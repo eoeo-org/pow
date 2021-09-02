@@ -1,0 +1,16 @@
+{
+  "name": "textread",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@discordjs/opus": "^0.5.3",
+    "axios": "^0.21.1",
+    "debug": "^4.3.2",
+    "discord.js": "^12.5.3",
+    "discord.js-commando": "^0.12.3",
+    "dotenv": "^10.0.0"
+  },
+  "author": "kazukazu123123",
+  "license": "ISC",
+  "description": ""
+}

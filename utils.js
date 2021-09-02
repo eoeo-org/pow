@@ -9,4 +9,3 @@ exports.awaitEvent = (eventEmitter, event, validate = () => true) => new Promise
   };
   eventEmitter.on(event, callback);
 });
-

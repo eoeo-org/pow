@@ -22,19 +22,16 @@ client.on("ready", () => {
 
 client.on("message", message => {
   if (message.author.bot) return;
-  if (message.channel.type == "dm") return;
-  if (message.channel.type == "text") {
-    const ctx = messageReader.guilds.get(message.guild);
+  if (message.channel.type !== "text") return;
 
-    if (!ctx.isJoined()) return;
-    if (ctx.textChannel !== message.channel) return;
+  const ctx = messageReader.guilds.get(message.guild);
+  if (!ctx.isJoined()) return;
+  if (ctx.textChannel !== message.channel) return;
 
-    const readMessage = convertContent(message).trim().replace("\n", "");
+  const convertedMessage = convertContent(message).trim().replace("\n", "");
+  if (convertedMessage.length === 0) return;
 
-    if (readMessage.length === 0) return;
-
-    ctx.addMessage(readMessage);
-  };
+  ctx.addMessage(message, convertedMessage);
 });
 
 client.registry
@@ -45,4 +42,3 @@ client.registry
   .registerCommandsIn(path.join(__dirname, "commands"));
 
 client.login(process.env.TOKEN);
-

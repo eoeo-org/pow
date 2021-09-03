@@ -1,32 +1,34 @@
+const RFC_URL = /^(https?|s?ftp):\/\/((([a-z]|[0-9]|[-._~])|%[0-9a-fA-F][0-9a-fA-F]|[!$&'()*+,;=]|:)*@)?(\[((([0-9a-f]{1,4}:){6}([0-9a-f]{1,4}:[0-9a-f]{1,4}|([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3})|::([0-9a-f]{1,4}:){5}([0-9a-f]{1,4}:[0-9a-f]{1,4}|([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3})|([0-9a-f]{1,4})?::([0-9a-f]{1,4}:){4}([0-9a-f]{1,4}:[0-9a-f]{1,4}|([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3})|(([0-9a-f]{1,4}:){0,1}[0-9a-f]{1,4})?::([0-9a-f]{1,4}:){3}([0-9a-f]{1,4}:[0-9a-f]{1,4}|([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3})|(([0-9a-f]{1,4}:){0,2}[0-9a-f]{1,4})?::([0-9a-f]{1,4}:){2}([0-9a-f]{1,4}:[0-9a-f]{1,4}|([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3})|(([0-9a-f]{1,4}:){0,3}[0-9a-f]{1,4})?::[0-9a-f]{1,4}:([0-9a-f]{1,4}:[0-9a-f]{1,4}|([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3})|(([0-9a-f]{1,4}:){0,4}[0-9a-f]{1,4})?::([0-9a-f]{1,4}:[0-9a-f]{1,4}|([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3})|(([0-9a-f]{1,4}:){0,5}[0-9a-f]{1,4})?::[0-9a-f]{1,4}|(([0-9a-f]{1,4}:){0,6}[0-9a-f]{1,4})?::)|v[0-9a-f]+\.(([a-z]|[0-9]|[-._~])|[!$&'()*+,;=]|:)+)]|([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}|(([a-z]|[0-9]|[-._~])|%[0-9a-fA-F][0-9a-fA-F]|[!$&'()*+,;=])*)(:\d*)?(\/((([a-z]|[0-9]|[-._~])|%[0-9a-fA-F][0-9a-fA-F]|[!$&'()*+,;=]|[:@]))*)*(\?((([a-z]|[0-9]|[-._~])|%[0-9a-fA-F][0-9a-fA-F]|[!$&'()*+,;=]|[:@])|[\/?])*)?(#((([a-z]|[0-9]|[-._~])|%[0-9a-fA-F][0-9a-fA-F]|[!$&'()*+,;=]|[:@])|[\/?])*)?$/g;
+
 module.exports = (message) => {
-    if (!message) throw new Error("There is no first argument.");
+  if (!message) throw new Error("There is no first argument.");
 
-    const contentParser = (a, b, c) => {
-        if (a.match(/https?|s?ftp/g)) return "";
-        if (a.match(/(<a?)?:\w+:(\d{18}>)?/g)) return "";
-        if (a.match(/[!$%^&*()_|~`{}\[\]:";'<>?,.\/]/g)) return "";
+  function parseContent (a, b, c) {
+    if (a.match(/(<a?)?:\w+:(\d{18}>)?/g)) return "";
+    if (a.match(/[!$%^&*()_|~`{}\[\]:";'<>?,.\/]/g)) return "";
 
-        const gm = message.guild.members;
-        const gr = message.guild.roles;
-        const gc = message.guild.channels;
+    const gm = message.guild.members;
+    const gr = message.guild.roles;
+    const gc = message.guild.channels;
 
-        switch(b) {
-            case "@":
-                return gm.resolve(c) ? gm.resolve(c).displayName : "";
-            case "@!":
-                return gm.resolve(c) ? gm.resolve(c).displayName : "";
-            case "@&":  
-                return gr.resolve(c) ? gr.resolve(c).name : "";
-            case "#":
-                return gc.resolve(c) ? gc.resolve(c).name : "";
-        }
-    };
+    switch (b) {
+      case "@":
+      case "@!":
+        return gm.resolve(c) ? gm.resolve(c).displayName : "";
+      case "@&":
+        return gr.resolve(c) ? gr.resolve(c).name : "";
+      case "#":
+        return gc.resolve(c) ? gc.resolve(c).name : "";
+    }
+  };
 
-    let res = message.content.replace(/<(@[!&]?|#)!?([\d]+)>|((https?|s?ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g, contentParser);
-    if (res.match(/(<a?)?:\w+:(\d{18}>)?/)) return "";
-    return res;
+  const result = message.content
+    .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
+    .replace(RFC_URL, "");
+  return result.match(/(<a?)?:\w+:(\d{18}>)?/) ? "" : result;
 };
 
+// .replace(/<(@[!&]?|#)!?([\d]+)>/g, contentParser);
 /*
   require: Discord.js message(v12) or messageCreate(v13) event argument
 
@@ -37,5 +39,5 @@ module.exports = (message) => {
   url: https://google.com
   user: @ced#0180
   channel: #1
-  role: @ぽット 
+  role: @ぽット
 */

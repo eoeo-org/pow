@@ -16,7 +16,7 @@ class GuildContext {
   async _readMessage({ audioStream, message, convertedMessage }) {
     if (this.connection === null) return;
     const dispatcher = this.connection.play(audioStream);
-    if (/[A-Z]/g.test(convertedMessage)) dispatcher.setVolume(10000);
+    //if (/[A-Z]/g.test(convertedMessage)) dispatcher.setVolume(10000);
 
     debug__GuildContext("read started");
     await awaitEvent(dispatcher, 'speaking', state => state === 0);

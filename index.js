@@ -23,6 +23,7 @@ client.on("ready", () => {
 client.on("message", message => {
   if (message.author.bot) return;
   if (message.channel.type !== "text") return;
+  if (message.content.startsWith(client.commandPrefix)) return;
 
   const ctx = messageReader.guilds.get(message.guild);
   if (!ctx.isJoined()) return;
@@ -36,7 +37,8 @@ client.on("message", message => {
 
 client.registry
   .registerGroups([
-    ["vc", "VC commands"]
+    ["vc", "VC commands"],
+    ["settings", "Settings commands"]
   ])
   .registerDefaults()
   .registerCommandsIn(path.join(__dirname, "commands"));

@@ -24,6 +24,7 @@ client.on("message", message => {
   if (message.author.bot) return;
   if (message.channel.type !== "text") return;
   if (message.content.startsWith(client.commandPrefix)) return;
+  if (message.content.startsWith(`<@!${client.user.id}>`)) return;
 
   const ctx = messageReader.guilds.get(message.guild);
   if (!ctx.isJoined()) return;

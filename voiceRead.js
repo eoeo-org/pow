@@ -2,6 +2,8 @@ const debug__GuildContext = require("debug")("voiceRead.js:GuildContext");
 const debug__initialize   = require("debug")("voiceRead.js:initialize");
 
 const axios = require("axios");
+const fs = require("fs");
+
 const { Queue, awaitEvent, getProperty } = require("./utils");
 
 let client;
@@ -16,8 +18,6 @@ class GuildContext {
   async _readMessage({ audioStream, message, convertedMessage }) {
     if (this.connection === null) return;
     const dispatcher = this.connection.play(audioStream);
-    //if (/[A-Z]/g.test(convertedMessage)) dispatcher.setVolume(10000);
-
     debug__GuildContext("read started");
     await awaitEvent(dispatcher, 'speaking', state => state === 0);
     debug__GuildContext("read finished");
@@ -38,7 +38,6 @@ class GuildContext {
 
   async join(textChannel, voiceChannel) {
     if (this.isJoined()) return;
-
     this.textChannel = this.guild.channels.resolve(textChannel);
     this.voiceChannel = this.guild.channels.resolve(voiceChannel);
     this.connection = await this.voiceChannel.join();
@@ -54,14 +53,42 @@ class GuildContext {
     this.cleanChannels();
   }
 
+  _getUserSettings(id) {
+    var userSettingPath = `${__dirname}/settings/${id}.json`;
+    var userSetting;
+    var defaultSetting = {
+      speaker: "haruka", 
+      pitch: 100,
+      speed: 100,
+    };
+    if (!fs.existsSync(userSettingPath)) fs.writeFileSync(userSettingPath, JSON.stringify(defaultSetting, undefined, 2));
+    userSetting = require(userSettingPath);
+    return userSetting;
+  }
+
+  _setUserSetting(id, key, value) {
+    var userSettingPath = `${__dirname}/settings/${id}.json`;
+    var userSetting = require(userSettingPath);
+    var defaultSetting = {
+      speaker: "haruka", 
+      pitch: 100,
+      speed: 100,
+    };
+    if (!fs.existsSync(userSettingPath)) fs.writeFileSync(userSettingPath, JSON.stringify(defaultSetting, undefined, 2));
+    userSetting[key] = value;
+    return userSetting;
+  }
+
   async addMessage(message, convertedMessage) {
     if (!this.isJoined()) return false;
 
+    const userSettings = this._getUserSettings(message.author.id);
+    console.log(userSettings);
     try {
       debug__GuildContext("fetching audio");
       const audioStream = await this._fetchAudioStream({
         text: convertedMessage,
-        speaker: "haruka"
+        ...userSettings
       });
 
       debug__GuildContext("got response, adding to queue");

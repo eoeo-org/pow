@@ -78,7 +78,6 @@ class GuildContext {
     if (!this.isJoined()) return false;
 
     const userSettings = this._getUserSetting(message.author.id);
-    console.log(userSettings);
     try {
       debug__GuildContext("fetching audio");
       const audioStream = await this._fetchAudioStream({

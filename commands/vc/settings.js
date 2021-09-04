@@ -41,7 +41,7 @@ module.exports = class VCCommand extends Command {
     }
 
     if (args[0] == "") {
-      message.channel.send("ヘルプを見るには、`pow!settings help`を実行してください。");
-    }
+      message.channel.send(`ヘルプを見るには、\`pow!settings help\`または\`<@!${this.client.user.id}> help\`を実行してください。`);
+    } 
   }
 };

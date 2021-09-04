@@ -53,7 +53,7 @@ class GuildContext {
     this.cleanChannels();
   }
 
-  _getUserSettings(id) {
+  _getUserSetting(id) {
     var userSettingPath = `${__dirname}/settings/${id}.json`;
     var userSetting;
     var defaultSetting = {
@@ -69,20 +69,15 @@ class GuildContext {
   _setUserSetting(id, key, value) {
     var userSettingPath = `${__dirname}/settings/${id}.json`;
     var userSetting = require(userSettingPath);
-    var defaultSetting = {
-      speaker: "haruka", 
-      pitch: 100,
-      speed: 100,
-    };
-    if (!fs.existsSync(userSettingPath)) fs.writeFileSync(userSettingPath, JSON.stringify(defaultSetting, undefined, 2));
     userSetting[key] = value;
+    if (!fs.existsSync(userSettingPath)) fs.writeFileSync(userSettingPath, JSON.stringify(userSetting, undefined, 2));
     return userSetting;
   }
 
   async addMessage(message, convertedMessage) {
     if (!this.isJoined()) return false;
 
-    const userSettings = this._getUserSettings(message.author.id);
+    const userSettings = this._getUserSetting(message.author.id);
     console.log(userSettings);
     try {
       debug__GuildContext("fetching audio");

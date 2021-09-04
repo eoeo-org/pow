@@ -37,8 +37,7 @@ client.on("message", message => {
 
 client.registry
   .registerGroups([
-    ["vc", "VC commands"],
-    ["settings", "Settings commands"]
+    ["vc", "VC commands"]
   ])
   .registerDefaults()
   .registerCommandsIn(path.join(__dirname, "commands"));

@@ -56,12 +56,28 @@ class GuildContext {
   _getUserSetting(id) {
     var userSettingPath = `${__dirname}/settings/${id}.json`;
     var userSetting;
+    var allowedVoiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
     var defaultSetting = {
-      speaker: "haruka", 
-      pitch: 100,
-      speed: 100,
+      speaker: allowedVoiceList[Math.floor(Math.random()*allowedVoiceList.length)], 
+      pitch: Math.floor(Math.random() * (200 + 1 - 50)) + 50,
+      speed: Math.floor(Math.random() * (400 + 1 - 50)) + 50
     };
     if (!fs.existsSync(userSettingPath)) fs.writeFileSync(userSettingPath, JSON.stringify(defaultSetting, undefined, 2));
+    userSetting = require(userSettingPath);
+    return userSetting;
+  }
+
+  _randomUserSetting(id) {
+    const allowedVoiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
+    var userSettingPath = `${__dirname}/settings/${id}.json`;
+    var userSetting = require(userSettingPath);
+    var defaultSetting = {
+      speaker: allowedVoiceList[Math.floor(Math.random()*allowedVoiceList.length)], 
+      pitch: Math.floor(Math.random() * (200 + 1 - 50)) + 50,
+      speed: Math.floor(Math.random() * (400 + 1 - 50)) + 50
+    };
+    fs.writeFileSync(userSettingPath, JSON.stringify(defaultSetting, undefined, 2));
+    delete require.cache[userSettingPath];
     userSetting = require(userSettingPath);
     return userSetting;
   }
@@ -88,8 +104,8 @@ class GuildContext {
       debug__GuildContext("got response, adding to queue");
       this.readQueue.add({ message, convertedMessage, audioStream });
     } catch(error) {
-      debug__GuildContext(`error, status code: ${error.response.status}`);
-      this.textChannel.send(`はい${error.response.status}！ｗ`);
+      debug__GuildContext(`Request error: ${error.response.status}: ${error.response.statusText}`);
+      this.textChannel.send(`リクエストエラー：${error.response.status}: ${error.response.statusText}`);
     }
   }
 

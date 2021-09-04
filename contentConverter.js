@@ -4,8 +4,9 @@ module.exports = (message) => {
   if (!message) throw new Error("There is no first argument.");
 
   function parseContent (a, b, c) {
+    console.log(a);
     if (a.match(/(<a?)?:\w+:(\d{18}>)?/g)) return "";
-    if (a.match(/[!$%^&*()_|~`{}\[\]:";'<>?,.\/]/g)) return "";
+    if (a.match(/[!$%^&*()_|~`{}\[\]:";'<>?,.\/]/gu)) return "";
 
     const gm = message.guild.members;
     const gr = message.guild.roles;

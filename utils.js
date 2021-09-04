@@ -50,3 +50,7 @@ exports.Queue = class Queue extends EventEmitter {
     this.emit("purge");
   }
 }
+
+exports.objToList = (obj) => {
+  return Object.keys(obj).map(a => a + ": " + obj[a]).join("\n");
+}

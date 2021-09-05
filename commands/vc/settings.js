@@ -18,7 +18,7 @@ module.exports = class VCCommand extends Command {
     const allowedVoiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
     const userSetting = messageReader.guilds.get(message.guild)._getUserSetting(message.author.id);
     if (args[0] == "help") {
-      message.channel.send("pow!settings speaker - 設定可能な話者リストを確認します。\npow!settings speaker <speaker> - 話者を<speaker>に設定します。\npow!settings pitch - 現在の声のピッチを確認します。\npow!settings pitch <pitch> - 声のピッチを<pitch>に設定します。\npow!settings speed - 設定可能な声の速度を確認します。\npow!settings speed <speed> - 声の速度を<speed>に設定します。\npow!settings view - 現在の声の設定を確認します。");
+      message.channel.send("pow!settings random - 声の設定をランダムにします。\npow!settings speaker - 設定可能な話者リストを確認します。\npow!settings speaker <speaker> - 話者を<speaker>に設定します。\npow!settings pitch - 現在の声のピッチを確認します。\npow!settings pitch <pitch> - 声のピッチを<pitch>に設定します。\npow!settings speed - 設定可能な声の速度を確認します。\npow!settings speed <speed> - 声の速度を<speed>に設定します。\npow!settings view - 現在の声の設定を確認します。");
     }
 
     if (args[0] == "random") {

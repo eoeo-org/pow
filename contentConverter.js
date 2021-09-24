@@ -1,15 +1,16 @@
 const RFC_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
+const { parse } = require("twemoji-parser");
+const emoji = require("node-emoji");
 
 module.exports = (message) => {
   if (!message) throw new Error("There is no first argument.");
 
   function parseContent (a, b, c) {
-    if (a.match(/(<a?)?:\w+:(\d{18}>)?/g)) return "";
-    if (a.match(/[!$%^&*()_|~`{}\[\]:";'<>?,.\/]/gu)) return "";
-
     const gm = message.guild.members;
     const gr = message.guild.roles;
     const gc = message.guild.channels;
+
+    console.log(a, b, c)
 
     switch (b) {
       case "@":
@@ -22,9 +23,14 @@ module.exports = (message) => {
     }
   };
 
-  const result = message.content
+  let result = message.content
     .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
-    .replace(RFC_URL, "");
+    .replaceAll(RFC_URL, "");
+  
+  const entities = parse(result);
+  entities.map(e => {
+    result = result.replaceAll(e.text, emoji.which(e.text))
+  })
   return result.match(/(<a?)?:\w+:(\d{18}>)?/) ? "" : result;
 };
 

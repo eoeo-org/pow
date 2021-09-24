@@ -36,6 +36,16 @@ client.on("message", message => {
   ctx.addMessage(message, convertedMessage);
 });
 
+client.on('voiceStateUpdate', (newState) => {
+  let newUserChannel = newState.voiceChannel
+  if (newUserChannel === undefined) {
+    //client.channels.resolve("790677529227689994").send("a");
+    if (client.channels.resolve("790151812366729217").members.size == 0) {
+      //client.channels.resolve("790677529227689994").send("a");
+    }
+  }
+});
+
 client.registry
   .registerGroups([
     ["vc", "VC commands"]

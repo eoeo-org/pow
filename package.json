@@ -8,7 +8,9 @@
     "debug": "^4.3.2",
     "discord.js": "^12.5.3",
     "discord.js-commando": "^0.12.3",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "node-emoji": "^1.11.0",
+    "twemoji-parser": "^13.1.0"
   },
   "author": "kazukazu123123",
   "license": "ISC",

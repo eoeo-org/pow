@@ -9,8 +9,16 @@
     "discord.js": "^12.5.3",
     "discord.js-commando": "^0.12.3",
     "dotenv": "^10.0.0",
+    "mysql2": "^2.3.0",
     "node-emoji": "^1.11.0",
     "twemoji-parser": "^13.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.4.1"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   },
   "author": "kazukazu123123",
   "license": "ISC",

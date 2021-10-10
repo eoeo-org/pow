@@ -1,0 +1,8 @@
+.env
+.git
+.gitignore
+node_modules
+package-lock.json
+.prettierignore
+settings
+vc-help.txt

@@ -1,8 +1,8 @@
+pow!settings pitch - 現在の声のピッチを確認します。
+pow!settings pitch <pitch> - 声のピッチを<pitch>に設定します。
 pow!settings random - 声の設定をランダムにします。
 pow!settings speaker - 設定可能な話者リストを確認します。
 pow!settings speaker <speaker> - 話者を<speaker>に設定します。
-pow!settings pitch - 現在の声のピッチを確認します。
-pow!settings pitch <pitch> - 声のピッチを<pitch>に設定します。
 pow!settings speed - 設定可能な声の速度を確認します。
 pow!settings speed <speed> - 声の速度を<speed>に設定します。
 pow!settings view - 現在の声の設定を確認します。

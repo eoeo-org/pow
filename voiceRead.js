@@ -4,6 +4,15 @@ const debug__initialize   = require("debug")("voiceRead.js:initialize");
 const axios = require("axios");
 const fs = require("fs");
 
+const mariadb = require("mariadb");
+const pool = mariadb.createPool({
+  host:     process.env.DB_HOST,
+  port:     parseInt(process.env.DB_PORT),
+  user:     process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
+});
+
 const { Queue, awaitEvent, getProperty } = require("./utils");
 
 let client;
@@ -19,7 +28,7 @@ class GuildContext {
     if (this.connection === null) return;
     const dispatcher = this.connection.play(audioStream);
     debug__GuildContext("read started");
-    await awaitEvent(dispatcher, 'speaking', state => state === 0);
+    await awaitEvent(dispatcher, "speaking", state => state === 0);
     debug__GuildContext("read finished");
   }
 
@@ -53,59 +62,70 @@ class GuildContext {
     this.cleanChannels();
   }
 
-  _getUserSetting(id) {
-    var userSettingPath = `${__dirname}/settings/${id}.json`;
-    var userSetting;
-    var allowedVoiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
-    var defaultSetting = {
-      speaker: allowedVoiceList[Math.floor(Math.random()*allowedVoiceList.length)], 
-      pitch: Math.floor(Math.random() * (200 + 1 - 50)) + 50,
-      speed: Math.floor(Math.random() * (400 + 1 - 50)) + 50
-    };
-    if (!fs.existsSync(userSettingPath)) fs.writeFileSync(userSettingPath, JSON.stringify(defaultSetting, undefined, 2));
-    userSetting = require(userSettingPath);
-    return userSetting;
+  async _getUserSetting(id) {
+    var conn, rows;
+    try {
+      conn = await pool.getConnection();
+      rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ])
+    } catch (err) {
+      throw err;
+    } finally {
+      if (conn) conn.release();
+      delete rows[0].id;
+      return rows[0];
+    }
   }
 
-  _randomUserSetting(id) {
+  async _randomUserSetting(id) {
+    var conn, rows;
     const allowedVoiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
-    var userSettingPath = `${__dirname}/settings/${id}.json`;
-    var userSetting = require(userSettingPath);
-    var defaultSetting = {
-      speaker: allowedVoiceList[Math.floor(Math.random()*allowedVoiceList.length)], 
-      pitch: Math.floor(Math.random() * (200 + 1 - 50)) + 50,
-      speed: Math.floor(Math.random() * (400 + 1 - 50)) + 50
-    };
-    fs.writeFileSync(userSettingPath, JSON.stringify(defaultSetting, undefined, 2));
-    delete require.cache[userSettingPath];
-    userSetting = require(userSettingPath);
-    return userSetting;
+    try {
+      conn = await pool.getConnection();
+      await conn.query(`UPDATE userSetting SET
+                          speaker='${allowedVoiceList[Math.floor(Math.random()*allowedVoiceList.length)]}',
+                          pitch=${Math.floor(Math.random() * (200 + 1 - 50)) + 50},
+                          speed=${Math.floor(Math.random() * (400 + 1 - 50)) + 50}
+                        WHERE id = ?`, [ id ])
+      rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ])
+    } catch (err) {
+      throw err;
+    } finally {
+      if (conn) conn.release();
+      delete rows[0].id;
+      return rows[0];
+    }
   }
 
-  _setUserSetting(id, key, value) {
-    var userSettingPath = `${__dirname}/settings/${id}.json`;
-    var userSetting = require(userSettingPath);
-    userSetting[key] = value;
-    if (!fs.existsSync(userSettingPath)) fs.writeFileSync(userSettingPath, JSON.stringify(userSetting, undefined, 2));
-    return userSetting;
+  async _setUserSetting(id, key, value) {
+    var conn, rows;
+    try {
+      conn = await pool.getConnection();
+      rows = await conn.query(`UPDATE userSetting SET ${key}=${value} WHERE id = ?`, [ id ])
+    } catch (err) {
+      throw err;
+    } finally {
+      if (conn) conn.release();
+      delete rows[0].id;
+      return rows[0];
+    }
   }
 
   async addMessage(message, convertedMessage) {
     if (!this.isJoined()) return false;
 
-    const userSettings = this._getUserSetting(message.author.id);
+    const userSetting = await this._getUserSetting(message.author.id);
     try {
       debug__GuildContext("fetching audio");
       const audioStream = await this._fetchAudioStream({
         text: convertedMessage,
-        ...userSettings
+        ...userSetting
       });
 
       debug__GuildContext("got response, adding to queue");
       this.readQueue.add({ message, convertedMessage, audioStream });
     } catch(error) {
       debug__GuildContext(`Request error: ${error.response.status}: ${error.response.statusText}`);
-      this.textChannel.send(`リクエストエラー: ${error.response.status} ${error.response.statusText}`);
+      this.textChannel.send(`リクエストエラー：${error.response.status}: ${error.response.statusText}`);
     }
   }
 

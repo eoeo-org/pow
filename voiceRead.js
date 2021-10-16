@@ -105,7 +105,7 @@ class GuildContext {
       this.readQueue.add({ message, convertedMessage, audioStream });
     } catch(error) {
       debug__GuildContext(`Request error: ${error.response.status}: ${error.response.statusText}`);
-      this.textChannel.send(`リクエストエラー：${error.response.status}: ${error.response.statusText}`);
+      this.textChannel.send(`リクエストエラー: ${error.response.status} ${error.response.statusText}`);
     }
   }
 

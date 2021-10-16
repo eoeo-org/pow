@@ -24,6 +24,7 @@ module.exports = (message) => {
   };
 
   let result = message.content
+  .replaceAll(/<:.+?:\d+>/g, "")
   .replaceAll(RFC_URL, "")
   .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent);
 

@@ -66,10 +66,10 @@ class GuildContext {
     var conn, rows;
     try {
       conn = await pool.getConnection();
-      rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ])
+      rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ]);
       if (!rows[0]) {
-        console.log("user not found in db");
         await this._randomUserSetting(id);
+        rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ]);
       }
     } catch (err) {
       throw err;
@@ -85,13 +85,13 @@ class GuildContext {
     const allowedVoiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
     try {
       conn = await pool.getConnection();
-      await conn.query(`INSERT IGNORE INTO userSetting VALUES (?, ?, ?, ?)`, [id, 0, 0, 0])
+      await conn.query(`INSERT IGNORE INTO userSetting VALUES (?, ?, ?, ?)`, [id, 0, 0, 0]);
       await conn.query(`UPDATE userSetting SET
                           speaker='${allowedVoiceList[Math.floor(Math.random()*allowedVoiceList.length)]}',
                           pitch=${Math.floor(Math.random() * (200 + 1 - 50)) + 50},
                           speed=${Math.floor(Math.random() * (400 + 1 - 50)) + 50}
-                        WHERE id = ?`, [ id ])
-      rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ])
+                        WHERE id = ?`, [ id ]);
+      rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ]);
     } catch (err) {
       throw err;
     } finally {
@@ -105,7 +105,7 @@ class GuildContext {
     var conn, rows;
     try {
       conn = await pool.getConnection();
-      rows = await conn.query(`UPDATE userSetting SET ${key}=${value} WHERE id = ?`, [ id ])
+      rows = await conn.query(`UPDATE userSetting SET ${key}=${value} WHERE id = ?`, [ id ]);
     } catch (err) {
       throw err;
     } finally {

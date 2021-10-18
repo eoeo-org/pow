@@ -14,11 +14,12 @@ module.exports = class VCCommand extends Command {
     });
   }
 
-  run(message, args) {
+  async run(message, args) {
     args = args.split(" ");
     const allowedVoiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
-    const userSetting = messageReader.guilds.get(message.guild)._getUserSetting(message.author.id);
-    if (args[0] == "help") {
+    const userSetting = await messageReader.guilds.get(message.guild)._getUserSetting(message.author.id);
+
+    if (args[0] == "") {
       message.channel.send({
         embed: {
           title: "設定コマンド一覧",
@@ -29,11 +30,10 @@ module.exports = class VCCommand extends Command {
     }
 
     if (args[0] == "random") {
-      let res = messageReader.guilds.get(message.guild)._randomUserSetting(message.author.id);
       message.channel.send({
         embed: {
           title: "声の設定をランダムにしました。",
-          description: "```\n" + objToList(res) + "\n```"
+          description: "```\n" + objToList(userSetting) + "\n```"
         }
       });
       return;
@@ -83,9 +83,5 @@ module.exports = class VCCommand extends Command {
         }
       });
     }
-
-    if (args[0] == "") {
-      message.channel.send(`ヘルプを見るには、pow!settings help または \<@!${this.client.user.id}> settings help を実行してください。`);
-    } 
   }
 };

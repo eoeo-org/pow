@@ -1,5 +1,5 @@
 {
-  "name": "textread",
+  "name": "discordbot-pow",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
@@ -9,7 +9,7 @@
     "discord.js": "^12.5.3",
     "discord.js-commando": "^0.12.3",
     "dotenv": "^10.0.0",
-    "mysql2": "^2.3.0",
+    "mariadb": "^2.5.4",
     "node-emoji": "^1.11.0",
     "twemoji-parser": "^13.1.0"
   },

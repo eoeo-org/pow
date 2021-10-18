@@ -1,4 +1,4 @@
-const RFC_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
+const RFC_URL = /http[s]?:\/\/[a-zA-Z0-9_.\/?&=,#%{};:-]+/g;
 const { parse } = require("twemoji-parser");
 const emoji = require("node-emoji");
 

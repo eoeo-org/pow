@@ -17,7 +17,6 @@ module.exports = class VCCommand extends Command {
   async run(message, args) {
     args = args.split(" ");
     const allowedVoiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
-    const userSetting = await messageReader.guilds.get(message.guild)._getUserSetting(message.author.id);
 
     if (args[0] == "") {
       message.channel.send({
@@ -30,6 +29,7 @@ module.exports = class VCCommand extends Command {
     }
 
     if (args[0] == "random") {
+      const userSetting = await messageReader.guilds.get(message.guild)._randomUserSetting(message.author.id);
       message.channel.send({
         embed: {
           title: "声の設定をランダムにしました。",
@@ -40,6 +40,7 @@ module.exports = class VCCommand extends Command {
     }
   
     if (args[0] == "speaker") {
+      const userSetting = await messageReader.guilds.get(message.guild)._getUserSetting(message.author.id);
       if (!args[1]) return message.channel.send(`指定できる声のリストは、こちらです。\n\`\`\`${allowedVoiceList}\`\`\`\n現在の声の設定は、${userSetting.speaker}です。`);
       if (!allowedVoiceList.includes(args[1])) return message.channel.send(`その声(${args[1]})は指定できません。指定できる声のリストは、こちらです。\n\`\`\`${allowedVoiceList}\`\`\``)
       messageReader.guilds.get(message.guild)._setUserSetting(message.author.id, "speaker", args[1]);
@@ -64,6 +65,7 @@ module.exports = class VCCommand extends Command {
     }
 
     if (args[0] == "speed") {
+      const userSetting = await messageReader.guilds.get(message.guild)._getUserSetting(message.author.id);
       if (!args[1]) return message.channel.send(`指定できる声の速度は、50%~400%です。\n現在の声の速度は、${userSetting.speed}%です。`);
       if (args[1] < 50 || args[1] > 400 || !args[1].match(/^[0-9]*$/g)) return message.channel.send(`その速度(${args[1]}%)は指定できません。指定できる声の速度は、50%~400%です。`)
       messageReader.guilds.get(message.guild)._setUserSetting(message.author.id, "speed", args[1]);
@@ -76,6 +78,7 @@ module.exports = class VCCommand extends Command {
     }
 
     if (args[0] == "view") {
+      const userSetting = await messageReader.guilds.get(message.guild)._getUserSetting(message.author.id);
       message.channel.send({
         embed: {
           title: "現在の設定",

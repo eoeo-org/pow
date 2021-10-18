@@ -1,4 +1,4 @@
-const RFC_URL = /http[s]?:\/\/[a-zA-Z0-9_.\/?=,#%{};:-]+/g;
+const RFC_URL = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
 const { parse } = require("twemoji-parser");
 const emoji = require("node-emoji");
 
@@ -24,15 +24,14 @@ module.exports = (message) => {
   };
 
   let result = message.content
-  .replaceAll(/<:.+?:\d+>/g, "")
-  .replaceAll(RFC_URL, "")
-  .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent);
-
+    .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
+    .replaceAll(RFC_URL, "");
+  
   const entities = parse(result);
   entities.map(e => {
     result = result.replaceAll(e.text, emoji.which(e.text))
   })
-  return result;
+  return result.match(/(<a?)?:\w+:(\d{18}>)?/) ? "" : result;
 };
 
 // .replace(/<(@[!&]?|#)!?([\d]+)>/g, contentParser);

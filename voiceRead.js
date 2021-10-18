@@ -105,7 +105,7 @@ class GuildContext {
     var conn, rows;
     try {
       conn = await pool.getConnection();
-      rows = await conn.query(`UPDATE userSetting SET ${key}='${value}' WHERE id = ?`, [ id ])
+      rows = await conn.query(`UPDATE userSetting SET ${key}=${value} WHERE id = ?`, [ id ])
     } catch (err) {
       throw err;
     } finally {

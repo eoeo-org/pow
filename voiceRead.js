@@ -85,7 +85,7 @@ class GuildContext {
     const allowedVoiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
     try {
       conn = await pool.getConnection();
-      await conn.query(`INSERT INTO userSetting VALUES (?, ?, ?, ?)`, [id, 0, 0, 0]);
+      await conn.query(`INSERT IGNORE INTO userSetting VALUES (?, ?, ?, ?)`, [id, 0, 0, 0]);
       await conn.query(`UPDATE userSetting SET
                           speaker='${allowedVoiceList[Math.floor(Math.random()*allowedVoiceList.length)]}',
                           pitch=${Math.floor(Math.random() * (200 + 1 - 50)) + 50},

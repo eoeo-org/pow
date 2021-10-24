@@ -78,12 +78,13 @@ module.exports = class VCCommand extends Command {
     if (args[0] == "speed") {
       const userSetting = await messageReader.guilds.get(message.guild)._getUserSetting(message.author.id);
       if (!args[1]) return message.channel.send(`指定できる声の速度は、50%~400%です。\n現在の声の速度は、${userSetting.speed}%です。`);
-      if (args[1] < 50 || args[1] > 400 || !args[1].match(/^[0-9]*$/g)) return message.channel.send(
-        {embed: {
-          color: 0xFF0000,
-          title: "エラー",
-          description: `その速度(${args[1]}%)は指定できません。指定できる声の速度は、50%~400%です。`
-        }}
+      if (args[1] < 50 || args[1] > 400 || !args[1].match(/^[0-9]*$/g)) return message.channel.send({
+          embed: {
+            color: 0xFF0000,
+            title: "エラー",
+            description: `その速度(${args[1]}%)は指定できません。指定できる声の速度は、50%~400%です。`
+          }
+        });
       messageReader.guilds.get(message.guild)._setUserSetting(message.author.id, "speed", args[1]);
       message.channel.send({
         embed: {

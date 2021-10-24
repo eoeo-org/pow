@@ -96,7 +96,7 @@ class GuildContext {
       throw err;
     } finally {
       if (conn) conn.release();
-      delete rows[0].id;
+      if (rows[0]) delete rows[0].id;
       return rows[0];
     }
   }
@@ -105,7 +105,8 @@ class GuildContext {
     var conn, rows;
     try {
       conn = await pool.getConnection();
-      rows = await conn.query(`UPDATE userSetting SET ${key}=${value} WHERE id = ?`, [ id ]);
+      rows = await conn.query(`UPDATE userSetting SET ${key}=${isNaN(value) ? value : Number(value)} WHERE id = ?`, [ id ]);
+      
     } catch (err) {
       throw err;
     } finally {
@@ -128,7 +129,13 @@ class GuildContext {
       this.readQueue.add({ message, convertedMessage, audioStream });
     } catch(error) {
       debug__GuildContext(`Request error: ${error.response.status}: ${error.response.statusText}`);
-      this.textChannel.send(`リクエストエラー：${error.response.status}: ${error.response.statusText}`);
+      this.textChannel.send(
+        {embed: {
+          color: 0xFF0000,
+          title: "APIリクエストエラー",
+          description: `${error.response.status}: ${error.response.statusText}`
+        }}
+      );
     }
   }
 
@@ -136,7 +143,7 @@ class GuildContext {
     return await axios
       .post("https://api.voicetext.jp/v1/tts", new URLSearchParams({ ...params, format: "mp3" }), {
         auth: { username: process.env.VOICETEXT_API_KEY },
-        responseType: 'stream'
+        responseType: "stream"
       })
       .then(getProperty("data"));
   }

@@ -49,7 +49,7 @@ module.exports = class VCCommand extends Command {
           description: `その声(${args[1]})は指定できません。指定できる声のリストは、こちらです。\n\`\`\`${allowedVoiceList}\`\`\``
         }
       })
-      messageReader.guilds.get(message.guild)._setUserSetting(message.author.id, "speaker", args[1]);
+      messageReader.guilds.get(message.guild)._setUserSetting(message.author.id, "speaker", `"${args[1]}"`);
       message.channel.send({
         embed: {
           color: 0x00FF00,

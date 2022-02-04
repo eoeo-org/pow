@@ -1,1 +1,1 @@
-# DiscordBOT-TextRead
+# DiscordBOT-pow

@@ -1,30 +1,33 @@
 require("dotenv").config();
 
-const Commando = require("discord.js-commando");
-const path = require("path");
+const fs = require("fs");
+const { Client, Collection, Intents } = require("discord.js");
+const client = new Client({ intents: Object.values(Intents.FLAGS) });
 const convertContent = require("./contentConverter");
-const messageReader = require("./voiceRead");
+const messageReader = require("./voiceRead.js");
 
-const client = new Commando.Client({
-  owner: ["615059426369339392", "855599077542723604", "474413012120502304"],
-  commandPrefix: "pow!"
-});
+client.commands = new Collection();
+const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.data.name, command);
+}
 
 messageReader.initialize(client);
 
 client.on("ready", () => {
-  console.log(`Servers: (${client.guilds.cache.size})`);
-  client.guilds.cache.forEach(guild => {
-    console.log(`  - ${guild.name} (${guild.memberCount}) Owner: ${guild.owner.user.tag}`);
-  });
   console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`Servers: (${client.guilds.cache.size})`);
+  client.guilds.cache.forEach(async guild => {
+    console.log(`  - ${guild.name} (${guild.memberCount}) Owner: ${await guild.fetchOwner().then(owner => `${owner.user.username}#${owner.user.discriminator}`)}`);
+  });
 });
 
-client.on("message", message => {
+client.on("messageCreate", message => {
   if (message.author.bot) return;
-  if (message.channel.type !== "text") return;
-  if (message.content.startsWith(client.commandPrefix)) return;
-  if (message.content.startsWith(`<@!${client.user.id}>`)) return;
+  if (message.type !== "DEFAULT") return;
+  if (message.content.startsWith("_")) return;
 
   const ctx = messageReader.guilds.get(message.guild);
   if (!ctx.isJoined()) return;
@@ -36,21 +39,17 @@ client.on("message", message => {
   ctx.addMessage(message, convertedMessage);
 });
 
-client.on('voiceStateUpdate', (newState) => {
-  let newUserChannel = newState.voiceChannel
-  if (newUserChannel === undefined) {
-    //client.channels.resolve("790677529227689994").send("a");
-    if (client.channels.resolve("790151812366729217").members.size == 0) {
-      //client.channels.resolve("790677529227689994").send("a");
+client.on("interactionCreate", async interaction => {
+  if (interaction.isCommand()) {
+    const command = client.commands.get(interaction.commandName);
+    if (!command) return;
+    try {
+      await command.execute(interaction);
+    } catch (error) {
+      console.error(error);
+      await interaction.reply({ content: "コマンドの実行中にエラーが発生しました。", ephemeral: true });
     }
   }
 });
-
-client.registry
-  .registerGroups([
-    ["vc", "VC commands"]
-  ])
-  .registerDefaults()
-  .registerCommandsIn(path.join(__dirname, "commands"));
 
 client.login(process.env.TOKEN);

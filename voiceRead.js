@@ -2,7 +2,7 @@ const debug__GuildContext = require("debug")("voiceRead.js:GuildContext");
 const debug__initialize   = require("debug")("voiceRead.js:initialize");
 
 const axios = require("axios");
-const fs = require("fs");
+const { joinVoiceChannel, entersState, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus } = require("@discordjs/voice");
 
 const mariadb = require("mariadb");
 const pool = mariadb.createPool({
@@ -13,7 +13,7 @@ const pool = mariadb.createPool({
   database: process.env.DB_DATABASE
 });
 
-const { Queue, awaitEvent, getProperty } = require("./utils");
+const { Queue, getProperty } = require("./utils");
 
 let client;
 
@@ -26,9 +26,16 @@ class GuildContext {
 
   async _readMessage({ audioStream, message, convertedMessage }) {
     if (this.connection === null) return;
-    const dispatcher = this.connection.play(audioStream);
+    this.player = createAudioPlayer();
+    const resource = createAudioResource(audioStream,
+    {
+      inputType: StreamType.Arbitrary
+    });
+    this.connection.subscribe(this.player);
+    this.player.play(resource);
+    await entersState(this.player, AudioPlayerStatus.Playing, 5e3);
     debug__GuildContext("read started");
-    await awaitEvent(dispatcher, "speaking", state => state === 0);
+    await entersState(this.player, AudioPlayerStatus.Idle, 2 ** 31 - 1);
     debug__GuildContext("read finished");
   }
 
@@ -49,8 +56,11 @@ class GuildContext {
     if (this.isJoined()) return;
     this.textChannel = this.guild.channels.resolve(textChannel);
     this.voiceChannel = this.guild.channels.resolve(voiceChannel);
-    this.connection = await this.voiceChannel.join();
-
+    this.connection = await joinVoiceChannel({
+      channelId: voiceChannel.id,
+      guildId: this.guild.id,
+      adapterCreator: this.guild.voiceAdapterCreator
+    })
     this.connection.once("disconnect", () => {
       this.leave();
     });
@@ -58,7 +68,7 @@ class GuildContext {
 
   leave() {
     this.readQueue.purge();
-    this.voiceChannel.leave();
+    this.connection.destroy();
     this.cleanChannels();
   }
 
@@ -82,12 +92,12 @@ class GuildContext {
 
   async _randomUserSetting(id) {
     var conn, rows;
-    const allowedVoiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
+    const voiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
     try {
       conn = await pool.getConnection();
       await conn.query(`INSERT IGNORE INTO userSetting VALUES (?, ?, ?, ?)`, [id, 0, 0, 0]);
       await conn.query(`UPDATE userSetting SET
-                          speaker='${allowedVoiceList[Math.floor(Math.random()*allowedVoiceList.length)]}',
+                          speaker='${voiceList[Math.floor(Math.random()*voiceList.length)]}',
                           pitch=${Math.floor(Math.random() * (200 + 1 - 50)) + 50},
                           speed=${Math.floor(Math.random() * (400 + 1 - 50)) + 50}
                         WHERE id = ?`, [ id ]);
@@ -106,7 +116,6 @@ class GuildContext {
     try {
       conn = await pool.getConnection();
       rows = await conn.query(`UPDATE userSetting SET ${key}=${isNaN(value) ? value : Number(value)} WHERE id = ?`, [ id ]);
-      
     } catch (err) {
       throw err;
     } finally {
@@ -129,12 +138,12 @@ class GuildContext {
       this.readQueue.add({ message, convertedMessage, audioStream });
     } catch(error) {
       debug__GuildContext(`Request error: ${error.response.status}: ${error.response.statusText}`);
-      this.textChannel.send(
-        {embed: {
+      message.reply(
+        {embeds: [{
           color: 0xFF0000,
           title: "APIリクエストエラー",
           description: `${error.response.status}: ${error.response.statusText}`
-        }}
+        }]}
       );
     }
   }

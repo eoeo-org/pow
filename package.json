@@ -1,25 +1,30 @@
 {
-  "name": "discordbot-pow",
+  "name": "pow",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "@discordjs/builders": "^0.9.0",
+    "@discordjs/collection": "^0.3.2",
     "@discordjs/opus": "^0.5.3",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "@discordjs/voice": "^0.7.5",
     "axios": "^0.21.1",
     "debug": "^4.3.2",
-    "discord.js": "^12.5.3",
-    "discord.js-commando": "^0.12.3",
+    "discord-api-types": "^0.24.0",
+    "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
+    "ffmpeg-static": "^4.4.0",
+    "libsodium-wrappers": "^0.7.9",
     "mariadb": "^2.5.4",
     "node-emoji": "^1.11.0",
-    "twemoji-parser": "^13.1.0",
-    "ffmpeg-static": "^4.4.0"
+    "twemoji-parser": "^13.1.0"
   },
   "devDependencies": {
     "prettier": "^2.4.1"
   },
   "prettier": {
-    "semi": false,
-    "singleQuote": true
+    "semi": true,
+    "singleQuote": false
   },
   "author": "kazukazu123123",
   "license": "ISC",

@@ -10,7 +10,7 @@ module.exports = (message) => {
     const gr = message.guild.roles;
     const gc = message.guild.channels;
 
-    console.log(a, b, c)
+    //console.log(a, b, c)
 
     switch (b) {
       case "@":
@@ -26,7 +26,7 @@ module.exports = (message) => {
   let result = message.content
     .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
     .replaceAll(RFC_URL, "");
-  
+  //console.log(result);
   const entities = parse(result);
   entities.map(e => {
     result = result.replaceAll(e.text, emoji.which(e.text))

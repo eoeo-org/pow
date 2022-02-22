@@ -19,13 +19,6 @@
     "node-emoji": "^1.11.0",
     "twemoji-parser": "^13.1.0"
   },
-  "devDependencies": {
-    "prettier": "^2.4.1"
-  },
-  "prettier": {
-    "semi": true,
-    "singleQuote": false
-  },
   "author": "kazukazu123123",
   "license": "ISC",
   "description": ""

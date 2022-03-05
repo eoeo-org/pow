@@ -28,6 +28,7 @@ client.on("messageCreate", message => {
   if (message.author.bot) return;
   if (message.type !== "DEFAULT") return;
   if (message.content.startsWith("_")) return;
+  if (message.content.includes("`")) return;
 
   const ctx = messageReader.guilds.get(message.guild);
   if (!ctx.isJoined()) return;

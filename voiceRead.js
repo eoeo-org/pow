@@ -1,5 +1,6 @@
 const debug__GuildContext = require("debug")("voiceRead.js:GuildContext");
 const debug__initialize   = require("debug")("voiceRead.js:initialize");
+const debug__ErrorHandler = require("debug")("voiceRead.js:ErrorHandler");
 
 const axios = require("axios");
 const { joinVoiceChannel, entersState, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus } = require("@discordjs/voice");
@@ -154,7 +155,8 @@ class GuildContext {
         auth: { username: process.env.VOICETEXT_API_KEY },
         responseType: "stream"
       })
-      .then(getProperty("data"));
+      .then(getProperty("data"))
+      .catch(err => debug__ErrorHandler(`Error while requestingg audio: ${error.response.status} ${error.response.statusText}`));
   }
 }
 

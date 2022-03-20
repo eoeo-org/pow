@@ -156,7 +156,10 @@ class GuildContext {
         responseType: "stream"
       })
       .then(getProperty("data"))
-      .catch(err => debug__ErrorHandler(`Error while requestingg audio: ${error.response.status} ${error.response.statusText}`));
+      .catch(err => {
+        debug__ErrorHandler(`Error while requesting audio: ${err.status} ${err.statusText}`)
+        throw err;
+      });
   }
 }
 

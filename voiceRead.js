@@ -74,12 +74,13 @@ class GuildContext {
   }
 
   async _getUserSetting(id) {
-    var conn, rows;
+    let conn, rows;
+    console.log('a')
     try {
       conn = await pool.getConnection();
       rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ]);
       if (!rows[0]) {
-        await this._randomUserSetting(id);
+        await this._randomizeUserSetting(id);
         rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ]);
       }
     } catch (err) {
@@ -91,8 +92,8 @@ class GuildContext {
     }
   }
 
-  async _randomUserSetting(id) {
-    var conn, rows;
+  async _randomizeUserSetting(id) {
+    let conn, rows;
     const voiceList = ["show", "haruka", "hikari", "takeru", "santa", "bear"];
     try {
       conn = await pool.getConnection();
@@ -113,7 +114,7 @@ class GuildContext {
   }
 
   async _setUserSetting(id, key, value) {
-    var conn, rows;
+    let conn, rows;
     try {
       conn = await pool.getConnection();
       rows = await conn.query(`UPDATE userSetting SET ${key}=${isNaN(value) ? value : Number(value)} WHERE id = ?`, [ id ]);

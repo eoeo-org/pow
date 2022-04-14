@@ -1,11 +1,10 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const convertContent = require("../contentConverter");
 const voiceRead = require("../voiceRead");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("read")
-    .setDescription("引数に渡されたメッセージを読み上げます。")
+    .setDescription("引数に渡されたメッセージを読み上げます。(メンションや、チャンネル、ロールなどは、表示名に変換されません。)")
     .addStringOption(option =>
       option.setName("text")
         .setDescription("喋らせたい内容")
@@ -15,9 +14,7 @@ module.exports = {
     const ctx = voiceRead.guilds.get(interaction.member.guild);
     const { options } = interaction;
     const text = options.getString("text");
-    const convertedMessage = convertContent(text).trim().replace("\n", "");
-
-    ctx.addMessage(text, convertedMessage);
+    ctx.addMessage(text);
     return interaction.reply("メッセージを読み上げキューに追加しました。");
   }
 };

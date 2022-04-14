@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const convertContent = require("../contentConverter");
 const voiceRead = require("../voiceRead");
 
 module.exports = {

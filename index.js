@@ -36,7 +36,7 @@ client.on("messageCreate", message => {
 
   const convertedMessage = convertContent(message).trim().replace("\n", "");
   if (convertedMessage.length === 0) return;
-  if (message.member.voice.channelID) return;
+  if (message.member.voice.channelID === null) return;
   ctx.addMessage(message, convertedMessage);
 });
 

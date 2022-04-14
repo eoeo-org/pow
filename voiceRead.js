@@ -124,14 +124,14 @@ class GuildContext {
     }
   }
 
-  async addMessage(message, id, convertedMessage) {
+  async addMessage(message, id) {
     if (!this.isJoined()) return false;
 
     const userSetting = await this._getUserSetting(id);
     try {
       debug__GuildContext("fetching audio");
       const audioStream = await this._fetchAudioStream({
-        text: convertedMessage,
+        text: message,
         ...userSetting
       });
 

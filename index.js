@@ -4,7 +4,7 @@ const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
 const client = new Client({ intents: Object.values(Intents.FLAGS) });
 const convertContent = require("./contentConverter");
-const messageReader = require("./voiceRead.js");
+const voiceRead = require("./voiceRead.js");
 
 client.commands = new Collection();
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
@@ -14,7 +14,7 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command);
 }
 
-messageReader.initialize(client);
+voiceRead.initialize(client);
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -30,7 +30,7 @@ client.on("messageCreate", message => {
   if (message.content.startsWith("_")) return;
   if (message.content.includes("```")) return;
 
-  const ctx = messageReader.guilds.get(message.guild);
+  const ctx = voiceRead.guilds.get(message.guild);
   if (!ctx.isJoined()) return;
   if (ctx.textChannel !== message.channel) return;
 

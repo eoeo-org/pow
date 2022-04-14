@@ -14,7 +14,7 @@ module.exports = {
     const ctx = voiceRead.guilds.get(interaction.member.guild);
     const { options } = interaction;
     const text = options.getString("text");
-    ctx.addMessage(text);
+    ctx.addMessage(text, interaction.member.id);
     return interaction.reply("メッセージを読み上げキューに追加しました。");
   }
 };

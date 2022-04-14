@@ -25,7 +25,7 @@ class GuildContext {
     this.cleanChannels();
   }
 
-  async _readMessage({ audioStream }) {
+  async _readMessage({ audioStream, message, convertedMessage }) {
     if (this.connection === null) return;
     this.player = createAudioPlayer();
     const resource = createAudioResource(audioStream,
@@ -75,7 +75,6 @@ class GuildContext {
 
   async _getUserSetting(id) {
     let conn, rows;
-    console.log('a')
     try {
       conn = await pool.getConnection();
       rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ]);
@@ -125,19 +124,19 @@ class GuildContext {
     }
   }
 
-  async addMessage(message, id) {
+  async addMessage(message, convertedMessage) {
     if (!this.isJoined()) return false;
 
-    const userSetting = await this._getUserSetting(id);
+    const userSetting = await this._getUserSetting(message.author.id);
     try {
       debug__GuildContext("fetching audio");
       const audioStream = await this._fetchAudioStream({
-        text: message,
+        text: convertedMessage,
         ...userSetting
       });
 
       debug__GuildContext("got response, adding to queue");
-      this.readQueue.add({ audioStream });
+      this.readQueue.add({ message, convertedMessage, audioStream });
     } catch(error) {
       debug__GuildContext(`Request error: ${error.response.status}: ${error.response.statusText}`);
       message.reply(

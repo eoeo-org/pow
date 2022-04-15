@@ -8,7 +8,7 @@ module.exports = {
     .setDescription("現在の声の設定を確認します。"),
 
   async execute(interaction) {
-    const userSetting = await voiceRead.guilds.get(interaction.guild)._getUserSetting(interaction.member.id);
+    const userSetting = await voiceRead.guilds.get(interaction.member.guild)._getUserSetting(interaction.member.id);
 
     return interaction.reply({
       embeds: [{

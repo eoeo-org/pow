@@ -7,7 +7,7 @@ module.exports = {
     .setDescription("ボイスチャンネルから退出します。"),
 
   async execute(interaction) {
-    const ctx = voiceRead.guilds.get(interaction.guild);
+    const ctx = voiceRead.guilds.get(interaction.member.guild);
     if (!ctx.isJoined()) {
       return interaction.reply({
         embeds: [{

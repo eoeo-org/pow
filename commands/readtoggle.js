@@ -8,9 +8,9 @@ module.exports = {
     .setDescription("メッセージを読み上げるかどうかを切り替えます。"),
 
   async execute(interaction) {
-    const userSetting = await voiceRead.guilds.get(interaction.guild)._getUserSetting(interaction.member.id);
+    const userSetting = await voiceRead.guilds.get(interaction.member.guild)._getUserSetting(interaction.member.id);
     if (userSetting.isDontRead) {
-      await voiceRead.guilds.get(interaction.guild)._setUserSetting(interaction.member.id, "isDontRead", 0);
+      await voiceRead.guilds.get(interaction.member.guild)._setUserSetting(interaction.member.id, "isDontRead", 0);
       return interaction.reply({
         embeds: [{
           color: 0x00FF00,
@@ -18,7 +18,7 @@ module.exports = {
         }]
       });
     } else {
-      await voiceRead.guilds.get(interaction.guild)._setUserSetting(interaction.member.id, "isDontRead", 1);
+      await voiceRead.guilds.get(interaction.member.guild)._setUserSetting(interaction.member.id, "isDontRead", 1);
       return interaction.reply({
         embeds: [{
           color: 0x00FF00,

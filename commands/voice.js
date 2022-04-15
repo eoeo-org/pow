@@ -34,8 +34,8 @@ module.exports = {
 
     if (speaker !== null) {
       if (allowedVoiceList.includes(speaker)) {
-        await voiceRead.guilds.get(interaction.guild)._setUserSetting(interaction.member.id, "speaker", `"${speaker}"`);
-        const userSetting = await voiceRead.guilds.get(interaction.guild)._getUserSetting(interaction.member.id);
+        await voiceRead.guilds.get(interaction.member.guild)._setUserSetting(interaction.member.id, "speaker", `"${speaker}"`);
+        const userSetting = await voiceRead.guilds.get(interaction.member.guild)._getUserSetting(interaction.member.id);
         return interaction.reply({
           embeds: [{
             color: 0x00FF00,
@@ -56,8 +56,8 @@ module.exports = {
 
     if (pitch !== null) {
       if (pitch > 49 && pitch < 201) {
-        await voiceRead.guilds.get(interaction.guild)._setUserSetting(interaction.member.id, "pitch", `"${pitch}"`);
-        const userSetting = await voiceRead.guilds.get(interaction.guild)._getUserSetting(interaction.member.id);
+        await voiceRead.guilds.get(interaction.member.guild)._setUserSetting(interaction.member.id, "pitch", `"${pitch}"`);
+        const userSetting = await voiceRead.guilds.get(interaction.member.guild)._getUserSetting(interaction.member.id);
         return interaction.reply({
           embeds: [{
             color: 0x00FF00,
@@ -78,8 +78,8 @@ module.exports = {
 
     if (speed !== null) {
       if (speed > 49 && speed < 401) {
-        await voiceRead.guilds.get(interaction.guild)._setUserSetting(interaction.member.id, "speed", `"${speed}"`);
-        const userSetting = await voiceRead.guilds.get(interaction.guild)._getUserSetting(interaction.member.id);
+        await voiceRead.guilds.get(interaction.member.guild)._setUserSetting(interaction.member.id, "speed", `"${speed}"`);
+        const userSetting = await voiceRead.guilds.get(interaction.member.guild)._getUserSetting(interaction.member.id);
         return interaction.reply({
           embeds: [{
             color: 0x00FF00,

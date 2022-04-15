@@ -138,15 +138,24 @@ class GuildContext {
       debug__GuildContext("got response, adding to queue");
       this.readQueue.add({ audioStream });
     } catch(error) {
-      console.log(error)
       debug__GuildContext(`Request error: ${error.response.status}: ${error.response.statusText}`);
-      return ctx.reply(
-        {embeds: [{
-          color: 0xFF0000,
-          title: "APIリクエストエラー",
-          description: `${error.response.status}: ${error.response.statusText}`
-        }]}
-      );
+        if (ctx.replied) {
+          return ctx.followUp(
+            {embeds: [{
+              color: 0xFF0000,
+              title: "APIリクエストエラー",
+              description: `${error.response.status}: ${error.response.statusText}`
+            }]}
+          );
+      } else {
+        return ctx.reply(
+          {embeds: [{
+            color: 0xFF0000,
+            title: "APIリクエストエラー",
+            description: `${error.response.status}: ${error.response.statusText}`
+          }]}
+        );
+      }
     }
   }
 

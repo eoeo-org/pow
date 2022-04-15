@@ -8,7 +8,7 @@ module.exports = {
     .setDescription("読み上げのキューリストを空にして、読み上げを中断します。"),
 
   async execute(interaction) {
-    const ctx = voiceRead.guilds.get(interaction.guild);
+    const ctx = voiceRead.guilds.get(interaction.member.guild);
     if (!ctx.isJoined()) {
       return interaction.reply({
         embeds: [{

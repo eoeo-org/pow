@@ -8,7 +8,7 @@ module.exports = {
     .setDescription("声の設定をランダムにします。"),
 
   async execute(interaction) {
-    const userSetting = await voiceRead.guilds.get(interaction.guild)._randomUserSetting(interaction.member.id);
+    const userSetting = await voiceRead.guilds.get(interaction.member.guild)._randomUserSetting(interaction.member.id);
 
     return interaction.reply({
       embeds: [{

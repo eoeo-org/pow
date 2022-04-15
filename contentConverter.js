@@ -2,13 +2,14 @@ const RFC_URL = /http[s]?:\/\/[a-zA-Z0-9_.\/?&=,#%{};:-]+/g;
 const { parse } = require("twemoji-parser");
 const emoji = require("node-emoji");
 
-module.exports = (message) => {
-  if (!message) throw new Error("There is no first argument.");
+module.exports = (text, guildId, client) => {
+  if (!text) throw new Error("There is no first argument.");
+  if (!guildId) throw new Error("There is no guildId.");
 
   function parseContent (a, b, c) {
-    const gm = message.guild.members;
-    const gr = message.guild.roles;
-    const gc = message.guild.channels;
+    const gm = client.guilds.resolve(guildId).members;
+    const gr = client.guilds.resolve(guildId).roles;
+    const gc = client.guilds.resolve(guildId).channels;
 
     //console.log(a, b, c)
 
@@ -23,7 +24,7 @@ module.exports = (message) => {
     }
   };
 
-  let result = message.content
+  let result = text
     .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
     .replaceAll(RFC_URL, "");
   //console.log(result);

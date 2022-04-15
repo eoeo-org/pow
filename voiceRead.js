@@ -25,7 +25,7 @@ class GuildContext {
     this.cleanChannels();
   }
 
-  async _readMessage({ audioStream, message, convertedMessage }) {
+  async _readMessage({ audioStream }) {
     if (this.connection === null) return;
     this.player = createAudioPlayer();
     const resource = createAudioResource(audioStream,
@@ -124,30 +124,39 @@ class GuildContext {
     }
   }
 
-  async addMessage(message, convertedMessage) {
+  async addMessage(text, ctx) {
     if (!this.isJoined()) return false;
-
-    const userSetting = await this._getUserSetting(message.author.id);
+    const userSetting = await this._getUserSetting(ctx.author ? ctx.author.id : ctx.user.id);
     if (userSetting.isDontRead) return;
 
     try {
       debug__GuildContext("fetching audio");
       const audioStream = await this._fetchAudioStream({
-        text: convertedMessage,
+        text: text,
         ...userSetting
       });
 
       debug__GuildContext("got response, adding to queue");
-      this.readQueue.add({ message, convertedMessage, audioStream });
+      this.readQueue.add({ audioStream });
     } catch(error) {
       debug__GuildContext(`Request error: ${error.response.status}: ${error.response.statusText}`);
-      message.reply(
-        {embeds: [{
-          color: 0xFF0000,
-          title: "APIリクエストエラー",
-          description: `${error.response.status}: ${error.response.statusText}`
-        }]}
-      );
+      if (message) {
+        return message.reply(
+          {embeds: [{
+            color: 0xFF0000,
+            title: "APIリクエストエラー",
+            description: `${error.response.status}: ${error.response.statusText}`
+          }]}
+        );
+      } else {
+        return interaction.reply(
+          {embeds: [{
+            color: 0xFF0000,
+            title: "APIリクエストエラー",
+            description: `${error.response.status}: ${error.response.statusText}`
+          }]}
+        );
+      }
     }
   }
 

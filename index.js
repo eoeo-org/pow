@@ -34,10 +34,10 @@ client.on("messageCreate", message => {
   if (!ctx.isJoined()) return;
   if (ctx.textChannel !== message.channel) return;
 
-  const convertedMessage = convertContent(message).trim().replace("\n", "");
+  const convertedMessage = convertContent(message.content, message.guildId, client).trim().replace("\n", "");
   if (convertedMessage.length === 0) return;
   if (message.member.voice.channel === null) return;
-  ctx.addMessage(message, convertedMessage);
+  ctx.addMessage(convertedMessage, message);
 });
 
 client.on("interactionCreate", async interaction => {
@@ -45,7 +45,7 @@ client.on("interactionCreate", async interaction => {
     const command = client.commands.get(interaction.commandName);
     if (!command) return;
     try {
-      await command.execute(interaction);
+      await command.execute(interaction, client);
     } catch (error) {
       console.error(error);
       await interaction.reply({ content: "コマンドの実行中にエラーが発生しました。", ephemeral: true });

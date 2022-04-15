@@ -20,6 +20,6 @@ module.exports = {
     const convertedMessage = convertContent(text, interaction.guild.id, client).trim().replace("\n", "");
     if (convertedMessage.length === 0) return;
     ctx.addMessage(convertedMessage, interaction);
-    return interaction.reply({content: "メッセージを読み上げキューに追加しました。", ephemeral: true })
+    return interaction.reply("メッセージを読み上げキューに追加しました。")
   }
 };

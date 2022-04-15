@@ -34,7 +34,7 @@ client.on("messageCreate", async message => {
   if (!ctx.isJoined()) return;
   if (ctx.textChannel !== message.channel) return;
   if (message.content === "") return;
-  const userSetting = await voiceRead._getUserSetting(message.author.id);
+  const userSetting = await voiceRead.guilds.get(message.guild)._getUserSetting(message.author.id);
   if (userSetting.isDontRead) return;
 
   const convertedMessage = convertContent(message.content, message.guildId, client).trim().replace("\n", "");

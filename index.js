@@ -33,6 +33,7 @@ client.on("messageCreate", message => {
   const ctx = voiceRead.guilds.get(message.guild);
   if (!ctx.isJoined()) return;
   if (ctx.textChannel !== message.channel) return;
+  if (message.content === "") return;
 
   const convertedMessage = convertContent(message.content, message.guildId, client).trim().replace("\n", "");
   if (convertedMessage.length === 0) return;

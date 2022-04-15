@@ -20,6 +20,15 @@ module.exports = {
     const convertedMessage = convertContent(text, interaction.guild.id, client).trim().replace("\n", "");
     if (convertedMessage.length === 0) return;
     ctx.addMessage(convertedMessage, interaction);
-    return interaction.reply("メッセージを読み上げキューに追加しました。")
+    if (!ctx.isJoined()) {
+      return interaction.reply({
+        embeds: [{
+          color: 0xFF0000,
+          title: "エラー",
+          description: "BOTがVCに参加している必要があります。"
+        }]
+      });
+    };
+    else return interaction.reply("メッセージを読み上げキューに追加しました。")
   }
 };

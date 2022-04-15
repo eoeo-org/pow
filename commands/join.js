@@ -18,7 +18,7 @@ module.exports = {
       });
     }
 
-    const ctx = voiceRead.guilds.get(interaction.member.guild);
+    const ctx = voiceRead.guilds.get(interaction.guild);
 
     if (ctx.isJoined()) {
       return interaction.reply({

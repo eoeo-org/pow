@@ -24,7 +24,7 @@ client.on("ready", () => {
   });
 });
 
-client.on("messageCreate", message => {
+client.on("messageCreate", async message => {
   if (message.author.bot) return;
   if (!['DEFAULT', 'REPLY'].includes(message.type)) return;
   if (message.content.startsWith("_")) return;

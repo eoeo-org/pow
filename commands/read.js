@@ -28,7 +28,7 @@ module.exports = {
           description: "BOTがVCに参加している必要があります。"
         }]
       });
-    };
+    }
     else return interaction.reply("メッセージを読み上げキューに追加しました。")
   }
 };

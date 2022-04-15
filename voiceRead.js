@@ -128,7 +128,7 @@ class GuildContext {
     if (!this.isJoined()) return false;
 
     const userSetting = await this._getUserSetting(message.author.id);
-    if (!userSetting.isDontRead) return;
+    if (userSetting.isDontRead) return;
 
     try {
       debug__GuildContext("fetching audio");

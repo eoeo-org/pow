@@ -126,8 +126,6 @@ class GuildContext {
 
   async addMessage(text, ctx) {
     if (!this.isJoined()) return false;
-    const userSetting = await this._getUserSetting(ctx.author ? ctx.author.id : ctx.user.id);
-    if (userSetting.isDontRead) return;
 
     try {
       debug__GuildContext("fetching audio");

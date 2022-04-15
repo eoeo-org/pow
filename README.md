@@ -1,1 +1,1 @@
-# DiscordBOT-pow
+# pow

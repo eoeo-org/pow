@@ -75,7 +75,6 @@ class GuildContext {
 
   async _getUserSetting(id) {
     let conn, rows;
-    debug__GuildContext("Get id arg:" + id);
     try {
       conn = await pool.getConnection();
       rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ]);

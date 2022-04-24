@@ -127,11 +127,8 @@ class GuildContext {
 
   async addMessage(text, ctx) {
     if (!this.isJoined()) return false;
-    console.log("debug-ctx object", ctx)
-    console.log("debug-messageContent", ctx.content)
-    console.log("debug-authorid", ctx.author.id)
-    console.log("debug-userid", ctx.user.id)
-    const userSetting = await this._getUserSetting(ctx.content ? ctx.author.id : ctx.user.id);
+    const userSetting = await this._getUserSetting(ctx.content ? ctx.author.id : ctx.user?.id);
+    if (!userSetting) return;
     try {
       debug__GuildContext("fetching audio");
       const audioStream = await this._fetchAudioStream({

@@ -1,7 +1,6 @@
 const debug__GuildContext = require("debug")("voiceRead.js:GuildContext");
 const debug__initialize   = require("debug")("voiceRead.js:initialize");
 const debug__ErrorHandler = require("debug")("voiceRead.js:ErrorHandler");
-const debug__userIdLog    = require("debug")("voiceRead.js:debug__userIdLog");
 
 const axios = require("axios");
 const { joinVoiceChannel, entersState, createAudioResource, StreamType, createAudioPlayer, AudioPlayerStatus } = require("@discordjs/voice");
@@ -76,7 +75,7 @@ class GuildContext {
 
   async _getUserSetting(id) {
     let conn, rows;
-    debug__userIdLog("Get id arg:" + id);
+    debug__GuildContext("Get id arg:" + id);
     try {
       conn = await pool.getConnection();
       rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ]);
@@ -128,7 +127,10 @@ class GuildContext {
 
   async addMessage(text, ctx) {
     if (!this.isJoined()) return false;
-
+    console.log("debug-ctx object", ctx)
+    console.log("debug-messageContent", ctx.content)
+    console.log("debug-authorid", ctx.author.id)
+    console.log("debug-userid", ctx.user.id)
     const userSetting = await this._getUserSetting(ctx.content ? ctx.author.id : ctx.user.id);
     try {
       debug__GuildContext("fetching audio");

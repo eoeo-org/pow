@@ -78,7 +78,7 @@ class GuildContext {
     try {
       conn = await pool.getConnection();
       rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ]);
-      if (!rows[0]) {
+      if (rows[0] === undefined) {
         await this._randomizeUserSetting(id);
         rows = await conn.query("SELECT * FROM userSetting WHERE id = ?", [ id ]);
       }
@@ -126,8 +126,8 @@ class GuildContext {
 
   async addMessage(text, ctx) {
     if (!this.isJoined()) return false;
-    const userSetting = await this._getUserSetting(ctx.content ? ctx.author.id : ctx.user?.id);
-    if (!userSetting) return;
+
+    const userSetting = await this._getUserSetting(ctx.content ? ctx.author.id : ctx.user.id);
     try {
       debug__GuildContext("fetching audio");
       const audioStream = await this._fetchAudioStream({

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "postinstall": "git config --local core.hooksPath .githooks && chmod -R +x .githooks/"
   },
   "dependencies": {
     "@discordjs/builders": "^0.13.0",

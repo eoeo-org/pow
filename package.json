@@ -19,6 +19,9 @@
     "node-emoji": "^1.11.0",
     "twemoji-parser": "^14.0.0"
   },
+  "devDependencies": {
+    "prettier": "2.6.2"
+  },
   "author": "kazukazu123123",
   "license": "MIT",
   "description": ""

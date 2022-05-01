@@ -17,20 +17,20 @@ module.exports = {
           { name: 'hikari', value: 'hikari' },
           { name: 'takeru', value: 'takeru' },
           { name: 'santa', value: 'santa' },
-          { name: 'bear', value: 'bear' }
-        )
+          { name: 'bear', value: 'bear' },
+        ),
     )
     .addIntegerOption((option) =>
       option
         .setName('pitch')
         .setDescription('声の高さを変更できます。')
-        .setRequired(false)
+        .setRequired(false),
     )
     .addIntegerOption((option) =>
       option
         .setName('speed')
         .setDescription('声の速度を変更できます。')
-        .setRequired(false)
+        .setRequired(false),
     ),
 
   async execute(interaction) {

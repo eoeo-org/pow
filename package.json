@@ -6,6 +6,10 @@
     "format": "prettier --write .",
     "postinstall": "git config --local core.hooksPath .githooks && chmod -R +x .githooks/"
   },
+  "packageManager": "pnpm@7.1.2",
+  "engines": {
+    "npm": "This project is configured to use pnpm"
+  },
   "dependencies": {
     "@discordjs/builders": "^0.13.0",
     "@discordjs/collection": "^0.6.0",

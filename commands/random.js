@@ -20,6 +20,7 @@ module.exports = {
           description: '```\n' + objToList(userSetting) + '\n```',
         },
       ],
+      ephemeral: true,
     })
   },
 }

@@ -17,6 +17,7 @@ module.exports = {
             description: 'BOTがVCに参加している必要があります。',
           },
         ],
+        ephemeral: true,
       })
     }
 

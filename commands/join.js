@@ -17,6 +17,7 @@ module.exports = {
             description: 'VCに参加してからコマンドを実行してください。',
           },
         ],
+        ephemeral: true,
       })
     }
 
@@ -31,6 +32,7 @@ module.exports = {
             description: 'BOTはすでにVCに参加しています。',
           },
         ],
+        ephemeral: true,
       })
     }
 

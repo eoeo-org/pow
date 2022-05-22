@@ -63,6 +63,7 @@ module.exports = {
               description: '```\n' + objToList(userSetting) + '\n```',
             },
           ],
+          ephemeral: true,
         })
       } else {
         return interaction.reply({
@@ -93,6 +94,7 @@ module.exports = {
               description: '```\n' + objToList(userSetting) + '\n```',
             },
           ],
+          ephemeral: true,
         })
       } else {
         return interaction.reply({
@@ -123,6 +125,7 @@ module.exports = {
               description: '```\n' + objToList(userSetting) + '\n```',
             },
           ],
+          ephemeral: true,
         })
       } else {
         return interaction.reply({

@@ -22,6 +22,7 @@ module.exports = {
             title: 'メッセージを読み上げるようにしました。',
           },
         ],
+        ephemeral: true,
       })
     } else {
       await voiceRead.guilds
@@ -34,6 +35,7 @@ module.exports = {
             title: 'メッセージを読み上げないようにしました。',
           },
         ],
+        ephemeral: true,
       })
     }
   },

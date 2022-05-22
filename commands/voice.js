@@ -63,6 +63,7 @@ module.exports = {
               description: '```\n' + objToList(userSetting) + '\n```',
             },
           ],
+          ephemeral: true,
         })
       } else {
         return interaction.reply({
@@ -73,6 +74,7 @@ module.exports = {
               description: `その声(${speaker})は指定できません。指定できる声のリストは、こちらです。\n\`\`\`${allowedVoiceList}\`\`\``,
             },
           ],
+          ephemeral: true,
         })
       }
     }
@@ -93,6 +95,7 @@ module.exports = {
               description: '```\n' + objToList(userSetting) + '\n```',
             },
           ],
+          ephemeral: true,
         })
       } else {
         return interaction.reply({
@@ -103,6 +106,7 @@ module.exports = {
               description: `その声の高さ(${pitch}%)は指定できません。指定できる声の高さは、50%~200%です。`,
             },
           ],
+          ephemeral: true,
         })
       }
     }
@@ -123,6 +127,7 @@ module.exports = {
               description: '```\n' + objToList(userSetting) + '\n```',
             },
           ],
+          ephemeral: true,
         })
       } else {
         return interaction.reply({
@@ -133,6 +138,7 @@ module.exports = {
               description: `その速度(${speed}%)は指定できません。指定できる声の速度は、50%~400%です。`,
             },
           ],
+          ephemeral: true,
         })
       }
     }

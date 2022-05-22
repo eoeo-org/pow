@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "format": "prettier --write .",
     "postinstall": "git config --local core.hooksPath .githooks && chmod -R +x .githooks/"
   },

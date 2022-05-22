@@ -1,0 +1,31 @@
+name: バグ報告 (Bug Report)
+description: 誤動作の報告はこちら
+title: '[Bug]: '
+labels: ['bug']
+body:
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: 現在の状況
+      description: 発生中の問題を簡潔明瞭に記入してください。
+    validations:
+      required: true
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: 期待する挙動
+      description: 期待する挙動を簡潔明瞭に記入してください。
+    validations:
+      required: true
+  - type: textarea
+    id: supplementary-information
+    attributes:
+      label: 補足情報
+      description: |
+        さらなる情報や詳しく説明したいことがありましたらこちらへ記述してください。
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: 'ご記入ありがとうございました。'

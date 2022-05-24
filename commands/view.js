@@ -5,12 +5,20 @@ const voiceRead = require('../voiceRead')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('view')
-    .setDescription('現在の声の設定を確認します。'),
+    .setDescription('現在の声の設定を確認します。')
+    .addUserOption((option) =>
+      option
+        .setName('user')
+        .setDescription('ユーザーの声の設定を確認できます。')
+        .setRequired(false),
+    ),
 
   async execute(interaction) {
+    const { options } = interaction
+    const user = options.getUser('user')
     const userSetting = await voiceRead.guilds
       .get(interaction.member.guild)
-      ._getUserSetting(interaction.member.id)
+      ._getUserSetting(user ? user.id : interaction.member.id)
 
     return interaction.reply({
       embeds: [

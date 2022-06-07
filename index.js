@@ -39,7 +39,6 @@ client.on('messageCreate', async (message) => {
   if (message.content.includes('```')) return
 
   const ctx = voiceRead.guilds.get(message.guild)
-  if (!ctx.isJoined()) return
   if (ctx.textChannel !== message.channel) return
   if (message.content === '') return
   const userSetting = await voiceRead.guilds

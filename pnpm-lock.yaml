@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@discordjs/builders': ^0.13.0
+  '@discordjs/builders': ^0.15.0
   '@discordjs/collection': ^0.6.0
   '@discordjs/rest': ^0.4.1
   '@discordjs/voice': 0.10.0
@@ -18,7 +18,7 @@ specifiers:
   twemoji-parser: ^14.0.0
 
 dependencies:
-  '@discordjs/builders': 0.13.0
+  '@discordjs/builders': 0.15.0
   '@discordjs/collection': 0.6.0
   '@discordjs/rest': 0.4.1
   '@discordjs/voice': 0.10.0_ffmpeg-static@4.4.1
@@ -60,6 +60,18 @@ packages:
       '@sapphire/shapeshift': 2.2.0
       '@sindresorhus/is': 4.6.0
       discord-api-types: 0.31.2
+      fast-deep-equal: 3.1.3
+      ts-mixer: 6.0.1
+      tslib: 2.4.0
+    dev: false
+
+  /@discordjs/builders/0.15.0:
+    resolution: {integrity: sha512-w1UfCPzx2iKycn6qh/f0c+PcDpcTHzHr7TXALXu/a4gKHGamiSg3lP8GhYswweSJk/Q5cbFLHZUsnoY3MVKNAg==}
+    engines: {node: '>=16.9.0'}
+    dependencies:
+      '@sapphire/shapeshift': 3.1.0
+      '@sindresorhus/is': 4.6.0
+      discord-api-types: 0.33.3
       fast-deep-equal: 3.1.3
       ts-mixer: 6.0.1
       tslib: 2.4.0
@@ -118,6 +130,11 @@ packages:
 
   /@sapphire/shapeshift/2.2.0:
     resolution: {integrity: sha512-UEnKgMlQyI0yY/q+lCMX0VJft9y86IsesgbIQj6e62FBYSaMVr+IaMNpi4z45Q14VnuMACbK0yrbHISNqgUYcQ==}
+    engines: {node: '>=v15.0.0', npm: '>=7.0.0'}
+    dev: false
+
+  /@sapphire/shapeshift/3.1.0:
+    resolution: {integrity: sha512-PkxFXd3QJ1qAPS05Dy2UkVGYPm/asF1Ugt2Xyzmv4DHzO3+G7l+873C4XFFcJ9M5Je+eCMC7SSifgPTSur5QuA==}
     engines: {node: '>=v15.0.0', npm: '>=7.0.0'}
     dev: false
 

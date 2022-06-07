@@ -12,7 +12,7 @@
     "npm": "This project is configured to use pnpm"
   },
   "dependencies": {
-    "@discordjs/builders": "^0.13.0",
+    "@discordjs/builders": "^0.15.0",
     "@discordjs/collection": "^0.6.0",
     "@discordjs/rest": "^0.4.1",
     "@discordjs/voice": "0.10.0",

@@ -25,7 +25,6 @@ exports.Queue = class Queue extends EventEmitter {
     if (typeof consumer !== 'function') throw new RangeError()
     this.consumer = consumer
     this.items = []
-
     ;(async () => {
       debug__Queue('starting event loop')
       while (true) {

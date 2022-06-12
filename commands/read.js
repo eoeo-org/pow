@@ -7,10 +7,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('read')
     .addStringOption((option) =>
-      option
-        .setName('text')
-        .setDescription('喋らせたい内容')
-        .setRequired(false),
+      option.setName('text').setDescription('喋らせたい内容').setRequired(true),
     )
 
     .setDescription('引数に渡されたメッセージを読み上げます。'),

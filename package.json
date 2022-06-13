@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "deployCommands": "node deployGuildCommand.js && node deployGlobalCommand.js",
     "start": "node .",
     "format": "prettier --write .",
     "postinstall": "git config --local core.hooksPath .githooks && chmod -R +x .githooks/"

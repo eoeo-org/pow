@@ -29,7 +29,7 @@
     "twemoji-parser": "14.0.0"
   },
   "devDependencies": {
-    "prettier": "2.7.0"
+    "prettier": "2.7.1"
   },
   "author": "kazukazu123123",
   "license": "MIT",

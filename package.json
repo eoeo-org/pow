@@ -8,7 +8,7 @@
     "format": "prettier --write .",
     "postinstall": "git config --local core.hooksPath .githooks && chmod -R +x .githooks/"
   },
-  "packageManager": "pnpm@7.2.1",
+  "packageManager": "pnpm@7.3.0",
   "engines": {
     "npm": "This project is configured to use pnpm"
   },

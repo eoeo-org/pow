@@ -7,7 +7,7 @@ specifiers:
   '@discordjs/voice': 0.10.0
   axios: 0.27.2
   debug: 4.3.4
-  discord-api-types: 0.33.5
+  discord-api-types: 0.34.0
   discord.js: 13.8.0
   dotenv: 16.0.1
   ffmpeg-static: 4.4.1
@@ -24,7 +24,7 @@ dependencies:
   '@discordjs/voice': 0.10.0_ffmpeg-static@4.4.1
   axios: 0.27.2_debug@4.3.4
   debug: 4.3.4
-  discord-api-types: 0.33.5
+  discord-api-types: 0.34.0
   discord.js: 13.8.0
   dotenv: 16.0.1
   ffmpeg-static: 4.4.1
@@ -237,6 +237,10 @@ packages:
 
   /discord-api-types/0.33.5:
     resolution: {integrity: sha512-dvO5M52v7m7Dy96+XUnzXNsQ/0npsYpU6dL205kAtEDueswoz3aU3bh1UMoK4cQmcGtB1YRyLKqp+DXi05lzFg==}
+    dev: false
+
+  /discord-api-types/0.34.0:
+    resolution: {integrity: sha512-xwlhwiLZ11+8+ou1JlPOLJkwpu8qklm+aUm9JF06YC59fSo4CD7gQqsbUBxqevqheLx+WhRgJOHjDbjI0Q+Ecw==}
     dev: false
 
   /discord.js/13.8.0:

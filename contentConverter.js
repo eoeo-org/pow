@@ -27,6 +27,7 @@ module.exports = (text, guildId, client) => {
   let result = text
     .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
     .replaceAll(RFC_URL, '')
+    .replaceAll(/\|\|.+?\|\|/g, '')
   //console.log(result);
   const entities = parse(result)
   entities.map((e) => {

@@ -7,7 +7,7 @@
     "start": "node .",
     "format": "prettier --write .",
     "lint": "pnpm prettier --check .",
-    "postinstall": "git config --local core.hooksPath .githooks && chmod -R +x .githooks/"
+    "postinstall": "git config --local core.hooksPath .githooks"
   },
   "packageManager": "pnpm@7.3.0",
   "engines": {

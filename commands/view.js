@@ -11,7 +11,8 @@ module.exports = {
         .setName('user')
         .setDescription('ユーザーの声の設定を確認できます。')
         .setRequired(false),
-    ),
+    )
+    .setDMPermission(false),
 
   async execute(interaction) {
     const { options } = interaction

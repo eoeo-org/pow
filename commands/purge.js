@@ -5,7 +5,8 @@ const voiceRead = require('../voiceRead')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('purge')
-    .setDescription('読み上げのキューリストを空にして、読み上げを中断します。'),
+    .setDescription('読み上げのキューリストを空にして、読み上げを中断します。')
+    .setDMPermission(false),
 
   async execute(interaction) {
     const ctx = voiceRead.guilds.get(interaction.member.guild)

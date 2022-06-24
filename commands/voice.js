@@ -31,7 +31,8 @@ module.exports = {
         .setName('speed')
         .setDescription('声の速度を変更できます。')
         .setRequired(false),
-    ),
+    )
+    .setDMPermission(false),
 
   async execute(interaction) {
     const allowedVoiceList = [

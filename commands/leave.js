@@ -4,7 +4,8 @@ const voiceRead = require('../voiceRead')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('leave')
-    .setDescription('ボイスチャンネルから退出します。'),
+    .setDescription('ボイスチャンネルから退出します。')
+    .setDMPermission(false),
 
   async execute(interaction) {
     const ctx = voiceRead.guilds.get(interaction.member.guild)

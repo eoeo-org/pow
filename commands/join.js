@@ -4,7 +4,8 @@ const voiceRead = require('../voiceRead')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('join')
-    .setDescription('ボイスチャンネルに参加します。'),
+    .setDescription('ボイスチャンネルに参加します。')
+    .setDMPermission(false),
 
   async execute(interaction) {
     const user = await interaction.member.fetch()

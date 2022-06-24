@@ -26,9 +26,10 @@ rest
     ),
     { body: commands },
   )
-  .then(() =>
+  .then(() => {
     console.log(
       `[Guild: (${process.env.GUILD_ID})] Successfully reloaded application (/) commands.`,
-    ),
-  )
+    )
+    process.exit()
+  })
   .catch(console.error)

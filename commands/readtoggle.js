@@ -5,7 +5,8 @@ const voiceRead = require('../voiceRead')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('readtoggle')
-    .setDescription('メッセージを読み上げるかどうかを切り替えます。'),
+    .setDescription('メッセージを読み上げるかどうかを切り替えます。')
+    .setDMPermission(false),
 
   async execute(interaction) {
     const userSetting = await voiceRead.guilds

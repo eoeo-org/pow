@@ -9,8 +9,8 @@ module.exports = {
     .addStringOption((option) =>
       option.setName('text').setDescription('喋らせたい内容').setRequired(true),
     )
-
-    .setDescription('引数に渡されたメッセージを読み上げます。'),
+    .setDescription('引数に渡されたメッセージを読み上げます。')
+    .setDMPermission(false),
 
   async execute(interaction, client) {
     const { options } = interaction

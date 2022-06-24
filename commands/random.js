@@ -5,7 +5,8 @@ const voiceRead = require('../voiceRead')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('random')
-    .setDescription('声の設定をランダムにします。'),
+    .setDescription('声の設定をランダムにします。')
+    .setDMPermission(false),
 
   async execute(interaction) {
     const userSetting = await voiceRead.guilds

@@ -43,8 +43,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /@derhuerst/http-basic/8.2.2:
-    resolution: {integrity: sha512-ek065nW95mleLHo8vZ+ob7QTQPNOwDEjCe27BX2flme/UTu9z2mD1uRRPko38u7al4tTZADMtozpll8PQHAZgg==}
+  /@derhuerst/http-basic/8.2.3:
+    resolution: {integrity: sha512-tMC4jVVS6x6zBx6z9XKA12ij7zMFUVEzc9Je+xIudu4yR8FwGgU6pLKddsDX8BtQlklnvwPEOskHOwQP5f9gow==}
     engines: {node: '>=6.0.0'}
     dependencies:
       caseless: 0.12.0
@@ -57,7 +57,7 @@ packages:
     resolution: {integrity: sha512-+fqLIqa9wN3R+kvlld8sgG0nt04BAZxdCDP4t2qZ9TJsquLWA+xMtT8Waibb3d4li4AQS+IOfjiHAznv/dhHgQ==}
     engines: {node: '>=16.9.0'}
     dependencies:
-      '@sapphire/shapeshift': 3.3.2
+      '@sapphire/shapeshift': 3.4.0
       '@sindresorhus/is': 4.6.0
       discord-api-types: 0.33.5
       fast-deep-equal: 3.1.3
@@ -69,7 +69,7 @@ packages:
     resolution: {integrity: sha512-w1UfCPzx2iKycn6qh/f0c+PcDpcTHzHr7TXALXu/a4gKHGamiSg3lP8GhYswweSJk/Q5cbFLHZUsnoY3MVKNAg==}
     engines: {node: '>=16.9.0'}
     dependencies:
-      '@sapphire/shapeshift': 3.3.2
+      '@sapphire/shapeshift': 3.4.0
       '@sindresorhus/is': 4.6.0
       discord-api-types: 0.33.5
       fast-deep-equal: 3.1.3
@@ -118,8 +118,8 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
-  /@sapphire/shapeshift/3.3.2:
-    resolution: {integrity: sha512-8+M8sLmT4RTXJCvI1Z69UiB56himVup8WJVm7ubt5j3HJmVK+l1OI4xTLkLVh1efupOhZR9jrl2YBIv4Lsag7A==}
+  /@sapphire/shapeshift/3.4.0:
+    resolution: {integrity: sha512-uV+vErdfbxCgnjgcwkPDADlyS40I20L57YPy254LKbRNfLCg4/ymy510aNSGhLhq/dpNU0s1fQnTbI2YAetzsA==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
@@ -281,7 +281,7 @@ packages:
     engines: {node: '>=10'}
     requiresBuild: true
     dependencies:
-      '@derhuerst/http-basic': 8.2.2
+      '@derhuerst/http-basic': 8.2.3
       env-paths: 2.2.1
       https-proxy-agent: 5.0.1
       progress: 2.0.3

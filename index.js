@@ -8,7 +8,9 @@ const {
   InteractionType,
 } = require('discord.js')
 const { MessageType } = require('discord-api-types/v10')
-const client = new Client({ intents: Object.values(GatewayIntentBits) })
+const client = new Client({
+  intents: Object.values(GatewayIntentBits).filter(Number.isInteger),
+})
 const convertContent = require('./contentConverter')
 const voiceRead = require('./voiceRead.js')
 

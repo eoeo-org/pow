@@ -1,8 +1,14 @@
 require('dotenv').config()
 
 const fs = require('fs')
-const { Client, Collection, Intents } = require('discord.js')
-const client = new Client({ intents: Object.values(Intents.FLAGS) })
+const {
+  Client,
+  Collection,
+  GatewayIntentBits,
+  InteractionType,
+} = require('discord.js')
+const { MessageType } = require('discord-api-types/v10')
+const client = new Client({ intents: Object.values(GatewayIntentBits) })
 const convertContent = require('./contentConverter')
 const voiceRead = require('./voiceRead.js')
 
@@ -34,7 +40,7 @@ client.on('ready', () => {
 
 client.on('messageCreate', async (message) => {
   if (message.author.bot) return
-  if (!['DEFAULT', 'REPLY'].includes(message.type)) return
+  if (![MessageType.Default, MessageType.Reply].includes(message.type)) return
   if (message.content.startsWith('_')) return
   if (message.content.includes('```')) return
 
@@ -59,7 +65,7 @@ client.on('messageCreate', async (message) => {
 })
 
 client.on('interactionCreate', async (interaction) => {
-  if (interaction.isCommand()) {
+  if (interaction.type === InteractionType.ApplicationCommand) {
     const command = client.commands.get(interaction.commandName)
     if (!command) return
     try {

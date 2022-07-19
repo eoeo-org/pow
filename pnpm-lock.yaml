@@ -8,7 +8,7 @@ specifiers:
   axios: 0.27.2
   debug: 4.3.4
   discord-api-types: 0.36.2
-  discord.js: 14.0.1
+  discord.js: 14.0.2
   dotenv: 16.0.1
   ffmpeg-static: 4.4.1
   libsodium-wrappers: 0.7.10
@@ -25,7 +25,7 @@ dependencies:
   axios: 0.27.2_debug@4.3.4
   debug: 4.3.4
   discord-api-types: 0.36.2
-  discord.js: 14.0.1
+  discord.js: 14.0.2
   dotenv: 16.0.1
   ffmpeg-static: 4.4.1
   libsodium-wrappers: 0.7.10
@@ -217,8 +217,8 @@ packages:
     resolution: {integrity: sha512-TunPAvzwneK/m5fr4hxH3bMsrtI22nr9yjfHyo5NBGMjpsAauGNiGCmwoFf0oO3jSd2mZiKUvZwCKDaB166u2Q==}
     dev: false
 
-  /discord.js/14.0.1:
-    resolution: {integrity: sha512-MZ2cvvk1WCpTUCLcchX5e/mBM22JCPAYle76qEuAfQfVTFdxE2YoKgRWMwWm6s/OJdkXyzglRWj405hg4vikEg==}
+  /discord.js/14.0.2:
+    resolution: {integrity: sha512-aHZHwT4i5yyV4IotFm9lSSPq8mTUkYWTrpatPlT53wz8QyFUPw5XjvUxuOXlaioV1kBsgfhSjCP0BNqxfuSjRQ==}
     engines: {node: '>=16.9.0'}
     dependencies:
       '@discordjs/builders': 1.0.0

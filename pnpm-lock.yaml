@@ -12,7 +12,7 @@ specifiers:
   dotenv: 16.0.1
   ffmpeg-static: 4.4.1
   libsodium-wrappers: 0.7.10
-  mariadb: 3.0.0
+  mariadb: 3.0.1
   node-emoji: 1.11.0
   prettier: 2.7.1
   twemoji-parser: 14.0.0
@@ -29,7 +29,7 @@ dependencies:
   dotenv: 16.0.1
   ffmpeg-static: 4.4.1
   libsodium-wrappers: 0.7.10
-  mariadb: 3.0.0
+  mariadb: 3.0.1
   node-emoji: 1.11.0
   twemoji-parser: 14.0.0
 
@@ -347,8 +347,8 @@ packages:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: false
 
-  /mariadb/3.0.0:
-    resolution: {integrity: sha512-1uIqD6AWLP5ojMY67XP4+4uRLe9L92HD1ZGU8fidi8cGdYIC+Ghx1JliAtf7lc/tGjOh6J400f/1M4BXVtZFvA==}
+  /mariadb/3.0.1:
+    resolution: {integrity: sha512-orYg4JojWszNWlI1a+We2TUe4h+S5WIkjUa0U4DF0jjrOtxBVtCsQtioXxURWCxVfxwQ5wZVZkBoa53lqRuQeQ==}
     engines: {node: '>= 12'}
     dependencies:
       '@alloc/quick-lru': 5.2.0

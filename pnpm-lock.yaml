@@ -51,8 +51,8 @@ packages:
       parse-cache-control: 1.0.1
     dev: false
 
-  /@discordjs/builders/1.0.0:
-    resolution: {integrity: sha512-8y91ZfpOHubiGJu5tVyGI9tQCEyHZDTeqUWVcJd0dq7B96xIf84S0L4fwmD1k9zTe1eqEFSk0gc7BpY+FKn7Ww==}
+  /@discordjs/builders/1.1.0:
+    resolution: {integrity: sha512-EO8TSltiIc9Z1wE854wAFvv5AccqEtvjFmao9PPoxQhRaJ0hEb7FwWRTCA1jGg4ZWI3hcp4m+RET5ufZQz3rOg==}
     engines: {node: '>=16.9.0'}
     dependencies:
       '@sapphire/shapeshift': 3.5.1
@@ -223,7 +223,7 @@ packages:
     resolution: {integrity: sha512-wH/VQl4CqN8/+dcXEtYis1iurqxGlDpEe0O4CqH5FGqZGIjVpTdtK0STXXx7bVNX8MT/0GvLZLkmO/5gLDWZVg==}
     engines: {node: '>=16.9.0'}
     dependencies:
-      '@discordjs/builders': 1.0.0
+      '@discordjs/builders': 1.1.0
       '@discordjs/collection': 1.0.1
       '@discordjs/rest': 1.0.1
       '@sapphire/snowflake': 3.2.2

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders')
+const { SlashCommandBuilder } = require('discord.js')
 const { objToList } = require('../utils.js')
 const convertContent = require('../contentConverter')
 const voiceRead = require('../voiceRead')

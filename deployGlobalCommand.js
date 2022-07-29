@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const fs = require('fs')
 const { REST } = require('@discordjs/rest')
-const { Routes } = require('discord-api-types/v9')
+const { Routes } = require('discord.js')
 const commands = []
 const commandFiles = fs
   .readdirSync('./commands')

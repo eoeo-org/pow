@@ -7,7 +7,7 @@ specifiers:
   axios: 0.27.2
   debug: 4.3.4
   discord-api-types: 0.37.0
-  discord.js: 14.0.3
+  discord.js: 14.1.1
   dotenv: 16.0.1
   ffmpeg-static: 4.4.1
   libsodium-wrappers: 0.7.10
@@ -23,7 +23,7 @@ dependencies:
   axios: 0.27.2_debug@4.3.4
   debug: 4.3.4
   discord-api-types: 0.37.0
-  discord.js: 14.0.3
+  discord.js: 14.1.1
   dotenv: 16.0.1
   ffmpeg-static: 4.4.1
   libsodium-wrappers: 0.7.10
@@ -51,8 +51,8 @@ packages:
       parse-cache-control: 1.0.1
     dev: false
 
-  /@discordjs/builders/1.0.0:
-    resolution: {integrity: sha512-8y91ZfpOHubiGJu5tVyGI9tQCEyHZDTeqUWVcJd0dq7B96xIf84S0L4fwmD1k9zTe1eqEFSk0gc7BpY+FKn7Ww==}
+  /@discordjs/builders/1.1.0:
+    resolution: {integrity: sha512-EO8TSltiIc9Z1wE854wAFvv5AccqEtvjFmao9PPoxQhRaJ0hEb7FwWRTCA1jGg4ZWI3hcp4m+RET5ufZQz3rOg==}
     engines: {node: '>=16.9.0'}
     dependencies:
       '@sapphire/shapeshift': 3.5.1
@@ -219,11 +219,11 @@ packages:
     resolution: {integrity: sha512-6LlL0xceiZs/kQ5PeKe5inkcjR73vagt3oACsP/C5IWKjXfzLGKrXn6yRYgiHIeJyFZ1xVPRJYE4W/u8UTT4ig==}
     dev: false
 
-  /discord.js/14.0.3:
-    resolution: {integrity: sha512-wH/VQl4CqN8/+dcXEtYis1iurqxGlDpEe0O4CqH5FGqZGIjVpTdtK0STXXx7bVNX8MT/0GvLZLkmO/5gLDWZVg==}
+  /discord.js/14.1.1:
+    resolution: {integrity: sha512-6Oa2f+Y0+s6B5HTTqcAP7Z6tUmguNTKpzbuTmE1JIeT/aUTr9dVe397D/bvcBSRpJERQzMyEWyEiVQnMRHcx4A==}
     engines: {node: '>=16.9.0'}
     dependencies:
-      '@discordjs/builders': 1.0.0
+      '@discordjs/builders': 1.1.0
       '@discordjs/collection': 1.0.1
       '@discordjs/rest': 1.0.1
       '@sapphire/snowflake': 3.2.2

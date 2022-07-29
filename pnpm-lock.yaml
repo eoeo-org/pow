@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@discordjs/builders': 1.0.0
-  '@discordjs/collection': 1.0.0
+  '@discordjs/collection': 1.0.1
   '@discordjs/rest': 1.0.1
   '@discordjs/voice': 0.11.0
   axios: 0.27.2
@@ -19,7 +19,7 @@ specifiers:
 
 dependencies:
   '@discordjs/builders': 1.0.0
-  '@discordjs/collection': 1.0.0
+  '@discordjs/collection': 1.0.1
   '@discordjs/rest': 1.0.1
   '@discordjs/voice': 0.11.0_ffmpeg-static@4.4.1
   axios: 0.27.2_debug@4.3.4
@@ -62,11 +62,6 @@ packages:
       fast-deep-equal: 3.1.3
       ts-mixer: 6.0.1
       tslib: 2.4.0
-    dev: false
-
-  /@discordjs/collection/1.0.0:
-    resolution: {integrity: sha512-nAxDQYE5dNAzEGQ7HU20sujDsG5vLowUKCEqZkKUIlrXERZFTt/60zKUj/g4+AVCGeq+pXC5hivMaNtiC+PY5Q==}
-    engines: {node: '>=16.9.0'}
     dev: false
 
   /@discordjs/collection/1.0.1:
@@ -227,7 +222,7 @@ packages:
     engines: {node: '>=16.9.0'}
     dependencies:
       '@discordjs/builders': 1.0.0
-      '@discordjs/collection': 1.0.0
+      '@discordjs/collection': 1.0.1
       '@discordjs/rest': 1.0.1
       '@sapphire/snowflake': 3.2.2
       '@types/ws': 8.5.3

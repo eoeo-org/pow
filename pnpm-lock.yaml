@@ -272,7 +272,7 @@ packages:
     dependencies:
       readable-web-to-node-stream: 3.0.2
       strtok3: 7.0.0-alpha.9
-      token-types: 5.0.0-alpha.2
+      token-types: 5.0.0-alpha.3
     dev: false
 
   /follow-redirects/1.15.1_debug@4.3.4:
@@ -482,8 +482,8 @@ packages:
       peek-readable: 5.0.0-alpha.5
     dev: false
 
-  /token-types/5.0.0-alpha.2:
-    resolution: {integrity: sha512-EsG9UxAW4M6VATrEEjhPFTKEUi1OiJqTUMIZOGBN49fGxYjZB36k0p7to3HZSmWRoHm1QfZgrg3e02fpqAt5fQ==}
+  /token-types/5.0.0-alpha.3:
+    resolution: {integrity: sha512-GWGtybxmoWRB1pNghnsNBftIfbzGLiTnytq1XKG/0ZQnLmSqgUA4x06dTvqRem5ZuXI0LY3zkNxl2/RG6QwJkA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       '@tokenizer/token': 0.3.0

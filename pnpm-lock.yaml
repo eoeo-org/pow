@@ -75,7 +75,7 @@ packages:
       '@sapphire/async-queue': 1.3.2
       '@sapphire/snowflake': 3.2.2
       discord-api-types: 0.36.3
-      file-type: 17.1.4
+      file-type: 17.1.5
       tslib: 2.4.0
       undici: 5.8.0
     dev: false
@@ -266,13 +266,13 @@ packages:
       - supports-color
     dev: false
 
-  /file-type/17.1.4:
-    resolution: {integrity: sha512-3w/rJUUPBj6CYhVER3D5JCKwYJJiC36uj5dP+LnyubHI6H6FJo1TeWVCEA09YLVoZqV3/mLP26j9+Pz1GjAyjQ==}
+  /file-type/17.1.5:
+    resolution: {integrity: sha512-GMZRKCpcCQgqV0L/8ZqlMZ5lLzH2GLYnAwnqen6fr8b0CHzQPP+R/vXHBOsa0m/R74gCZP3sQDpu6fUeIvyFEQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       readable-web-to-node-stream: 3.0.2
-      strtok3: 7.0.0-alpha.9
-      token-types: 5.0.0-alpha.3
+      strtok3: 7.0.0
+      token-types: 5.0.0
     dev: false
 
   /follow-redirects/1.15.1_debug@4.3.4:
@@ -398,9 +398,9 @@ packages:
     resolution: {integrity: sha512-60zvsJReQPX5/QP0Kzfd/VrpjScIQ7SHBW6bFCYfEP+fp0Eppr1SHhIO5nd1PjZtvclzSzES9D/p5nFJurwfWg==}
     dev: false
 
-  /peek-readable/5.0.0-alpha.5:
-    resolution: {integrity: sha512-pJohF/tDwV3ntnT5+EkUo4E700q/j/OCDuPxtM+5/kFGjyOai/sK4/We4Cy1MB2OiTQliWU5DxPvYIKQAdPqAA==}
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+  /peek-readable/5.0.0:
+    resolution: {integrity: sha512-YtCKvLUOvwtMGmrniQPdO7MwPjgkFBtFIrmfSbYmYuq3tKDV/mcfAhBth1+C3ru7uXIZasc/pHnb+YDYNkkj4A==}
+    engines: {node: '>=14.16'}
     dev: false
 
   /please-upgrade-node/3.2.0:
@@ -474,17 +474,17 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
-  /strtok3/7.0.0-alpha.9:
-    resolution: {integrity: sha512-G8WxjBFjTZ77toVElv1i7k3jCXNkBB14FVaZ/6LIOka/WGo4La5XHLrU7neFVLdKbXESZf4BejVKZu5maOmocA==}
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+  /strtok3/7.0.0:
+    resolution: {integrity: sha512-pQ+V+nYQdC5H3Q7qBZAz/MO6lwGhoC2gOAjuouGf/VO0m7vQRh8QNMl2Uf6SwAtzZ9bOw3UIeBukEGNJl5dtXQ==}
+    engines: {node: '>=14.16'}
     dependencies:
       '@tokenizer/token': 0.3.0
-      peek-readable: 5.0.0-alpha.5
+      peek-readable: 5.0.0
     dev: false
 
-  /token-types/5.0.0-alpha.3:
-    resolution: {integrity: sha512-GWGtybxmoWRB1pNghnsNBftIfbzGLiTnytq1XKG/0ZQnLmSqgUA4x06dTvqRem5ZuXI0LY3zkNxl2/RG6QwJkA==}
-    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+  /token-types/5.0.0:
+    resolution: {integrity: sha512-cza79xW1bo4pa6/AAZoOaZTlgNCgG3oCG7LQiGrfRFVl+XZvqiyc0+ncvlz+3XDIDNf9WcaT3Hcy6n/e1Tuc9A==}
+    engines: {node: '>=14.16'}
     dependencies:
       '@tokenizer/token': 0.3.0
       ieee754: 1.2.1

@@ -75,7 +75,7 @@ packages:
       '@sapphire/async-queue': 1.3.2
       '@sapphire/snowflake': 3.2.2
       discord-api-types: 0.36.3
-      file-type: 17.1.5
+      file-type: 17.1.6
       tslib: 2.4.0
       undici: 5.8.0
     dev: false
@@ -266,13 +266,13 @@ packages:
       - supports-color
     dev: false
 
-  /file-type/17.1.5:
-    resolution: {integrity: sha512-GMZRKCpcCQgqV0L/8ZqlMZ5lLzH2GLYnAwnqen6fr8b0CHzQPP+R/vXHBOsa0m/R74gCZP3sQDpu6fUeIvyFEQ==}
+  /file-type/17.1.6:
+    resolution: {integrity: sha512-hlDw5Ev+9e883s0pwUsuuYNu4tD7GgpUnOvykjv1Gya0ZIjuKumthDRua90VUn6/nlRKAjcxLUnHNTIUWwWIiw==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       readable-web-to-node-stream: 3.0.2
       strtok3: 7.0.0
-      token-types: 5.0.0
+      token-types: 5.0.1
     dev: false
 
   /follow-redirects/1.15.1_debug@4.3.4:
@@ -482,8 +482,8 @@ packages:
       peek-readable: 5.0.0
     dev: false
 
-  /token-types/5.0.0:
-    resolution: {integrity: sha512-cza79xW1bo4pa6/AAZoOaZTlgNCgG3oCG7LQiGrfRFVl+XZvqiyc0+ncvlz+3XDIDNf9WcaT3Hcy6n/e1Tuc9A==}
+  /token-types/5.0.1:
+    resolution: {integrity: sha512-Y2fmSnZjQdDb9W4w4r1tswlMHylzWIeOKpx0aZH9BgGtACHhrk3OkT52AzwcuqTRBZtvvnTjDBh8eynMulu8Vg==}
     engines: {node: '>=14.16'}
     dependencies:
       '@tokenizer/token': 0.3.0

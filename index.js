@@ -5,9 +5,9 @@ const {
   Client,
   Collection,
   GatewayIntentBits,
+  MessageType,
   InteractionType,
 } = require('discord.js')
-const { MessageType } = require('discord-api-types/v10')
 const client = new Client({
   intents: Object.values(GatewayIntentBits).filter(Number.isInteger),
 })

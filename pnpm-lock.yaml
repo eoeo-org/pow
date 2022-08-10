@@ -6,7 +6,7 @@ specifiers:
   '@discordjs/voice': 0.11.0
   axios: 0.27.2
   debug: 4.3.4
-  discord.js: 14.1.2
+  discord.js: 14.2.0
   dotenv: 16.0.1
   ffmpeg-static: 4.4.1
   libsodium-wrappers: 0.7.10
@@ -21,7 +21,7 @@ dependencies:
   '@discordjs/voice': 0.11.0_ffmpeg-static@4.4.1
   axios: 0.27.2_debug@4.3.4
   debug: 4.3.4
-  discord.js: 14.1.2
+  discord.js: 14.2.0
   dotenv: 16.0.1
   ffmpeg-static: 4.4.1
   libsodium-wrappers: 0.7.10
@@ -213,8 +213,8 @@ packages:
     resolution: {integrity: sha512-bz/NDyG0KBo/tY14vSkrwQ/n3HKPf87a0WFW/1M9+tXYK+vp5Z5EksawfCWo2zkAc6o7CClc0eff1Pjrqznlwg==}
     dev: false
 
-  /discord.js/14.1.2:
-    resolution: {integrity: sha512-apdWNLkjAkeEnuNpB8H6rS/4OgrXQlSAjuuzeodjCOdIXy3OwOjD314V/HiSttcAlr9+r3ONhaT5qvbDad5SIg==}
+  /discord.js/14.2.0:
+    resolution: {integrity: sha512-kIGhEeOB1d9k7whL9HCCuRuzK2GL7i/hTesYINOZ2szWm4TOsBVwRU+i9O/zDb2M+Gvff4SJ4EpAtCVV0okgVw==}
     engines: {node: '>=16.9.0'}
     dependencies:
       '@discordjs/builders': 1.1.0

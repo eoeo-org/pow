@@ -6,7 +6,7 @@
 
 ## プレビュー
 
-![](https://user-images.githubusercontent.com/34514603/184809823-c66e5f0c-7a7c-476a-b9c1-3ce2e0cc8d12.mp4)
+https://user-images.githubusercontent.com/34514603/184809823-c66e5f0c-7a7c-476a-b9c1-3ce2e0cc8d12.mp4
 
 ## BOT追加URL
 

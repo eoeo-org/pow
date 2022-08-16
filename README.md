@@ -6,7 +6,7 @@
 
 ## BOT追加URL
 
-[こちら のURL](https://discord.com/oauth2/authorize?client_id=939494577574924339&permissions=36716544&scope=applications.commands%20bot)から追加可能です。
+[こちらのURL](https://discord.com/oauth2/authorize?client_id=939494577574924339&permissions=36716544&scope=applications.commands%20bot)から追加可能です。
 
 ## 使い方
 

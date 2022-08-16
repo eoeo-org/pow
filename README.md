@@ -4,6 +4,10 @@
 「pow」はDiscord用音声読み上げBotです。  
 読み上げAPIに「[VoiceText Web API](https://cloud.voicetext.jp/webapi)」を使用しています。
 
+## プレビュー
+
+![](https://user-images.githubusercontent.com/34514603/184809823-c66e5f0c-7a7c-476a-b9c1-3ce2e0cc8d12.mp4)
+
 ## BOT追加URL
 
 [こちらのURL](https://discord.com/oauth2/authorize?client_id=939494577574924339&permissions=36716544&scope=applications.commands%20bot)から追加可能です。

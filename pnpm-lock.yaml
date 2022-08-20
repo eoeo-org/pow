@@ -130,14 +130,14 @@ packages:
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
     dev: false
 
-  /@types/node/18.7.6:
-    resolution: {integrity: sha512-EdxgKRXgYsNITy5mjjXjVE/CS8YENSdhiagGrLqjG0pvA2owgJ6i4l7wy/PFZGC0B1/H20lWKN7ONVDNYDZm7A==}
+  /@types/node/18.7.7:
+    resolution: {integrity: sha512-sTKYCtQmaUpsAT+AbUTKg0Ya0dYyh20t3TBQebWrGXQHFmkrEyeedok2/IpTthlJopPSbUoc1hAKoK6UeFRCZw==}
     dev: false
 
   /@types/ws/8.5.3:
     resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}
     dependencies:
-      '@types/node': 18.7.6
+      '@types/node': 18.7.7
     dev: false
 
   /agent-base/6.0.2:

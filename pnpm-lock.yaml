@@ -356,7 +356,7 @@ packages:
       '@types/node': 17.0.45
       denque: 2.1.0
       iconv-lite: 0.6.3
-      moment-timezone: 0.5.36
+      moment-timezone: 0.5.37
       please-upgrade-node: 3.2.0
     dev: false
 
@@ -372,8 +372,8 @@ packages:
       mime-db: 1.52.0
     dev: false
 
-  /moment-timezone/0.5.36:
-    resolution: {integrity: sha512-yxiQanbZOzU9rX9a1svFjjHyDExMTnTUK9cQWpogjEOdycdD94kIsLYbHHkUQC0dlQbzp/c2Og+Xb4yeDbgo6Q==}
+  /moment-timezone/0.5.37:
+    resolution: {integrity: sha512-uEDzDNFhfaywRl+vwXxffjjq1q0Vzr+fcQpQ1bU0kbzorfS7zVtZnCnGc8mhWmF39d4g4YriF6kwA75mJKE/Zg==}
     dependencies:
       moment: 2.29.4
     dev: false

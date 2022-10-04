@@ -4,7 +4,7 @@ specifiers:
   '@discordjs/collection': 1.1.0
   '@discordjs/rest': 1.2.0
   '@discordjs/voice': 0.11.0
-  axios: 0.27.2
+  axios: 1.0.0
   debug: 4.3.4
   discord.js: 14.5.0
   dotenv: 16.0.3
@@ -19,7 +19,7 @@ dependencies:
   '@discordjs/collection': 1.1.0
   '@discordjs/rest': 1.2.0
   '@discordjs/voice': 0.11.0_ffmpeg-static@5.1.0
-  axios: 0.27.2_debug@4.3.4
+  axios: 1.0.0_debug@4.3.4
   debug: 4.3.4
   discord.js: 14.5.0
   dotenv: 16.0.3
@@ -153,11 +153,12 @@ packages:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
     dev: false
 
-  /axios/0.27.2_debug@4.3.4:
-    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+  /axios/1.0.0_debug@4.3.4:
+    resolution: {integrity: sha512-SsHsGFN1qNPFT5QhSoSD37SHDfGyLSW5AESmyLk2JeCMHv5g0I9g0Hz/zQHx2KNe0jGXh2q2hAm7OdkXm360CA==}
     dependencies:
       follow-redirects: 1.15.2_debug@4.3.4
       form-data: 4.0.0
+      proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
     dev: false
@@ -443,6 +444,10 @@ packages:
   /progress/2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
     engines: {node: '>=0.4.0'}
+    dev: false
+
+  /proxy-from-env/1.1.0:
+    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
     dev: false
 
   /readable-stream/3.6.0:

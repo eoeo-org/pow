@@ -4,7 +4,7 @@ specifiers:
   '@discordjs/collection': 1.1.0
   '@discordjs/rest': 1.2.0
   '@discordjs/voice': 0.11.0
-  axios: 1.1.0
+  axios: 1.1.2
   debug: 4.3.4
   discord.js: 14.5.0
   dotenv: 16.0.3
@@ -19,7 +19,7 @@ dependencies:
   '@discordjs/collection': 1.1.0
   '@discordjs/rest': 1.2.0
   '@discordjs/voice': 0.11.0_ffmpeg-static@5.1.0
-  axios: 1.1.0_debug@4.3.4
+  axios: 1.1.2_debug@4.3.4
   debug: 4.3.4
   discord.js: 14.5.0
   dotenv: 16.0.3
@@ -153,8 +153,8 @@ packages:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
     dev: false
 
-  /axios/1.1.0_debug@4.3.4:
-    resolution: {integrity: sha512-hsJgcqz4JY7f+HZ4cWTrPZ6tZNCNFPTRx1MjRqu/hbpgpHdSCUpLVuplc+jE/h7dOvyANtw/ERA3HC2Rz/QoMg==}
+  /axios/1.1.2_debug@4.3.4:
+    resolution: {integrity: sha512-bznQyETwElsXl2RK7HLLwb5GPpOLlycxHCtrpDR/4RqqBzjARaOTo3jz4IgtntWUYee7Ne4S8UHd92VCuzPaWA==}
     dependencies:
       follow-redirects: 1.15.2_debug@4.3.4
       form-data: 4.0.0

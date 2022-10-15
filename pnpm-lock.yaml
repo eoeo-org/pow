@@ -55,7 +55,7 @@ packages:
     dependencies:
       '@discordjs/util': 0.1.0
       '@sapphire/shapeshift': 3.7.0
-      discord-api-types: 0.37.13
+      discord-api-types: 0.37.14
       fast-deep-equal: 3.1.3
       ts-mixer: 6.0.1
       tslib: 2.4.0
@@ -74,7 +74,7 @@ packages:
       '@discordjs/util': 0.1.0
       '@sapphire/async-queue': 1.5.0
       '@sapphire/snowflake': 3.2.2
-      discord-api-types: 0.37.13
+      discord-api-types: 0.37.14
       file-type: 18.0.0
       tslib: 2.4.0
       undici: 5.11.0
@@ -90,7 +90,7 @@ packages:
     engines: {node: '>=16.9.0'}
     dependencies:
       '@types/ws': 8.5.3
-      discord-api-types: 0.37.13
+      discord-api-types: 0.37.14
       prism-media: 1.3.4_ffmpeg-static@5.1.0
       tslib: 2.4.0
       ws: 8.9.0
@@ -224,8 +224,8 @@ packages:
     engines: {node: '>=0.10'}
     dev: false
 
-  /discord-api-types/0.37.13:
-    resolution: {integrity: sha512-NFzR0ZsokLyHRrqPjAeDh4lI5rYlKP8dZYV4ZfUuxUilSW1FpWyz2oe9485HDKN2ZhV0KTDXWwNiomLDOu/lAA==}
+  /discord-api-types/0.37.14:
+    resolution: {integrity: sha512-byBH7SfDCMJwxdqeS8k5sihltH88/YPhuwx+vF2cftSxFLdxyHyU/ZxDL3bq+LB2c4ls/TymE76/ISlLfniUXg==}
     dev: false
 
   /discord.js/14.6.0:
@@ -238,7 +238,7 @@ packages:
       '@discordjs/util': 0.1.0
       '@sapphire/snowflake': 3.2.2
       '@types/ws': 8.5.3
-      discord-api-types: 0.37.13
+      discord-api-types: 0.37.14
       fast-deep-equal: 3.1.3
       lodash.snakecase: 4.1.1
       tslib: 2.4.0
@@ -368,7 +368,7 @@ packages:
       '@types/node': 17.0.45
       denque: 2.1.0
       iconv-lite: 0.6.3
-      moment-timezone: 0.5.37
+      moment-timezone: 0.5.38
       please-upgrade-node: 3.2.0
     dev: false
 
@@ -384,8 +384,8 @@ packages:
       mime-db: 1.52.0
     dev: false
 
-  /moment-timezone/0.5.37:
-    resolution: {integrity: sha512-uEDzDNFhfaywRl+vwXxffjjq1q0Vzr+fcQpQ1bU0kbzorfS7zVtZnCnGc8mhWmF39d4g4YriF6kwA75mJKE/Zg==}
+  /moment-timezone/0.5.38:
+    resolution: {integrity: sha512-nMIrzGah4+oYZPflDvLZUgoVUO4fvAqHstvG3xAUnMolWncuAiLDWNnJZj6EwJGMGfb1ZcuTFE6GI3hNOVWI/Q==}
     dependencies:
       moment: 2.29.4
     dev: false

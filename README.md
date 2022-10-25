@@ -45,3 +45,6 @@ https://user-images.githubusercontent.com/34514603/184809823-c66e5f0c-7a7c-476a-
 | speaker                | show, haruka, hikari, takeru, santa, bear |
 | pitch                  | 50 から 200                               |
 | speed                  | 50 から 400                               |
+
+### 読み上げをスキップするには
+`_`を最初に付けると読み上げをスキップできます、また同様にコードブロック、スポイラーでもスキップできます。

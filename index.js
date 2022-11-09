@@ -82,4 +82,7 @@ client.on('interactionCreate', async (interaction) => {
   }
 })
 
+process.on('SIGTERM', client.destroy)
+process.on('SIGINT', client.destroy)
+
 client.login(process.env.TOKEN)

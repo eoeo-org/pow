@@ -368,7 +368,7 @@ packages:
       denque: 2.1.0
       iconv-lite: 0.6.3
       lru-cache: 7.14.1
-      moment-timezone: 0.5.38
+      moment-timezone: 0.5.39
     dev: false
 
   /mime-db/1.52.0:
@@ -383,8 +383,8 @@ packages:
       mime-db: 1.52.0
     dev: false
 
-  /moment-timezone/0.5.38:
-    resolution: {integrity: sha512-nMIrzGah4+oYZPflDvLZUgoVUO4fvAqHstvG3xAUnMolWncuAiLDWNnJZj6EwJGMGfb1ZcuTFE6GI3hNOVWI/Q==}
+  /moment-timezone/0.5.39:
+    resolution: {integrity: sha512-hoB6suq4ISDj7BDgctiOy6zljBsdYT0++0ZzZm9rtxIvJhIbQ3nmbgSWe7dNFGurl6/7b1OUkHlmN9JWgXVz7w==}
     dependencies:
       moment: 2.29.4
     dev: false

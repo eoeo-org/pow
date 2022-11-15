@@ -9,7 +9,7 @@
     "lint": "pnpm prettier --check .",
     "postinstall": "git config --local core.hooksPath .githooks || [ $? = 127 ]"
   },
-  "packageManager": "pnpm@7.15.0",
+  "packageManager": "pnpm@7.16.0",
   "engines": {
     "npm": "This project is configured to use pnpm"
   },

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  discordbot-pow:
+    container_name: discordbot-pow
+    build: .
+    env_file: .env
+    environment:
+      - DEBUG=voiceRead.js:*,utils.js:*
+    restart: always

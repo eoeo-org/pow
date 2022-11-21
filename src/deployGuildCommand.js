@@ -1,11 +1,12 @@
 require('dotenv').config()
 
 const fs = require('fs')
+const path = require('path')
 const { REST } = require('@discordjs/rest')
 const { Routes } = require('discord.js')
 const commands = []
 const commandFiles = fs
-  .readdirSync('./commands')
+  .readdirSync(path.resolve(__dirname, './commands'))
   .filter((file) => file.endsWith('.js'))
 
 for (const file of commandFiles) {

@@ -16,6 +16,18 @@ module.exports = {
     const { options } = interaction
     const text = options.getString('text')
     const ctx = voiceRead.guilds.get(interaction.guild)
+    if (!ctx.isJoined()) {
+      return interaction.reply({
+        embeds: [
+          {
+            color: 0xff0000,
+            title: 'エラー',
+            description: 'BOTはこのサーバーのVCに参加していません。',
+          },
+        ],
+        ephemeral: true,
+      })
+    }
     const convertedMessage = convertContent(text, interaction.guild.id, client)
       .trim()
       .replace('\n', '')

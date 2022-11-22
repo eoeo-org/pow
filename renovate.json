@@ -1,16 +1,13 @@
 {
-  "extends": ["config:base"],
-  "labels": ["dependencies"],
-  "prConcurrentLimit": 0,
-  "prHourlyLimit": 0,
-  "packageRules": [
-    {
-      "matchPackagePatterns": ["*"],
-      "rangeStrategy": "pin"
-    }
-  ],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": ["after 10am"]
-  }
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:js-app",
+    ":rebaseStalePrs",
+    ":disableRateLimiting",
+    ":maintainLockFilesWeekly",
+    ":label(dependencies)",
+    ":assignAndReview(kazukazu123123)",
+    ":semanticCommits",
+    ":disablePrControls"
+  ]
 }

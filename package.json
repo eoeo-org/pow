@@ -7,7 +7,7 @@
     "start": "node .",
     "format": "prettier --write .",
     "lint": "pnpm prettier --check .",
-    "postinstall": "git config --local core.hooksPath .githooks || [ $? = 127 ]"
+    "prepare": "husky install"
   },
   "packageManager": "pnpm@7.17.0",
   "engines": {
@@ -28,6 +28,7 @@
     "twemoji-parser": "14.0.0"
   },
   "devDependencies": {
+    "husky": "8.0.2",
     "prettier": "2.8.0"
   },
   "author": "kazukazu123123",

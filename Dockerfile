@@ -13,7 +13,6 @@ WORKDIR /package
 COPY .npmrc /package
 COPY package.json /package
 RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | sed 's/.*@//') bash -
-RUN pnpm config set script-postinstall ""
 RUN pnpm i
 
 FROM gcr.io/distroless/cc:nonroot

@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@discordjs/collection': 1.2.0
+  '@discordjs/collection': 1.3.0
   '@discordjs/rest': 1.3.0
   '@discordjs/voice': 0.13.0
   axios: 1.2.0
@@ -17,7 +17,7 @@ specifiers:
   twemoji-parser: 14.0.0
 
 dependencies:
-  '@discordjs/collection': 1.2.0
+  '@discordjs/collection': 1.3.0
   '@discordjs/rest': 1.3.0
   '@discordjs/voice': 0.13.0_ffmpeg-static@5.1.0
   axios: 1.2.0_debug@4.3.4
@@ -58,8 +58,8 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@discordjs/collection/1.2.0:
-    resolution: {integrity: sha512-VvrrtGb7vbfPHzbhGq9qZB5o8FOB+kfazrxdt0OtxzSkoBuw9dURMkCwWizZ00+rDpiK2HmLHBZX+y6JsG9khw==}
+  /@discordjs/collection/1.3.0:
+    resolution: {integrity: sha512-ylt2NyZ77bJbRij4h9u/wVy7qYw/aDqQLWnadjvDqW/WoWCxrsX6M3CIw9GVP5xcGCDxsrKj5e0r5evuFYwrKg==}
     engines: {node: '>=16.9.0'}
     dev: false
 
@@ -67,7 +67,7 @@ packages:
     resolution: {integrity: sha512-U6X5J+r/MxYpPTlHFuPxXEf92aKsBaD2teBC7sWkKILIr30O8c9+XshfL7KFBCavnAqS/qE+PF9fgRilO3N44g==}
     engines: {node: '>=16.9.0'}
     dependencies:
-      '@discordjs/collection': 1.2.0
+      '@discordjs/collection': 1.3.0
       '@discordjs/util': 0.1.0
       '@sapphire/async-queue': 1.5.0
       '@sapphire/snowflake': 3.2.2
@@ -230,7 +230,7 @@ packages:
     engines: {node: '>=16.9.0'}
     dependencies:
       '@discordjs/builders': 1.3.0
-      '@discordjs/collection': 1.2.0
+      '@discordjs/collection': 1.3.0
       '@discordjs/rest': 1.3.0
       '@discordjs/util': 0.1.0
       '@sapphire/snowflake': 3.2.2

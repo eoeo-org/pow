@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@discordjs/collection': 1.3.0
   '@discordjs/rest': 1.4.0
-  '@discordjs/voice': 0.13.0
+  '@discordjs/voice': 0.14.0
   axios: 1.2.0
   debug: 4.3.4
   discord.js: 14.6.0
@@ -19,7 +19,7 @@ specifiers:
 dependencies:
   '@discordjs/collection': 1.3.0
   '@discordjs/rest': 1.4.0
-  '@discordjs/voice': 0.13.0_ffmpeg-static@5.1.0
+  '@discordjs/voice': 0.14.0_ffmpeg-static@5.1.0
   axios: 1.2.0_debug@4.3.4
   debug: 4.3.4
   discord.js: 14.6.0
@@ -82,8 +82,8 @@ packages:
     engines: {node: '>=16.9.0'}
     dev: false
 
-  /@discordjs/voice/0.13.0_ffmpeg-static@5.1.0:
-    resolution: {integrity: sha512-ZzwDmVINaLgkoDUeTJfpN9TkjINMLfTVoLMtEygm0YC5jTTw7AvKGqhc+Ae/2kNLywd0joyFVNrLp94yCkQ9SA==}
+  /@discordjs/voice/0.14.0_ffmpeg-static@5.1.0:
+    resolution: {integrity: sha512-/LV8LSFuJ1c4OEW1ubPg3al2QNpUpwX8ZL+KL+LORmnUFVCtehSaEh+38uDfWg1O/TgiGI5vOLj4ZKql43drcw==}
     engines: {node: '>=16.9.0'}
     dependencies:
       '@types/ws': 8.5.3

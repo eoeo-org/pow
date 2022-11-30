@@ -9,6 +9,7 @@ const {
   MessageType,
   InteractionType,
 } = require('discord.js')
+
 const client = new Client({
   intents: Object.values(GatewayIntentBits).filter(Number.isInteger),
 })
@@ -80,6 +81,15 @@ client.on('interactionCreate', async (interaction) => {
         ephemeral: true,
       })
     }
+  }
+})
+
+client.on('voiceStateUpdate', (oldState, newState) => {
+  if (newState.channelId != null) return
+  if (newState.id == client.user.id) {
+    const ctx = voiceRead.guilds.get(newState.guild)
+    ctx.readQueue.purge()
+    ctx.cleanChannels()
   }
 })
 

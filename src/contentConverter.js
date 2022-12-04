@@ -1,6 +1,5 @@
 const RFC_URL = /http[s]?:\/\/[a-zA-Z0-9_.\/?&=,#%{};:-]+/g
-const { parse } = require('twemoji-parser')
-const emoji = require('node-emoji')
+const uEmojiParser = require('universal-emoji-parser')
 
 module.exports = (text, guildId, client) => {
   if (!text) throw new Error('There is no first argument.')
@@ -28,11 +27,7 @@ module.exports = (text, guildId, client) => {
     .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
     .replaceAll(RFC_URL, '')
     .replaceAll(/\|\|.+?\|\|/g, '')
-  //console.log(result);
-  const entities = parse(result)
-  entities.map((e) => {
-    result = result.replaceAll(e.text, emoji.which(e.text))
-  })
+  result = uEmojiParser.parseToShortcode(result).replaceAll(':', '')
   return result.match(/(<a?)?:\w+:(\d{18}>)?/) ? '' : result
 }
 

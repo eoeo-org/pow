@@ -9,7 +9,7 @@
     "lint": "prettier --check .",
     "prepare": "husky install || [ $? = 127 ]"
   },
-  "packageManager": "pnpm@7.18.2",
+  "packageManager": "pnpm@7.18.2+sha1.c00528a40825c54771a091835605ee551f190f33",
   "engines": {
     "npm": "This project is configured to use pnpm"
   },

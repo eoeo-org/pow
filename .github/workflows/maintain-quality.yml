@@ -24,6 +24,7 @@ jobs:
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path | tail -n1)" >> $GITHUB_OUTPUT
+          ls /home/runner/setup-pnpm/node_modules/.bin/
 
       - uses: actions/cache@v3
         name: Setup pnpm cache

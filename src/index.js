@@ -96,4 +96,4 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 process.on('SIGTERM', client.destroy)
 process.on('SIGINT', client.destroy)
 
-client.login(process.env.TOKEN)
+client.login()

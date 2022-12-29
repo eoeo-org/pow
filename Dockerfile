@@ -2,7 +2,7 @@ FROM ubuntu:rolling as depender
 
 RUN sed -i 's@archive.ubuntu.com@ftp.jaist.ac.jp/pub/Linux@g' /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get install curl jq -y
+RUN apt-get -y --no-install-recommends install ca-certificates curl jq
 
 ENV NODE_ENV="production"
 ENV PNPM_HOME="/pnpm"

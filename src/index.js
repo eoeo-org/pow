@@ -47,6 +47,7 @@ client.on('messageCreate', async (message) => {
   if (![MessageType.Default, MessageType.Reply].includes(message.type)) return
   if (message.content.startsWith('_')) return
   if (message.content.includes('```')) return
+  if (message.member.voice.selfDeaf) return
 
   const ctx = voiceRead.guilds.get(message.guild)
   if (ctx.textChannel !== message.channel) return

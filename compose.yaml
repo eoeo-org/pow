@@ -3,6 +3,7 @@ services:
   discordbot-pow:
     container_name: discordbot-pow
     build: .
+    pull_policy: always
     env_file: .env
     environment:
       - DEBUG=voiceRead.js:*,utils.js:*

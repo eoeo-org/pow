@@ -23,4 +23,5 @@ COPY --chown=nonroot:nonroot --from=depender /pnpm /pnpm
 COPY --chown=nonroot:nonroot src/ ./src
 COPY --chown=nonroot:nonroot .npmrc package.json ./
 COPY --chown=nonroot:nonroot --from=depender /package/node_modules ./node_modules
-CMD ["pnpm", "node", "."]
+ENTRYPOINT [ "pnpm", "--shell-emulator" ]
+CMD [ "start" ]

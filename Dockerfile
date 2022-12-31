@@ -10,7 +10,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN mkdir /pnpm
 WORKDIR /package
 COPY .npmrc package.json ./
-RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | sed 's/.*@//') bash -
+RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | grep -oP '\d+\.\d+\.\d') bash -
 RUN pnpm i
 
 FROM gcr.io/distroless/cc-debian11:nonroot

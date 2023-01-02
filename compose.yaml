@@ -1,6 +1,7 @@
 version: '3'
 services:
   discordbot-pow:
+    image: discordbot-pow
     container_name: discordbot-pow
     build: .
     pull_policy: always

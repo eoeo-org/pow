@@ -27,7 +27,7 @@
     "universal-emoji-parser": "1.0.7"
   },
   "devDependencies": {
-    "husky": "8.0.2",
+    "husky": "8.0.3",
     "prettier": "2.8.1"
   },
   "author": "kazukazu123123",

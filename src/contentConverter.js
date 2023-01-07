@@ -28,6 +28,10 @@ module.exports = (text, guildId, client) => {
     .replaceAll(RFC_URL, '')
     .replaceAll(/\|\|.+?\|\|/g, '')
     .replaceAll(/<a?:(\w{2,32}):\d{17,19}>/g, '$1')
+    .replaceAll(
+      /<\/([-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}):\d{1,20}>/gu,
+      '$1',
+    )
     .replaceAll(/~/g, '')
     .replaceAll(/\*/g, '')
   result = uEmojiParser.parseToShortcode(result).replaceAll(':', '')

@@ -1,5 +1,19 @@
 const RFC_URL = /http[s]?:\/\/[a-zA-Z0-9_.\/?&=,#%{};:-]+/g
-const uEmojiParser = require('universal-emoji-parser')
+const emojiRegExp = require('emoji-regex')
+const discordEmoji = require('discord-emoji')
+
+const emojiRegex = emojiRegExp()
+
+const dismoji = new Map(
+  Object.entries(discordEmoji)
+    .flatMap((category) => Object.entries(category[1]))
+    .map((v) => v.reverse())
+    .reverse(),
+)
+
+function getShortcodes(emoji) {
+  return ` ${dismoji.get(emoji)} `
+}
 
 module.exports = (text, guildId, client) => {
   if (!text) throw new Error('There is no first argument.')
@@ -34,7 +48,10 @@ module.exports = (text, guildId, client) => {
     )
     .replaceAll(/~/g, '')
     .replaceAll(/\*/g, '')
-  result = uEmojiParser.parseToShortcode(result).replaceAll(':', '')
+    .replaceAll(emojiRegex, function (x) {
+      return getShortcodes(x)
+    })
+
   return result.match(/(<a?)?:\w+:(\d{18}>)?/) ? '' : result
 }
 

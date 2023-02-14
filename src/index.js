@@ -50,7 +50,8 @@ client.on('messageCreate', async (message) => {
   if (message.member.voice.selfDeaf) return
 
   const ctx = voiceRead.guilds.get(message.guild)
-  if (ctx.textChannel !== message.channel) return
+  if (![ctx.textChannel.id, ctx.voiceChanel.id].includes(message.channelId))
+    return
   if (message.content === '') return
   const userSetting = await voiceRead.guilds
     .get(message.guild)

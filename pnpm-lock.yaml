@@ -12,7 +12,7 @@ specifiers:
   emoji-regex: 10.2.1
   ffmpeg-static: 5.1.0
   husky: 8.0.3
-  libsodium-wrappers: 0.7.10
+  libsodium-wrappers: 0.7.11
   mariadb: 3.1.0
   prettier: 2.8.4
 
@@ -27,7 +27,7 @@ dependencies:
   dotenv: 16.0.3
   emoji-regex: 10.2.1
   ffmpeg-static: 5.1.0
-  libsodium-wrappers: 0.7.10
+  libsodium-wrappers: 0.7.11
   mariadb: 3.1.0
 
 devDependencies:
@@ -348,14 +348,14 @@ packages:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
     dev: false
 
-  /libsodium-wrappers/0.7.10:
-    resolution: {integrity: sha512-pO3F1Q9NPLB/MWIhehim42b/Fwb30JNScCNh8TcQ/kIc+qGLQch8ag8wb0keK3EP5kbGakk1H8Wwo7v+36rNQg==}
+  /libsodium-wrappers/0.7.11:
+    resolution: {integrity: sha512-SrcLtXj7BM19vUKtQuyQKiQCRJPgbpauzl3s0rSwD+60wtHqSUuqcoawlMDheCJga85nKOQwxNYQxf/CKAvs6Q==}
     dependencies:
-      libsodium: 0.7.10
+      libsodium: 0.7.11
     dev: false
 
-  /libsodium/0.7.10:
-    resolution: {integrity: sha512-eY+z7hDrDKxkAK+QKZVNv92A5KYkxfvIshtBJkmg5TSiCnYqZP3i9OO9whE79Pwgm4jGaoHgkM4ao/b9Cyu4zQ==}
+  /libsodium/0.7.11:
+    resolution: {integrity: sha512-WPfJ7sS53I2s4iM58QxY3Inb83/6mjlYgcmZs7DJsvDlnmVUwNinBCi5vBT43P6bHRy01O4zsMU2CoVR6xJ40A==}
     dev: false
 
   /lodash.snakecase/4.1.1:

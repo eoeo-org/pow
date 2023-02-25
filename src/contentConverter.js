@@ -1,4 +1,4 @@
-const RFC_URL = /http[s]?:\/\/[a-zA-Z0-9_.\/?&=,#%{};:-]+/g
+const URLPattern = /(https?|vrchat):\/\/[^\s>]+/g
 const emojiRegExp = require('emoji-regex')
 const discordEmoji = require('discord-emoji')
 
@@ -39,7 +39,7 @@ module.exports = (text, guildId, client) => {
 
   let result = text
     .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
-    .replaceAll(RFC_URL, '')
+    .replaceAll(URLPattern, '')
     .replaceAll(/\|\|.+?\|\|/g, '')
     .replaceAll(/<a?:(\w{2,32}):\d{17,19}>/g, '$1')
     .replaceAll(

@@ -87,7 +87,7 @@ client.on('interactionCreate', async (interaction) => {
 
 client.on('voiceStateUpdate', (oldState, newState) => {
   if (newState.channelId != null) return
-  if (newState.id == client.user.id) {
+  if (newState.id === client.user.id) {
     const ctx = voiceRead.guilds.get(newState.guild)
     ctx.readQueue.purge()
     ctx.cleanChannels()

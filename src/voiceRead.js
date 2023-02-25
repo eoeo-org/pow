@@ -94,7 +94,6 @@ class GuildContext {
       throw err
     } finally {
       if (conn) conn.release()
-      delete rows[0].id
       return rows[0]
     }
   }

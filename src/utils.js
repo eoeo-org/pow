@@ -59,6 +59,6 @@ exports.Queue = class Queue extends EventEmitter {
 
 exports.objToList = (obj) => {
   return Object.keys(obj)
-    .map((a) => a + ': ' + obj[a])
+    .map((a) => `${a}: ${obj[a]}`)
     .join('\n')
 }

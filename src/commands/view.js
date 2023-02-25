@@ -29,7 +29,10 @@ module.exports = {
         {
           color: 0x00ff00,
           title: `${userNameText}の声の設定`,
-          description: '```\n' + objToList(userSetting) + '\n```',
+          description:
+            '```\n' +
+            objToList(userSetting).split('\n').slice(1).join('\n') +
+            '\n```',
         },
       ],
       ephemeral: true,

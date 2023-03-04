@@ -1,3 +1,4 @@
+// @ts-check
 const debug__Queue = require('debug')('utils.js:Queue')
 const { EventEmitter } = require('events')
 

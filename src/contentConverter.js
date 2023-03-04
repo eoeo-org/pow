@@ -1,3 +1,4 @@
+// @ts-check
 const URLPattern = /(https?|vrchat):\/\/[^\s>]+/g
 const emojiRegExp = require('emoji-regex')
 const discordEmoji = require('discord-emoji')

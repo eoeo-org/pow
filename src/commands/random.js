@@ -1,3 +1,4 @@
+// @ts-check
 const { SlashCommandBuilder } = require('discord.js')
 const { objToList } = require('../utils.js')
 const voiceRead = require('../voiceRead')

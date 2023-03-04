@@ -1,3 +1,4 @@
+// @ts-check
 const debug__GuildContext = require('debug')('voiceRead.js:GuildContext')
 const debug__initialize = require('debug')('voiceRead.js:initialize')
 const debug__ErrorHandler = require('debug')('voiceRead.js:ErrorHandler')

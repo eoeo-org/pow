@@ -12,7 +12,7 @@ const {
 } = require('discord.js')
 
 const client = new Client({
-  intents: Number(Object.values(GatewayIntentBits).filter(Number.isInteger)),
+  intents: Object.values(GatewayIntentBits).filter(Number.isInteger),
 })
 const convertContent = require('./contentConverter')
 const voiceRead = require('./voiceRead.js')

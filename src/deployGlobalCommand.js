@@ -15,11 +15,15 @@ for (const file of commandFiles) {
   commands.push(command.data.toJSON())
 }
 
-const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN)
+const rest = new REST({ version: '10' }).setToken(
+  process.env.DISCORD_TOKEN ?? '',
+)
 console.log('[Global] Started refreshing global (/) commands.')
 
 rest
-  .put(Routes.applicationCommands(process.env.CLIENT_ID), { body: commands })
+  .put(Routes.applicationCommands(process.env.CLIENT_ID ?? ''), {
+    body: commands,
+  })
   .then(() => {
     console.log('[Global] Successfully reloaded global (/) commands.')
     process.exit()

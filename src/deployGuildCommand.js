@@ -15,7 +15,9 @@ for (const file of commandFiles) {
   commands.push(command.data.toJSON())
 }
 
-const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN)
+const rest = new REST({ version: '10' }).setToken(
+  process.env.DISCORD_TOKEN ?? '',
+)
 console.log(
   `[Guild: (${process.env.GUILD_ID})] Started refreshing application (/) commands.`,
 )
@@ -23,8 +25,8 @@ console.log(
 rest
   .put(
     Routes.applicationGuildCommands(
-      process.env.CLIENT_ID,
-      process.env.GUILD_ID,
+      process.env.CLIENT_ID ?? '',
+      process.env.GUILD_ID ?? '',
     ),
     { body: commands },
   )

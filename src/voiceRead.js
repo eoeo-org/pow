@@ -11,6 +11,7 @@ const {
   StreamType,
   createAudioPlayer,
   AudioPlayerStatus,
+  VoiceConnectionStatus,
 } = require('@discordjs/voice')
 
 const mariadb = require('mariadb')
@@ -73,6 +74,14 @@ class GuildContext {
     })
     this.connection.once('disconnect', () => {
       this.leave()
+    })
+    this.connection.on('stateChange', (old_state, new_state) => {
+      if (
+        old_state.status === VoiceConnectionStatus.Ready &&
+        new_state.status === VoiceConnectionStatus.Connecting
+      ) {
+        this.connection.configureNetworking()
+      }
     })
   }
 

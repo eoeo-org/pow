@@ -41,7 +41,7 @@ module.exports = (text, guildId, client) => {
   let result = text
     .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
     .replaceAll(URLPattern, '')
-    .replaceAll(/\|\|.+?\|\|/g, '')
+    .replaceAll(/\|\|.+?\|\|/gs, '')
     .replaceAll(/<a?:(\w{2,32}):\d{17,19}>/g, '$1')
     .replaceAll(
       /<\/([-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}):\d{1,20}>/gu,

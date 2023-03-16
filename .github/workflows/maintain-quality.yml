@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@27135e314dd1818f797af1db9dae03a9f045786b
+        uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f
 
       - name: Install pnpm
         uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad

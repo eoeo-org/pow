@@ -13,7 +13,7 @@ specifiers:
   ffmpeg-static: 5.1.0
   husky: 8.0.3
   libsodium-wrappers: 0.7.11
-  mariadb: 3.1.0
+  mariadb: 3.1.1
   prettier: 2.8.4
 
 dependencies:
@@ -28,7 +28,7 @@ dependencies:
   emoji-regex: 10.2.1
   ffmpeg-static: 5.1.0
   libsodium-wrappers: 0.7.11
-  mariadb: 3.1.0
+  mariadb: 3.1.1
 
 devDependencies:
   husky: 8.0.3
@@ -380,8 +380,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /mariadb/3.1.0:
-    resolution: {integrity: sha512-OyWbm90bX6gsEuJjD8rLrkBXYt3BR/xc6mQfFibZmmzSw938S5EZzullW5gbVZKRZwbZGxihfszxjCETWid45Q==}
+  /mariadb/3.1.1:
+    resolution: {integrity: sha512-Y5tu9pQr8uZs63FATr7ldODXn8N2aIFlAg/rp6kRTohgQiJfdl9DNGu9PXRTYdY4JgF5mT2ASD81Jdo5kfGYzg==}
     engines: {node: '>= 12'}
     dependencies:
       '@types/geojson': 7946.0.10

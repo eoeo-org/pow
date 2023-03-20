@@ -14,7 +14,7 @@ specifiers:
   husky: 8.0.3
   libsodium-wrappers: 0.7.11
   mariadb: 3.1.1
-  prettier: 2.8.4
+  prettier: 2.8.5
 
 dependencies:
   '@discordjs/collection': 1.4.0
@@ -32,7 +32,7 @@ dependencies:
 
 devDependencies:
   husky: 8.0.3
-  prettier: 2.8.4
+  prettier: 2.8.5
 
 packages:
 
@@ -416,8 +416,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: false
 
-  /prettier/2.8.4:
-    resolution: {integrity: sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==}
+  /prettier/2.8.5:
+    resolution: {integrity: sha512-3gzuxrHbKUePRBB4ZeU08VNkUcqEHaUaouNt0m7LGP4Hti/NuB07C7PPTM/LkWqXoJYJn2McEo5+kxPNrtQkLQ==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true

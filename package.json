@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "husky": "8.0.3",
-    "prettier": "2.8.5"
+    "prettier": "2.8.6"
   },
   "author": "kazukazu123123",
   "license": "MIT",

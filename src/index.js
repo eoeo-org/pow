@@ -66,7 +66,11 @@ client.on('messageCreate', async (message) => {
     .trim()
     .replace('\n', '')
   if (convertedMessage.length === 0) return
-  if (message.member.voice.channel === null) return
+  if (
+    message.member?.voice.channel === null ||
+    message.member?.voice.channel !== ctx.voiceChannel
+  )
+    return
   ctx.addMessage(convertedMessage, message)
 })
 

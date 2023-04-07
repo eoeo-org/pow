@@ -111,7 +111,7 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
   }
 })
 
-process.on('SIGTERM', client.destroy)
-process.on('SIGINT', client.destroy)
+process.on('SIGTERM', client.destroy.bind(client))
+process.on('SIGINT', client.destroy.bind(client))
 
 client.login()

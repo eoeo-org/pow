@@ -11,6 +11,8 @@ const {
   InteractionType,
 } = require('discord.js')
 
+const debug__ErrorHandler = require('debug')('index.js:ErrorHandler')
+
 const client = new Client({
   intents: Object.values(GatewayIntentBits).filter(Number.isInteger),
 })
@@ -90,7 +92,7 @@ client.on('interactionCreate', async (interaction) => {
   }
 })
 
-client.on('voiceStateUpdate', async (oldState, newState) => {
+client.on('voiceStateUpdate', (oldState, newState) => {
   const ctx = voiceRead.guilds.get(newState.guild)
   if (newState.channelId == null && newState.id === client.user.id) {
     ctx.readQueue.purge()
@@ -98,16 +100,28 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
     return
   }
   if (ctx.voiceChannel && ctx.voiceChannel.members.size === 1) {
-    ctx.textChannel.send({
-      embeds: [
-        {
-          color: 0x00ff00,
-          title: 'ボイスチャンネルから退出しました。',
-          description: 'またのご利用をお待ちしております。',
-        },
-      ],
-    })
-    await ctx.leave()
+    ctx.textChannel
+      .send({
+        embeds: [
+          {
+            color: 0x00ff00,
+            title: 'ボイスチャンネルから退出しました。',
+            description: 'またのご利用をお待ちしております。',
+          },
+        ],
+      })
+      .catch((err) => {
+        if (err.code !== 50013) throw err
+        debug__ErrorHandler(
+          `Error code ${err.code}: Missing send messages permission.`,
+        )
+        debug__ErrorHandler(
+          `Guild ID: ${ctx.guild.id} Guild Name: ${ctx.guild.name} Channel ID: ${ctx.textChannel.id} Channel Name: ${ctx.textChannel.name}`,
+        )
+      })
+      .finally(async () => {
+        await ctx.leave()
+      })
   }
 })
 

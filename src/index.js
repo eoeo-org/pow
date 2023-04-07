@@ -86,12 +86,24 @@ client.on('interactionCreate', async (interaction) => {
   }
 })
 
-client.on('voiceStateUpdate', (oldState, newState) => {
-  if (newState.channelId != null) return
-  if (newState.id === client.user.id) {
-    const ctx = voiceRead.guilds.get(newState.guild)
+client.on('voiceStateUpdate', async (oldState, newState) => {
+  const ctx = voiceRead.guilds.get(newState.guild)
+  if (newState.channelId == null && newState.id === client.user.id) {
     ctx.readQueue.purge()
     ctx.cleanChannels()
+    return
+  }
+  if (ctx.voiceChannel && ctx.voiceChannel.members.size === 1) {
+    ctx.textChannel.send({
+      embeds: [
+        {
+          color: 0x00ff00,
+          title: 'ボイスチャンネルから退出しました。',
+          description: 'またのご利用をお待ちしております。',
+        },
+      ],
+    })
+    await ctx.leave()
   }
 })
 

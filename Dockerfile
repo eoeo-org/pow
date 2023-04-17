@@ -17,11 +17,10 @@ FROM gcr.io/distroless/cc-debian11:nonroot
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-USER nonroot
 WORKDIR /app
-COPY --chown=nonroot:nonroot --from=depender /pnpm /pnpm
-COPY --chown=nonroot:nonroot src/ ./src
-COPY --chown=nonroot:nonroot .npmrc package.json ./
-COPY --chown=nonroot:nonroot --from=depender /package/node_modules ./node_modules
+COPY --from=depender /pnpm /pnpm
+COPY src/ ./src
+COPY .npmrc package.json ./
+COPY --from=depender /package/node_modules ./node_modules
 ENTRYPOINT [ "pnpm", "--shell-emulator" ]
 CMD [ "start" ]

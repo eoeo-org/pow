@@ -1,25 +1,30 @@
-// @ts-check
-const debug__Queue = require('debug')('utils.js:Queue')
-const { EventEmitter } = require('events')
+import debug from 'debug'
+const debug__Queue = debug('utils.js:Queue')
+import { EventEmitter } from 'events'
 
-exports.getProperty = (property) => (object) => object[property]
+export function getProperty<T, K extends keyof T>(property: K) {
+  return (object: T) => object[property]
+}
 
-const awaitEvent = (exports.awaitEvent = (
-  eventEmitter,
-  event,
-  validate = () => true,
+const awaitEvent = (
+  eventEmitter: EventEmitter,
+  event: string,
+  validate = (...args: any[]) => true,
 ) =>
   new Promise((resolve) => {
     const callback = (...args) => {
       if (validate(...args)) {
         eventEmitter.off(event, callback)
-        resolve(event, ...args)
+        resolve({ event, ...args })
       }
     }
     eventEmitter.on(event, callback)
-  }))
+  })
 
-exports.Queue = class Queue extends EventEmitter {
+export class Queue extends EventEmitter {
+  consumer: any
+  items: any
+
   constructor(consumer) {
     super()
 
@@ -58,7 +63,7 @@ exports.Queue = class Queue extends EventEmitter {
   }
 }
 
-exports.objToList = (obj) => {
+export function objToList(obj) {
   return Object.keys(obj)
     .map((a) => `${a}: ${obj[a]}`)
     .join('\n')

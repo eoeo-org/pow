@@ -11,7 +11,16 @@ RUN mkdir /pnpm
 WORKDIR /package
 COPY .npmrc package.json ./
 RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | grep -oP '\d+\.\d+\.\d') bash -
+COPY pnpm-lock.yaml ./
 RUN pnpm i
+
+FROM depender as builder
+
+ENV NODE_ENV="development"
+COPY tsconfig.json ./
+RUN pnpm i
+COPY src/ ./src
+RUN pnpm exec tsc
 
 FROM gcr.io/distroless/cc-debian11:nonroot
 
@@ -19,7 +28,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 WORKDIR /app
 COPY --from=depender /pnpm /pnpm
-COPY src/ ./src
+COPY --from=builder /package/dist/ ./dist
 COPY .npmrc package.json ./
 COPY --from=depender /package/node_modules ./node_modules
 ENTRYPOINT [ "pnpm", "--shell-emulator" ]

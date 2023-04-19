@@ -1,6 +1,9 @@
 name: Maintain code quality
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  pull_request_review:
 
 permissions:
   contents: read

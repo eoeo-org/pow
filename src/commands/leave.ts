@@ -38,6 +38,17 @@ export class JoinCommand extends Command {
         ],
         ephemeral: true,
       })
+    } else if (ctx.voiceChannel !== interaction.member.voice.channel) {
+      return interaction.reply({
+        embeds: [
+          {
+            color: 0xff0000,
+            title: 'エラー',
+            description: 'BOTと同じVCに参加している必要があります。',
+          },
+        ],
+        ephemeral: true,
+      })
     }
 
     await ctx.leave()

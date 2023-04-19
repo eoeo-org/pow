@@ -16,7 +16,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GH_REPO: ${{ github.repository }}
     steps:
-      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
         with:
           fetch-depth: 0
       - name: Setup git

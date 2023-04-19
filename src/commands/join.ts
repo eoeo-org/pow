@@ -1,14 +1,31 @@
-// @ts-check
-const { SlashCommandBuilder } = require('discord.js')
-const voiceRead = require('../voiceRead')
+import { Command, type ChatInputCommand } from '@sapphire/framework'
+import { guildCtxManager } from '../index.js'
 
-module.exports = {
-  data: new SlashCommandBuilder()
-    .setName('join')
-    .setDescription('ボイスチャンネルに参加します。')
-    .setDMPermission(false),
+export class JoinCommand extends Command {
+  public constructor(
+    context: ChatInputCommand.Context,
+    options: ChatInputCommand.Options,
+  ) {
+    super(context, {
+      ...options,
+      description: 'ボイスチャンネルに参加します。',
+    })
+  }
 
-  async execute(interaction) {
+  public override registerApplicationCommands(
+    registry: ChatInputCommand.Registry,
+  ) {
+    registry.registerChatInputCommand((builder) =>
+      builder
+        .setName(this.name)
+        .setDescription(this.description)
+        .setDMPermission(false),
+    )
+  }
+  public override async chatInputRun(
+    interaction: ChatInputCommand.Interaction,
+  ) {
+    if (!interaction.inCachedGuild()) return
     const user = await interaction.member.fetch()
     if (!user.voice.channel) {
       return interaction.reply({
@@ -23,7 +40,7 @@ module.exports = {
       })
     }
 
-    const ctx = voiceRead.guilds.get(interaction.member.guild)
+    const ctx = guildCtxManager.get(interaction.member.guild)
 
     if (ctx.isJoined()) {
       return interaction.reply({
@@ -54,5 +71,5 @@ module.exports = {
         },
       ],
     })
-  },
+  }
 }

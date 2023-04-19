@@ -1,29 +1,52 @@
-// @ts-check
 const URLPattern = /(https?|vrchat):\/\/[^\s>]+/g
-const emojiRegExp = require('emoji-regex')
-const discordEmoji = require('discord-emoji')
+import emojiRegExp from 'emoji-regex'
+import {
+  activity,
+  flags,
+  food,
+  nature,
+  objects,
+  people,
+  symbols,
+  travel,
+} from 'discord-emoji'
+import type { Client } from 'discord.js'
 
 const emojiRegex = emojiRegExp()
 
 const dismoji = new Map(
-  Object.entries(discordEmoji)
-    .flatMap((category) => Object.entries(category[1]))
-    .map((v) => v.reverse())
-    .reverse(),
+  Object.entries(
+    Object.assign(
+      activity,
+      flags,
+      food,
+      nature,
+      objects,
+      people,
+      symbols,
+      travel,
+    ),
+  )
+    .reverse()
+    .map(([key, value]) => [value, key]),
 )
 
-function getShortcodes(emoji) {
+function getShortcodes(emoji: string) {
   return ` ${dismoji.get(emoji)} `
 }
 
-module.exports = (text, guildId, client) => {
+export const convertContent = (
+  text: string,
+  guildId: string,
+  client: Client,
+) => {
   if (!text) throw new Error('There is no first argument.')
   if (!guildId) throw new Error('There is no guildId.')
 
   function parseContent(a, b, c) {
-    const gm = client.guilds.resolve(guildId).members
-    const gr = client.guilds.resolve(guildId).roles
-    const gc = client.guilds.resolve(guildId).channels
+    const gm = client.guilds.resolve(guildId)!.members
+    const gr = client.guilds.resolve(guildId)!.roles
+    const gc = client.guilds.resolve(guildId)!.channels
 
     //console.log(a, b, c)
 
@@ -35,6 +58,8 @@ module.exports = (text, guildId, client) => {
         return gr.resolve(c) ? gr.resolve(c).name : ''
       case '#':
         return gc.resolve(c) ? gc.resolve(c).name : ''
+      default:
+        return ''
     }
   }
 

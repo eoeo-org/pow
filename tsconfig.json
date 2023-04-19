@@ -1,0 +1,32 @@
+{
+  "compileOnSave": true,
+  "include": ["src/**/*", "tests/**/*"],
+  "compilerOptions": {
+    "strict": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+
+    "noUnusedParameters": false,
+
+    "module": "NodeNext",
+    "resolveJsonModule": true,
+    "outDir": "dist",
+    "removeComments": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "checkJs": true,
+    "verbatimModuleSyntax": true,
+    "target": "ES2022",
+    "incremental": true,
+    "skipLibCheck": true,
+
+    "noImplicitAny": false
+  }
+}

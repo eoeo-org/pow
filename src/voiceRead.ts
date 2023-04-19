@@ -1,19 +1,21 @@
-// @ts-check
-const debug__GuildContext = require('debug')('voiceRead.js:GuildContext')
-const debug__initialize = require('debug')('voiceRead.js:initialize')
-const debug__ErrorHandler = require('debug')('voiceRead.js:ErrorHandler')
+import debug from 'debug'
+const debug__GuildContext = debug('voiceRead.js:GuildContext')
+const debug__ErrorHandler = debug('voiceRead.js:ErrorHandler')
 
-const axios = require('axios')
-const {
+import axios, { AxiosError } from 'axios'
+import {
   joinVoiceChannel,
   entersState,
   createAudioResource,
   StreamType,
   createAudioPlayer,
   AudioPlayerStatus,
-} = require('@discordjs/voice')
+  AudioPlayer,
+  VoiceConnection,
+  VoiceConnectionStatus,
+} from '@discordjs/voice'
 
-const mariadb = require('mariadb')
+import mariadb from 'mariadb'
 const pool = mariadb.createPool({
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT),
@@ -22,13 +24,19 @@ const pool = mariadb.createPool({
   database: process.env.DB_DATABASE,
 })
 
-const { Queue, getProperty } = require('./utils')
-
-let client
+import { Client, type Guild, type GuildBasedChannel } from 'discord.js'
+import { Queue, getProperty } from './utils.js'
 
 class GuildContext {
-  constructor(guild) {
-    this.guild = client.guilds.resolve(guild)
+  guild: Guild
+  readQueue: any
+  player: AudioPlayer | null = null
+  textChannel: GuildBasedChannel | null = null
+  voiceChannel: GuildBasedChannel | null = null
+  connection: VoiceConnection | null = null
+
+  constructor(guild: Guild) {
+    this.guild = guild
     this.readQueue = new Queue(this._readMessage.bind(this))
     this.cleanChannels()
   }
@@ -58,7 +66,10 @@ class GuildContext {
       this.textChannel !== null &&
       this.voiceChannel !== null &&
       this.connection !== null &&
-      this.connection.status !== 4
+      ![
+        VoiceConnectionStatus.Destroyed,
+        VoiceConnectionStatus.Disconnected,
+      ].includes(this.connection.state.status)
     )
   }
 
@@ -78,11 +89,11 @@ class GuildContext {
 
   leave() {
     this.readQueue.purge()
-    this.connection.destroy()
+    this.connection?.destroy()
     this.cleanChannels()
   }
 
-  async _getUserSetting(id) {
+  async _getUserSetting(id: string) {
     let conn, rows
     try {
       conn = await pool.getConnection()
@@ -99,7 +110,7 @@ class GuildContext {
     }
   }
 
-  async _randomizeUserSetting(id) {
+  async _randomizeUserSetting(id: string) {
     let conn, rows
     const voiceList = ['show', 'haruka', 'hikari', 'takeru', 'santa', 'bear']
     try {
@@ -135,10 +146,10 @@ class GuildContext {
   }
 
   async _setUserSetting(id, key, value) {
-    let conn, rows
+    let conn
     try {
       conn = await pool.getConnection()
-      rows = await conn.query(
+      await conn.query(
         `UPDATE userSetting SET ${key}=${
           isNaN(value) ? value : Number(value)
         } WHERE id = ?`,
@@ -167,29 +178,31 @@ class GuildContext {
       debug__GuildContext('got response, adding to queue')
       this.readQueue.add({ audioStream })
     } catch (error) {
-      debug__GuildContext(
-        `Request error: ${error.response.status}: ${error.response.statusText}`,
-      )
-      if (ctx.replied) {
-        return ctx.followUp({
-          embeds: [
-            {
-              color: 0xff0000,
-              title: 'APIリクエストエラー',
-              description: `${error.response.status}: ${error.response.statusText}`,
-            },
-          ],
-        })
-      } else {
-        return ctx.reply({
-          embeds: [
-            {
-              color: 0xff0000,
-              title: 'APIリクエストエラー',
-              description: `${error.response.status}: ${error.response.statusText}`,
-            },
-          ],
-        })
+      if (error instanceof AxiosError) {
+        debug__GuildContext(
+          `Request error: ${error.response?.status}: ${error.response?.statusText}`,
+        )
+        if (ctx.replied) {
+          return ctx.followUp({
+            embeds: [
+              {
+                color: 0xff0000,
+                title: 'APIリクエストエラー',
+                description: `${error.response?.status}: ${error.response?.statusText}`,
+              },
+            ],
+          })
+        } else {
+          return ctx.reply({
+            embeds: [
+              {
+                color: 0xff0000,
+                title: 'APIリクエストエラー',
+                description: `${error.response?.status}: ${error.response?.statusText}`,
+              },
+            ],
+          })
+        }
       }
     }
   }
@@ -200,7 +213,7 @@ class GuildContext {
         'https://api.voicetext.jp/v1/tts',
         new URLSearchParams({ ...params, format: 'mp3' }),
         {
-          auth: { username: process.env.VOICETEXT_API_KEY },
+          auth: { username: process.env.VOICETEXT_API_KEY, password: '' },
           responseType: 'stream',
         },
       )
@@ -214,9 +227,14 @@ class GuildContext {
   }
 }
 
-class GuildCtxManager extends Map {
-  get(guild) {
-    guild = client.guilds.resolve(guild)
+export class GuildCtxManager extends Map {
+  client: Client
+  constructor(client) {
+    super()
+    this.client = client
+  }
+  override get(guild: Guild) {
+    guild = this.client.guilds.resolve(guild)
     if (this.has(guild.id)) return super.get(guild.id)
 
     const guildContext = new GuildContext(guild)
@@ -224,10 +242,4 @@ class GuildCtxManager extends Map {
     this.set(guild.id, guildContext)
     return guildContext
   }
-}
-
-exports.initialize = (c) => {
-  debug__initialize('initializing GuildCtxManager')
-  client = c
-  exports.guilds = new GuildCtxManager()
 }

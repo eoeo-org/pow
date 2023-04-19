@@ -1,40 +1,28 @@
-// @ts-check
-require('dotenv').config()
+import type typings = require('discord.js')
 
-const fs = require('fs')
-const path = require('path')
-const {
-  Client,
-  Collection,
-  GatewayIntentBits,
-  MessageType,
-  InteractionType,
-} = require('discord.js')
-
-const debug__ErrorHandler = require('debug')('index.js:ErrorHandler')
-
-const client = new Client({
-  intents: Object.values(GatewayIntentBits).filter(Number.isInteger),
-})
-const convertContent = require('./contentConverter')
-const voiceRead = require('./voiceRead.js')
-
-client.commands = new Collection()
-const commandFiles = fs
-  .readdirSync(path.resolve(__dirname, './commands'))
-  .filter((file) => file.endsWith('.js'))
-
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`)
-  client.commands.set(command.data.name, command)
+import { Collection, MessageType } from 'discord.js'
+import { SapphireClient } from '@sapphire/framework'
+import { convertContent } from './contentConverter.js'
+import { GuildCtxManager } from './voiceRead.js'
+import debug from 'debug'
+const debug__ErrorHandler = debug('index.js:ErrorHandler')
+class PowClient extends SapphireClient {
+  commands: any
+  constructor(options) {
+    super(options)
+    this.commands = new Collection()
+  }
 }
+export const client = new PowClient({
+  intents: ['Guilds', 'GuildVoiceStates', 'GuildMessages', 'MessageContent'],
+})
 
-voiceRead.initialize(client)
+export const guildCtxManager = new GuildCtxManager(client)
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`)
+  console.log(`Logged in as ${client.user?.tag}!`)
   console.log(`Servers: (${client.guilds.cache.size})`)
-  client.guilds.cache.forEach(async (guild) => {
+  client.guilds.cache.forEach(async (guild: typings.Guild) => {
     console.log(
       `  - ${guild.name} (${guild.memberCount}) Owner: ${await guild
         .fetchOwner()
@@ -45,17 +33,17 @@ client.on('ready', () => {
   })
 })
 
-client.on('messageCreate', async (message) => {
-  if (message.author.bot) return
+client.on('messageCreate', async (message: typings.Message) => {
+  if (message.author.bot || !message.inGuild()) return
   if (![MessageType.Default, MessageType.Reply].includes(message.type)) return
   if (message.content.startsWith('_')) return
   if (message.content.includes('```')) return
-  if (message.member.voice.selfDeaf) return
+  if (message.member?.voice.selfDeaf) return
 
-  const ctx = voiceRead.guilds.get(message.guild)
+  const ctx = guildCtxManager.get(message.guild)
   if (ctx.textChannel !== message.channel) return
   if (message.content === '') return
-  const userSetting = await voiceRead.guilds
+  const userSetting = await guildCtxManager
     .get(message.guild)
     ._getUserSetting(message.author.id)
   if (userSetting.isDontRead) return
@@ -76,25 +64,24 @@ client.on('messageCreate', async (message) => {
   ctx.addMessage(convertedMessage, message)
 })
 
-client.on('interactionCreate', async (interaction) => {
-  if (interaction.type === InteractionType.ApplicationCommand) {
-    const command = client.commands.get(interaction.commandName)
-    if (!command) return
-    try {
-      await command.execute(interaction, client)
-    } catch (error) {
-      console.error(error)
-      await interaction.reply({
-        content: 'コマンドの実行中にエラーが発生しました。',
-        ephemeral: true,
-      })
-    }
+client.on('interactionCreate', async (interaction: typings.Interaction) => {
+  if (!(interaction.inCachedGuild() && interaction.isChatInputCommand())) return
+  const command = client.commands.get(interaction.commandName)
+  if (!command) return
+  try {
+    await command.execute(interaction, client)
+  } catch (error) {
+    console.error(error)
+    await interaction.reply({
+      content: 'コマンドの実行中にエラーが発生しました。',
+      ephemeral: true,
+    })
   }
 })
 
 client.on('voiceStateUpdate', (oldState, newState) => {
-  const ctx = voiceRead.guilds.get(newState.guild)
-  if (newState.channelId == null && newState.id === client.user.id) {
+  const ctx = guildCtxManager.get(newState.guild)
+  if (newState.channelId == null && newState.id === client.user?.id) {
     ctx.readQueue.purge()
     ctx.cleanChannels()
     return

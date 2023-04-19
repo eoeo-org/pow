@@ -1,5 +1,7 @@
 import type typings = require('discord.js')
 
+import packageJson from '../package.json' assert { type: 'json', integrity: 'sha384-ABC123' }
+
 import { Collection, MessageType } from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { convertContent } from './contentConverter.js'
@@ -19,9 +21,14 @@ export const client = new PowClient({
 
 export const guildCtxManager = new GuildCtxManager(client)
 
+console.log(`pow - v${packageJson.version}`)
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}!`)
   console.log(`Servers: (${client.guilds.cache.size})`)
+  client.user?.setPresence({
+    activities: [{ name: `pow - v${packageJson.version}` }],
+  })
   client.guilds.cache.forEach(async (guild: typings.Guild) => {
     console.log(
       `  - ${guild.name} (${guild.memberCount}) Owner: ${await guild

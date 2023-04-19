@@ -1,7 +1,7 @@
 {
   "name": "pow",
   "version": "1.0.2",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "deployCommands": "node scripts/deployGuildCommand.js && node scripts/deployGlobalCommand.js",
     "start": "node .",

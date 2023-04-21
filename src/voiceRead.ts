@@ -193,15 +193,25 @@ class GuildContext {
             ],
           })
         } else {
-          return ctx.reply({
-            embeds: [
-              {
-                color: 0xff0000,
-                title: 'APIリクエストエラー',
-                description: `${error.response?.status}: ${error.response?.statusText}`,
-              },
-            ],
-          })
+          return ctx
+            .reply({
+              embeds: [
+                {
+                  color: 0xff0000,
+                  title: 'APIリクエストエラー',
+                  description: `${error.response?.status}: ${error.response?.statusText}`,
+                },
+              ],
+            })
+            .catch((err) => {
+              if (err.code !== 50013) throw err
+              debug__ErrorHandler(
+                `Error code ${err.code}: Missing send messages permission.`,
+              )
+              debug__ErrorHandler(
+                `Guild ID: ${ctx.guild.id} Guild Name: ${ctx.guild.name} Channel ID: ${ctx.textChannel.id} Channel Name: ${ctx.textChannel.name}`,
+              )
+            })
         }
       }
     }

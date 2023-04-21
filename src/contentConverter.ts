@@ -27,6 +27,7 @@ const dismoji = new Map(
       travel,
     ),
   )
+    .map(([key, value]) => [key, (value as string).replace(/\u{FE0F}$/u, '')])
     .reverse()
     .map(([key, value]) => [value, key]),
 )

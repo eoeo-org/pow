@@ -208,9 +208,6 @@ class GuildContext {
               debug__ErrorHandler(
                 `Error code ${err.code}: Missing send messages permission.`,
               )
-              debug__ErrorHandler(
-                `Guild ID: ${ctx.guild.id} Guild Name: ${ctx.guild.name} Channel ID: ${ctx.textChannel.id} Channel Name: ${ctx.textChannel.name}`,
-              )
             })
         }
       }

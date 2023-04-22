@@ -61,6 +61,9 @@ export class JoinCommand extends Command {
       'santa',
       'bear',
     ]
+
+    let errorMsg: string[] = []
+
     const { options } = interaction
     const speaker = options.getString('speaker')
     const pitch = options.getInteger('pitch')
@@ -71,30 +74,10 @@ export class JoinCommand extends Command {
         await guildCtxManager
           .get(interaction.member.guild)
           ._setUserSetting(interaction.member.id, 'speaker', `"${speaker}"`)
-        const userSetting = await guildCtxManager
-          .get(interaction.member.guild)
-          ._getUserSetting(interaction.member.id)
-        return interaction.reply({
-          embeds: [
-            {
-              color: 0x00ff00,
-              title: '声の設定を更新しました。',
-              description: '```\n' + objToList(userSetting) + '\n```',
-            },
-          ],
-          ephemeral: true,
-        })
       } else {
-        return interaction.reply({
-          embeds: [
-            {
-              color: 0xff0000,
-              title: 'エラー',
-              description: `その声(${speaker})は指定できません。指定できる声のリストは、こちらです。\n\`\`\`${allowedVoiceList}\`\`\``,
-            },
-          ],
-          ephemeral: true,
-        })
+        errorMsg.push(
+          `その声(${speaker})は指定できません。指定できる声のリストは、こちらです。\n\${allowedVoiceList.map(voice => "- " + voice).join('\n')}`,
+        )
       }
     }
 
@@ -103,30 +86,10 @@ export class JoinCommand extends Command {
         await guildCtxManager
           .get(interaction.member.guild)
           ._setUserSetting(interaction.member.id, 'pitch', `"${pitch}"`)
-        const userSetting = await guildCtxManager
-          .get(interaction.member.guild)
-          ._getUserSetting(interaction.member.id)
-        return interaction.reply({
-          embeds: [
-            {
-              color: 0x00ff00,
-              title: '声の設定を更新しました。',
-              description: '```\n' + objToList(userSetting) + '\n```',
-            },
-          ],
-          ephemeral: true,
-        })
       } else {
-        return interaction.reply({
-          embeds: [
-            {
-              color: 0xff0000,
-              title: 'エラー',
-              description: `その声の高さ(${pitch}%)は指定できません。指定できる声の高さは、50%~200%です。`,
-            },
-          ],
-          ephemeral: true,
-        })
+        errorMsg.push(
+          `その声の高さ(${pitch}%)は指定できません。指定できる声の高さは、50%~200%です。`,
+        )
       }
     }
 
@@ -135,31 +98,44 @@ export class JoinCommand extends Command {
         await guildCtxManager
           .get(interaction.member.guild)
           ._setUserSetting(interaction.member.id, 'speed', `"${speed}"`)
-        const userSetting = await guildCtxManager
-          .get(interaction.member.guild)
-          ._getUserSetting(interaction.member.id)
-        return interaction.reply({
-          embeds: [
-            {
-              color: 0x00ff00,
-              title: '声の設定を更新しました。',
-              description: '```\n' + objToList(userSetting) + '\n```',
-            },
-          ],
-          ephemeral: true,
-        })
       } else {
-        return interaction.reply({
-          embeds: [
-            {
-              color: 0xff0000,
-              title: 'エラー',
-              description: `その速度(${speed}%)は指定できません。指定できる声の速度は、50%~400%です。`,
-            },
-          ],
-          ephemeral: true,
-        })
+        errorMsg.push(
+          `その速度(${speed}%)は指定できません。指定できる声の速度は、50%~400%です。`,
+        )
       }
+    }
+    const userSetting = await guildCtxManager
+      .get(interaction.member.guild)
+      ._getUserSetting(interaction.member.id)
+    if (errorMsg.length === 0) {
+      interaction.reply({
+        embeds: [
+          {
+            color: 0x00ff00,
+            title: '声の設定を更新しました。',
+            description: '```\n' + objToList(userSetting) + '\n```',
+          },
+        ],
+        ephemeral: true,
+      })
+    } else {
+      interaction.reply({
+        embeds: [
+          {
+            color: 0xff0000,
+            title: 'エラー',
+            description: `設定変更中にエラーが発生しました。\n詳細情報:\n${errorMsg.join(
+              '\n',
+            )}`,
+          },
+          {
+            color: 0x00ff00,
+            title: '声の設定を更新しました。',
+            description: '```\n' + objToList(userSetting) + '\n```',
+          },
+        ],
+        ephemeral: true,
+      })
     }
     return
   }

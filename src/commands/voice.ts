@@ -38,13 +38,13 @@ export class JoinCommand extends Command {
         .addIntegerOption((option) =>
           option
             .setName('pitch')
-            .setDescription('声の高さを変更できます。')
+            .setDescription('声の高さを変更できます。(指定できる範囲: 50〜200)')
             .setRequired(false),
         )
         .addIntegerOption((option) =>
           option
             .setName('speed')
-            .setDescription('声の速度を変更できます。')
+            .setDescription('声の速度を変更できます。(指定できる範囲: 50〜400)')
             .setRequired(false),
         ),
     )

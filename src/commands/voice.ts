@@ -1,6 +1,21 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
-import { objToList } from '../utils.js'
+
+const userSettingToDiff = (oldUserSetting, newUserSetting) => {
+  return `${
+    oldUserSetting.speaker === newUserSetting.speaker
+      ? `speaker: ${newUserSetting.speaker}`
+      : `-speaker: ${oldUserSetting.speaker}\n+speaker: ${newUserSetting.speaker}`
+  }\n${
+    oldUserSetting.pitch === newUserSetting.pitch
+      ? `pitch: ${newUserSetting.pitch}`
+      : `-pitch: ${oldUserSetting.pitch}\n+pitch: ${newUserSetting.pitch}`
+  }\n${
+    oldUserSetting.speed === newUserSetting.speed
+      ? `speed: ${newUserSetting.speed}`
+      : `-speed: ${oldUserSetting.speed}\n+speed: ${newUserSetting.speed}`
+  }`
+}
 
 export class JoinCommand extends Command {
   public constructor(
@@ -62,6 +77,10 @@ export class JoinCommand extends Command {
       'bear',
     ]
 
+    const userSetting_old = await guildCtxManager
+      .get(interaction.member.guild)
+      ._getUserSetting(interaction.member.id)
+
     let errorMsg: string[] = []
 
     const { options } = interaction
@@ -107,13 +126,17 @@ export class JoinCommand extends Command {
     const userSetting = await guildCtxManager
       .get(interaction.member.guild)
       ._getUserSetting(interaction.member.id)
+
     if (errorMsg.length === 0) {
       interaction.reply({
         embeds: [
           {
             color: 0x00ff00,
             title: '声の設定を更新しました。',
-            description: '```\n' + objToList(userSetting) + '\n```',
+            description:
+              '```diff\n' +
+              userSettingToDiff(userSetting_old, userSetting) +
+              '\n```',
           },
         ],
         ephemeral: true,
@@ -131,7 +154,10 @@ export class JoinCommand extends Command {
           {
             color: 0x00ff00,
             title: '声の設定を更新しました。',
-            description: '```\n' + objToList(userSetting) + '\n```',
+            description:
+              '```diff\n' +
+              userSettingToDiff(userSetting_old, userSetting) +
+              '\n```',
           },
         ],
         ephemeral: true,

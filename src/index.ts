@@ -24,6 +24,7 @@ export const guildCtxManager = new GuildCtxManager(client)
 console.log(`pow - v${packageJson.version}`)
 
 client.on('ready', () => {
+  process.title = `${client.user?.tag} - pow v${packageJson.version}`
   console.log(`Logged in as ${client.user?.tag}!`)
   console.log(`Servers: (${client.guilds.cache.size})`)
   client.user?.setPresence({

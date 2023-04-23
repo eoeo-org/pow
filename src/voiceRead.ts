@@ -15,18 +15,34 @@ import {
   VoiceConnectionStatus,
 } from '@discordjs/voice'
 
-import mariadb from 'mariadb'
-const pool = mariadb.createPool({
+import { createPool, type PoolConnection } from 'mariadb'
+
+import {
+  Client,
+  TextChannel,
+  type Guild,
+  type GuildBasedChannel,
+  VoiceChannel,
+  Message,
+  ChatInputCommandInteraction,
+} from 'discord.js'
+import { Queue, getProperty } from './utils.js'
+
+export interface UserSetting {
+  id?: bigint
+  speaker: 'show' | 'haruka' | 'hikari' | 'takeru' | 'santa' | 'bear'
+  pitch: number
+  speed: number
+  isDontRead: 0 | 1
+}
+
+const pool = createPool({
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT),
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
 })
-
-import { Client, type Guild, type GuildBasedChannel } from 'discord.js'
-import { Queue, getProperty } from './utils.js'
-
 class GuildContext {
   guild: Guild
   readQueue: any
@@ -73,7 +89,7 @@ class GuildContext {
     )
   }
 
-  async join(textChannel, voiceChannel) {
+  async join(textChannel: TextChannel, voiceChannel: VoiceChannel) {
     if (this.isJoined()) return
     this.textChannel = this.guild.channels.resolve(textChannel)
     this.voiceChannel = this.guild.channels.resolve(voiceChannel)
@@ -94,24 +110,30 @@ class GuildContext {
   }
 
   async _getUserSetting(id: string) {
-    let conn, rows
+    let conn: PoolConnection | undefined = undefined
     try {
       conn = await pool.getConnection()
-      rows = await conn.query('SELECT * FROM userSetting WHERE id = ?', [id])
+      const rows: Array<UserSetting | undefined> = await conn.query(
+        'SELECT * FROM userSetting WHERE id = ?',
+        [id],
+      )
       if (rows[0] === undefined) {
         await this._randomizeUserSetting(id)
-        rows = await conn.query('SELECT * FROM userSetting WHERE id = ?', [id])
+        return (
+          await conn.query('SELECT * FROM userSetting WHERE id = ?', [id])
+        )[0] as UserSetting
       }
+      return rows[0]
     } catch (err) {
       throw err
     } finally {
       if (conn) conn.release()
-      return rows[0]
     }
   }
 
   async _randomizeUserSetting(id: string) {
-    let conn, rows
+    let conn: PoolConnection | undefined = undefined,
+      rows: Array<UserSetting> | undefined = undefined
     const voiceList = ['show', 'haruka', 'hikari', 'takeru', 'santa', 'bear']
     try {
       conn = await pool.getConnection()
@@ -140,18 +162,18 @@ class GuildContext {
       throw err
     } finally {
       if (conn) conn.release()
-      if (rows[0]) delete rows[0].id
-      return rows[0]
+      if (rows![0]) delete rows![0].id
+      return rows![0]
     }
   }
 
-  async _setUserSetting(id, key, value) {
-    let conn
+  async _setUserSetting(id: bigint, key: string, value: string | number) {
+    let conn: PoolConnection | undefined = undefined
     try {
       conn = await pool.getConnection()
       await conn.query(
         `UPDATE userSetting SET ${key}=${
-          isNaN(value) ? value : Number(value)
+          typeof value === 'string' ? value : Number(value)
         } WHERE id = ?`,
         [id],
       )
@@ -162,18 +184,20 @@ class GuildContext {
     }
   }
 
-  async addMessage(text, ctx) {
+  async addMessage(text: string, ctx: Message | ChatInputCommandInteraction) {
     if (!this.isJoined()) return false
 
     const userSetting = await this._getUserSetting(
-      ctx.content ? ctx.author.id : ctx.user.id,
+      ctx instanceof Message ? ctx.author.id : ctx.user.id,
     )
     try {
       debug__GuildContext('fetching audio')
-      const audioStream = await this._fetchAudioStream({
-        text: text,
-        ...userSetting,
-      })
+      const audioStream = await this._fetchAudioStream(
+        text,
+        userSetting?.speaker,
+        userSetting?.pitch,
+        userSetting?.speed,
+      )
 
       debug__GuildContext('got response, adding to queue')
       this.readQueue.add({ audioStream })
@@ -182,7 +206,7 @@ class GuildContext {
         debug__GuildContext(
           `Request error: ${error.response?.status}: ${error.response?.statusText}`,
         )
-        if (ctx.replied) {
+        if (ctx instanceof ChatInputCommandInteraction) {
           return ctx.followUp({
             embeds: [
               {
@@ -214,11 +238,22 @@ class GuildContext {
     }
   }
 
-  async _fetchAudioStream(params) {
+  async _fetchAudioStream(
+    text: string,
+    speaker: string,
+    pitch: number,
+    speed: number,
+  ) {
     return await axios
       .post(
         'https://api.voicetext.jp/v1/tts',
-        new URLSearchParams({ ...params, format: 'mp3' }),
+        new URLSearchParams({
+          text: text,
+          speaker: speaker,
+          pitch: pitch.toString(),
+          speed: speed.toString(),
+          format: 'mp3',
+        }),
         {
           auth: { username: process.env.VOICETEXT_API_KEY, password: '' },
           responseType: 'stream',
@@ -236,7 +271,7 @@ class GuildContext {
 
 export class GuildCtxManager extends Map {
   client: Client
-  constructor(client) {
+  constructor(client: Client) {
     super()
     this.client = client
   }

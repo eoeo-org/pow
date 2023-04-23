@@ -10,7 +10,7 @@ import debug from 'debug'
 const debug__ErrorHandler = debug('index.js:ErrorHandler')
 class PowClient extends SapphireClient {
   commands: any
-  constructor(options) {
+  constructor(options: typings.ClientOptions) {
     super(options)
     this.commands = new Collection()
   }
@@ -104,7 +104,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
           },
         ],
       })
-      .catch((err) => {
+      .catch((err: typings.DiscordErrorData) => {
         if (err.code !== 50013) throw err
         debug__ErrorHandler(
           `Error code ${err.code}: Missing send messages permission.`,

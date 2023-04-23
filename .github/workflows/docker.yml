@@ -12,9 +12,6 @@ env:
 
 jobs:
   build-and-push-image:
-    strategy:
-      matrix:
-        platform: [linux/amd64, linux/arm64]
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -46,7 +43,9 @@ jobs:
         uses: docker/build-push-action@eafaea8d0f5853934deece2ffa67af59d936562b
         with:
           context: .
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

@@ -2,18 +2,18 @@ import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
 
 const userSettingToDiff = (oldUserSetting, newUserSetting) => {
-  return `${
+  return `speaker: ${
     oldUserSetting.speaker === newUserSetting.speaker
-      ? `speaker: ${newUserSetting.speaker}`
-      : `-speaker: ${oldUserSetting.speaker}\n+speaker: ${newUserSetting.speaker}`
-  }\n${
+      ? `${newUserSetting.speaker}`
+      : `[31m${oldUserSetting.speaker}[0m -> [32m${newUserSetting.speaker}[0m`
+  }\npitch: ${
     oldUserSetting.pitch === newUserSetting.pitch
-      ? `pitch: ${newUserSetting.pitch}`
-      : `-pitch: ${oldUserSetting.pitch}\n+pitch: ${newUserSetting.pitch}`
-  }\n${
+      ? `${newUserSetting.pitch}`
+      : `[31m${oldUserSetting.pitch}[0m -> [32m${newUserSetting.pitch}[0m`
+  }\nspeed: ${
     oldUserSetting.speed === newUserSetting.speed
-      ? `speed: ${newUserSetting.speed}`
-      : `-speed: ${oldUserSetting.speed}\n+speed: ${newUserSetting.speed}`
+      ? `${newUserSetting.speed}`
+      : `[31m${oldUserSetting.speed}[0m -> [32m${newUserSetting.speed}[0m`
   }`
 }
 
@@ -77,7 +77,7 @@ export class JoinCommand extends Command {
       'bear',
     ]
 
-    const userSetting_old = await guildCtxManager
+    const oldUserSetting = await guildCtxManager
       .get(interaction.member.guild)
       ._getUserSetting(interaction.member.id)
 
@@ -134,8 +134,8 @@ export class JoinCommand extends Command {
             color: 0x00ff00,
             title: '声の設定を更新しました。',
             description:
-              '```diff\n' +
-              userSettingToDiff(userSetting_old, userSetting) +
+              '```ansi\n' +
+              userSettingToDiff(oldUserSetting, userSetting) +
               '\n```',
           },
         ],
@@ -155,8 +155,8 @@ export class JoinCommand extends Command {
             color: 0x00ff00,
             title: '声の設定を更新しました。',
             description:
-              '```diff\n' +
-              userSettingToDiff(userSetting_old, userSetting) +
+              '```ansi\n' +
+              userSettingToDiff(oldUserSetting, userSetting) +
               '\n```',
           },
         ],

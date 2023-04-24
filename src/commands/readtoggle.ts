@@ -1,5 +1,5 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
-import { guildCtxManager } from '../index.js'
+import { getUserSetting, setUserSetting } from '../db.js'
 
 export class JoinCommand extends Command {
   public constructor(
@@ -26,13 +26,9 @@ export class JoinCommand extends Command {
     interaction: ChatInputCommand.Interaction,
   ) {
     if (!interaction.inCachedGuild()) return
-    const userSetting = await guildCtxManager
-      .get(interaction.member.guild)
-      ._getUserSetting(interaction.member.id)
+    const userSetting = await getUserSetting(interaction.member.id)
     if (userSetting.isDontRead) {
-      await guildCtxManager
-        .get(interaction.member.guild)
-        ._setUserSetting(interaction.member.id, 'isDontRead', 0)
+      await setUserSetting(interaction.member.id, 'isDontRead', 0)
       return interaction.reply({
         embeds: [
           {
@@ -43,9 +39,7 @@ export class JoinCommand extends Command {
         ephemeral: true,
       })
     } else {
-      await guildCtxManager
-        .get(interaction.member.guild)
-        ._setUserSetting(interaction.member.id, 'isDontRead', 1)
+      await setUserSetting(interaction.member.id, 'isDontRead', 1)
       return interaction.reply({
         embeds: [
           {

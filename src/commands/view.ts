@@ -1,6 +1,6 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
-import { guildCtxManager } from '../index.js'
 import { objToList } from '../utils.js'
+import { getUserSetting } from '../db.js'
 
 export class JoinCommand extends Command {
   public constructor(
@@ -34,9 +34,9 @@ export class JoinCommand extends Command {
   ) {
     if (!interaction.inCachedGuild()) return
     const user = interaction.options.getUser('user')
-    const userSetting = await guildCtxManager
-      .get(interaction.member.guild)
-      ._getUserSetting(user ? user.id : interaction.member.id)
+    const userSetting = await getUserSetting(
+      user ? user.id : interaction.member.id,
+    )
     const userNameText = user
       ? `${user.username}#${user.discriminator}`
       : '現在'

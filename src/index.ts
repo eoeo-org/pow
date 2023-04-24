@@ -5,9 +5,10 @@ import packageJson from '../package.json' assert { type: 'json', integrity: 'sha
 import { Collection, MessageType } from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { convertContent } from './contentConverter.js'
-import { GuildCtxManager } from './voiceRead.js'
+import { GuildCtxManager } from './guildCtx.js'
 import debug from 'debug'
 import type { SignalConstants } from 'os'
+import { getUserSetting } from './db.js'
 const debug__ErrorHandler = debug('index.js:ErrorHandler')
 class PowClient extends SapphireClient {
   commands: any
@@ -52,9 +53,7 @@ client.on('messageCreate', async (message: typings.Message) => {
   const ctx = guildCtxManager.get(message.guild)
   if (ctx.textChannel !== message.channel) return
   if (message.content === '') return
-  const userSetting = await guildCtxManager
-    .get(message.guild)
-    ._getUserSetting(message.author.id)
+  const userSetting = await getUserSetting(message.author.id)
   if (userSetting.isDontRead) return
 
   const convertedMessage = convertContent(

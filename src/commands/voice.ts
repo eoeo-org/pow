@@ -1,5 +1,5 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
-import { guildCtxManager } from '../index.js'
+import { getUserSetting, setUserSetting } from '../db.js'
 
 const userSettingToDiff = (oldUserSetting, newUserSetting) => {
   return `speaker: ${
@@ -77,9 +77,7 @@ export class JoinCommand extends Command {
       'bear',
     ]
 
-    const oldUserSetting = await guildCtxManager
-      .get(interaction.member.guild)
-      ._getUserSetting(interaction.member.id)
+    const oldUserSetting = await getUserSetting(interaction.member.id)
 
     let errorMsg: string[] = []
 
@@ -90,9 +88,7 @@ export class JoinCommand extends Command {
 
     if (speaker !== null) {
       if (allowedVoiceList.includes(speaker)) {
-        await guildCtxManager
-          .get(interaction.member.guild)
-          ._setUserSetting(interaction.member.id, 'speaker', `"${speaker}"`)
+        await setUserSetting(interaction.member.id, 'speaker', `"${speaker}"`)
       } else {
         errorMsg.push(
           `その声(${speaker})は指定できません。指定できる声のリストは、こちらです。\n\${allowedVoiceList.map(voice => "- " + voice).join('\n')}`,
@@ -102,9 +98,7 @@ export class JoinCommand extends Command {
 
     if (pitch !== null) {
       if (pitch > 49 && pitch < 201) {
-        await guildCtxManager
-          .get(interaction.member.guild)
-          ._setUserSetting(interaction.member.id, 'pitch', `"${pitch}"`)
+        await setUserSetting(interaction.member.id, 'pitch', `"${pitch}"`)
       } else {
         errorMsg.push(
           `その声の高さ(${pitch}%)は指定できません。指定できる声の高さは、50%~200%です。`,
@@ -114,18 +108,14 @@ export class JoinCommand extends Command {
 
     if (speed !== null) {
       if (speed > 49 && speed < 401) {
-        await guildCtxManager
-          .get(interaction.member.guild)
-          ._setUserSetting(interaction.member.id, 'speed', `"${speed}"`)
+        await setUserSetting(interaction.member.id, 'speed', `"${speed}"`)
       } else {
         errorMsg.push(
           `その速度(${speed}%)は指定できません。指定できる声の速度は、50%~400%です。`,
         )
       }
     }
-    const userSetting = await guildCtxManager
-      .get(interaction.member.guild)
-      ._getUserSetting(interaction.member.id)
+    const userSetting = await getUserSetting(interaction.member.id)
 
     if (errorMsg.length === 0) {
       interaction.reply({

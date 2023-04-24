@@ -7,6 +7,7 @@ import { SapphireClient } from '@sapphire/framework'
 import { convertContent } from './contentConverter.js'
 import { GuildCtxManager } from './voiceRead.js'
 import debug from 'debug'
+import type { SignalConstants } from 'os'
 const debug__ErrorHandler = debug('index.js:ErrorHandler')
 class PowClient extends SapphireClient {
   commands: any
@@ -120,7 +121,13 @@ client.on('voiceStateUpdate', (oldState, newState) => {
   }
 })
 
-process.on('SIGTERM', client.destroy.bind(client))
-process.on('SIGINT', client.destroy.bind(client))
+function handle(signal: SignalConstants) {
+  console.log(`Received ${signal}`)
+  client.destroy()
+  process.exit()
+}
+
+process.on('SIGINT', handle)
+process.on('SIGTERM', handle)
 
 client.login()

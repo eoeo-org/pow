@@ -33,7 +33,7 @@ const dismoji = new Map(
 )
 
 function getShortcodes(emoji: string) {
-  return ` ${dismoji.get(emoji)} `
+  return ` ${dismoji.get(emoji.replace(/(\u{FE0E}|\u{FE0F})$/u, ''))} `
 }
 
 export const convertContent = (

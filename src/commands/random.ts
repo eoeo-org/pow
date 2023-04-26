@@ -1,6 +1,6 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
-import { guildCtxManager } from '../index.js'
-import { objToList } from '../utils.js'
+import { userSettingToDiff } from '../utils.js'
+import { getUserSetting, randomizeUserSetting } from '../db.js'
 
 export class RandomCommand extends Command {
   public constructor(
@@ -27,16 +27,18 @@ export class RandomCommand extends Command {
     interaction: ChatInputCommand.Interaction,
   ) {
     if (!interaction.inCachedGuild()) return
-    const userSetting = await guildCtxManager
-      .get(interaction.member.guild)
-      ._randomizeUserSetting(interaction.member.id)
+    const oldUserSetting = await getUserSetting(interaction.member.id)
+    const userSetting = await randomizeUserSetting(interaction.member.id)
 
     return interaction.reply({
       embeds: [
         {
           color: 0x00ff00,
           title: '声の設定をランダムにしました。',
-          description: '```\n' + objToList(userSetting) + '\n```',
+          description:
+            '```ansi\n' +
+            userSettingToDiff(oldUserSetting, userSetting) +
+            '\n```',
         },
       ],
       ephemeral: true,

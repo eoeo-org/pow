@@ -1,7 +1,7 @@
 import { createPool, type PoolConnection } from 'mariadb'
 
 export interface UserSetting {
-  id?: bigint
+  id: bigint
   speaker: 'show' | 'haruka' | 'hikari' | 'takeru' | 'santa' | 'bear'
   pitch: number
   speed: number
@@ -38,7 +38,7 @@ export async function getUserSetting(id: string) {
   }
 }
 
-async function randomizeUserSetting(id: string) {
+export async function randomizeUserSetting(id: string) {
   let conn: PoolConnection | undefined = undefined,
     rows: Array<UserSetting> | undefined = undefined
   const voiceList = ['show', 'haruka', 'hikari', 'takeru', 'santa', 'bear']
@@ -72,8 +72,7 @@ async function randomizeUserSetting(id: string) {
     throw err
   } finally {
     if (conn) conn.release()
-    if (rows![0]) delete rows![0].id
-    return rows![0]
+    return rows![0]!
   }
 }
 

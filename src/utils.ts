@@ -1,6 +1,7 @@
 import debug from 'debug'
 const debug__Queue = debug('utils.js:Queue')
 import { EventEmitter } from 'events'
+import type { UserSetting } from './db.js'
 
 export function getProperty<T, K extends keyof T>(property: K) {
   return (object: T) => object[property]
@@ -67,4 +68,23 @@ export function objToList(obj) {
   return Object.keys(obj)
     .map((a) => `${a}: ${obj[a]}`)
     .join('\n')
+}
+
+export const userSettingToDiff = (
+  oldUserSetting: UserSetting,
+  newUserSetting: UserSetting,
+) => {
+  return `speaker: ${
+    oldUserSetting.speaker === newUserSetting.speaker
+      ? `${newUserSetting.speaker}`
+      : `[31m${oldUserSetting.speaker}[0m -> [32m${newUserSetting.speaker}[0m`
+  }\npitch: ${
+    oldUserSetting.pitch === newUserSetting.pitch
+      ? `${newUserSetting.pitch}`
+      : `[31m${oldUserSetting.pitch}[0m -> [32m${newUserSetting.pitch}[0m`
+  }\nspeed: ${
+    oldUserSetting.speed === newUserSetting.speed
+      ? `${newUserSetting.speed}`
+      : `[31m${oldUserSetting.speed}[0m -> [32m${newUserSetting.speed}[0m`
+  }`
 }

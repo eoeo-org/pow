@@ -2,7 +2,7 @@ import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { objToList } from '../utils.js'
 import { getUserSetting } from '../db.js'
 
-export class JoinCommand extends Command {
+export class ViewCommand extends Command {
   public constructor(
     context: ChatInputCommand.Context,
     options: ChatInputCommand.Options,

@@ -17,7 +17,7 @@ const userSettingToDiff = (oldUserSetting, newUserSetting) => {
   }`
 }
 
-export class JoinCommand extends Command {
+export class VoiceCommand extends Command {
   public constructor(
     context: ChatInputCommand.Context,
     options: ChatInputCommand.Options,

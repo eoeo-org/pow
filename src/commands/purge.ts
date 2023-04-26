@@ -1,7 +1,7 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
 
-export class JoinCommand extends Command {
+export class PurgeCommand extends Command {
   public constructor(
     context: ChatInputCommand.Context,
     options: ChatInputCommand.Options,

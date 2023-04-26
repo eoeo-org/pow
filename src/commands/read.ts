@@ -2,7 +2,7 @@ import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { client, guildCtxManager } from '../index.js'
 import { convertContent } from '../contentConverter.js'
 
-export class JoinCommand extends Command {
+export class ReadCommand extends Command {
   public constructor(
     context: ChatInputCommand.Context,
     options: ChatInputCommand.Options,

@@ -1,7 +1,7 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { getUserSetting, setUserSetting } from '../db.js'
 
-export class JoinCommand extends Command {
+export class ReadtoggleCommand extends Command {
   public constructor(
     context: ChatInputCommand.Context,
     options: ChatInputCommand.Options,

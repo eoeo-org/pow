@@ -19,6 +19,7 @@ class PowClient extends SapphireClient {
 }
 export const client = new PowClient({
   intents: ['Guilds', 'GuildVoiceStates', 'GuildMessages', 'MessageContent'],
+  loadMessageCommandListeners: true,
 })
 
 export const guildCtxManager = new GuildCtxManager(client)

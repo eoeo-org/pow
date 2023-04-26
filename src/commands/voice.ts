@@ -1,21 +1,6 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { getUserSetting, setUserSetting } from '../db.js'
-
-const userSettingToDiff = (oldUserSetting, newUserSetting) => {
-  return `speaker: ${
-    oldUserSetting.speaker === newUserSetting.speaker
-      ? `${newUserSetting.speaker}`
-      : `[31m${oldUserSetting.speaker}[0m -> [32m${newUserSetting.speaker}[0m`
-  }\npitch: ${
-    oldUserSetting.pitch === newUserSetting.pitch
-      ? `${newUserSetting.pitch}`
-      : `[31m${oldUserSetting.pitch}[0m -> [32m${newUserSetting.pitch}[0m`
-  }\nspeed: ${
-    oldUserSetting.speed === newUserSetting.speed
-      ? `${newUserSetting.speed}`
-      : `[31m${oldUserSetting.speed}[0m -> [32m${newUserSetting.speed}[0m`
-  }`
-}
+import { userSettingToDiff } from '../utils.js'
 
 export class VoiceCommand extends Command {
   public constructor(

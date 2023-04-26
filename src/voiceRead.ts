@@ -4,14 +4,6 @@ const debug__ErrorHandler = debug('voiceRead.js:ErrorHandler')
 import axios, { AxiosError } from 'axios'
 import { getProperty } from './utils.js'
 
-export interface UserSetting {
-  id?: bigint
-  speaker: 'show' | 'haruka' | 'hikari' | 'takeru' | 'santa' | 'bear'
-  pitch: number
-  speed: number
-  isDontRead: 0 | 1
-}
-
 export async function fetchAudioStream(
   text: string,
   speaker: string,

@@ -124,6 +124,24 @@ client.on('voiceStateUpdate', (oldState, newState) => {
   }
 })
 
+client.on('guildMemberAdd', async (member) => {
+  if (workerClientMap.has(member.id)) {
+    ;(await guildCtxManager.get(member.guild).bots).push(member.id)
+    ;(await guildCtxManager.get(member.guild).standbyBots).push(member.id)
+  }
+})
+client.on('guildMemberRemove', async (member) => {
+  if (workerClientMap.has(member.id)) {
+    const guildCtx = guildCtxManager.get(member.guild)
+    const bots = await guildCtx.bots
+    bots.splice(
+      bots.findIndex((element) => element === member.id),
+      1,
+    )
+    guildCtx.resetBots()
+  }
+})
+
 function handle(signal: SignalConstants) {
   console.log(`Received ${signal}`)
   client.destroy()

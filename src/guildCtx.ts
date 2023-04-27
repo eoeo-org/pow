@@ -49,6 +49,12 @@ class GuildContext {
     const workerId = this.connectionManager.connectionLeave(voiceChannel)
     ;(await this.standbyBots).push(workerId)
   }
+  resetBots() {
+    for (const voiceChannel of this.connectionManager.channelMap.keys()) {
+      this.leave(voiceChannel)
+    }
+    this.standbyBots = this.bots
+  }
 }
 
 export class GuildCtxManager extends Map<Guild, GuildContext> {

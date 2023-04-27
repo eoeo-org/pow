@@ -1,5 +1,6 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
+import { StageChannel } from 'discord.js'
 
 export class JoinCommand extends Command {
   public constructor(
@@ -27,7 +28,8 @@ export class JoinCommand extends Command {
   ) {
     if (!interaction.inCachedGuild()) return
     const user = await interaction.member.fetch()
-    if (!user.voice.channel) {
+    const voiceChannel = user.voice.channel
+    if (!voiceChannel) {
       return interaction.reply({
         embeds: [
           {
@@ -40,9 +42,22 @@ export class JoinCommand extends Command {
       })
     }
 
+    if (voiceChannel instanceof StageChannel) {
+      return interaction.reply({
+        embeds: [
+          {
+            color: 0xff0000,
+            title: 'エラー',
+            description: 'ステージチャンネルは現在サポートしていません。',
+          },
+        ],
+        ephemeral: true,
+      })
+    }
+
     const ctx = guildCtxManager.get(interaction.member.guild)
 
-    if (ctx.isJoined()) {
+    if (ctx.connectionManager.channelMap.has(voiceChannel)) {
       return interaction.reply({
         embeds: [
           {
@@ -55,10 +70,24 @@ export class JoinCommand extends Command {
       })
     }
 
-    await ctx.join(
-      ctx.guild.channels.cache.get(interaction.channelId),
-      interaction.member.voice.channel,
-    )
+    try {
+      await ctx.join(voiceChannel, interaction.channel!)
+    } catch (err) {
+      if (err instanceof Error && err.message === 'No worker') {
+        return interaction.reply({
+          embeds: [
+            {
+              color: 0xff0000,
+              title: 'エラー',
+              description: '参加させられるBotが居ません。',
+            },
+          ],
+          ephemeral: true,
+        })
+      } else {
+        throw err
+      }
+    }
 
     return interaction.reply({
       embeds: [

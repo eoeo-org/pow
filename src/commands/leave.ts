@@ -1,5 +1,6 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
+import { StageChannel } from 'discord.js'
 
 export class LeaveCommand extends Command {
   public constructor(
@@ -26,19 +27,35 @@ export class LeaveCommand extends Command {
     interaction: ChatInputCommand.Interaction,
   ) {
     if (!interaction.inCachedGuild()) return
-    const ctx = guildCtxManager.get(interaction.member.guild)
-    if (!ctx.isJoined()) {
+    const user = await interaction.member.fetch()
+    const voiceChannel = user.voice.channel
+    if (voiceChannel == null) {
       return interaction.reply({
         embeds: [
           {
             color: 0xff0000,
             title: 'エラー',
-            description: 'BOTがVCに参加している必要があります。',
+            description:
+              'このコマンドを実行するには、VCに参加している必要があります。',
           },
         ],
         ephemeral: true,
       })
-    } else if (ctx.voiceChannel !== interaction.member.voice.channel) {
+    }
+    if (voiceChannel instanceof StageChannel) {
+      return interaction.reply({
+        embeds: [
+          {
+            color: 0xff0000,
+            title: 'エラー',
+            description: 'ステージチャンネルは現在サポートしていません。',
+          },
+        ],
+        ephemeral: true,
+      })
+    }
+    const ctx = guildCtxManager.get(interaction.member.guild)
+    if (!ctx.connectionManager.channelMap.has(voiceChannel)) {
       return interaction.reply({
         embeds: [
           {
@@ -51,7 +68,7 @@ export class LeaveCommand extends Command {
       })
     }
 
-    await ctx.leave()
+    await ctx.leave(voiceChannel)
 
     return interaction.reply({
       embeds: [

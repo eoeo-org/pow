@@ -37,6 +37,7 @@ export class ViewCommand extends Command {
     const userSetting = await getUserSetting(
       user ? user.id : interaction.member.id,
     )
+
     const userNameText = user
       ? `${user.username}#${user.discriminator}`
       : '現在'

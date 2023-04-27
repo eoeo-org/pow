@@ -43,11 +43,13 @@ class GuildContext {
       )
       ;(await this.standbyBots).shift()
     } catch {}
+    return worker
   }
   async leave(voiceChannel: VoiceChannel) {
     if (!this.connectionManager.channelMap.has(voiceChannel)) throw Error()
     const workerId = this.connectionManager.connectionLeave(voiceChannel)
     ;(await this.standbyBots).push(workerId)
+    return workerId
   }
   async addBot(workerId: string) {
     ;(await this.bots).push(workerId)

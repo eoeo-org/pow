@@ -68,14 +68,18 @@ export class LeaveCommand extends Command {
       })
     }
 
-    await ctx.leave(voiceChannel)
+    const textChannel = ctx.connectionManager.channelMap.get(voiceChannel)
+    const workerId = await ctx.leave(voiceChannel)
 
     return interaction.reply({
       embeds: [
         {
           color: 0x00ff00,
           title: 'ボイスチャンネルから退出しました。',
-          description: 'またのご利用をお待ちしております。',
+          description: `担当BOT: <@${workerId}>
+          テキストチャンネル: ${textChannel}
+          ボイスチャンネル: ${voiceChannel}
+          またのご利用をお待ちしております。`,
         },
       ],
     })

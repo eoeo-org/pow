@@ -75,13 +75,19 @@ export class PurgeCommand extends Command {
     )
     connectionCtx?.readQueue.purge()
     connectionCtx?.player?.stop()
+    const workerId = connectionCtx?.connection.joinConfig.group
 
     return interaction.reply({
       embeds: [
         {
           color: 0x00ff00,
           title: '読み上げを中断しました。',
-          description: '読み上げキューを空にして、読み上げを中断しました。',
+          description: `担当BOT: <@${workerId}>
+          テキストチャンネル: ${connectionManager.channelMap
+            .get(voiceChannel)
+            ?.toString()}
+          ボイスチャンネル: ${voiceChannel}
+          読み上げキューを空にして、読み上げを中断しました。`,
         },
       ],
     })

@@ -1,6 +1,6 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
-import { StageChannel } from 'discord.js'
+import { Client, StageChannel } from 'discord.js'
 
 export class JoinCommand extends Command {
   public constructor(
@@ -83,8 +83,10 @@ export class JoinCommand extends Command {
       })
     }
 
+    let worker: Client | null = null
+
     try {
-      await guildCtx.join(voiceChannel, interaction.channel!)
+      worker = await guildCtx.join(voiceChannel, interaction.channel!)
     } catch (err) {
       if (err instanceof Error && err.message === 'No worker') {
         return interaction.reply({
@@ -106,8 +108,8 @@ export class JoinCommand extends Command {
       embeds: [
         {
           color: 0x00ff00,
-          title: 'ボイスチャンネルに参加しました。',
-          description: `テキストチャンネル: ${guildCtx.guild.channels.cache.get(
+          title: `ボイスチャンネルに参加しました。`,
+          description: `担当BOT: ${worker.user?.toString()}\nテキストチャンネル: ${guildCtx.guild.channels.cache.get(
             interaction.channelId,
           )}\nボイスチャンネル: ${interaction.member.voice.channel}`,
         },

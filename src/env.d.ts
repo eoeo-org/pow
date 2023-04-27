@@ -1,6 +1,7 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly DISCORD_TOKEN: string
+    readonly WORKER_TOKENS: string
     readonly CLIENT_ID: string
     readonly GUILD_ID: string
     readonly VOICETEXT_API_KEY: string

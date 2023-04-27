@@ -2,22 +2,30 @@ import type typings = require('discord.js')
 
 import packageJson from '../package.json' assert { type: 'json', integrity: 'sha384-ABC123' }
 
-import { MessageType } from 'discord.js'
+import { MessageType, VoiceChannel } from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { convertContent } from './contentConverter.js'
 import { GuildCtxManager } from './guildCtx.js'
 import debug from 'debug'
 import type { SignalConstants } from 'os'
 import { getUserSetting } from './db.js'
+import { WorkerClientMap } from './worker.js'
 const debug__ErrorHandler = debug('index.js:ErrorHandler')
 
 export const client = new SapphireClient({
-  intents: ['Guilds', 'GuildVoiceStates', 'GuildMessages', 'MessageContent'],
+  intents: [
+    'Guilds',
+    'GuildMembers',
+    'GuildVoiceStates',
+    'GuildMessages',
+    'MessageContent',
+  ],
   loadMessageCommandListeners: true,
 })
 
 export const guildCtxManager = new GuildCtxManager(client)
 
+export let workerClientMap: WorkerClientMap
 console.log(`pow - v${packageJson.version}`)
 
 client.on('ready', () => {
@@ -36,18 +44,20 @@ client.on('ready', () => {
         )}`,
     )
   })
+  workerClientMap = new WorkerClientMap(process.env.WORKER_TOKENS, client)
+  workerClientMap.set(client.user!.id, client)
 })
 
 client.on('messageCreate', async (message: typings.Message) => {
+  if (message.content === '') return
   if (message.author.bot || !message.inGuild()) return
   if (![MessageType.Default, MessageType.Reply].includes(message.type)) return
   if (message.content.startsWith('_')) return
   if (message.content.includes('```')) return
   if (message.member?.voice.selfDeaf) return
 
-  const ctx = guildCtxManager.get(message.guild)
-  if (ctx.textChannel !== message.channel) return
-  if (message.content === '') return
+  const connectionManager = guildCtxManager.get(message.guild).connectionManager
+  if (!connectionManager.has(message.channel)) return
   const userSetting = await getUserSetting(message.author.id)
   if (userSetting.isDontRead) return
 
@@ -61,21 +71,27 @@ client.on('messageCreate', async (message: typings.Message) => {
   if (convertedMessage.length === 0) return
   if (
     message.member?.voice.channel === null ||
-    message.member?.voice.channel !== ctx.voiceChannel
+    message.member?.voice.channel.id !==
+      connectionManager.get(message.channel)?.connection.joinConfig.channelId
   )
     return
-  ctx.addMessage(convertedMessage, message)
+  connectionManager.get(message.channel)!.addMessage(convertedMessage, message)
 })
 
 client.on('voiceStateUpdate', (oldState, newState) => {
-  const ctx = guildCtxManager.get(newState.guild)
-  if (newState.channelId == null && newState.id === client.user?.id) {
-    ctx.readQueue.purge()
-    ctx.cleanChannels()
-    return
-  }
-  if (ctx.voiceChannel && ctx.voiceChannel.members.size === 1) {
-    ctx.textChannel
+  const guildCtx = guildCtxManager.get(newState.guild)
+
+  if (
+    (newState.channelId == null &&
+      newState.id === client.user?.id &&
+      oldState.channel instanceof VoiceChannel &&
+      guildCtx.connectionManager.channelMap.has(oldState.channel)) ||
+    (oldState.channel instanceof VoiceChannel &&
+      guildCtx.connectionManager.channelMap.has(oldState.channel) &&
+      oldState.channel.members.size === 1)
+  ) {
+    guildCtx.connectionManager.channelMap
+      .get(oldState.channel)!
       .send({
         embeds: [
           {
@@ -91,12 +107,33 @@ client.on('voiceStateUpdate', (oldState, newState) => {
           `Error code ${err.code}: Missing send messages permission.`,
         )
         debug__ErrorHandler(
-          `Guild ID: ${ctx.guild.id} Guild Name: ${ctx.guild.name} Channel ID: ${ctx.textChannel.id} Channel Name: ${ctx.textChannel.name}`,
+          `Guild ID: ${oldState.guild.id} Guild Name: ${
+            oldState.guild.name
+          } Channel ID: ${
+            guildCtx.connectionManager.channelMap.get(
+              oldState.channel as VoiceChannel,
+            )?.id
+          } Channel Name: ${
+            guildCtx.connectionManager.channelMap.get(
+              oldState.channel as VoiceChannel,
+            )?.name
+          }`,
         )
       })
       .finally(async () => {
-        await ctx.leave()
+        await guildCtx.leave(oldState.channel as VoiceChannel)
       })
+  }
+})
+
+client.on('guildMemberAdd', async (member) => {
+  if (workerClientMap.has(member.id)) {
+    await guildCtxManager.get(member.guild).addBot(member.id)
+  }
+})
+client.on('guildMemberRemove', async (member) => {
+  if (workerClientMap.has(member.id)) {
+    await guildCtxManager.get(member.guild).resetBots(workerClientMap)
   }
 })
 
@@ -108,5 +145,9 @@ function handle(signal: SignalConstants) {
 
 process.on('SIGINT', handle)
 process.on('SIGTERM', handle)
+process.on('uncaughtException', (err) => {
+  client.destroy()
+  throw err
+})
 
 client.login()

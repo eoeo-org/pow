@@ -3,7 +3,6 @@
   "version": "1.4.1",
   "main": "dist/src/index.js",
   "scripts": {
-    "deployCommands": "node scripts/deployGuildCommand.js && node scripts/deployGlobalCommand.js",
     "start": "node .",
     "dev": "tsc && node -r dotenv/config .",
     "format": "prettier --write .",

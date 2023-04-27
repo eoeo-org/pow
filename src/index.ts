@@ -2,7 +2,7 @@ import type typings = require('discord.js')
 
 import packageJson from '../package.json' assert { type: 'json', integrity: 'sha384-ABC123' }
 
-import { Collection, MessageType } from 'discord.js'
+import { MessageType } from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { convertContent } from './contentConverter.js'
 import { GuildCtxManager } from './guildCtx.js'
@@ -10,14 +10,8 @@ import debug from 'debug'
 import type { SignalConstants } from 'os'
 import { getUserSetting } from './db.js'
 const debug__ErrorHandler = debug('index.js:ErrorHandler')
-class PowClient extends SapphireClient {
-  commands: any
-  constructor(options: typings.ClientOptions) {
-    super(options)
-    this.commands = new Collection()
-  }
-}
-export const client = new PowClient({
+
+export const client = new SapphireClient({
   intents: ['Guilds', 'GuildVoiceStates', 'GuildMessages', 'MessageContent'],
   loadMessageCommandListeners: true,
 })
@@ -71,21 +65,6 @@ client.on('messageCreate', async (message: typings.Message) => {
   )
     return
   ctx.addMessage(convertedMessage, message)
-})
-
-client.on('interactionCreate', async (interaction: typings.Interaction) => {
-  if (!(interaction.inCachedGuild() && interaction.isChatInputCommand())) return
-  const command = client.commands.get(interaction.commandName)
-  if (!command) return
-  try {
-    await command.execute(interaction, client)
-  } catch (error) {
-    console.error(error)
-    await interaction.reply({
-      content: 'コマンドの実行中にエラーが発生しました。',
-      ephemeral: true,
-    })
-  }
 })
 
 client.on('voiceStateUpdate', (oldState, newState) => {

@@ -55,9 +55,9 @@ export class JoinCommand extends Command {
       })
     }
 
-    const ctx = guildCtxManager.get(interaction.member.guild)
+    const guildCtx = guildCtxManager.get(interaction.member.guild)
 
-    if (ctx.connectionManager.channelMap.has(voiceChannel)) {
+    if (guildCtx.connectionManager.channelMap.has(voiceChannel)) {
       return interaction.reply({
         embeds: [
           {
@@ -70,8 +70,21 @@ export class JoinCommand extends Command {
       })
     }
 
+    if (guildCtx.connectionManager.has(interaction.channel!)) {
+      return interaction.reply({
+        embeds: [
+          {
+            color: 0xff0000,
+            title: 'エラー',
+            description: 'このテキストチャンネルは既に使われています。',
+          },
+        ],
+        ephemeral: true,
+      })
+    }
+
     try {
-      await ctx.join(voiceChannel, interaction.channel!)
+      await guildCtx.join(voiceChannel, interaction.channel!)
     } catch (err) {
       if (err instanceof Error && err.message === 'No worker') {
         return interaction.reply({
@@ -94,7 +107,7 @@ export class JoinCommand extends Command {
         {
           color: 0x00ff00,
           title: 'ボイスチャンネルに参加しました。',
-          description: `テキストチャンネル: ${ctx.guild.channels.cache.get(
+          description: `テキストチャンネル: ${guildCtx.guild.channels.cache.get(
             interaction.channelId,
           )}\nボイスチャンネル: ${interaction.member.voice.channel}`,
         },

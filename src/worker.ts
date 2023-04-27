@@ -14,7 +14,7 @@ class WorkerClient extends Client {
     console.log(`Ready as ${this.user?.tag}`)
     workerClientMap.set(this.user!.id, this)
     this.user?.setPresence({
-      activities: [{ name: `pow worker - ${mainClient.user?.tag}` }],
+      activities: [{ name: `${mainClient.user?.tag} - worker` }],
     })
   }
 }

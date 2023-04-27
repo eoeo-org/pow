@@ -13,7 +13,13 @@ import { WorkerClientMap } from './worker.js'
 const debug__ErrorHandler = debug('index.js:ErrorHandler')
 
 export const client = new SapphireClient({
-  intents: ['Guilds', 'GuildVoiceStates', 'GuildMessages', 'MessageContent'],
+  intents: [
+    'Guilds',
+    'GuildMembers',
+    'GuildVoiceStates',
+    'GuildMessages',
+    'MessageContent',
+  ],
   loadMessageCommandListeners: true,
 })
 
@@ -74,19 +80,15 @@ client.on('messageCreate', async (message: typings.Message) => {
 
 client.on('voiceStateUpdate', (oldState, newState) => {
   const guildCtx = guildCtxManager.get(newState.guild)
+
   if (
-    newState.channelId == null &&
-    newState.id === client.user?.id &&
-    oldState.channel instanceof VoiceChannel &&
-    guildCtx.connectionManager.channelMap.has(oldState.channel)
-  ) {
-    guildCtx.leave(oldState.channel)
-    return
-  }
-  if (
-    oldState.channel instanceof VoiceChannel &&
-    guildCtx.connectionManager.channelMap.has(oldState.channel) &&
-    oldState.channel.members.size === 1
+    (newState.channelId == null &&
+      newState.id === client.user?.id &&
+      oldState.channel instanceof VoiceChannel &&
+      guildCtx.connectionManager.channelMap.has(oldState.channel)) ||
+    (oldState.channel instanceof VoiceChannel &&
+      guildCtx.connectionManager.channelMap.has(oldState.channel) &&
+      oldState.channel.members.size === 1)
   ) {
     guildCtx.connectionManager.channelMap
       .get(oldState.channel)!
@@ -126,19 +128,12 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
 client.on('guildMemberAdd', async (member) => {
   if (workerClientMap.has(member.id)) {
-    ;(await guildCtxManager.get(member.guild).bots).push(member.id)
-    ;(await guildCtxManager.get(member.guild).standbyBots).push(member.id)
+    await guildCtxManager.get(member.guild).addBot(member.id)
   }
 })
 client.on('guildMemberRemove', async (member) => {
   if (workerClientMap.has(member.id)) {
-    const guildCtx = guildCtxManager.get(member.guild)
-    const bots = await guildCtx.bots
-    bots.splice(
-      bots.findIndex((element) => element === member.id),
-      1,
-    )
-    guildCtx.resetBots()
+    await guildCtxManager.get(member.guild).resetBots(workerClientMap)
   }
 })
 

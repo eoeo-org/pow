@@ -70,13 +70,16 @@ export class JoinCommand extends Command {
       })
     }
 
-    if (guildCtx.connectionManager.has(interaction.channel!)) {
+    const connectionVoiceJoinConfig = guildCtx.connectionManager.get(
+      interaction.channel!,
+    )?.connection.joinConfig
+    if (connectionVoiceJoinConfig !== undefined) {
       return interaction.reply({
         embeds: [
           {
             color: 0xff0000,
             title: 'エラー',
-            description: 'このテキストチャンネルは既に使われています。',
+            description: `このテキストチャンネルは https://discord.com/channels/${connectionVoiceJoinConfig?.guildId}/${connectionVoiceJoinConfig?.channelId} で既に使われています。`,
           },
         ],
         ephemeral: true,

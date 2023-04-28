@@ -15,6 +15,7 @@ class WorkerClient extends Client {
     workerClientMap.set(this.user!.id, this)
     this.user?.setPresence({
       activities: [{ name: `${mainClient.user?.tag} - worker` }],
+      status: 'dnd',
     })
   }
 }

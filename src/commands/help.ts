@@ -17,7 +17,7 @@ export class HelpCommand extends Command {
 
   public override async messageRun(message: Message) {
     await message.reply({
-      content: helpUrl,
+      content: `</help:${this.applicationCommandRegistry.globalCommandId}> をお使いください。（コマンドメンションを押すとチャット欄に自動挿入されます。）`,
       flags: MessageFlags.SuppressEmbeds,
     })
   }

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discordbot-pow-deployment
+  labels:
+    app: discordbot-pow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discordbot-pow
+  template:
+    metadata:
+      labels:
+        app: discordbot-pow
+    spec:
+      containers:
+        - name: discordbot-pow
+          image: ghcr.io/kazukazu123123/pow:v2.1.1
+          envFrom:
+            - secretRef:
+                name: pow-token
+            - secretRef:
+                name: pow-worker-token
+            - secretRef:
+                name: voicetext
+            - secretRef:
+                name: pow-db
+          securityContext:
+            capabilities:
+              drop:
+                - CAP_MKNOD
+                - CAP_NET_RAW
+                - CAP_AUDIT_WRITE
+      nodeSelector:
+        bot-hosting: 'true'

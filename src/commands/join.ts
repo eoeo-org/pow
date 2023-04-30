@@ -1,5 +1,5 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
-import { guildCtxManager } from '../index.js'
+import { guildCtxManager, workerClientMap } from '../index.js'
 import { Client, StageChannel } from 'discord.js'
 
 export class JoinCommand extends Command {
@@ -49,6 +49,20 @@ export class JoinCommand extends Command {
             color: 0xff0000,
             title: 'エラー',
             description: 'ステージチャンネルは現在サポートしていません。',
+          },
+        ],
+        ephemeral: true,
+      })
+    }
+
+    if (workerClientMap.size === process.env.WORKER_TOKENS.split(',').length) {
+      return interaction.reply({
+        embeds: [
+          {
+            color: 0xff0000,
+            title: 'エラー',
+            description:
+              'worker の準備が整っていません。十数秒後に再試行してください。',
           },
         ],
         ephemeral: true,

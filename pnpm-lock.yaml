@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@discordjs/collection':
-    specifier: 1.5.0
-    version: 1.5.0
+    specifier: 1.5.1
+    version: 1.5.1
   '@discordjs/rest':
     specifier: 1.7.0
     version: 1.7.0
@@ -96,11 +96,6 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /@discordjs/collection@1.5.0:
-    resolution: {integrity: sha512-suyVndkEAAWrGxyw/CPGdtXoRRU6AUNkibtnbJevQzpelkJh3Q1gQqWDpqf5i39CnAn5+LrN0YS+cULeEjq2Yw==}
-    engines: {node: '>=16.9.0'}
-    dev: false
-
   /@discordjs/collection@1.5.1:
     resolution: {integrity: sha512-aWEc9DCf3TMDe9iaJoOnO2+JVAjeRNuRxPZQA6GVvBf+Z3gqUuWYBy2NWh4+5CLYq5uoc3MOvUQ5H5m8CJBqOA==}
     engines: {node: '>=16.9.0'}
@@ -117,7 +112,7 @@ packages:
     resolution: {integrity: sha512-r2HzmznRIo8IDGYBWqQfkEaGN1LrFfWQd3dSyC4tOpMU8nuVvFUEw6V/lwnG44jyOq+vgyDny2fxeUDMt9I4aQ==}
     engines: {node: '>=16.9.0'}
     dependencies:
-      '@discordjs/collection': 1.5.0
+      '@discordjs/collection': 1.5.1
       '@discordjs/util': 0.2.0
       '@sapphire/async-queue': 1.5.0
       '@sapphire/snowflake': 3.4.2
@@ -240,7 +235,7 @@ packages:
     resolution: {integrity: sha512-QDRom4yPX6flJ3EaGFeHV2IPBOBZw7p/NjiWNkC3hKw9npG/5Dsn9iib2XfLfBtznzBo0ARxoxeRl+74kABnWg==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dependencies:
-      '@discordjs/collection': 1.5.0
+      '@discordjs/collection': 1.5.1
       '@sapphire/utilities': 3.11.1
       tslib: 2.5.0
     dev: false

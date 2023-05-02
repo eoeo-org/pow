@@ -14,7 +14,7 @@
     "npm": "This project is configured to use pnpm"
   },
   "dependencies": {
-    "@discordjs/collection": "1.5.0",
+    "@discordjs/collection": "1.5.1",
     "@discordjs/rest": "1.7.0",
     "@discordjs/voice": "0.16.0",
     "@sapphire/framework": "4.4.2",

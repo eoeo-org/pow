@@ -55,8 +55,8 @@ export class JoinCommand extends Command {
       })
     }
 
-    if (workerClientMap.size === process.env.WORKER_TOKENS.split(',').length) {
-      return interaction.reply({
+    if (workerClientMap.size !== process.env.WORKER_TOKENS.split(',').length) {
+      return await interaction.reply({
         embeds: [
           {
             color: 0xff0000,

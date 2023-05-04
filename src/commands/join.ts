@@ -55,7 +55,11 @@ export class JoinCommand extends Command {
       })
     }
 
-    if (workerClientMap.size !== process.env.WORKER_TOKENS.split(',').length) {
+    // workerClientMap には master client も含まれる
+    if (
+      workerClientMap.size !==
+      process.env.WORKER_TOKENS.split(',').length + 1
+    ) {
       return await interaction.reply({
         embeds: [
           {

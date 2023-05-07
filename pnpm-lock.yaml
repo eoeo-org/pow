@@ -1,5 +1,10 @@
 lockfileVersion: '6.0'
 
+patchedDependencies:
+  discord.js@14.11.0:
+    hash: dbcnsngqymjrabac4nysmisovm
+    path: patches/discord.js@14.11.0.patch
+
 dependencies:
   '@discordjs/collection':
     specifier: 1.5.1
@@ -24,7 +29,7 @@ dependencies:
     version: 2.2.0
   discord.js:
     specifier: 14.11.0
-    version: 14.11.0
+    version: 14.11.0(patch_hash=dbcnsngqymjrabac4nysmisovm)
   emoji-regex:
     specifier: 10.2.1
     version: 10.2.1
@@ -374,7 +379,7 @@ packages:
     resolution: {integrity: sha512-zdLSEjcCoOsFlxba6GLWp113RDE3zwxaMLPs1rH6ipc1Q+S6W+8vztHMGS+O0uVQwsJc16y9JqaBhIAmKLmeyA==}
     dev: false
 
-  /discord.js@14.11.0:
+  /discord.js@14.11.0(patch_hash=dbcnsngqymjrabac4nysmisovm):
     resolution: {integrity: sha512-CkueWYFQ28U38YPR8HgsBR/QT35oPpMbEsTNM30Fs8loBIhnA4s70AwQEoy6JvLcpWWJO7GY0y2BUzZmuBMepQ==}
     engines: {node: '>=16.9.0'}
     dependencies:
@@ -396,6 +401,7 @@ packages:
       - bufferutil
       - utf-8-validate
     dev: false
+    patched: true
 
   /dotenv@16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}

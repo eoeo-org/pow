@@ -38,5 +38,10 @@
   "author": "kazukazu123123",
   "license": "MIT",
   "description": "",
-  "type": "module"
+  "type": "module",
+  "pnpm": {
+    "patchedDependencies": {
+      "discord.js@14.11.0": "patches/discord.js@14.11.0.patch"
+    }
+  }
 }

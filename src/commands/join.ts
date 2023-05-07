@@ -60,7 +60,7 @@ export class JoinCommand extends Command {
       workerClientMap.size !==
       process.env.WORKER_TOKENS.split(',').length + 1
     ) {
-      return await interaction.reply({
+      return interaction.reply({
         embeds: [
           {
             color: 0xff0000,
@@ -120,9 +120,8 @@ export class JoinCommand extends Command {
           ],
           ephemeral: true,
         })
-      } else {
-        throw err
       }
+      throw err
     }
 
     return interaction.reply({

@@ -11,6 +11,7 @@ RUN mkdir /pnpm
 WORKDIR /package
 COPY .npmrc package.json ./
 RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | grep -oP '\d+\.\d+\.\d') bash -
+COPY patches/discord.js@14.11.0.patch ./patches/
 COPY pnpm-lock.yaml ./
 RUN pnpm i
 

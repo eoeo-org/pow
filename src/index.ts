@@ -152,7 +152,7 @@ const destroy = async () => {
         const promise = channel.send({
           embeds: [
             {
-              color: 0x00ff00,
+              color: 0xffff00,
               title: '再起動を行うためボイスチャンネルから退出します。',
               description: '起動完了までしばらくお待ちください。',
             },

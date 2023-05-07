@@ -137,23 +137,23 @@ client.on('guildMemberRemove', async (member) => {
   }
 })
 
-const destroy = () => {
-  client.destroy()
+const destroy = async () => {
+  await client.destroy()
   for (const worker of workerClientMap.values()) {
-    worker.destroy()
+    await worker.destroy()
   }
 }
 
-function handle(signal: SignalConstants) {
+async function handle(signal: SignalConstants) {
   console.log(`Received ${signal}`)
-  destroy()
+  await destroy()
   process.exit()
 }
 
 process.on('SIGINT', handle)
 process.on('SIGTERM', handle)
-process.on('uncaughtException', (err) => {
-  destroy()
+process.on('uncaughtException', async (err) => {
+  await destroy()
   console.error('uncaughtException:\n%o', err)
   process.exit(1)
 })

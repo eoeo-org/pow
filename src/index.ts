@@ -10,6 +10,7 @@ import debug from 'debug'
 import type { SignalConstants } from 'os'
 import { getUserSetting } from './db.js'
 import { WorkerClientMap } from './worker.js'
+import { joinMessageRun } from './joinMessage.js'
 const debug__ErrorHandler = debug('index.js:ErrorHandler')
 
 let isCalledDestroy = false
@@ -51,6 +52,9 @@ client.on('ready', () => {
 })
 
 client.on('messageCreate', async (message: typings.Message) => {
+  if (message.content === `${client.user} join`) {
+    joinMessageRun(message)
+  }
   if (message.content === '') return
   if (message.author.bot || !message.inGuild()) return
   if (![MessageType.Default, MessageType.Reply].includes(message.type)) return

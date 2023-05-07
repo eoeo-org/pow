@@ -2,7 +2,7 @@ import type typings = require('discord.js')
 
 import packageJson from '../package.json' assert { type: 'json', integrity: 'sha384-ABC123' }
 
-import { MessageType, VoiceChannel } from 'discord.js'
+import { Message, MessageType, VoiceChannel } from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { convertContent } from './contentConverter.js'
 import { GuildCtxManager } from './guildCtx.js'
@@ -11,6 +11,8 @@ import type { SignalConstants } from 'os'
 import { getUserSetting } from './db.js'
 import { WorkerClientMap } from './worker.js'
 const debug__ErrorHandler = debug('index.js:ErrorHandler')
+
+let isCalledDestroy = false
 
 export const client = new SapphireClient({
   intents: [
@@ -138,6 +140,30 @@ client.on('guildMemberRemove', async (member) => {
 })
 
 const destroy = async () => {
+  if (!isCalledDestroy) {
+    isCalledDestroy = true
+
+    const promises: Promise<Message<true>>[] = []
+
+    guildCtxManager.forEach((guildContext) => {
+      guildContext.connectionManager.forEach(async (connectionContext) => {
+        const channel =
+          connectionContext.readChannel as typings.GuildTextBasedChannel
+        const promise = channel.send({
+          embeds: [
+            {
+              color: 0x00ff00,
+              title: '再起動を行うためボイスチャンネルから退出します。',
+              description: '起動完了までしばらくお待ちください。',
+            },
+          ],
+        })
+        promises.push(promise)
+      })
+    })
+    await Promise.allSettled(promises)
+  }
+
   await client.destroy()
   for (const worker of workerClientMap.values()) {
     await worker.destroy()

@@ -33,7 +33,7 @@ export class HelpCommand extends Command {
     interaction: ChatInputCommand.Interaction,
   ) {
     return interaction.reply({
-      content: `[${helpUrl}](${helpUrl})`,
+      content: `${helpUrl}`,
       ephemeral: true,
     })
   }

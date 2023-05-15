@@ -25,8 +25,8 @@ dependencies:
     specifier: 4.3.4
     version: 4.3.4
   discord-emoji:
-    specifier: 2.2.0
-    version: 2.2.0
+    specifier: 2.3.0
+    version: 2.3.0
   discord.js:
     specifier: 14.11.0
     version: 14.11.0(patch_hash=dbcnsngqymjrabac4nysmisovm)
@@ -371,8 +371,8 @@ packages:
     resolution: {integrity: sha512-1Huaj9cQ1W7/uryS8MZs/tZemnoKB94thM1cE40lep3rpU3q7WHqkdjN/veX0prTkYlPhcyLd/DeF/pBO8X8oQ==}
     dev: false
 
-  /discord-emoji@2.2.0:
-    resolution: {integrity: sha512-zdLSEjcCoOsFlxba6GLWp113RDE3zwxaMLPs1rH6ipc1Q+S6W+8vztHMGS+O0uVQwsJc16y9JqaBhIAmKLmeyA==}
+  /discord-emoji@2.3.0:
+    resolution: {integrity: sha512-OBa4Yn0+esidXTaCKDderhcyq0ylNAqAB9G1DUOl0D/Hn0BQ0jA05+qHIU193VuxvnLwT442i4CWFWy41BNfmQ==}
     dev: false
 
   /discord.js@14.11.0(patch_hash=dbcnsngqymjrabac4nysmisovm):

@@ -15,18 +15,16 @@ import type { Client } from 'discord.js'
 const emojiRegex = emojiRegExp()
 
 const dismoji = new Map(
-  Object.entries(
-    Object.assign(
-      activity,
-      flags,
-      food,
-      nature,
-      objects,
-      people,
-      symbols,
-      travel,
-    ),
-  )
+  Object.entries({
+    ...activity,
+    ...flags,
+    ...food,
+    ...nature,
+    ...objects,
+    ...people,
+    ...symbols,
+    ...travel,
+  })
     .map(([key, value]) => [key, (value as string).replace(/\u{FE0F}$/u, '')])
     .reverse()
     .map(([key, value]) => [value, key]),
@@ -65,7 +63,7 @@ export const convertContent = (
   }
 
   let result = text
-    .replace(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
+    .replaceAll(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
     .replaceAll(URLPattern, '')
     .replaceAll(/\|\|.+?\|\|/gs, '')
     .replaceAll(/<a?:(\w{2,32}):\d{17,19}>/g, '$1')
@@ -75,9 +73,7 @@ export const convertContent = (
     )
     .replaceAll(/~/g, '')
     .replaceAll(/\*/g, '')
-    .replaceAll(emojiRegex, function (x) {
-      return getShortcodes(x)
-    })
+    .replaceAll(emojiRegex, getShortcodes)
 
   return result.match(/(<a?)?:\w+:(\d{18}>)?/) ? '' : result
 }

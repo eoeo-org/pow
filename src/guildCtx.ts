@@ -29,7 +29,7 @@ class GuildContext {
   }
 
   async join(voiceChannel: VoiceChannel, readChannel: GuildTextBasedChannel) {
-    const workerId = (await this.standbyBots)[0]
+    const workerId = (await this.standbyBots).sort()[0]
     if (workerId === undefined) {
       throw Error('No worker')
     }

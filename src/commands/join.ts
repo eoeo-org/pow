@@ -42,6 +42,19 @@ export class JoinCommand extends Command {
       })
     }
 
+    if (!voiceChannel.joinable) {
+      return interaction.reply({
+        embeds: [
+          {
+            color: 0xff0000,
+            title: 'エラー',
+            description: 'このVCに参加する権限がありません。',
+          },
+        ],
+        ephemeral: true,
+      })
+    }
+
     if (voiceChannel instanceof StageChannel) {
       return interaction.reply({
         embeds: [

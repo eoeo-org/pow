@@ -20,7 +20,6 @@ import {
   Message,
   ChatInputCommandInteraction,
   type DiscordErrorData,
-  type TextBasedChannel,
   type GuildTextBasedChannel,
 } from 'discord.js'
 import { Queue } from './utils.js'
@@ -28,12 +27,12 @@ import { fetchAudioStream } from './voiceRead.js'
 import { getUserSetting } from './db.js'
 
 class ConnectionContext {
-  readChannel: TextBasedChannel
+  readChannel: GuildTextBasedChannel
   readQueue: any
   player: AudioPlayer | null = null
   connection: VoiceConnection
 
-  constructor(readChannel: TextBasedChannel, connection: VoiceConnection) {
+  constructor(readChannel: GuildTextBasedChannel, connection: VoiceConnection) {
     this.readChannel = readChannel
     this.readQueue = new Queue(this._readMessage.bind(this))
     this.connection = connection

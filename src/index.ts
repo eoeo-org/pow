@@ -11,6 +11,7 @@ import type { SignalConstants } from 'os'
 import { getUserSetting } from './db.js'
 import { WorkerClientMap } from './worker.js'
 import { joinMessageRun } from './joinMessage.js'
+import { ChannelType } from 'discord.js'
 const debug__ErrorHandler = debug('index.js:ErrorHandler')
 
 let isCalledDestroy = false
@@ -84,17 +85,29 @@ client.on('messageCreate', async (message: typings.Message) => {
   connectionManager.get(message.channel)!.addMessage(convertedMessage, message)
 })
 
-client.on('voiceStateUpdate', (oldState, newState) => {
+client.on('voiceStateUpdate', async (oldState, newState) => {
+  if (oldState.channel?.type !== ChannelType.GuildVoice) return
   const guildCtx = guildCtxManager.get(newState.guild)
 
   if (
     (newState.channelId == null &&
-      newState.id === client.user?.id &&
-      oldState.channel instanceof VoiceChannel &&
-      guildCtx.connectionManager.channelMap.has(oldState.channel)) ||
-    (oldState.channel instanceof VoiceChannel &&
-      guildCtx.connectionManager.channelMap.has(oldState.channel) &&
-      oldState.channel.members.size === 1)
+      (await guildCtx.bots).includes(newState.id) &&
+      [...guildCtx.connectionManager.values()].find(
+        (connectionCtx) =>
+          connectionCtx.connection.joinConfig.channelId ===
+            oldState.channelId &&
+          connectionCtx.connection.joinConfig.group === oldState.id,
+      )) ||
+    (guildCtx.connectionManager.channelMap.has(oldState.channel) &&
+      oldState.channel.members.size === 1 &&
+      oldState.channel.members.every((member) =>
+        [...guildCtx.connectionManager.values()].find(
+          (connectionCtx) =>
+            connectionCtx.connection.joinConfig.channelId ===
+              oldState.channelId &&
+            connectionCtx.connection.joinConfig.group === member.id,
+        ),
+      ))
   ) {
     guildCtx.connectionManager.channelMap
       .get(oldState.channel)!

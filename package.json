@@ -1,6 +1,6 @@
 {
   "name": "pow",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "main": "dist/src/index.js",
   "scripts": {
     "start": "node .",

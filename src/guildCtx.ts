@@ -6,7 +6,7 @@ import {
   ChannelType,
 } from 'discord.js'
 import { WorkerClientMap } from './worker.js'
-import { workerClientMap } from './index.js'
+import { client, workerClientMap } from './index.js'
 import { ConnectionCtxManager } from './connectionCtx.js'
 
 const getBots = async (guild: Guild, worker: WorkerClientMap) => {
@@ -45,18 +45,42 @@ class GuildContext {
 
     let workerId = (await this.bots)[vcArray.indexOf(voiceChannel)]
 
-    if (
-      workerId === undefined ||
-      [...this.connectionManager.values()].find(
-        (v) => v.connection.joinConfig.group === workerId,
-      )
-    ) {
+    if (workerId === undefined) {
       workerId = (await this.bots).find(
         (botId) =>
           ![...this.connectionManager.values()]
             .map((connectionCtx) => connectionCtx.connection.joinConfig.group)
             .includes(botId),
       )
+    } else {
+      const oldConnectionCtx = [...this.connectionManager.values()].find(
+        (v) => v.connection.joinConfig.group === workerId,
+      )
+      if (oldConnectionCtx !== undefined) {
+        const oldVoiceChannel = await client.channels
+          .fetch(oldConnectionCtx.connection.joinConfig.channelId!)
+          .then((channels) => {
+            return channels?.type === ChannelType.GuildVoice ? channels : null
+          })
+        const forOldCtxWorkerId = (await this.bots).find(
+          (botId) =>
+            ![...this.connectionManager.values()]
+              .map((connectionCtx) => connectionCtx.connection.joinConfig.group)
+              .includes(botId) && botId !== workerId,
+        )
+        if (forOldCtxWorkerId === undefined) {
+          throw Error('No worker')
+        }
+        this.leave(oldVoiceChannel!)
+        try {
+          this.connectionManager.connectionJoin(
+            oldVoiceChannel!,
+            this.guild.id,
+            oldConnectionCtx.readChannel,
+            workerClientMap.get(forOldCtxWorkerId)!,
+          )
+        } catch {}
+      }
     }
     if (workerId === undefined) {
       throw Error('No worker')
@@ -72,7 +96,7 @@ class GuildContext {
     } catch {}
     return worker
   }
-  async leave(voiceChannel: VoiceChannel) {
+  leave(voiceChannel: VoiceChannel) {
     if (!this.connectionManager.channelMap.has(voiceChannel)) throw Error()
     const workerId = this.connectionManager.connectionLeave(voiceChannel)
     return workerId

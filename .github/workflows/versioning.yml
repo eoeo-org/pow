@@ -30,7 +30,7 @@ jobs:
           version_string=$(jq -r '.version' package.json)
           pr=$( (git log --oneline @...v"$version_string" || git log --oneline) | sed -nE 's/.+\((#[0-9]+)\)$/\1/p')
           pr_array=($pr)
-          if [ ${#pr_array[*]} -gt 20 ]; then
+          if [ ${#pr_array[*]} -gt 40 ]; then
             exit 1
           fi
           labels=$( echo "$pr" | xargs -n1 gh pr view --json labels -q '.labels[].name')

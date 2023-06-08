@@ -38,16 +38,14 @@ export class ViewCommand extends Command {
       user ? user.id : interaction.member.id,
     )
 
-    const userNameText = user
-      ? `${user.username}#${user.discriminator}`
-      : '現在'
+    const userNameText = user ? user : '現在'
 
     return interaction.reply({
       embeds: [
         {
           color: 0x00ff00,
-          title: `${userNameText}の声の設定`,
           description:
+            `**${userNameText}の声の設定**` +
             '```\n' +
             objToList(userSetting).split('\n').slice(1).join('\n') +
             '\n```',

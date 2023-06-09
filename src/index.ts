@@ -43,9 +43,7 @@ client.on('ready', () => {
     console.log(
       `  - ${guild.name} (${guild.memberCount}) Owner: ${await guild
         .fetchOwner()
-        .then(
-          (owner) => `${owner.user.username}#${owner.user.discriminator}`,
-        )}`,
+        .then((owner) => owner.user.tag)}`,
     )
   })
   workerClientMap = new WorkerClientMap(process.env.WORKER_TOKENS, client)

@@ -55,8 +55,8 @@ devDependencies:
     specifier: 18.16.18
     version: 18.16.18
   dotenv:
-    specifier: 16.3.0
-    version: 16.3.0
+    specifier: 16.3.1
+    version: 16.3.1
   husky:
     specifier: 8.0.3
     version: 8.0.3
@@ -401,8 +401,8 @@ packages:
     dev: false
     patched: true
 
-  /dotenv@16.3.0:
-    resolution: {integrity: sha512-tHB+hmf8MRCkT3VVivGiG8kq9HiGTmQ3FzOKgztfpJQH1IWuZTOvKSJmHNnQPowecAmkCJhLrxdPhOr06LLqIQ==}
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
     engines: {node: '>=12'}
     dev: true
 

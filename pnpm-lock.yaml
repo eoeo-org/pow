@@ -44,8 +44,8 @@ dependencies:
     specifier: 0.7.11
     version: 0.7.11
   mariadb:
-    specifier: 3.1.2
-    version: 3.1.2
+    specifier: 3.2.0
+    version: 3.2.0
 
 devDependencies:
   '@types/debug':
@@ -522,8 +522,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /mariadb@3.1.2:
-    resolution: {integrity: sha512-ILlC54fkXkvizTJZC1uP7f/REBxuu1k+OWzpiIITIEdS+dGIjFe/Ob3EW9KrdtBa38l3z+odz6elva0RG/y5og==}
+  /mariadb@3.2.0:
+    resolution: {integrity: sha512-IH2nidQat1IBMxP5gjuNxG6dADtz1PESEC6rKrcATen5v3ngFyZITjehyYiwNfz3zUNQupfYmVntz93M+Pz8pQ==}
     engines: {node: '>= 12'}
     dependencies:
       '@types/geojson': 7946.0.10

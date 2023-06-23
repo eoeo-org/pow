@@ -9,5 +9,15 @@
     ":assignAndReview(kazukazu123123)",
     ":semanticCommits",
     ":disablePrControls"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "labels": ["semver:none"]
+    },
+    {
+      "matchDepTypes": ["dependencies", "require"],
+      "labels": ["semver:patch"]
+    }
   ]
 }

@@ -20,5 +20,13 @@
       "matchDepTypes": ["dependencies", "require"],
       "labels": ["semver:patch"]
     }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["(^|/)\\.npmrc$"],
+      "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version"
+    }
   ]
 }

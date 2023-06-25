@@ -8,7 +8,8 @@
     ":label(dependencies)",
     ":assignAndReview(kazukazu123123)",
     ":semanticCommits",
-    ":disablePrControls"
+    ":disablePrControls",
+    "helpers:pinGitHubActionDigests"
   ],
   "packageRules": [
     {

@@ -14,11 +14,11 @@
   "packageRules": [
     {
       "matchPackagePatterns": ["*"],
-      "labels": ["semver:none"]
+      "addLabels": ["semver:none"]
     },
     {
       "matchDepTypes": ["dependencies", "require"],
-      "labels": ["semver:patch"]
+      "addLabels": ["semver:patch"]
     }
   ],
   "regexManagers": [

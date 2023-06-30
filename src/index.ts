@@ -2,7 +2,7 @@ import type typings = require('discord.js')
 
 import packageJson from '../package.json' assert { type: 'json', integrity: 'sha384-ABC123' }
 
-import { Message, MessageType, VoiceChannel } from 'discord.js'
+import { Message, MessageType, Options, VoiceChannel } from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { convertContent } from './contentConverter.js'
 import { GuildCtxManager } from './guildCtx.js'
@@ -24,6 +24,18 @@ export const client = new SapphireClient({
     'GuildMessages',
     'MessageContent',
   ],
+  makeCache: Options.cacheWithLimits({
+    BaseGuildEmojiManager: 0,
+    GuildEmojiManager: 0,
+    GuildForumThreadManager: 0,
+    GuildScheduledEventManager: 0,
+    GuildStickerManager: 0,
+    GuildTextThreadManager: 0,
+    MessageManager: 0,
+    StageInstanceManager: 0,
+    ThreadManager: 0,
+    ThreadMemberManager: 0,
+  }),
   loadMessageCommandListeners: true,
 })
 

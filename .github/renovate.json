@@ -6,7 +6,7 @@
     ":rebaseStalePrs",
     ":disableRateLimiting",
     ":maintainLockFilesWeekly",
-    ":label(dependencies)",
+    ":labels(dependencies, semver:none)",
     ":assignAndReview(kazukazu123123)",
     ":semanticCommits",
     ":disablePrControls",
@@ -14,12 +14,8 @@
   ],
   "packageRules": [
     {
-      "matchPackagePatterns": ["*"],
-      "addLabels": ["semver:none"]
-    },
-    {
       "matchDepTypes": ["dependencies", "require"],
-      "addLabels": ["semver:patch"]
+      "labels": ["dependencies", "semver:patch"]
     }
   ],
   "regexManagers": [

@@ -8,6 +8,7 @@ import { GuildCtxManager } from './guildCtx.js'
 import type { SignalConstants } from 'os'
 import { WorkerClientMap } from './worker.js'
 import {
+  channelUpdateEvent,
   guildMemberAddEvent,
   guildMemberRemoveEvent,
   messageCreateEvent,
@@ -51,6 +52,7 @@ client.on(Events.ClientReady, (c) => {
   workerClientMap.set(client.user!.id, client)
 })
 
+client.on(Events.ChannelUpdate, channelUpdateEvent)
 client.on(Events.MessageCreate, messageCreateEvent)
 client.on(Events.VoiceStateUpdate, voiceStateUpdateEvent)
 client.on(Events.GuildMemberAdd, guildMemberAddEvent)

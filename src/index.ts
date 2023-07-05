@@ -2,7 +2,12 @@ import type typings = require('discord.js')
 
 import packageJson from '../package.json' assert { type: 'json', integrity: 'sha384-ABC123' }
 
-import { Message, MessageType, Options, VoiceChannel } from 'discord.js'
+import {
+  Message,
+  MessageType,
+  Options,
+  type VoiceBasedChannel,
+} from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { convertContent } from './contentConverter.js'
 import { GuildCtxManager } from './guildCtx.js'
@@ -72,6 +77,7 @@ client.on('messageCreate', async (message: typings.Message) => {
   if (message.content.startsWith('_')) return
   if (message.content.includes('```')) return
   if (message.member?.voice.selfDeaf) return
+  if (message.member?.voice.suppress) return
 
   const connectionManager = guildCtxManager.get(message.guild).connectionManager
   if (!connectionManager.has(message.channel)) return
@@ -96,9 +102,16 @@ client.on('messageCreate', async (message: typings.Message) => {
 })
 
 client.on('voiceStateUpdate', async (oldState, newState) => {
-  if (oldState.channel?.type !== ChannelType.GuildVoice) return
+  if (
+    newState.channel?.type === ChannelType.GuildStageVoice &&
+    newState.member?.id === client.user?.id &&
+    newState.suppress
+  ) {
+    await newState.setSuppressed(false)
+    return
+  }
+  if (oldState.channel === null) return
   const guildCtx = guildCtxManager.get(newState.guild)
-
   if (
     (newState.channelId == null &&
       (await guildCtx.bots).includes(newState.id) &&
@@ -140,17 +153,17 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
             oldState.guild.name
           } Channel ID: ${
             guildCtx.connectionManager.channelMap.get(
-              oldState.channel as VoiceChannel,
+              oldState.channel as VoiceBasedChannel,
             )?.id
           } Channel Name: ${
             guildCtx.connectionManager.channelMap.get(
-              oldState.channel as VoiceChannel,
+              oldState.channel as VoiceBasedChannel,
             )?.name
           }`,
         )
       })
       .finally(async () => {
-        await guildCtx.leave(oldState.channel as VoiceChannel)
+        await guildCtx.leave(oldState.channel as VoiceBasedChannel)
       })
   }
 })

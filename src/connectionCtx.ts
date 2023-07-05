@@ -16,7 +16,7 @@ import {
 
 import {
   Client,
-  VoiceChannel,
+  type VoiceBasedChannel,
   Message,
   ChatInputCommandInteraction,
   type DiscordErrorData,
@@ -111,14 +111,14 @@ export class ConnectionCtxManager extends Map<
   GuildTextBasedChannel,
   ConnectionContext
 > {
-  channelMap: Map<VoiceChannel, GuildTextBasedChannel>
+  channelMap: Map<VoiceBasedChannel, GuildTextBasedChannel>
   constructor() {
     super()
     this.channelMap = new Map()
   }
 
   connectionJoin(
-    voiceChannel: VoiceChannel,
+    voiceChannel: VoiceBasedChannel,
     guildId: string,
     readChannel: GuildTextBasedChannel,
     worker: Client,
@@ -140,7 +140,7 @@ export class ConnectionCtxManager extends Map<
     })
     this.set(readChannel, new ConnectionContext(readChannel, connection))
   }
-  connectionLeave(voiceChannel: VoiceChannel) {
+  connectionLeave(voiceChannel: VoiceBasedChannel) {
     const readChannel = this.channelMap.get(voiceChannel)
     if (readChannel == null) throw Error()
     const connection = this.get(readChannel)?.connection

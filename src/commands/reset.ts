@@ -25,11 +25,9 @@ export class ResetCommand extends Command {
         .setDMPermission(false),
     )
   }
-  public override async chatInputRun(
-    interaction: ChatInputCommand.Interaction,
-  ) {
+  public override chatInputRun(interaction: ChatInputCommand.Interaction) {
     if (!interaction.inCachedGuild()) return
-    await guildCtxManager.get(interaction.guild).resetBots(workerClientMap)
+    guildCtxManager.get(interaction.guild).resetBots(workerClientMap)
     return interaction.reply({
       embeds: [
         {

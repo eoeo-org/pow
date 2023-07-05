@@ -162,8 +162,8 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
           }`,
         )
       })
-      .finally(async () => {
-        await guildCtx.leave(oldState.channel as VoiceBasedChannel)
+      .finally(() => {
+        guildCtx.leave(oldState.channel as VoiceBasedChannel)
       })
   }
 })
@@ -173,9 +173,9 @@ client.on('guildMemberAdd', async (member) => {
     await guildCtxManager.get(member.guild).addBot(member.id)
   }
 })
-client.on('guildMemberRemove', async (member) => {
+client.on('guildMemberRemove', (member) => {
   if (workerClientMap.has(member.id)) {
-    await guildCtxManager.get(member.guild).resetBots(workerClientMap)
+    guildCtxManager.get(member.guild).resetBots(workerClientMap)
   }
 })
 

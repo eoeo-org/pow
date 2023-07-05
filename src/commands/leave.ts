@@ -57,7 +57,7 @@ export class LeaveCommand extends Command {
     }
 
     const textChannel = ctx.connectionManager.channelMap.get(voiceChannel)
-    const workerId = await ctx.leave(voiceChannel)
+    const workerId = ctx.leave(voiceChannel)
 
     return interaction.reply({
       embeds: [

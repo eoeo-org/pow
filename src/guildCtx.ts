@@ -111,10 +111,10 @@ class GuildContext {
   async addBot(workerId: string) {
     ;(await this.bots).push(workerId)
   }
-  async resetBots(workerClientMap: WorkerClientMap) {
+  resetBots(workerClientMap: WorkerClientMap) {
     for (const voiceChannel of this.connectionManager.channelMap.keys()) {
       try {
-        await this.leave(voiceChannel)
+        this.leave(voiceChannel)
       } catch {}
     }
     this.bots = getBots(this.guild, workerClientMap)

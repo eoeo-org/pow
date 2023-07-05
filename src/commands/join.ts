@@ -1,6 +1,6 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager, workerClientMap } from '../index.js'
-import { Client, StageChannel } from 'discord.js'
+import { Client } from 'discord.js'
 
 export class JoinCommand extends Command {
   public constructor(
@@ -49,19 +49,6 @@ export class JoinCommand extends Command {
             color: 0xff0000,
             title: 'エラー',
             description: 'このVCに参加する権限がありません。',
-          },
-        ],
-        ephemeral: true,
-      })
-    }
-
-    if (voiceChannel instanceof StageChannel) {
-      return interaction.reply({
-        embeds: [
-          {
-            color: 0xff0000,
-            title: 'エラー',
-            description: 'ステージチャンネルは現在サポートしていません。',
           },
         ],
         ephemeral: true,

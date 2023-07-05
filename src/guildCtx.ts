@@ -1,7 +1,7 @@
 import {
   Client,
   type Guild,
-  VoiceChannel,
+  type VoiceBasedChannel,
   type GuildTextBasedChannel,
   ChannelType,
 } from 'discord.js'
@@ -29,10 +29,17 @@ class GuildContext {
     this.connectionManager = new ConnectionCtxManager()
   }
 
-  async join(voiceChannel: VoiceChannel, readChannel: GuildTextBasedChannel) {
+  async join(
+    voiceChannel: VoiceBasedChannel,
+    readChannel: GuildTextBasedChannel,
+  ) {
     const vcArray = (await voiceChannel.guild.channels.fetch())
       .map((v) => {
-        if (v?.type === ChannelType.GuildVoice && v.joinable) {
+        if (
+          (v?.type === ChannelType.GuildVoice ||
+            v?.type === ChannelType.GuildStageVoice) &&
+          v.joinable
+        ) {
           return v
         } else {
           return null
@@ -96,7 +103,7 @@ class GuildContext {
     } catch {}
     return worker
   }
-  leave(voiceChannel: VoiceChannel) {
+  leave(voiceChannel: VoiceBasedChannel) {
     if (!this.connectionManager.channelMap.has(voiceChannel)) throw Error()
     const workerId = this.connectionManager.connectionLeave(voiceChannel)
     return workerId

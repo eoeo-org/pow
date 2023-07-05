@@ -1,6 +1,5 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
-import { StageChannel } from 'discord.js'
 
 export class LeaveCommand extends Command {
   public constructor(
@@ -42,18 +41,7 @@ export class LeaveCommand extends Command {
         ephemeral: true,
       })
     }
-    if (voiceChannel instanceof StageChannel) {
-      return interaction.reply({
-        embeds: [
-          {
-            color: 0xff0000,
-            title: 'エラー',
-            description: 'ステージチャンネルは現在サポートしていません。',
-          },
-        ],
-        ephemeral: true,
-      })
-    }
+
     const ctx = guildCtxManager.get(interaction.member.guild)
     if (!ctx.connectionManager.channelMap.has(voiceChannel)) {
       return interaction.reply({

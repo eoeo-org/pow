@@ -1,4 +1,4 @@
-import { Client, Message, VoiceChannel } from 'discord.js'
+import { ChannelType, Client, Message } from 'discord.js'
 import { client, guildCtxManager, workerClientMap } from './index.js'
 
 export const joinMessageRun = async (message: Message) => {
@@ -10,7 +10,10 @@ export const joinMessageRun = async (message: Message) => {
     })
   }
   if (
-    !(message.channel instanceof VoiceChannel) ||
+    !(
+      message.channel.type === ChannelType.GuildVoice ||
+      message.channel.type === ChannelType.GuildStageVoice
+    ) ||
     !message.channel.joinable ||
     workerClientMap.size !== process.env.WORKER_TOKENS.split(',').length + 1
   )

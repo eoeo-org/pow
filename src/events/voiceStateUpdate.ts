@@ -23,39 +23,12 @@ export const voiceStateUpdateEvent = async (
     } catch (error) {
       if (error instanceof DiscordAPIError) {
         if (error.code !== 50001) throw error
-        const guildCtx = guildCtxManager.get(newState.guild)
-        await newState.channel
-          .send({
-            embeds: [
-              {
-                color: 0xff0000,
-                title: 'エラー',
-                description: 'スピーカーになる権限がないため、退出します。',
-              },
-            ],
-          })
-          .catch((err: DiscordErrorData) => {
-            if (err.code !== 50013) throw err
-            debug__ErrorHandler(
-              `Error code ${err.code}: Missing send messages permission.`,
-            )
-            debug__ErrorHandler(
-              `Guild ID: ${newState.guild.id} Guild Name: ${
-                newState.guild.name
-              } Channel ID: ${
-                guildCtx.connectionManager.channelMap.get(
-                  newState.channel as VoiceBasedChannel,
-                )?.id
-              } Channel Name: ${
-                guildCtx.connectionManager.channelMap.get(
-                  newState.channel as VoiceBasedChannel,
-                )?.name
-              }`,
-            )
-          })
-          .finally(() => {
-            guildCtx.leave(newState.channel as VoiceBasedChannel)
-          })
+        try {
+          if (newState.requestToSpeakTimestamp) return
+          await newState.setRequestToSpeak(true)
+        } catch (err) {
+          debug__ErrorHandler(err)
+        }
       }
     }
     return
@@ -113,7 +86,11 @@ export const voiceStateUpdateEvent = async (
         )
       })
       .finally(() => {
-        guildCtx.leave(oldState.channel as VoiceBasedChannel)
+        try {
+          guildCtx.leave(oldState.channel as VoiceBasedChannel)
+        } catch (e) {
+          debug__ErrorHandler(e)
+        }
       })
   }
 }

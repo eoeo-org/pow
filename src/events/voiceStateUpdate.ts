@@ -74,15 +74,11 @@ export const voiceStateUpdateEvent = async (
         debug__ErrorHandler(
           `Guild ID: ${oldState.guild.id} Guild Name: ${
             oldState.guild.name
-          } Channel ID: ${
-            guildCtx.connectionManager.channelMap.get(
-              oldState.channel as VoiceBasedChannel,
-            )?.id
-          } Channel Name: ${
-            guildCtx.connectionManager.channelMap.get(
-              oldState.channel as VoiceBasedChannel,
-            )?.name
-          }`,
+          } Channel ID: ${guildCtx.connectionManager.channelMap.get(
+            oldState.channel as VoiceBasedChannel,
+          )?.id} Channel Name: ${guildCtx.connectionManager.channelMap.get(
+            oldState.channel as VoiceBasedChannel,
+          )?.name}`,
         )
       })
       .finally(() => {

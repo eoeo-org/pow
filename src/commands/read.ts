@@ -1,5 +1,5 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
-import { client, guildCtxManager } from '../index.js'
+import { guildCtxManager } from '../index.js'
 import { convertContent } from '../contentConverter.js'
 import { StageChannel } from 'discord.js'
 
@@ -78,7 +78,11 @@ export class ReadCommand extends Command {
         ephemeral: true,
       })
     }
-    const convertedMessage = convertContent(text, interaction.guild.id, client)
+    const convertedMessage = convertContent(
+      text,
+      interaction.guild.id,
+      interaction.client,
+    )
       .trim()
       .replace('\n', '')
     if (convertedMessage.length === 0) return

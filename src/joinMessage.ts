@@ -1,10 +1,12 @@
 import { ChannelType, Client, Message } from 'discord.js'
-import { client, guildCtxManager, workerClientMap } from './index.js'
+import { guildCtxManager, workerClientMap } from './index.js'
 
 export const joinMessageRun = async (message: Message) => {
   if (!message.author.bot) {
     return message.reply({
-      content: `</join:${(await client.application?.commands.fetch())?.findKey(
+      content: `</join:${(
+        await message.client.application?.commands.fetch()
+      )?.findKey(
         (applicationCommand) => applicationCommand.name === 'join',
       )}> をお使いください。（コマンドメンションを押すとチャット欄に自動挿入されます。）`,
     })

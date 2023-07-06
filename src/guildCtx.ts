@@ -6,7 +6,7 @@ import {
   ChannelType,
 } from 'discord.js'
 import { WorkerClientMap } from './worker.js'
-import { client, workerClientMap } from './index.js'
+import { workerClientMap } from './index.js'
 import { ConnectionCtxManager } from './connectionCtx.js'
 
 const getBots = async (guild: Guild, worker: WorkerClientMap) => {
@@ -64,7 +64,7 @@ class GuildContext {
         (v) => v.connection.joinConfig.group === workerId,
       )
       if (oldConnectionCtx !== undefined) {
-        const oldVoiceChannel = await client.channels
+        const oldVoiceChannel = await voiceChannel.client.channels
           .fetch(oldConnectionCtx.connection.joinConfig.channelId!)
           .then((channels) => {
             return channels?.type === ChannelType.GuildVoice ? channels : null

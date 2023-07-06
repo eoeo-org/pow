@@ -18,7 +18,7 @@ import {
 
 let isCalledDestroy = false
 
-export const client = new SapphireClient({
+const client = new SapphireClient({
   intents: [
     'Guilds',
     'GuildMembers',

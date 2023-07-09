@@ -1,6 +1,5 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
-import { StageChannel } from 'discord.js'
 
 export class SkipCommand extends Command {
   public constructor(
@@ -37,18 +36,6 @@ export class SkipCommand extends Command {
             title: 'エラー',
             description:
               'このコマンドを実行するには、VCに参加している必要があります。',
-          },
-        ],
-        ephemeral: true,
-      })
-    }
-    if (voiceChannel instanceof StageChannel) {
-      return interaction.reply({
-        embeds: [
-          {
-            color: 0xff0000,
-            title: 'エラー',
-            description: 'ステージチャンネルは現在サポートしていません。',
           },
         ],
         ephemeral: true,

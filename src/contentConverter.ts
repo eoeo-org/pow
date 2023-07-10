@@ -10,7 +10,7 @@ import {
   symbols,
   travel,
 } from 'discord-emoji'
-import type { Client } from 'discord.js'
+import type { Client, Embed } from 'discord.js'
 
 const emojiRegex = emojiRegExp()
 
@@ -36,6 +36,7 @@ function getShortcodes(emoji: string) {
 
 export const convertContent = (
   text: string,
+  embeds: Embed[],
   guildId: string,
   client: Client,
 ) => {
@@ -62,9 +63,18 @@ export const convertContent = (
     }
   }
 
+  function resolveURL(matchedStr: string, group1: string) {
+    if (group1 === 'vrchat') return 'VRChatへのリンク'
+    const matchedUrl = matchedStr.replace(/\/\/[^\/]+(\s|$)/, '$&/')
+    return `${
+      embeds.find((data) => data.url === matchedUrl)?.data.title ??
+      matchedUrl.replace(/.+?\/\/(.+?)\//, '$1')
+    }へのリンク`
+  }
+
   let result = text
     .replaceAll(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
-    .replaceAll(URLPattern, '')
+    .replaceAll(URLPattern, resolveURL)
     .replaceAll(/\|\|.+?\|\|/gs, '')
     .replaceAll(/<a?:(\w{2,32}):\d{17,19}>/g, '$1')
     .replaceAll(

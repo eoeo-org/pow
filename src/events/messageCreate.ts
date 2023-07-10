@@ -23,6 +23,7 @@ export const messageCreateEvent = async (message: Message) => {
 
   const convertedMessage = convertContent(
     message.content,
+    message.embeds,
     message.guildId,
     message.client,
   )

@@ -66,6 +66,7 @@ export class ReadCommand extends Command {
     }
     const convertedMessage = convertContent(
       text,
+      [],
       interaction.guild.id,
       interaction.client,
     )

@@ -44,12 +44,17 @@ const client = new SapphireClient({
 export const guildCtxManager = new GuildCtxManager(client)
 
 export let workerClientMap: WorkerClientMap
+export let workerReady = false
 console.log(`pow - v${packageJson.version}`)
 
-client.on(Events.ClientReady, (c) => {
+client.on(Events.ClientReady, async (c) => {
   readyEvent(c, packageJson)
-  workerClientMap = new WorkerClientMap(process.env.WORKER_TOKENS, client)
+  workerClientMap = await new WorkerClientMap().init(
+    process.env.WORKER_TOKENS,
+    client,
+  )
   workerClientMap.set(client.user!.id, client)
+  workerReady = true
 })
 
 client.on(Events.ChannelUpdate, channelUpdateEvent)

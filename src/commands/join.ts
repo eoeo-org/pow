@@ -1,5 +1,5 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
-import { guildCtxManager, workerClientMap } from '../index.js'
+import { guildCtxManager, workerReady } from '../index.js'
 import { Client } from 'discord.js'
 
 export class JoinCommand extends Command {
@@ -55,11 +55,7 @@ export class JoinCommand extends Command {
       })
     }
 
-    // workerClientMap には master client も含まれる
-    if (
-      workerClientMap.size !==
-      process.env.WORKER_TOKENS.split(',').length + 1
-    ) {
+    if (!workerReady) {
       return interaction.reply({
         embeds: [
           {

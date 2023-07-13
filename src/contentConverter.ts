@@ -72,7 +72,7 @@ export const convertContent = (
     }へのリンク`
   }
 
-  let result = text
+  const result = text
     .replaceAll(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
     .replaceAll(URLPattern, resolveURL)
     .replaceAll(/\|\|.+?\|\|/gs, '')
@@ -85,7 +85,7 @@ export const convertContent = (
     .replaceAll(/\*/g, '')
     .replaceAll(emojiRegex, getShortcodes)
 
-  return result.match(/(<a?)?:\w+:(\d{18}>)?/) ? '' : result
+  return result
 }
 
 // .replace(/<(@[!&]?|#)!?([\d]+)>/g, contentParser);

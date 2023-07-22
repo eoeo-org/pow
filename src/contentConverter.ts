@@ -68,7 +68,7 @@ export const convertContent = (
     const matchedUrl = matchedStr.replace(/\/\/[^\/]+(\s|$)/, '$&/')
     return `${
       embeds.find((data) => data.url === matchedUrl)?.data.title ??
-      matchedUrl.replace(/.+?\/\/(.+?)\/.*/, '$1')
+      matchedUrl.replace(/.+?\/\/(?:www.)?(.+?)\/.*/, '$1')
     }へのリンク`
   }
 

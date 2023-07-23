@@ -10,7 +10,7 @@ import {
   symbols,
   travel,
 } from 'discord-emoji'
-import type { Client, Embed } from 'discord.js'
+import type { Client, Collection, Embed, Sticker } from 'discord.js'
 
 const emojiRegex = emojiRegExp()
 
@@ -37,10 +37,10 @@ function getShortcodes(emoji: string) {
 export const convertContent = (
   text: string,
   embeds: Embed[],
+  stickers: Collection<string, Sticker>,
   guildId: string,
   client: Client,
 ) => {
-  if (!text) throw new Error('There is no first argument.')
   if (!guildId) throw new Error('There is no guildId.')
 
   function parseContent(a, b, c) {
@@ -72,18 +72,21 @@ export const convertContent = (
     }へのリンク`
   }
 
-  const result = text
-    .replaceAll(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
-    .replaceAll(URLPattern, resolveURL)
-    .replaceAll(/\|\|.+?\|\|/gs, '')
-    .replaceAll(/<a?:(\w{2,32}):\d{17,19}>/g, '$1')
-    .replaceAll(
-      /<\/([-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}):\d{1,20}>/gu,
-      '$1',
-    )
-    .replaceAll(/~/g, '')
-    .replaceAll(/\*/g, '')
-    .replaceAll(emojiRegex, getShortcodes)
+  const result =
+    text
+      .replaceAll(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
+      .replaceAll(URLPattern, resolveURL)
+      .replaceAll(/\|\|.+?\|\|/gs, '')
+      .replaceAll(/<a?:(\w{2,32}):\d{17,19}>/g, '$1')
+      .replaceAll(
+        /<\/([-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}):\d{1,20}>/gu,
+        '$1',
+      )
+      .replaceAll(/~/g, '')
+      .replaceAll(/\*/g, '')
+      .replaceAll(emojiRegex, getShortcodes) +
+    '\n' +
+    stickers.map((sticker) => sticker.name).join('\n')
 
   return result
 }

@@ -8,7 +8,8 @@ export const messageCreateEvent = async (message: Message) => {
   if (message.content === `${message.client.user} join`) {
     joinMessageRun(message)
   }
-  if (message.content === '') return
+
+  if (message.content === '' && message.stickers.size === 0) return
   if (message.author.bot || !message.inGuild()) return
   if (![MessageType.Default, MessageType.Reply].includes(message.type)) return
   if (message.content.startsWith('_')) return
@@ -24,6 +25,7 @@ export const messageCreateEvent = async (message: Message) => {
   const convertedMessage = convertContent(
     message.content,
     message.embeds,
+    message.stickers,
     message.guildId,
     message.client,
   )

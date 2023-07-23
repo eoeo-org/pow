@@ -1,6 +1,7 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
 import { convertContent } from '../contentConverter.js'
+import { Collection, type Sticker } from 'discord.js'
 
 export class ReadCommand extends Command {
   public constructor(
@@ -67,6 +68,7 @@ export class ReadCommand extends Command {
     const convertedMessage = convertContent(
       text,
       [],
+      new Collection<string, Sticker>(),
       interaction.guild.id,
       interaction.client,
     )

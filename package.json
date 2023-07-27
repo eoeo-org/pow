@@ -4,7 +4,7 @@
   "main": "dist/src/index.js",
   "scripts": {
     "start": "node .",
-    "dev": "tsc && node -r dotenv/config .",
+    "dev": "tsc && node -r dotenv/config . dotenv_config_override=true",
     "format": "prettier --write .",
     "lint": "prettier --check .",
     "prepare": "husky install || [ $? = 127 ]"

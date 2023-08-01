@@ -16,7 +16,6 @@ WORKDIR /package
 COPY .npmrc package.json ./
 RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | grep -oP '\d+\.\d+\.\d') bash - \
     && pnpm config set store-dir /.pnpm-store
-COPY patches/discord.js@14.11.0.patch ./patches/
 RUN --mount=type=cache,target=/.pnpm-store \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
     pnpm install --frozen-lockfile

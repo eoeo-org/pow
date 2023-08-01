@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@discordjs/collection": "1.5.2",
-    "@discordjs/rest": "1.7.1",
+    "@discordjs/rest": "2.0.0",
     "@discordjs/voice": "0.16.0",
     "@sapphire/framework": "4.5.1",
     "axios": "1.4.0",

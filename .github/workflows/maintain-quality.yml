@@ -2,6 +2,7 @@ name: Maintain code quality
 
 on:
   push:
+    branches: ['**']
   pull_request:
   pull_request_review:
 
@@ -11,7 +12,6 @@ permissions:
 jobs:
   lint:
     name: Lint
-    if: contains(fromJSON('["push", "pull_request_review"]'), github.event_name) || github.event.pull_request.head.repo.fork
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout

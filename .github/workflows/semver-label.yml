@@ -1,4 +1,4 @@
-name: SemVer label check
+name: SemVer label
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   label-check:
-    name: 'SemVer label check'
+    name: 'SemVer label'
     runs-on: ubuntu-latest
     steps:
       - env:
@@ -20,19 +20,19 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           if ${{ contains(github.event.pull_request.title, '!: ') }}; then
-            gh pr edit \
+            gh pr edit ${{ github.event.number }} \
             --remove-label='semver:minor,semver:patch,semver:none' \
             --add-label='semver:major'
           elif ${{ startsWith(github.event.pull_request.title, 'feat') }}; then
-            gh pr edit \
+            gh pr edit ${{ github.event.number }} \
             --remove-label='semver:major,semver:patch,semver:none' \
             --add-label='semver:minor'
           elif ${{ startsWith(github.event.pull_request.title, 'fix') }}; then
-            gh pr edit \
+            gh pr edit ${{ github.event.number }} \
             --remove-label='semver:major,semver:minor,semver:none' \
             --add-label='semver:patch'
           else
-            gh pr edit \
+            gh pr edit ${{ github.event.number }} \
             --remove-label='semver:major,semver:minor,semver:patch' \
             --add-label='semver:none'
           fi

@@ -3,8 +3,16 @@ name: Create and publish a Docker image
 on:
   push:
     branches: ['main']
-    tags:
-      - 'v*'
+  workflow_call:
+    inputs:
+      tag-name:
+        required: true
+        type: string
+    outputs:
+      image_tags:
+        value: ${{ jobs.build-and-push-image.outputs.image_tags }}
+      image_url:
+        value: https://ghcr.io/${{ github.repository }}
 
 env:
   REGISTRY: ghcr.io
@@ -13,6 +21,9 @@ env:
 jobs:
   build-and-push-image:
     runs-on: ubuntu-22.04
+    outputs:
+      image_tags: ${{ steps.meta.outputs.tags }}
+
     permissions:
       contents: read
       packages: write
@@ -37,9 +48,9 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=semver,pattern={{version}},value=${{ inputs.tag-name }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag-name }}
+            type=semver,pattern={{major}},value=${{ inputs.tag-name }}
             type=edge
             type=ref,event=branch
             type=sha

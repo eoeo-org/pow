@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ubuntu:rolling as depender
+FROM ubuntu:rolling@sha256:7a520eeb6c18bc6d32a21bb7edcf673a7830813c169645d51c949cecb62387d0 as depender
 
 ARG APT_MIRROR="ftp.jaist.ac.jp/pub/Linux"
 RUN sed -i "s@archive.ubuntu.com@${APT_MIRROR}@g" /etc/apt/sources.list
@@ -30,7 +30,7 @@ RUN --mount=type=bind,source=src/,target=src/ \
     --mount=type=bind,source=tsconfig.json,target=tsconfig.json \
     pnpm exec tsc
 
-FROM gcr.io/distroless/cc-debian11:nonroot
+FROM gcr.io/distroless/cc-debian11:nonroot@sha256:880bcf2ca034ab5e8ae76df0bd50d700e54eb44e948877244b130e3fcd5a1d66
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"

@@ -1,21 +1,41 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "dependencyDashboardAutoclose": true,
   "extends": [
+    "config:best-practices",
     "config:js-app",
-    ":rebaseStalePrs",
-    ":disableRateLimiting",
-    ":maintainLockFilesWeekly",
-    ":labels(dependencies, semver:none)",
-    ":assignAndReview(kazukazu123123)",
-    ":semanticCommits",
+    ":automergeAll",
+    ":automergePr",
     ":disablePrControls",
-    "helpers:pinGitHubActionDigests"
+    ":labels(dependencies, semver:none)",
+    ":maintainLockFilesWeekly",
+    ":pathSemanticCommitType(.github/workflows/**, ci)",
+    ":prHourlyLimitNone",
+    ":rebaseStalePrs",
+    ":semanticCommits"
   ],
+  "automergeStrategy": "squash",
+  "assignAutomerge": true,
+  "assigneesFromCodeOwners": true,
+  "dependencyDashboardAutoclose": true,
+  "dependencyDashboardOSVVulnerabilitySummary": "all",
+  "prConcurrentLimit": 3,
+  "reviewersFromCodeOwners": true,
   "packageRules": [
     {
       "matchDepTypes": ["dependencies", "require"],
       "labels": ["dependencies", "semver:patch"]
+    },
+    {
+      "extends": ["packages:linters"],
+      "automergeType": "branch"
+    },
+    {
+      "extends": ["packages:test"],
+      "automergeType": "branch"
+    },
+    {
+      "matchPackagePrefixes": ["@types/"],
+      "automergeType": "branch"
     }
   ],
   "regexManagers": [

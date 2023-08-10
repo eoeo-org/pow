@@ -17,7 +17,6 @@
   "assignAutomerge": true,
   "assigneesFromCodeOwners": true,
   "dependencyDashboardAutoclose": true,
-  "dependencyDashboardOSVVulnerabilitySummary": "all",
   "prConcurrentLimit": 3,
   "reviewersFromCodeOwners": true,
   "packageRules": [

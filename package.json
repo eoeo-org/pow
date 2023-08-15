@@ -31,7 +31,7 @@
     "@types/node": "18.17.5",
     "dotenv": "16.3.1",
     "husky": "8.0.3",
-    "prettier": "3.0.1",
+    "prettier": "3.0.2",
     "typescript": "5.1.6"
   },
   "author": "kazukazu123123",

@@ -10,7 +10,7 @@ dependencies:
     version: 1.5.2
   '@discordjs/voice':
     specifier: 0.16.0
-    version: 0.16.0(ffmpeg-static@5.1.0)
+    version: 0.16.0(ffmpeg-static@5.2.0)
   '@sapphire/framework':
     specifier: 4.5.1
     version: 4.5.1
@@ -30,8 +30,8 @@ dependencies:
     specifier: 10.2.1
     version: 10.2.1
   ffmpeg-static:
-    specifier: 5.1.0
-    version: 5.1.0
+    specifier: 5.2.0
+    version: 5.2.0
   libsodium-wrappers:
     specifier: 0.7.11
     version: 0.7.11
@@ -116,13 +116,13 @@ packages:
     engines: {node: '>=16.9.0'}
     dev: false
 
-  /@discordjs/voice@0.16.0(ffmpeg-static@5.1.0):
+  /@discordjs/voice@0.16.0(ffmpeg-static@5.2.0):
     resolution: {integrity: sha512-ToGCvHD1cBscuW3p+C7zOF5+L7MJmU4GjdOARfNk9mkHyFFZq4grK+Sxr3QXKbp27DtfDBc9uqD4GUOYgxngfA==}
     engines: {node: '>=16.9.0'}
     dependencies:
       '@types/ws': 8.5.5
       discord-api-types: 0.37.52
-      prism-media: 1.3.5(ffmpeg-static@5.1.0)
+      prism-media: 1.3.5(ffmpeg-static@5.2.0)
       tslib: 2.6.1
       ws: 8.13.0
     transitivePeerDependencies:
@@ -407,8 +407,8 @@ packages:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: false
 
-  /ffmpeg-static@5.1.0:
-    resolution: {integrity: sha512-eEWOiGdbf7HKPeJI5PoJ0oCwkL0hckL2JdS4JOuB/gUETppwkEpq8nF0+e6VEQnDCo/iuoipbTUsn9QJmtpNkg==}
+  /ffmpeg-static@5.2.0:
+    resolution: {integrity: sha512-WrM7kLW+do9HLr+H6tk7LzQ7kPqbAgLjdzNE32+u3Ff11gXt9Kkkd2nusGFrlWMIe+XaA97t+I8JS7sZIrvRgA==}
     engines: {node: '>=16'}
     requiresBuild: true
     dependencies:
@@ -538,7 +538,7 @@ packages:
     hasBin: true
     dev: true
 
-  /prism-media@1.3.5(ffmpeg-static@5.1.0):
+  /prism-media@1.3.5(ffmpeg-static@5.2.0):
     resolution: {integrity: sha512-IQdl0Q01m4LrkN1EGIE9lphov5Hy7WWlH6ulf5QdGePLlPas9p2mhgddTEHrlaXYjjFToM1/rWuwF37VF4taaA==}
     peerDependencies:
       '@discordjs/opus': '>=0.8.0 <1.0.0'
@@ -555,7 +555,7 @@ packages:
       opusscript:
         optional: true
     dependencies:
-      ffmpeg-static: 5.1.0
+      ffmpeg-static: 5.2.0
     dev: false
 
   /progress@2.0.3:

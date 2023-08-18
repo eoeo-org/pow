@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@discordjs/collection':
-    specifier: 1.5.2
-    version: 1.5.2
+    specifier: 1.5.3
+    version: 1.5.3
   '@discordjs/voice':
     specifier: 0.16.0
     version: 0.16.0(ffmpeg-static@5.2.0)
@@ -84,9 +84,9 @@ packages:
       tslib: 2.6.1
     dev: false
 
-  /@discordjs/collection@1.5.2:
-    resolution: {integrity: sha512-LDplPy8SPbc8MYkuCdnLRGWqygAX97E8NH7gA9uz+NZ/hXknUKJHuxsOmhC6pmHnF9Zmg0kvfwrDjGsRIljt9g==}
-    engines: {node: '>=16.9.0'}
+  /@discordjs/collection@1.5.3:
+    resolution: {integrity: sha512-SVb428OMd3WO1paV3rm6tSjM4wC+Kecaa1EUGX7vc6/fddvw/6lg90z4QtCqm21zvVe92vMMDt9+DkIvjXImQQ==}
+    engines: {node: '>=16.11.0'}
     dev: false
 
   /@discordjs/formatters@0.3.1:
@@ -100,7 +100,7 @@ packages:
     resolution: {integrity: sha512-CW9ldfzsRzUbHcS4Oqu5+Moo+yrQ5qQ9groKNxPOzcoq2nuXa/fXOXkuQtQHcTeSVXsC9cmJ56M8gBDBUyLgGA==}
     engines: {node: '>=16.9.0'}
     dependencies:
-      '@discordjs/collection': 1.5.2
+      '@discordjs/collection': 1.5.3
       '@discordjs/util': 1.0.0
       '@sapphire/async-queue': 1.5.0
       '@sapphire/snowflake': 3.5.1
@@ -138,7 +138,7 @@ packages:
     resolution: {integrity: sha512-POiImjuQJzwCxjJs4JCtDcTjzvjVsVQbnsaoW/F03yTVdrj/xSpmgv4383AnpNEYXI+CA6ggkz37phZDsZQ1NQ==}
     engines: {node: '>=16.9.0'}
     dependencies:
-      '@discordjs/collection': 1.5.2
+      '@discordjs/collection': 1.5.3
       '@discordjs/rest': 2.0.0
       '@discordjs/util': 1.0.0
       '@sapphire/async-queue': 1.5.0
@@ -205,7 +205,7 @@ packages:
     resolution: {integrity: sha512-DgkcvTja63rDPP4uByH2Ky3eNaYp+Yc1WoFaOsme5w5Nptruwj49sktY6KEbdBrxz23l3ofcxaqnfT/8RROJug==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dependencies:
-      '@discordjs/collection': 1.5.2
+      '@discordjs/collection': 1.5.3
       '@sapphire/utilities': 3.13.0
       tslib: 2.6.1
     dev: false
@@ -371,7 +371,7 @@ packages:
     engines: {node: '>=16.9.0'}
     dependencies:
       '@discordjs/builders': 1.6.4
-      '@discordjs/collection': 1.5.2
+      '@discordjs/collection': 1.5.3
       '@discordjs/formatters': 0.3.1
       '@discordjs/rest': 2.0.0
       '@discordjs/util': 1.0.0

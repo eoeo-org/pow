@@ -17,6 +17,7 @@
     "@discordjs/collection": "1.5.3",
     "@discordjs/voice": "0.16.0",
     "@sapphire/framework": "4.5.1",
+    "@sapphire/plugin-subcommands": "4.0.2",
     "axios": "1.4.0",
     "debug": "4.3.4",
     "discord-emoji": "2.3.0",

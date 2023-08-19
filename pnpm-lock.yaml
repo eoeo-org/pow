@@ -14,6 +14,9 @@ dependencies:
   '@sapphire/framework':
     specifier: 4.5.1
     version: 4.5.1
+  '@sapphire/plugin-subcommands':
+    specifier: 4.0.2
+    version: 4.0.2
   axios:
     specifier: 1.4.0
     version: 1.4.0(debug@4.3.4)
@@ -231,6 +234,14 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dependencies:
       '@discordjs/collection': 1.5.3
+      '@sapphire/utilities': 3.13.0
+      tslib: 2.6.1
+    dev: false
+
+  /@sapphire/plugin-subcommands@4.0.2:
+    resolution: {integrity: sha512-hWSRqdggUPQ3bmDajDyoUZ1SGg/CAi2ZNfj8n1s6NMBFOgjVffJajyIhnpVFgMjkNvpBFnFMjvf20QRPtS5fDw==}
+    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
+    dependencies:
       '@sapphire/utilities': 3.13.0
       tslib: 2.6.1
     dev: false

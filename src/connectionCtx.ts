@@ -2,7 +2,6 @@ import debug from 'debug'
 const debug__ConnectionContext = debug('connectionCtx.js:ConnectionContext')
 const debug__ErrorHandler = debug('connectionCtx.js:ErrorHandler')
 
-import { AxiosError } from 'axios'
 import {
   joinVoiceChannel,
   entersState,
@@ -23,12 +22,12 @@ import {
   type GuildTextBasedChannel,
 } from 'discord.js'
 import { Queue } from './utils.js'
-import { fetchAudioStream } from './voiceRead.js'
+import { ResponseError, fetchAudioStream } from './voiceRead.js'
 import { getUserSetting } from './db.js'
 
 class ConnectionContext {
   readChannel: GuildTextBasedChannel
-  readQueue: any
+  readQueue: Queue<{ audioStream: ReadableStream }>
   player: AudioPlayer | null = null
   connection: VoiceConnection
 
@@ -70,38 +69,36 @@ class ConnectionContext {
       debug__ConnectionContext('got response, adding to queue')
       this.readQueue.add({ audioStream })
     } catch (error) {
-      if (error instanceof AxiosError) {
-        debug__ConnectionContext(
-          `Request error: ${error.response?.status}: ${error.response?.statusText}`,
-        )
-        if (ctx instanceof ChatInputCommandInteraction) {
-          return ctx.followUp({
-            embeds: [
-              {
-                color: 0xff0000,
-                title: 'APIリクエストエラー',
-                description: `${error.response?.status}: ${error.response?.statusText}`,
-              },
-            ],
-          })
-        } else {
-          return ctx
-            .reply({
+      const message =
+        error instanceof ResponseError
+          ? {
               embeds: [
                 {
                   color: 0xff0000,
                   title: 'APIリクエストエラー',
-                  description: `${error.response?.status}: ${error.response?.statusText}`,
+                  description: `${error.response.status}: ${error.response.statusText}`,
                 },
               ],
-            })
-            .catch((err: DiscordErrorData) => {
-              if (err.code !== 50013) throw err
-              debug__ErrorHandler(
-                `Error code ${err.code}: Missing send messages permission.`,
-              )
-            })
-        }
+            }
+          : {
+              embeds: [
+                {
+                  color: 0xff0000,
+                  title: 'リクエストエラー',
+                  description: `${error}`,
+                },
+              ],
+            }
+
+      if (ctx instanceof ChatInputCommandInteraction) {
+        return await ctx.followUp(message)
+      } else {
+        return await ctx.reply(message).catch((err: DiscordErrorData) => {
+          if (err.code !== 50013) throw err
+          debug__ErrorHandler(
+            `Error code ${err.code}: Missing send messages permission.`,
+          )
+        })
       }
     }
   }

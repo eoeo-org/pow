@@ -1,8 +1,15 @@
 import debug from 'debug'
 const debug__ErrorHandler = debug('voiceRead.js:ErrorHandler')
 
-import axios, { AxiosError } from 'axios'
-import { getProperty } from './utils.js'
+export class ResponseError extends Error {
+  constructor(
+    message: string,
+    public response: Response,
+  ) {
+    super(message)
+    console.log(this.response.status)
+  }
+}
 
 export async function fetchAudioStream(
   text: string,
@@ -10,26 +17,26 @@ export async function fetchAudioStream(
   pitch: number,
   speed: number,
 ) {
-  return await axios
-    .post(
-      'https://api.voicetext.jp/v1/tts',
-      new URLSearchParams({
-        text: text,
-        speaker: speaker,
-        pitch: pitch.toString(),
-        speed: speed.toString(),
-        format: 'mp3',
-      }),
-      {
-        auth: { username: process.env.VOICETEXT_API_KEY, password: '' },
-        responseType: 'stream',
-      },
+  const response = await fetch('https://api.voicetext.jp/v1/tts', {
+    method: 'POST',
+    headers: {
+      Authorization: 'Basic ' + btoa(`${process.env.VOICETEXT_API_KEY}:`),
+    },
+    body: new URLSearchParams({
+      text,
+      speaker,
+      pitch: pitch.toString(),
+      speed: speed.toString(),
+      format: 'mp3',
+    }),
+  })
+
+  if (!response.ok) {
+    debug__ErrorHandler(
+      `Error while requesting audio: ${response.status} ${response.statusText}`,
     )
-    .then(getProperty('data'))
-    .catch((err: AxiosError) => {
-      debug__ErrorHandler(
-        `Error while requesting audio: ${err.response?.status} ${err.response?.statusText}`,
-      )
-      throw err
-    })
+    throw new ResponseError('Error while requesting audio.', response)
+  }
+
+  return response.body
 }

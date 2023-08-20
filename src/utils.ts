@@ -22,16 +22,11 @@ const awaitEvent = (
     eventEmitter.on(event, callback)
   })
 
-export class Queue extends EventEmitter {
-  consumer: any
-  items: any
+export class Queue<T> extends EventEmitter {
+  items: T[] = []
 
-  constructor(consumer) {
+  constructor(private consumer: (item: T) => Promise<any>) {
     super()
-
-    if (typeof consumer !== 'function') throw new RangeError()
-    this.consumer = consumer
-    this.items = []
     ;(async () => {
       debug__Queue('starting event loop')
       while (true) {
@@ -46,7 +41,7 @@ export class Queue extends EventEmitter {
           awaitEvent(this, 'purge').then(() =>
             debug__Queue('queue purged, continuing'),
           ),
-          this.consumer(this.items.shift()),
+          this.consumer(this.items.shift()!),
         ])
         debug__Queue('consumer resolved')
       }
@@ -77,14 +72,14 @@ export const userSettingToDiff = (
   return `speaker: ${
     oldUserSetting.speaker === newUserSetting.speaker
       ? `${newUserSetting.speaker}`
-      : `[31m${oldUserSetting.speaker}[0m -> [32m${newUserSetting.speaker}[0m`
+      : `\x1B[31m${oldUserSetting.speaker}\x1B[0m -> \x1B[32m${newUserSetting.speaker}\x1B[0m`
   }\npitch: ${
     oldUserSetting.pitch === newUserSetting.pitch
       ? `${newUserSetting.pitch}`
-      : `[31m${oldUserSetting.pitch}[0m -> [32m${newUserSetting.pitch}[0m`
+      : `\x1B[31m${oldUserSetting.pitch}\x1B[0m -> \x1B[32m${newUserSetting.pitch}\x1B[0m`
   }\nspeed: ${
     oldUserSetting.speed === newUserSetting.speed
       ? `${newUserSetting.speed}`
-      : `[31m${oldUserSetting.speed}[0m -> [32m${newUserSetting.speed}[0m`
+      : `\x1B[31m${oldUserSetting.speed}\x1B[0m -> \x1B[32m${newUserSetting.speed}\x1B[0m`
   }`
 }

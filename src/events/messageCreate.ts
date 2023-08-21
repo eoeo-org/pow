@@ -1,7 +1,6 @@
 import { MessageType, type Message } from 'discord.js'
 import { joinMessageRun } from '../joinMessage.js'
 import { guildCtxManager } from '../index.js'
-import { getUserSetting } from '../db.js'
 import { convertContent } from '../contentConverter.js'
 
 export const messageCreateEvent = async (message: Message) => {
@@ -19,8 +18,10 @@ export const messageCreateEvent = async (message: Message) => {
 
   const connectionManager = guildCtxManager.get(message.guild).connectionManager
   if (!connectionManager.has(message.channel)) return
-  const userSetting = await getUserSetting(message.author.id)
-  if (userSetting.isDontRead) return
+  const connectionCtx = connectionManager.get(message.channel)
+  if (connectionCtx === undefined) return
+
+  if (connectionCtx.skipUser.has(message.author)) return
 
   const convertedMessage = convertContent(
     message.content,
@@ -35,8 +36,8 @@ export const messageCreateEvent = async (message: Message) => {
   if (
     message.member?.voice.channel === null ||
     message.member?.voice.channel.id !==
-      connectionManager.get(message.channel)?.connection.joinConfig.channelId
+      connectionCtx.connection.joinConfig.channelId
   )
     return
-  connectionManager.get(message.channel)!.addMessage(convertedMessage, message)
+  connectionCtx.addMessage(convertedMessage, message)
 }

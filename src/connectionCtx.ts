@@ -20,6 +20,7 @@ import {
   ChatInputCommandInteraction,
   type DiscordErrorData,
   type GuildTextBasedChannel,
+  User,
 } from 'discord.js'
 import { Queue } from './utils.js'
 import { ResponseError, fetchAudioStream } from './voiceRead.js'
@@ -30,6 +31,7 @@ class ConnectionContext {
   readQueue: Queue<{ audioStream: ReadableStream }>
   player: AudioPlayer | null = null
   connection: VoiceConnection
+  skipUser: Set<User> = new Set()
 
   constructor(readChannel: GuildTextBasedChannel, connection: VoiceConnection) {
     this.readChannel = readChannel
@@ -100,6 +102,14 @@ class ConnectionContext {
           )
         })
       }
+    }
+  }
+
+  async updateSkipUser(user: User, isSkip: boolean) {
+    if (isSkip) {
+      this.skipUser.add(user)
+    } else {
+      this.skipUser.delete(user)
     }
   }
 }

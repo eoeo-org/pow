@@ -39,6 +39,7 @@
   ],
   "regexManagers": [
     {
+      "customType": "regex",
       "fileMatch": ["(^|/)\\.npmrc$"],
       "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "node",

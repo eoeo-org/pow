@@ -13,7 +13,7 @@ const awaitEvent = (
   validate = (...args: any[]) => true,
 ) =>
   new Promise((resolve) => {
-    const callback = (...args) => {
+    const callback = (...args: any[]) => {
       if (validate(...args)) {
         eventEmitter.off(event, callback)
         resolve({ event, ...args })
@@ -48,7 +48,7 @@ export class Queue<T> extends EventEmitter {
     })()
   }
 
-  add(item) {
+  add(item: T) {
     this.items.push(item)
     this.emit('new_item')
   }

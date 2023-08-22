@@ -1,6 +1,8 @@
 import debug from 'debug'
 const debug__ErrorHandler = debug('voiceRead.js:ErrorHandler')
 
+import type { ReadableStream as NodeJSReadableStream } from 'node:stream/web'
+
 export class ResponseError extends Error {
   constructor(
     message: string,
@@ -37,6 +39,6 @@ export async function fetchAudioStream(
     )
     throw new ResponseError('Error while requesting audio.', response)
   }
-
-  return response.body
+  // lib.dom.d.ts の型を参照しやがるため、その対策
+  return response.body as NodeJSReadableStream<Uint8Array>
 }

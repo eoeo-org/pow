@@ -25,10 +25,11 @@ import {
 import { Queue } from './utils.js'
 import { ResponseError, fetchAudioStream } from './voiceRead.js'
 import { getUserSetting } from './db.js'
+import { Readable } from 'node:stream'
 
 class ConnectionContext {
   readChannel: GuildTextBasedChannel
-  readQueue: Queue<{ audioStream: ReadableStream }>
+  readQueue: Queue<{ audio: Readable }>
   player: AudioPlayer | null = null
   connection: VoiceConnection
   skipUser: Set<User> = new Set()
@@ -39,9 +40,9 @@ class ConnectionContext {
     this.connection = connection
   }
 
-  private async _readMessage({ audioStream }) {
+  private async _readMessage({ audio }: { audio: Readable }) {
     this.player = createAudioPlayer()
-    const resource = createAudioResource(audioStream, {
+    const resource = createAudioResource(audio, {
       inputType: StreamType.Arbitrary,
     })
     this.connection.subscribe(this.player)
@@ -67,9 +68,10 @@ class ConnectionContext {
         userSetting?.pitch,
         userSetting?.speed,
       )
-
+      if (audioStream === null) return
+      const audio = Readable.fromWeb(audioStream)
       debug__ConnectionContext('got response, adding to queue')
-      this.readQueue.add({ audioStream })
+      this.readQueue.add({ audio })
     } catch (error) {
       const message =
         error instanceof ResponseError

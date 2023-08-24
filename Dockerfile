@@ -27,8 +27,8 @@ RUN --mount=type=cache,target=/.pnpm-store \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
     pnpm install --frozen-lockfile
 RUN --mount=type=bind,source=src/,target=src/ \
-    --mount=type=bind,source=tsconfig.json,target=tsconfig.json \
-    pnpm exec tsc
+    --mount=type=bind,source=.swcrc,target=.swcrc \
+    pnpm build
 
 FROM gcr.io/distroless/cc-debian11:nonroot@sha256:880bcf2ca034ab5e8ae76df0bd50d700e54eb44e948877244b130e3fcd5a1d66
 

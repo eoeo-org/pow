@@ -2,11 +2,12 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "typescript",
-      "tsconfig": "tsconfig.json",
-      "problemMatcher": ["$tsc"],
+      "type": "npm",
+      "script": "build:debug",
       "group": "build",
-      "label": "tsc: build - tsconfig.json"
+      "problemMatcher": [],
+      "label": "pnpm: build with source-maps",
+      "detail": "swc --source-maps=true src --out-dir=dist"
     }
   ]
 }

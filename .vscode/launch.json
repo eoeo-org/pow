@@ -8,11 +8,12 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
+      "preLaunchTask": "pnpm: build with source-maps",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/dist/src/index.js",
-      "runtimeArgs": ["-r", "dotenv/config"],
-      "preLaunchTask": "tsc: build - tsconfig.json",
-      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["start"],
+      "envFile": "${workspaceFolder}/.env",
+      "killBehavior": "polite"
     }
   ]
 }

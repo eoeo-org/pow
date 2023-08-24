@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.1](https://github.com/kazukazu123123/pow/compare/v3.0.0...v3.0.1) (2023-08-24)
+
+
+### Bug Fixes
+
+* **commands:** help の返答メッセージを修正 ([#710](https://github.com/kazukazu123123/pow/issues/710)) ([9670fac](https://github.com/kazukazu123123/pow/commit/9670fac23c8f84462accac682c61778748de6c6e))
+* **deps:** update dependency @sapphire/framework to v4.5.2 ([#700](https://github.com/kazukazu123123/pow/issues/700)) ([2786c34](https://github.com/kazukazu123123/pow/commit/2786c346993b1472b8624ad35f6a547a5dcb03e4))
+* **deps:** update dependency @sapphire/framework to v4.5.3 ([#706](https://github.com/kazukazu123123/pow/issues/706)) ([0988321](https://github.com/kazukazu123123/pow/commit/0988321a769be31dde8d02b2604b43a513d8b6f4))
+* **deps:** update dependency @sapphire/plugin-subcommands to v4.1.0 ([#701](https://github.com/kazukazu123123/pow/issues/701)) ([c8d517c](https://github.com/kazukazu123123/pow/commit/c8d517c4c7d26151f7602f3f73279c231d3acfdb))
+* **deps:** update dependency @sapphire/plugin-subcommands to v4.2.0 ([#705](https://github.com/kazukazu123123/pow/issues/705)) ([b77a3d8](https://github.com/kazukazu123123/pow/commit/b77a3d82fc651074b5d76818acde0edd5eb6c47d))
+
 ## [3.0.0](https://github.com/kazukazu123123/pow/compare/v2.10.1...v3.0.0) (2023-08-21)
 
 

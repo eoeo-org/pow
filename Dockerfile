@@ -14,7 +14,7 @@ ARG NODE_ENV="production"
 RUN mkdir /pnpm
 WORKDIR /package
 COPY .npmrc package.json ./
-RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | grep -oP '\d+\.\d+\.\d') bash - \
+RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | grep -oP '\d+\.\d+\.\d+') bash - \
     && pnpm config set store-dir /.pnpm-store
 RUN --mount=type=cache,target=/.pnpm-store \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \

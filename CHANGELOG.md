@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/kazukazu123123/pow/compare/v3.0.1...v3.1.0) (2023-08-25)
+
+
+### Features
+
+* **command:** Add /rejoin command. ([#715](https://github.com/kazukazu123123/pow/issues/715)) ([1aac74b](https://github.com/kazukazu123123/pow/commit/1aac74bf2b88110d16576a87fadbda3d4615b3a3))
+
+
+### Bug Fixes
+
+* **commands:** add command validations ([#722](https://github.com/kazukazu123123/pow/issues/722)) ([881db8a](https://github.com/kazukazu123123/pow/commit/881db8a7bc5d24113036bce7f22eddbe3ce61e40))
+
 ## [3.0.1](https://github.com/kazukazu123123/pow/compare/v3.0.0...v3.0.1) (2023-08-24)
 
 

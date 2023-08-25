@@ -68,6 +68,8 @@ export class UserSettingsCommand extends Subcommand {
                   '声の高さを変更できます。(指定できる範囲: 50〜200)',
                 )
                 .setRequired(false)
+                .setMinValue(50)
+                .setMaxValue(200)
                 .setAutocomplete(true),
             )
             .addIntegerOption((option) =>
@@ -77,6 +79,8 @@ export class UserSettingsCommand extends Subcommand {
                   '声の速度を変更できます。(指定できる範囲: 50〜400)',
                 )
                 .setRequired(false)
+                .setMinValue(50)
+                .setMaxValue(400)
                 .setAutocomplete(true),
             ),
         ),

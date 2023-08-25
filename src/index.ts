@@ -1,8 +1,11 @@
-import type typings = require('discord.js')
-
 import packageJson from '../package.json' assert { type: 'json', integrity: 'sha384-ABC123' }
 
-import { Events, Message, Options } from 'discord.js'
+import {
+  Events,
+  Message,
+  Options,
+  type GuildTextBasedChannel,
+} from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { GuildCtxManager } from './guildCtx.js'
 import type { SignalConstants } from 'os'
@@ -71,8 +74,7 @@ const destroy = async () => {
 
     guildCtxManager.forEach((guildContext) => {
       guildContext.connectionManager.forEach(async (connectionContext) => {
-        const channel =
-          connectionContext.readChannel as typings.GuildTextBasedChannel
+        const channel = connectionContext.readChannel as GuildTextBasedChannel
         const promise = channel.send({
           embeds: [
             {

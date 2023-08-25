@@ -1,7 +1,7 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { MessageFlags, type Message } from 'discord.js'
 
-import packageJson from '../../package.json' assert { type: 'json', integrity: 'sha384-ABC123' }
+import packageJson from '../../package.json' assert { type: 'json' }
 
 const helpUrl = `https://gh.kazu123.net/pow/tree/v${packageJson.version}#使い方`
 

@@ -69,9 +69,14 @@ export class PurgeCommand extends Command {
         {
           color: 0x00ff00,
           title: '読み上げを中断しました。',
-          description: `担当BOT: <@${workerId}>\nテキストチャンネル: ${connectionManager.channelMap
-            .get(voiceChannel)
-            ?.toString()}\nボイスチャンネル: ${voiceChannel}\n読み上げキューを空にして、読み上げを中断しました。`,
+          description: [
+            `担当BOT: <@${workerId}>`,
+            `テキストチャンネル: ${connectionManager.channelMap
+              .get(voiceChannel)
+              ?.toString()}`,
+            `ボイスチャンネル: ${voiceChannel}`,
+            '読み上げキューを空にして、読み上げを中断しました。',
+          ].join('\n'),
         },
       ],
     })

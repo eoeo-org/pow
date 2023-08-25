@@ -125,9 +125,13 @@ export class JoinCommand extends Command {
         {
           color: 0x00ff00,
           title: `ボイスチャンネルに参加しました。`,
-          description: `担当BOT: ${worker.user?.toString()}\nテキストチャンネル: ${guildCtx.guild.channels.cache.get(
-            interaction.channelId,
-          )}\nボイスチャンネル: ${interaction.member.voice.channel}`,
+          description: [
+            `担当BOT: ${worker.user?.toString()}`,
+            `テキストチャンネル: ${guildCtx.guild.channels.cache.get(
+              interaction.channelId,
+            )}`,
+            `ボイスチャンネル: ${interaction.member.voice.channel}`,
+          ].join('\n'),
         },
       ],
     })

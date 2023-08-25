@@ -167,7 +167,10 @@ export class UserSettingsCommand extends Subcommand {
         await setUserSetting(interaction.member.id, 'speaker', `"${speaker}"`)
       } else {
         errorMsg.push(
-          `その声(${speaker})は指定できません。指定できる声のリストは、こちらです。\n\${allowedVoiceList.map(voice => "- " + voice).join('\n')}`,
+          [
+            `その声(${speaker})は指定できません。指定できる声のリストは、こちらです。`,
+            ...allowedVoiceList.map((voice) => '- ' + voice),
+          ].join('\n'),
         )
       }
     }
@@ -213,9 +216,11 @@ export class UserSettingsCommand extends Subcommand {
           {
             color: 0xff0000,
             title: 'エラー',
-            description: `設定変更中にエラーが発生しました。\n詳細情報:\n${errorMsg.join(
-              '\n',
-            )}`,
+            description: [
+              '設定変更中にエラーが発生しました。',
+              '詳細情報:',
+              ...errorMsg,
+            ].join('\n'),
           },
           {
             color: 0x00ff00,

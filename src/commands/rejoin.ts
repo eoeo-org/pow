@@ -87,7 +87,11 @@ export class RejoinCommand extends Command {
         {
           color: 0x00ff00,
           title: 'ボイスチャンネルに再接続しました。',
-          description: `担当BOT: <@${worker.user?.toString()}>\nテキストチャンネル: ${textChannel}\nボイスチャンネル: ${voiceChannel}`,
+          description: [
+            `担当BOT: <@${worker.user?.toString()}>`,
+            `テキストチャンネル: ${textChannel}`,
+            `ボイスチャンネル: ${voiceChannel}`,
+          ].join('\n'),
         },
       ],
     })

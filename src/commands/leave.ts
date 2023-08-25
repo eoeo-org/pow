@@ -64,7 +64,12 @@ export class LeaveCommand extends Command {
         {
           color: 0x00ff00,
           title: 'ボイスチャンネルから退出しました。',
-          description: `担当BOT: <@${workerId}>\nテキストチャンネル: ${textChannel}\nボイスチャンネル: ${voiceChannel}\nまたのご利用をお待ちしております。`,
+          description: [
+            `担当BOT: <@${workerId}>`,
+            `テキストチャンネル: ${textChannel}`,
+            `ボイスチャンネル: ${voiceChannel}`,
+            'またのご利用をお待ちしております。',
+          ].join('\n'),
         },
       ],
     })

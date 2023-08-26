@@ -10,14 +10,7 @@ import { SapphireClient } from '@sapphire/framework'
 import { GuildCtxManager } from './guildCtx.js'
 import type { SignalConstants } from 'os'
 import { WorkerClientMap } from './worker.js'
-import {
-  channelUpdateEvent,
-  guildMemberAddEvent,
-  guildMemberRemoveEvent,
-  messageCreateEvent,
-  readyEvent,
-  voiceStateUpdateEvent,
-} from './events/index.js'
+import { readyEvent } from './events/index.js'
 
 let isCalledDestroy = false
 
@@ -59,12 +52,6 @@ client.on(Events.ClientReady, async (c) => {
   workerClientMap.set(client.user!.id, client)
   workerReady = true
 })
-
-client.on(Events.ChannelUpdate, channelUpdateEvent)
-client.on(Events.MessageCreate, messageCreateEvent)
-client.on(Events.VoiceStateUpdate, voiceStateUpdateEvent)
-client.on(Events.GuildMemberAdd, guildMemberAddEvent)
-client.on(Events.GuildMemberRemove, guildMemberRemoveEvent)
 
 const destroy = async () => {
   if (!isCalledDestroy) {

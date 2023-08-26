@@ -9,7 +9,6 @@ export class ResponseError extends Error {
     public response: Response,
   ) {
     super(message)
-    console.log(this.response.status)
   }
 }
 

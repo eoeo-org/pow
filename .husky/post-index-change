@@ -12,7 +12,6 @@ if [ -z "$PACKAGES" ]; then
 fi
 echo "📦 $(echo "$PACKAGES" | tr '\n' ' ')が変更されました。pnpm install を実行します..."
 if ! pnpm install --frozen-lockfile; then
-  echo "🚨 pnpm install に失敗しました。restore を実行します..."
-  git restore --staged .
+  echo "🚨 pnpm install に失敗しました。"
   exit 1
 fi

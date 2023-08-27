@@ -58,7 +58,38 @@ export class RejoinCommand extends Command {
       })
     }
 
-    const textChannel = guildCtx.connectionManager.channelMap.get(voiceChannel)
+    if (!voiceChannel.joinable) {
+      return interaction.reply({
+        embeds: [
+          {
+            color: 0xff0000,
+            title: 'エラー',
+            description: 'このVCに参加する権限がありません。',
+          },
+        ],
+        ephemeral: true,
+      })
+    }
+
+    const connectionVoiceJoinConfig = guildCtx.connectionManager.get(
+      interaction.channel!,
+    )?.connection.joinConfig
+    if (
+      guildCtx.connectionManager.channelMap.get(voiceChannel) !==
+        interaction.channel &&
+      connectionVoiceJoinConfig !== undefined
+    ) {
+      return interaction.reply({
+        embeds: [
+          {
+            color: 0xff0000,
+            title: 'エラー',
+            description: `このテキストチャンネルは https://discord.com/channels/${connectionVoiceJoinConfig?.guildId}/${connectionVoiceJoinConfig?.channelId} で既に使われています。`,
+          },
+        ],
+        ephemeral: true,
+      })
+    }
 
     guildCtx.leave(voiceChannel)
 
@@ -88,9 +119,9 @@ export class RejoinCommand extends Command {
           color: 0x00ff00,
           title: 'ボイスチャンネルに再接続しました。',
           description: [
-            `担当BOT: <@${worker.user?.toString()}>`,
-            `テキストチャンネル: ${textChannel}`,
-            `ボイスチャンネル: ${voiceChannel}`,
+            `担当BOT: ${worker.user?.toString()}`,
+            `テキストチャンネル: ${interaction.channel?.toString()}`,
+            `ボイスチャンネル: ${voiceChannel.toString()}`,
           ].join('\n'),
         },
       ],

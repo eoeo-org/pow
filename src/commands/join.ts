@@ -35,7 +35,8 @@ export class JoinCommand extends Command {
           {
             color: 0xff0000,
             title: 'エラー',
-            description: 'VCに参加してからコマンドを実行してください。',
+            description:
+              'このコマンドを実行するには、VCに参加している必要があります。',
           },
         ],
         ephemeral: true,

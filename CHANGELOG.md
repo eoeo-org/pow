@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.2](https://github.com/kazukazu123123/pow/compare/v3.1.1...v3.1.2) (2023-08-27)
+
+
+### Bug Fixes
+
+* **commands:** Fix error message ([#731](https://github.com/kazukazu123123/pow/issues/731)) ([5ee752b](https://github.com/kazukazu123123/pow/commit/5ee752b616f13d6a97b5bb05c907b617067c8236))
+
 ## [3.1.1](https://github.com/kazukazu123123/pow/compare/v3.1.0...v3.1.1) (2023-08-27)
 
 

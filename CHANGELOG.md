@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1](https://github.com/kazukazu123123/pow/compare/v3.1.0...v3.1.1) (2023-08-27)
+
+
+### Bug Fixes
+
+* **commands:** rejoin コマンドを修正 ([#728](https://github.com/kazukazu123123/pow/issues/728)) ([306ddf8](https://github.com/kazukazu123123/pow/commit/306ddf8f18f67abb87bc88e4de2a6f3d2b009a47))
+
 ## [3.1.0](https://github.com/kazukazu123123/pow/compare/v3.0.1...v3.1.0) (2023-08-25)
 
 

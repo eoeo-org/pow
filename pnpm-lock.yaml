@@ -133,7 +133,7 @@ packages:
     engines: {node: '>=16.9.0'}
     dependencies:
       '@types/ws': 8.5.5
-      discord-api-types: 0.37.54
+      discord-api-types: 0.37.55
       prism-media: 1.3.5(ffmpeg-static@5.2.0)
       tslib: 2.6.2
       ws: 8.13.0
@@ -208,7 +208,7 @@ packages:
     resolution: {integrity: sha512-Nznd3gBPsjEDKk3OrodSx+w8/oe4cZc9msdokjl8cnvxaprKBvHo/RzAfx54AeTYsIe7lQ801r+eVw8VWGkfVQ==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dependencies:
-      discord-api-types: 0.37.54
+      discord-api-types: 0.37.55
     dev: false
 
   /@sapphire/discord.js-utilities@7.0.1:
@@ -426,7 +426,7 @@ packages:
       '@swc/helpers':
         optional: true
     dependencies:
-      '@swc/types': 0.1.3
+      '@swc/types': 0.1.4
     optionalDependencies:
       '@swc/core-darwin-arm64': 1.3.80
       '@swc/core-darwin-x64': 1.3.80
@@ -440,8 +440,8 @@ packages:
       '@swc/core-win32-x64-msvc': 1.3.80
     dev: true
 
-  /@swc/types@0.1.3:
-    resolution: {integrity: sha512-3Oq9V7tRV5+hlKHPr/8RpByJ1HXB4mAbZxh/sKAjyvNRBxTASjBx4j+gN9iXMBTllhZCZgYUfOqvbCtU3tqOHQ==}
+  /@swc/types@0.1.4:
+    resolution: {integrity: sha512-z/G02d+59gyyUb7KYhKi9jOhicek6QD2oMaotUyG+lUkybpXoV49dY9bj7Ah5Q+y7knK2jU67UTX9FyfGzaxQg==}
     dev: true
 
   /@szmarczak/http-timer@4.0.6:
@@ -791,8 +791,8 @@ packages:
     resolution: {integrity: sha512-X4CDiMnDbA3s3RaUXWXmgAIbY1uxab3fqe3qwzg5XutR3wjqi7M3IkgQbsIBzpqBN2YWr/Qdv7JrFRqSgb4TFg==}
     dev: false
 
-  /discord-api-types@0.37.54:
-    resolution: {integrity: sha512-xNO6yzEMfpVSVUa6lOOzgLDy3Gyd8yuBAozGQdjpW9VjRq2Ccboz4FhTrd5v4Hw7pbkCKwnHvddjIYrX0INkUQ==}
+  /discord-api-types@0.37.55:
+    resolution: {integrity: sha512-XIf8AELxg76AH1WzrgB5ziFyIxSs4tLK1XGjFs4oE6t7M7r1B0Chdylaz76ALhvRXAUBGHGFXu/pKAa5Q+LbQg==}
     dev: false
 
   /discord-emoji@2.3.0:

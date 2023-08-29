@@ -5,14 +5,14 @@ export class WorkerNullError extends Error {
 }
 
 class WorkerClient<Ready extends boolean = boolean> extends Client<Ready> {
-  constructor(mainClient: Client<true>) {
+  constructor(readonly mainClient: Client<true>) {
     super({ intents: ['Guilds', 'GuildVoiceStates'] })
-    this.on(Events.ClientReady, (client) => this.onReady(client, mainClient))
+    this.on(Events.ClientReady, (client) => this.onReady(client))
   }
-  private onReady(client: Client<true>, mainClient: Client<true>) {
+  private onReady(client: Client<true>) {
     console.log(`Ready as ${client.user.tag}`)
     client.user.setPresence({
-      activities: [{ name: `${mainClient.user.tag} - worker` }],
+      activities: [{ name: `${this.mainClient.user.tag} - worker` }],
       status: 'dnd',
     })
   }

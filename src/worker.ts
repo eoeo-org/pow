@@ -1,18 +1,18 @@
-import { Client } from 'discord.js'
+import { Client, Events } from 'discord.js'
 
 export class WorkerNullError extends Error {
   code = 'WORKER_USER_IS_NULL' as const
 }
 
-class WorkerClient extends Client {
-  constructor(mainClient: Client) {
+class WorkerClient<Ready extends boolean = boolean> extends Client<Ready> {
+  constructor(mainClient: Client<true>) {
     super({ intents: ['Guilds', 'GuildVoiceStates'] })
-    this.on('ready', () => this.onReady(mainClient))
+    this.on(Events.ClientReady, (client) => this.onReady(client, mainClient))
   }
-  private onReady(mainClient: Client) {
-    console.log(`Ready as ${this.user?.tag}`)
-    this.user?.setPresence({
-      activities: [{ name: `${mainClient.user?.tag} - worker` }],
+  private onReady(client: Client<true>, mainClient: Client<true>) {
+    console.log(`Ready as ${client.user.tag}`)
+    client.user.setPresence({
+      activities: [{ name: `${mainClient.user.tag} - worker` }],
       status: 'dnd',
     })
   }
@@ -23,7 +23,7 @@ class WorkerClient extends Client {
 }
 
 export class WorkerClientMap extends Map<string, Client> {
-  public async init(tokens: string, mainClient: Client) {
+  public async init(tokens: string, mainClient: Client<true>) {
     await Promise.all(
       tokens.split(',').map(async (token) => {
         const workerClient = await new WorkerClient(mainClient).start(token)
@@ -31,6 +31,7 @@ export class WorkerClientMap extends Map<string, Client> {
         this.set(workerClient.user.id, workerClient)
       }),
     )
+    this.set(mainClient.user.id, mainClient)
     return this
   }
 }

@@ -47,9 +47,8 @@ client.on(Events.ClientReady, async (c) => {
   readyEvent(c, packageJson)
   workerClientMap = await new WorkerClientMap().init(
     process.env.WORKER_TOKENS,
-    client,
+    c,
   )
-  workerClientMap.set(client.user!.id, client)
   workerReady = true
 })
 

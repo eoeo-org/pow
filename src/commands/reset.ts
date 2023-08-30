@@ -1,6 +1,7 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager, workerClientMap } from '../index.js'
-import { PermissionFlagsBits } from 'discord.js'
+import { PermissionFlagsBits, type InteractionReplyOptions } from 'discord.js'
+import { PowError } from '../errors/index.js'
 
 export class ResetCommand extends Command {
   public constructor(
@@ -27,14 +28,35 @@ export class ResetCommand extends Command {
   }
   public override chatInputRun(interaction: ChatInputCommand.Interaction) {
     if (!interaction.inCachedGuild()) return
-    guildCtxManager.get(interaction.guild).resetBots(workerClientMap)
-    return interaction.reply({
+
+    let interactionReplyOptions: InteractionReplyOptions = {
       embeds: [
         {
-          color: 0x00ff00,
-          title: `参加状態を初期化しました。`,
+          color: 0xff0000,
+          title: '予期せぬエラーが発生しました。',
         },
       ],
-    })
+      ephemeral: true,
+    }
+
+    try {
+      guildCtxManager.get(interaction.guild).resetBots(workerClientMap)
+      interactionReplyOptions = {
+        embeds: [
+          {
+            color: 0x00ff00,
+            title: `参加状態を初期化しました。`,
+          },
+        ],
+      }
+    } catch (error) {
+      if (error instanceof PowError) {
+        interactionReplyOptions = error.toInteractionReplyOptions
+      } else {
+        throw error
+      }
+    } finally {
+      return interaction.reply(interactionReplyOptions)
+    }
   }
 }

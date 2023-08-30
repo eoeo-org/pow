@@ -6,8 +6,9 @@ import {
   ChannelType,
 } from 'discord.js'
 import { WorkerClientMap } from './worker.js'
-import { workerClientMap } from './index.js'
+import { workerClientMap, workerReady } from './index.js'
 import { ConnectionCtxManager } from './connectionCtx.js'
+import { NoWorkerError, NotReadyWorkerError } from './errors/index.js'
 
 const getBots = async (guild: Guild, worker: WorkerClientMap) => {
   const results = await Promise.allSettled(
@@ -18,7 +19,7 @@ const getBots = async (guild: Guild, worker: WorkerClientMap) => {
     .sort((a, b) => Number(BigInt(a) - BigInt(b)))
 }
 
-class GuildContext {
+export class GuildContext {
   guild: Guild
   bots: Promise<string[]>
   connectionManager: ConnectionCtxManager
@@ -76,35 +77,30 @@ class GuildContext {
               .includes(botId) && botId !== workerId,
         )
         if (forOldCtxWorkerId === undefined) {
-          throw Error('No worker')
+          throw new NoWorkerError()
         }
         this.leave(oldVoiceChannel!)
-        try {
-          this.connectionManager.connectionJoin(
-            oldVoiceChannel!,
-            this.guild.id,
-            oldConnectionCtx.readChannel,
-            workerClientMap.get(forOldCtxWorkerId)!,
-          )
-        } catch {}
+        this.connectionManager.connectionJoin(
+          oldVoiceChannel!,
+          this.guild.id,
+          oldConnectionCtx.readChannel,
+          workerClientMap.get(forOldCtxWorkerId)!,
+        )
       }
     }
     if (workerId === undefined) {
-      throw Error('No worker')
+      throw new NoWorkerError()
     }
     const worker = workerClientMap.get(workerId)!
-    try {
-      this.connectionManager.connectionJoin(
-        voiceChannel,
-        this.guild.id,
-        readChannel,
-        worker,
-      )
-    } catch {}
+    this.connectionManager.connectionJoin(
+      voiceChannel,
+      this.guild.id,
+      readChannel,
+      worker,
+    )
     return worker
   }
   leave(voiceChannel: VoiceBasedChannel) {
-    if (!this.connectionManager.channelMap.has(voiceChannel)) throw Error()
     const workerId = this.connectionManager.connectionLeave(voiceChannel)
     return workerId
   }
@@ -113,9 +109,7 @@ class GuildContext {
   }
   resetBots(workerClientMap: WorkerClientMap) {
     for (const voiceChannel of this.connectionManager.channelMap.keys()) {
-      try {
-        this.leave(voiceChannel)
-      } catch {}
+      this.leave(voiceChannel)
     }
     this.bots = getBots(this.guild, workerClientMap)
   }
@@ -129,6 +123,7 @@ export class GuildCtxManager extends Map<Guild, GuildContext> {
   }
   override get(guild: Guild) {
     if (this.has(guild)) return super.get(guild)!
+    if (!workerReady) throw new NotReadyWorkerError()
     const guildContext = new GuildContext(guild, workerClientMap)
     this.set(guild, guildContext)
     return guildContext

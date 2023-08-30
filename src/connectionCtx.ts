@@ -23,9 +23,16 @@ import {
   User,
 } from 'discord.js'
 import { Queue } from './utils.js'
-import { ResponseError, fetchAudioStream } from './voiceRead.js'
+import { fetchAudioStream } from './voiceRead.js'
 import { getUserSetting } from './db.js'
 import { Readable } from 'node:stream'
+import {
+  AlreadyJoinedError,
+  AlreadyUsedChannelError,
+  FetchResponseError,
+  HandleInteractionError,
+  HandleInteractionErrorType,
+} from './errors/index.js'
 
 class ConnectionContext {
   readChannel: GuildTextBasedChannel
@@ -74,16 +81,8 @@ class ConnectionContext {
       this.readQueue.add({ audio })
     } catch (error) {
       const message =
-        error instanceof ResponseError
-          ? {
-              embeds: [
-                {
-                  color: 0xff0000,
-                  title: 'APIリクエストエラー',
-                  description: `${error.response.status}: ${error.response.statusText}`,
-                },
-              ],
-            }
+        error instanceof FetchResponseError
+          ? { embeds: [FetchResponseError.getEmbed(error)] }
           : {
               embeds: [
                 {
@@ -125,6 +124,13 @@ export class ConnectionCtxManager extends Map<
     super()
     this.channelMap = new Map()
   }
+  override get(channel: GuildTextBasedChannel | undefined) {
+    if (channel === undefined) return undefined
+    return super.get(channel)
+  }
+  getWithVoiceChannel(voiceChannel: VoiceBasedChannel) {
+    return this.get(this.channelMap.get(voiceChannel))
+  }
 
   connectionJoin(
     voiceChannel: VoiceBasedChannel,
@@ -132,8 +138,13 @@ export class ConnectionCtxManager extends Map<
     readChannel: GuildTextBasedChannel,
     worker: Client,
   ) {
-    if (this.channelMap.get(voiceChannel) !== undefined)
-      throw new Error('Already joined')
+    if (this.channelMap.has(voiceChannel)) throw new AlreadyJoinedError()
+    const existingJoinConfig = this.get(readChannel)?.connection.joinConfig
+    if (existingJoinConfig !== undefined)
+      throw new AlreadyUsedChannelError(
+        existingJoinConfig.guildId,
+        existingJoinConfig.channelId ?? '',
+      )
     this.channelMap.set(voiceChannel, readChannel)
     const connection = joinVoiceChannel({
       channelId: voiceChannel.id,
@@ -151,9 +162,12 @@ export class ConnectionCtxManager extends Map<
   }
   connectionLeave(voiceChannel: VoiceBasedChannel) {
     const readChannel = this.channelMap.get(voiceChannel)
-    if (readChannel == null) throw Error()
-    const connection = this.get(readChannel)?.connection
-    if (connection == null) return ''
+    if (readChannel === undefined)
+      throw new HandleInteractionError(
+        HandleInteractionErrorType.userNotWithBot,
+      )
+    const connection = this.get(this.channelMap.get(voiceChannel))?.connection
+    if (connection === undefined) throw Error('connection is null')
     const workerId = connection.joinConfig.group
     connection.disconnect()
     this.channelMap.delete(voiceChannel)

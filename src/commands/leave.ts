@@ -1,5 +1,8 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
+import { checkUserAlreadyJoined } from '../components/preCheck.js'
+import type { InteractionReplyOptions } from 'discord.js'
+import { PowError } from '../errors/index.js'
 
 export class LeaveCommand extends Command {
   public constructor(
@@ -28,50 +31,46 @@ export class LeaveCommand extends Command {
     if (!interaction.inCachedGuild()) return
     const user = await interaction.member.fetch()
     const voiceChannel = user.voice.channel
-    if (voiceChannel == null) {
-      return interaction.reply({
-        embeds: [
-          {
-            color: 0xff0000,
-            title: 'エラー',
-            description:
-              'このコマンドを実行するには、VCに参加している必要があります。',
-          },
-        ],
-        ephemeral: true,
-      })
-    }
 
-    const ctx = guildCtxManager.get(interaction.member.guild)
-    if (!ctx.connectionManager.channelMap.has(voiceChannel)) {
-      return interaction.reply({
-        embeds: [
-          {
-            color: 0xff0000,
-            title: 'エラー',
-            description: 'BOTと同じVCに参加している必要があります。',
-          },
-        ],
-        ephemeral: true,
-      })
-    }
-
-    const textChannel = ctx.connectionManager.channelMap.get(voiceChannel)
-    const workerId = ctx.leave(voiceChannel)
-
-    return interaction.reply({
+    let interactionReplyOptions: InteractionReplyOptions = {
       embeds: [
         {
-          color: 0x00ff00,
-          title: 'ボイスチャンネルから退出しました。',
-          description: [
-            `担当BOT: <@${workerId}>`,
-            `テキストチャンネル: ${textChannel}`,
-            `ボイスチャンネル: ${voiceChannel}`,
-            'またのご利用をお待ちしております。',
-          ].join('\n'),
+          color: 0xff0000,
+          title: '予期せぬエラーが発生しました。',
         },
       ],
-    })
+      ephemeral: true,
+    }
+
+    try {
+      checkUserAlreadyJoined(voiceChannel)
+
+      const ctx = guildCtxManager.get(interaction.member.guild)
+      const textChannel = ctx.connectionManager.channelMap.get(voiceChannel)
+      const workerId = ctx.leave(voiceChannel)
+
+      interactionReplyOptions = {
+        embeds: [
+          {
+            color: 0x00ff00,
+            title: 'ボイスチャンネルから退出しました。',
+            description: [
+              `担当BOT: <@${workerId}>`,
+              `テキストチャンネル: ${textChannel}`,
+              `ボイスチャンネル: ${voiceChannel}`,
+              'またのご利用をお待ちしております。',
+            ].join('\n'),
+          },
+        ],
+      }
+    } catch (error) {
+      if (error instanceof PowError) {
+        interactionReplyOptions = error.toInteractionReplyOptions
+      } else {
+        throw error
+      }
+    } finally {
+      return interaction.reply(interactionReplyOptions)
+    }
   }
 }

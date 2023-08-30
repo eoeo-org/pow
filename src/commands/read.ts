@@ -1,7 +1,17 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
 import { convertContent } from '../contentConverter.js'
-import { Collection, type Sticker } from 'discord.js'
+import {
+  Collection,
+  type InteractionReplyOptions,
+  type Sticker,
+} from 'discord.js'
+import {
+  HandleInteractionError,
+  HandleInteractionErrorType,
+  PowError,
+} from '../errors/index.js'
+import { checkUserAlreadyJoined } from '../components/preCheck.js'
 
 export class ReadCommand extends Command {
   public constructor(
@@ -36,48 +46,51 @@ export class ReadCommand extends Command {
     if (!interaction.inCachedGuild()) return
     const user = await interaction.member.fetch()
     const voiceChannel = user.voice.channel
-    if (voiceChannel == null) {
-      return interaction.reply({
-        embeds: [
-          {
-            color: 0xff0000,
-            title: 'エラー',
-            description:
-              'このコマンドを実行するには、VCに参加している必要があります。',
-          },
-        ],
-        ephemeral: true,
-      })
+
+    let interactionReplyOptions: InteractionReplyOptions = {
+      embeds: [
+        {
+          color: 0xff0000,
+          title: '予期せぬエラーが発生しました。',
+        },
+      ],
+      ephemeral: true,
     }
-    const text = interaction.options.getString('text', true)
-    const connectionManager = guildCtxManager.get(
-      interaction.member.guild,
-    ).connectionManager
-    if (!connectionManager.channelMap.has(voiceChannel)) {
-      return interaction.reply({
-        embeds: [
-          {
-            color: 0xff0000,
-            title: 'エラー',
-            description: 'BOTと同じVCに参加している必要があります。',
-          },
-        ],
-        ephemeral: true,
-      })
+
+    try {
+      checkUserAlreadyJoined(voiceChannel)
+      const text = interaction.options.getString('text', true)
+
+      const connectionCtx = guildCtxManager
+        .get(interaction.member.guild)
+        .connectionManager.getWithVoiceChannel(voiceChannel)
+      if (connectionCtx === undefined)
+        throw new HandleInteractionError(
+          HandleInteractionErrorType.userNotWithBot,
+        )
+
+      const convertedMessage = convertContent(
+        text,
+        [],
+        new Collection<string, Sticker>(),
+        interaction.guild.id,
+        interaction.client,
+      )
+        .trim()
+        .replace('\n', '')
+      if (convertedMessage.length === 0) return
+      connectionCtx.addMessage(convertedMessage, interaction)
+      interactionReplyOptions = {
+        content: 'メッセージを読み上げキューに追加しました。',
+      }
+    } catch (error) {
+      if (error instanceof PowError) {
+        interactionReplyOptions = error.toInteractionReplyOptions
+      } else {
+        throw error
+      }
+    } finally {
+      return interaction.reply(interactionReplyOptions)
     }
-    const convertedMessage = convertContent(
-      text,
-      [],
-      new Collection<string, Sticker>(),
-      interaction.guild.id,
-      interaction.client,
-    )
-      .trim()
-      .replace('\n', '')
-    if (convertedMessage.length === 0) return
-    connectionManager
-      .get(connectionManager.channelMap.get(voiceChannel)!)
-      ?.addMessage(convertedMessage, interaction)
-    return interaction.reply('メッセージを読み上げキューに追加しました。')
   }
 }

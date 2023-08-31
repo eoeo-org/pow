@@ -1,5 +1,3 @@
-import packageJson from '../package.json' assert { type: 'json' }
-
 import {
   Events,
   Message,
@@ -11,6 +9,9 @@ import { GuildCtxManager } from './guildCtx.js'
 import type { SignalConstants } from 'os'
 import { WorkerClientMap } from './worker.js'
 import { readyEvent } from './events/index.js'
+
+import { createRequire } from 'node:module'
+const packageJson = createRequire(import.meta.url)('../package.json')
 
 let isCalledDestroy = false
 

@@ -29,6 +29,7 @@ import { Readable } from 'node:stream'
 import {
   AlreadyJoinedError,
   AlreadyUsedChannelError,
+  DBError,
   FetchResponseError,
   HandleInteractionError,
   HandleInteractionErrorType,
@@ -64,10 +65,10 @@ class ConnectionContext {
     text: string,
     ctx: Message | ChatInputCommandInteraction<'cached'>,
   ) {
-    const userSetting = await getUserSetting(
-      ctx instanceof Message ? ctx.author.id : ctx.user.id,
-    )
     try {
+      const userSetting = await getUserSetting(
+        ctx instanceof Message ? ctx.author.id : ctx.user.id,
+      )
       debug__ConnectionContext('fetching audio')
       const audioStream = await fetchAudioStream(
         text,
@@ -83,6 +84,8 @@ class ConnectionContext {
       const message =
         error instanceof FetchResponseError
           ? { embeds: [FetchResponseError.getEmbed(error)] }
+          : error instanceof DBError
+          ? { embeds: [DBError.getEmbed(error)] }
           : {
               embeds: [
                 {

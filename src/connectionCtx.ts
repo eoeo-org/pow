@@ -43,11 +43,11 @@ class ConnectionContext {
 
   constructor(readChannel: GuildTextBasedChannel, connection: VoiceConnection) {
     this.readChannel = readChannel
-    this.readQueue = new Queue(this._readMessage.bind(this))
+    this.readQueue = new Queue(this.#readMessage.bind(this))
     this.connection = connection
   }
 
-  private async _readMessage({ audio }: { audio: Readable }) {
+  async #readMessage({ audio }: { audio: Readable }) {
     this.player = createAudioPlayer()
     const resource = createAudioResource(audio, {
       inputType: StreamType.Arbitrary,

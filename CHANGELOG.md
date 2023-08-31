@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.3](https://github.com/kazukazu123123/pow/compare/v3.1.2...v3.1.3) (2023-08-31)
+
+
+### Bug Fixes
+
+* add handle db errors ([#743](https://github.com/kazukazu123123/pow/issues/743)) ([b3e9ba6](https://github.com/kazukazu123123/pow/commit/b3e9ba63dd082ba996ef1fe6998e6fcff31988f1))
+* **deps:** update dependency @sapphire/plugin-subcommands to v4.2.1 ([#737](https://github.com/kazukazu123123/pow/issues/737)) ([9ab4793](https://github.com/kazukazu123123/pow/commit/9ab4793e9bd6705019b30521a1fcf909c9d5fc9b))
+* **refactor:** エラー処理を修正 ([#739](https://github.com/kazukazu123123/pow/issues/739)) ([a3e3621](https://github.com/kazukazu123123/pow/commit/a3e36219a7cb049699432bb316764334be379f2f))
+
 ## [3.1.2](https://github.com/kazukazu123123/pow/compare/v3.1.1...v3.1.2) (2023-08-27)
 
 

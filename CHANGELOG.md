@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.4](https://github.com/kazukazu123123/pow/compare/v3.1.3...v3.1.4) (2023-08-31)
+
+
+### Miscellaneous Chores
+
+* release 3.1.4 ([#746](https://github.com/kazukazu123123/pow/issues/746)) ([88e1a8c](https://github.com/kazukazu123123/pow/commit/88e1a8c74611cf337ac8e7618e062aaee69638cc))
+
 ## [3.1.3](https://github.com/kazukazu123123/pow/compare/v3.1.2...v3.1.3) (2023-08-31)
 
 

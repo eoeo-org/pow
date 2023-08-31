@@ -1,4 +1,5 @@
-import { createPool, type PoolConnection } from 'mariadb'
+import { createPool, SqlError, type PoolConnection } from 'mariadb'
+import { DBError } from './errors/index.js'
 
 export interface UserSetting {
   id: bigint
@@ -32,6 +33,9 @@ export async function getUserSetting(id: string) {
     }
     return rows[0]
   } catch (err) {
+    if (err instanceof SqlError) {
+      throw new DBError(err.message, { cause: err })
+    }
     throw err
   } finally {
     if (conn) conn.release()
@@ -69,6 +73,9 @@ export async function randomizeUserSetting(id: string) {
     )
     rows = await conn.query('SELECT * FROM userSetting WHERE id = ?', [id])
   } catch (err) {
+    if (err instanceof SqlError) {
+      throw new DBError(err.message, { cause: err })
+    }
     throw err
   } finally {
     if (conn) conn.release()
@@ -91,6 +98,9 @@ export async function setUserSetting(
       [id],
     )
   } catch (err) {
+    if (err instanceof SqlError) {
+      throw new DBError(err.message, { cause: err })
+    }
     throw err
   } finally {
     if (conn) conn.release()

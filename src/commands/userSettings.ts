@@ -1,6 +1,8 @@
 import { Subcommand } from '@sapphire/plugin-subcommands'
 import { objToList, userSettingToDiff } from '../utils.js'
 import { getUserSetting, randomizeUserSetting, setUserSetting } from '../db.js'
+import type { InteractionReplyOptions } from 'discord.js'
+import { PowError } from '../errors/index.js'
 
 export class UserSettingsCommand extends Subcommand {
   public constructor(context: Subcommand.Context, options: Subcommand.Options) {
@@ -118,25 +120,46 @@ export class UserSettingsCommand extends Subcommand {
   ) {
     if (!interaction.inCachedGuild()) return
     const user = interaction.options.getUser('user')
-    const userSetting = await getUserSetting(
-      user ? user.id : interaction.member.id,
-    )
 
-    const userNameText = user ? user : '現在'
-
-    return interaction.reply({
+    let interactionReplyOptions: InteractionReplyOptions = {
       embeds: [
         {
-          color: 0x00ff00,
-          description:
-            `**${userNameText}の声の設定**` +
-            '```\n' +
-            objToList(userSetting).split('\n').slice(1).join('\n') +
-            '\n```',
+          color: 0xff0000,
+          title: '予期せぬエラーが発生しました。',
         },
       ],
       ephemeral: true,
-    })
+    }
+
+    try {
+      const userSetting = await getUserSetting(
+        user ? user.id : interaction.member.id,
+      )
+
+      const userNameText = user ? user : '現在'
+
+      interactionReplyOptions = {
+        embeds: [
+          {
+            color: 0x00ff00,
+            description:
+              `**${userNameText}の声の設定**` +
+              '```\n' +
+              objToList(userSetting).split('\n').slice(1).join('\n') +
+              '\n```',
+          },
+        ],
+        ephemeral: true,
+      }
+    } catch (error) {
+      if (error instanceof PowError) {
+        interactionReplyOptions = error.toInteractionReplyOptions
+      } else {
+        throw error
+      }
+    } finally {
+      return interaction.reply(interactionReplyOptions)
+    }
   }
 
   public async chatInputVoice(
@@ -152,92 +175,112 @@ export class UserSettingsCommand extends Subcommand {
       'bear',
     ]
 
-    const oldUserSetting = await getUserSetting(interaction.member.id)
-
-    let errorMsg: string[] = []
-
-    const { options } = interaction
-    const random = options.getBoolean('random')
-    const speaker = options.getString('speaker')
-    const pitch = options.getInteger('pitch')
-    const speed = options.getInteger('speed')
-
-    if (random) {
-      await randomizeUserSetting(interaction.member.id)
+    let interactionReplyOptions: InteractionReplyOptions = {
+      embeds: [
+        {
+          color: 0xff0000,
+          title: '予期せぬエラーが発生しました。',
+        },
+      ],
+      ephemeral: true,
     }
 
-    if (speaker !== null) {
-      if (allowedVoiceList.includes(speaker)) {
-        await setUserSetting(interaction.member.id, 'speaker', `"${speaker}"`)
-      } else {
-        errorMsg.push(
-          [
-            `その声(${speaker})は指定できません。指定できる声のリストは、こちらです。`,
-            ...allowedVoiceList.map((voice) => '- ' + voice),
-          ].join('\n'),
-        )
+    try {
+      const oldUserSetting = await getUserSetting(interaction.member.id)
+
+      let errorMsg: string[] = []
+
+      const { options } = interaction
+      const random = options.getBoolean('random')
+      const speaker = options.getString('speaker')
+      const pitch = options.getInteger('pitch')
+      const speed = options.getInteger('speed')
+
+      if (random) {
+        await randomizeUserSetting(interaction.member.id)
       }
-    }
 
-    if (pitch !== null) {
-      if (pitch > 49 && pitch < 201) {
-        await setUserSetting(interaction.member.id, 'pitch', `"${pitch}"`)
-      } else {
-        errorMsg.push(
-          `その声の高さ(${pitch}%)は指定できません。指定できる声の高さは、50%~200%です。`,
-        )
-      }
-    }
-
-    if (speed !== null) {
-      if (speed > 49 && speed < 401) {
-        await setUserSetting(interaction.member.id, 'speed', `"${speed}"`)
-      } else {
-        errorMsg.push(
-          `その速度(${speed}%)は指定できません。指定できる声の速度は、50%~400%です。`,
-        )
-      }
-    }
-    const userSetting = await getUserSetting(interaction.member.id)
-
-    if (errorMsg.length === 0) {
-      interaction.reply({
-        embeds: [
-          {
-            color: 0x00ff00,
-            title: '声の設定を更新しました。',
-            description:
-              '```ansi\n' +
-              userSettingToDiff(oldUserSetting, userSetting) +
-              '\n```',
-          },
-        ],
-        ephemeral: true,
-      })
-    } else {
-      interaction.reply({
-        embeds: [
-          {
-            color: 0xff0000,
-            title: 'エラー',
-            description: [
-              '設定変更中にエラーが発生しました。',
-              '詳細情報:',
-              ...errorMsg,
+      if (speaker !== null) {
+        if (allowedVoiceList.includes(speaker)) {
+          await setUserSetting(interaction.member.id, 'speaker', `"${speaker}"`)
+        } else {
+          errorMsg.push(
+            [
+              `その声(${speaker})は指定できません。指定できる声のリストは、こちらです。`,
+              ...allowedVoiceList.map((voice) => '- ' + voice),
             ].join('\n'),
-          },
-          {
-            color: 0x00ff00,
-            title: '声の設定を更新しました。',
-            description:
-              '```ansi\n' +
-              userSettingToDiff(oldUserSetting, userSetting) +
-              '\n```',
-          },
-        ],
-        ephemeral: true,
-      })
+          )
+        }
+      }
+
+      if (pitch !== null) {
+        if (pitch > 49 && pitch < 201) {
+          await setUserSetting(interaction.member.id, 'pitch', `"${pitch}"`)
+        } else {
+          errorMsg.push(
+            `その声の高さ(${pitch}%)は指定できません。指定できる声の高さは、50%~200%です。`,
+          )
+        }
+      }
+
+      if (speed !== null) {
+        if (speed > 49 && speed < 401) {
+          await setUserSetting(interaction.member.id, 'speed', `"${speed}"`)
+        } else {
+          errorMsg.push(
+            `その速度(${speed}%)は指定できません。指定できる声の速度は、50%~400%です。`,
+          )
+        }
+      }
+      const userSetting = await getUserSetting(interaction.member.id)
+
+      if (errorMsg.length === 0) {
+        interaction.reply({
+          embeds: [
+            {
+              color: 0x00ff00,
+              title: '声の設定を更新しました。',
+              description:
+                '```ansi\n' +
+                userSettingToDiff(oldUserSetting, userSetting) +
+                '\n```',
+            },
+          ],
+          ephemeral: true,
+        })
+      } else {
+        interaction.reply({
+          embeds: [
+            {
+              color: 0xff0000,
+              title: 'エラー',
+              description: [
+                '設定変更中にエラーが発生しました。',
+                '詳細情報:',
+                ...errorMsg,
+              ].join('\n'),
+            },
+            {
+              color: 0x00ff00,
+              title: '声の設定を更新しました。',
+              description:
+                '```ansi\n' +
+                userSettingToDiff(oldUserSetting, userSetting) +
+                '\n```',
+            },
+          ],
+          ephemeral: true,
+        })
+      }
+      return
+    } catch (error) {
+      if (error instanceof PowError) {
+        interactionReplyOptions = error.toInteractionReplyOptions
+      } else {
+        throw error
+      }
+    } finally {
+      return interaction.reply(interactionReplyOptions)
     }
-    return
   }
 }

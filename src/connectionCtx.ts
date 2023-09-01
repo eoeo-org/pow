@@ -64,6 +64,11 @@ class ConnectionContext {
   async addMessage(
     text: string,
     ctx: Message | ChatInputCommandInteraction<'cached'>,
+    setting: {
+      speaker?: string | null
+      pitch?: number | null
+      speed?: number | null
+    } = {},
   ) {
     try {
       const userSetting = await getUserSetting(
@@ -72,9 +77,9 @@ class ConnectionContext {
       debug__ConnectionContext('fetching audio')
       const audioStream = await fetchAudioStream(
         text,
-        userSetting?.speaker,
-        userSetting?.pitch,
-        userSetting?.speed,
+        setting.speaker ?? userSetting.speaker,
+        setting.pitch ?? userSetting.pitch,
+        setting.speed ?? userSetting.speed,
       )
       if (audioStream === null) return
       const audio = Readable.fromWeb(audioStream)

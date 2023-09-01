@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/kazukazu123123/pow/compare/v3.1.4...v3.2.0) (2023-09-01)
+
+
+### Features
+
+* **commands:** `/read` に声設定のオプションを追加 ([#750](https://github.com/kazukazu123123/pow/issues/750)) ([c59aed8](https://github.com/kazukazu123123/pow/commit/c59aed857cf8b59e0d8df32f1fee6e0e449d2e9c)), closes [#9](https://github.com/kazukazu123123/pow/issues/9)
+
 ## [3.1.4](https://github.com/kazukazu123123/pow/compare/v3.1.3...v3.1.4) (2023-08-31)
 
 

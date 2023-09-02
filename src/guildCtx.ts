@@ -8,7 +8,11 @@ import {
 import { WorkerClientMap } from './worker.js'
 import { workerClientMap, workerReady } from './index.js'
 import { ConnectionCtxManager } from './connectionCtx.js'
-import { NoWorkerError, NotReadyWorkerError } from './errors/index.js'
+import {
+  AlreadyJoinedError,
+  NoWorkerError,
+  NotReadyWorkerError,
+} from './errors/index.js'
 
 const getBots = async (guild: Guild, worker: WorkerClientMap) => {
   const results = await Promise.allSettled(
@@ -34,6 +38,9 @@ export class GuildContext {
     voiceChannel: VoiceBasedChannel,
     readChannel: GuildTextBasedChannel,
   ) {
+    if (this.connectionManager.channelMap.has(voiceChannel))
+      throw new AlreadyJoinedError()
+
     const vcArray = (await voiceChannel.guild.channels.fetch())
       .map((v) => {
         if (

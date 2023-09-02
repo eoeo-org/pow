@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.1](https://github.com/kazukazu123123/pow/compare/v3.2.0...v3.2.1) (2023-09-02)
+
+
+### Bug Fixes
+
+* **commands:** join コマンドのエラー処理を修正 ([#755](https://github.com/kazukazu123123/pow/issues/755)) ([9bc93fb](https://github.com/kazukazu123123/pow/commit/9bc93fbc77d5616ac202f9ddec8c17cf813133bb)), closes [#754](https://github.com/kazukazu123123/pow/issues/754)
+
 ## [3.2.0](https://github.com/kazukazu123123/pow/compare/v3.1.4...v3.2.0) (2023-09-01)
 
 

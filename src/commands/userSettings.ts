@@ -235,7 +235,7 @@ export class UserSettingsCommand extends Subcommand {
       const userSetting = await getUserSetting(interaction.member.id)
 
       if (errorMsg.length === 0) {
-        interaction.reply({
+        interactionReplyOptions = {
           embeds: [
             {
               color: 0x00ff00,
@@ -247,9 +247,9 @@ export class UserSettingsCommand extends Subcommand {
             },
           ],
           ephemeral: true,
-        })
+        }
       } else {
-        interaction.reply({
+        interactionReplyOptions = {
           embeds: [
             {
               color: 0xff0000,
@@ -270,7 +270,7 @@ export class UserSettingsCommand extends Subcommand {
             },
           ],
           ephemeral: true,
-        })
+        }
       }
       return
     } catch (error) {

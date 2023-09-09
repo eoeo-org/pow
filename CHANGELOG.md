@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.4](https://github.com/kazukazu123123/pow/compare/v3.2.3...v3.2.4) (2023-09-09)
+
+
+### Bug Fixes
+
+* **db:** SQLインジェクション対策 ([#771](https://github.com/kazukazu123123/pow/issues/771)) ([1b38bec](https://github.com/kazukazu123123/pow/commit/1b38becc0eb411db8c73866d9d65000a9be78108))
+
 ## [3.2.3](https://github.com/kazukazu123123/pow/compare/v3.2.2...v3.2.3) (2023-09-09)
 
 

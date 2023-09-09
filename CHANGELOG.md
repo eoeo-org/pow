@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.2.3](https://github.com/kazukazu123123/pow/compare/v3.2.2...v3.2.3) (2023-09-09)
+
+
+### Bug Fixes
+
+* **commands:** voice コマンドで落ちるのを修正 ([#768](https://github.com/kazukazu123123/pow/issues/768)) ([f51b8a4](https://github.com/kazukazu123123/pow/commit/f51b8a4550e7db2eda0416b31bcbdcca03fdd468))
+
+
+### Performance Improvements
+
+* add compress option to db connection ([#766](https://github.com/kazukazu123123/pow/issues/766)) ([56c89ba](https://github.com/kazukazu123123/pow/commit/56c89ba9f5686b1321c77c46ca5505ac136d5f80))
+
 ## [3.2.2](https://github.com/kazukazu123123/pow/compare/v3.2.1...v3.2.2) (2023-09-07)
 
 

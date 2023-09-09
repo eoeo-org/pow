@@ -202,7 +202,7 @@ export class UserSettingsCommand extends Subcommand {
 
       if (speaker !== null) {
         if (allowedVoiceList.includes(speaker)) {
-          await setUserSetting(interaction.member.id, 'speaker', `"${speaker}"`)
+          await setUserSetting(interaction.member.id, 'speaker', speaker)
         } else {
           errorMsg.push(
             [
@@ -215,7 +215,7 @@ export class UserSettingsCommand extends Subcommand {
 
       if (pitch !== null) {
         if (pitch > 49 && pitch < 201) {
-          await setUserSetting(interaction.member.id, 'pitch', `"${pitch}"`)
+          await setUserSetting(interaction.member.id, 'pitch', pitch)
         } else {
           errorMsg.push(
             `その声の高さ(${pitch}%)は指定できません。指定できる声の高さは、50%~200%です。`,
@@ -225,7 +225,7 @@ export class UserSettingsCommand extends Subcommand {
 
       if (speed !== null) {
         if (speed > 49 && speed < 401) {
-          await setUserSetting(interaction.member.id, 'speed', `"${speed}"`)
+          await setUserSetting(interaction.member.id, 'speed', speed)
         } else {
           errorMsg.push(
             `その速度(${speed}%)は指定できません。指定できる声の速度は、50%~400%です。`,

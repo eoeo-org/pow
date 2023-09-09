@@ -27,7 +27,7 @@ jobs:
             gh pr edit ${{ github.event.number }} \
             --remove-label='semver:major,semver:patch,semver:none' \
             --add-label='semver:minor'
-          elif ${{ startsWith(github.event.pull_request.title, 'fix') }}; then
+          elif ${{ startsWith(github.event.pull_request.title, 'fix') || startsWith(github.event.pull_request.title, 'perf') }}; then
             gh pr edit ${{ github.event.number }} \
             --remove-label='semver:major,semver:minor,semver:none' \
             --add-label='semver:patch'

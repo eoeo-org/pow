@@ -47,9 +47,12 @@ export async function randomizeUserSetting(id: string) {
   let conn: PoolConnection | undefined = undefined,
     rows: Array<UserSetting> | undefined = undefined
   const voiceList = ['show', 'haruka', 'hikari', 'takeru', 'santa', 'bear']
+  const speaker = voiceList[Math.floor(Math.random() * voiceList.length)]
+  const pitch = Math.floor(Math.random() * (200 + 1 - 50)) + 50
+  const speed = Math.floor(Math.random() * (400 + 1 - 50)) + 50
   try {
     conn = await pool.getConnection()
-    await conn.query(`INSERT IGNORE INTO userSetting VALUES (?, ?, ?, ?, ?)`, [
+    await conn.query('INSERT IGNORE INTO userSetting VALUES (?, ?, ?, ?, ?)', [
       id,
       0,
       0,
@@ -57,20 +60,8 @@ export async function randomizeUserSetting(id: string) {
       0,
     ])
     await conn.query(
-      `UPDATE userSetting SET
-                          speaker='${
-                            voiceList[
-                              Math.floor(Math.random() * voiceList.length)
-                            ]
-                          }',
-                          pitch=${
-                            Math.floor(Math.random() * (200 + 1 - 50)) + 50
-                          },
-                          speed=${
-                            Math.floor(Math.random() * (400 + 1 - 50)) + 50
-                          }
-                        WHERE id = ?`,
-      [id],
+      'UPDATE userSetting SET speaker=?, pitch=?, speed=? WHERE id = ?',
+      [speaker, pitch, speed, id],
     )
     rows = await conn.query('SELECT * FROM userSetting WHERE id = ?', [id])
   } catch (err) {
@@ -92,12 +83,10 @@ export async function setUserSetting(
   let conn: PoolConnection | undefined = undefined
   try {
     conn = await pool.getConnection()
-    await conn.query(
-      `UPDATE userSetting SET ${key}=${
-        typeof value === 'string' ? value : Number(value)
-      } WHERE id = ?`,
-      [id],
-    )
+    await conn.query(`UPDATE userSetting SET ${key}=? WHERE id = ?`, [
+      value,
+      id,
+    ])
   } catch (err) {
     if (err instanceof SqlError) {
       throw new DBError(err.message, { cause: err })

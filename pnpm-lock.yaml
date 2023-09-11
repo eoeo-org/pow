@@ -136,7 +136,7 @@ packages:
       discord-api-types: 0.37.56
       prism-media: 1.3.5(ffmpeg-static@5.2.0)
       tslib: 2.6.2
-      ws: 8.13.0
+      ws: 8.14.1
     transitivePeerDependencies:
       - '@discordjs/opus'
       - bufferutil
@@ -158,7 +158,7 @@ packages:
       '@vladfrangu/async_event_emitter': 2.2.2
       discord-api-types: 0.37.50
       tslib: 2.6.2
-      ws: 8.13.0
+      ws: 8.14.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -235,7 +235,7 @@ packages:
       '@sapphire/discord.js-utilities': 7.0.2
       '@sapphire/lexure': 1.1.5
       '@sapphire/pieces': 3.7.0
-      '@sapphire/ratelimits': 2.4.6
+      '@sapphire/ratelimits': 2.4.7
       '@sapphire/result': 2.6.4
       '@sapphire/stopwatch': 1.5.0
       '@sapphire/utilities': 3.13.0
@@ -265,8 +265,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@sapphire/ratelimits@2.4.6:
-    resolution: {integrity: sha512-E8ZogD+gtXw/iAFuyd42ZzUcYzOC3qGXZFOjU12o0cSYWObh7kQEqkS62BB0hMXy+GJH0X2+kqgMklME8EhWUg==}
+  /@sapphire/ratelimits@2.4.7:
+    resolution: {integrity: sha512-IJQySiK+A8P4E+0oW2TGDy4RBjMsw3hccFL0y4kjQ2VZNzPDHJSYR4Pb1TzlG6V9YTVdCNWJODFXXyVn3tEQ/A==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
@@ -551,13 +551,14 @@ packages:
       is-array-buffer: 3.0.2
     dev: true
 
-  /arraybuffer.prototype.slice@1.0.1:
-    resolution: {integrity: sha512-09x0ZWFEjj4WD8PDbykUwo3t9arLn8NIzmmYEJFpYekOAQjpkGSyrQhNoRTcwwcFRu+ycWF78QZ63oWTqSjBcw==}
+  /arraybuffer.prototype.slice@1.0.2:
+    resolution: {integrity: sha512-yMBKppFur/fbHu9/6USUe03bZ4knMYiwFBcyiaXB8Go0qNehwX6inYPzK9U0NeQvGxKthcmHcaR8P5MStSRBAw==}
     engines: {node: '>= 0.4'}
     dependencies:
       array-buffer-byte-length: 1.0.0
       call-bind: 1.0.2
       define-properties: 1.2.0
+      es-abstract: 1.22.1
       get-intrinsic: 1.2.1
       is-array-buffer: 3.0.2
       is-shared-array-buffer: 1.0.2
@@ -816,7 +817,7 @@ packages:
       lodash.snakecase: 4.1.1
       tslib: 2.6.2
       undici: 5.22.1
-      ws: 8.13.0
+      ws: 8.14.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -853,7 +854,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       array-buffer-byte-length: 1.0.0
-      arraybuffer.prototype.slice: 1.0.1
+      arraybuffer.prototype.slice: 1.0.2
       available-typed-arrays: 1.0.5
       call-bind: 1.0.2
       es-set-tostringtag: 2.0.1
@@ -880,11 +881,11 @@ packages:
       object-keys: 1.1.1
       object.assign: 4.1.4
       regexp.prototype.flags: 1.5.0
-      safe-array-concat: 1.0.0
+      safe-array-concat: 1.0.1
       safe-regex-test: 1.0.0
-      string.prototype.trim: 1.2.7
-      string.prototype.trimend: 1.0.6
-      string.prototype.trimstart: 1.0.6
+      string.prototype.trim: 1.2.8
+      string.prototype.trimend: 1.0.7
+      string.prototype.trimstart: 1.0.7
       typed-array-buffer: 1.0.0
       typed-array-byte-length: 1.0.0
       typed-array-byte-offset: 1.0.0
@@ -1567,7 +1568,7 @@ packages:
       pidtree: 0.3.1
       read-pkg: 3.0.0
       shell-quote: 1.8.1
-      string.prototype.padend: 3.1.4
+      string.prototype.padend: 3.1.5
     dev: true
 
   /npm-run-path@2.0.2:
@@ -1813,8 +1814,8 @@ packages:
       queue-microtask: 1.2.3
     dev: true
 
-  /safe-array-concat@1.0.0:
-    resolution: {integrity: sha512-9dVEFruWIsnie89yym+xWTAYASdpw3CJV7Li/6zBewGf9z2i1j31rP6jnY0pHEO4QZh6N0K11bFjWmdR8UGdPQ==}
+  /safe-array-concat@1.0.1:
+    resolution: {integrity: sha512-6XbUAseYE2KtOuGueyeobCySj9L4+66Tn6KQMOPQJrAJEowYKW/YR/MGJZl7FdydUdaFu4LYyDZjxf4/Nmo23Q==}
     engines: {node: '>=0.4'}
     dependencies:
       call-bind: 1.0.2
@@ -1954,8 +1955,8 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
-  /string.prototype.padend@3.1.4:
-    resolution: {integrity: sha512-67otBXoksdjsnXXRUq+KMVTdlVRZ2af422Y0aTyTjVaoQkGr3mxl2Bc5emi7dOQ3OGVVQQskmLEWwFXwommpNw==}
+  /string.prototype.padend@3.1.5:
+    resolution: {integrity: sha512-DOB27b/2UTTD+4myKUFh+/fXWcu/UDyASIXfg+7VzoCNNGOfWvoyU/x5pvVHr++ztyt/oSYI1BcWBBG/hmlNjA==}
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
@@ -1963,8 +1964,8 @@ packages:
       es-abstract: 1.22.1
     dev: true
 
-  /string.prototype.trim@1.2.7:
-    resolution: {integrity: sha512-p6TmeT1T3411M8Cgg9wBTMRtY2q9+PNy9EV1i2lIXUN/btt763oIfxwN3RR8VU6wHX8j/1CFy0L+YuThm6bgOg==}
+  /string.prototype.trim@1.2.8:
+    resolution: {integrity: sha512-lfjY4HcixfQXOfaqCvcBuOIapyaroTXhbkfJN3gcB1OtyupngWK4sEET9Knd0cXd28kTUqu/kHoV4HKSJdnjiQ==}
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
@@ -1972,16 +1973,16 @@ packages:
       es-abstract: 1.22.1
     dev: true
 
-  /string.prototype.trimend@1.0.6:
-    resolution: {integrity: sha512-JySq+4mrPf9EsDBEDYMOb/lM7XQLulwg5R/m1r0PXEFqrV0qHvl58sdTilSXtKOflCsK2E8jxf+GKC0T07RWwQ==}
+  /string.prototype.trimend@1.0.7:
+    resolution: {integrity: sha512-Ni79DqeB72ZFq1uH/L6zJ+DKZTkOtPIHovb3YZHQViE+HDouuU4mBrLOLDn5Dde3RF8qw5qVETEjhu9locMLvA==}
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.2.0
       es-abstract: 1.22.1
     dev: true
 
-  /string.prototype.trimstart@1.0.6:
-    resolution: {integrity: sha512-omqjMDaY92pbn5HOX7f9IccLA+U1tA9GvtU4JrodiXFfYB7jPzzHpRzpglLAjtUV6bB557zwClJezTqnAiYnQA==}
+  /string.prototype.trimstart@1.0.7:
+    resolution: {integrity: sha512-NGhtDFu3jCEm7B4Fy0DpLewdJQOZcQ0rGbwQ/+stjnrp2i+rlKeCvos9hOIeCmqwratM47OBxY7uFZzjxHXmrg==}
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.2.0
@@ -2177,8 +2178,8 @@ packages:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: true
 
-  /ws@8.13.0:
-    resolution: {integrity: sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==}
+  /ws@8.14.1:
+    resolution: {integrity: sha512-4OOseMUq8AzRBI/7SLMUwO+FEDnguetSk7KMb1sHwvF2w2Wv5Hoj0nlifx8vtGsftE/jWHojPy8sMMzYLJ2G/A==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1

@@ -35,7 +35,7 @@ export async function getUserSetting(id: string) {
     return rows[0]
   } catch (err) {
     if (err instanceof SqlError) {
-      throw new DBError(err.message, { cause: err })
+      throw new DBError('ユーザー設定の取得に失敗しました。', { cause: err })
     }
     throw err
   } finally {
@@ -66,7 +66,9 @@ export async function randomizeUserSetting(id: string) {
     rows = await conn.query('SELECT * FROM userSetting WHERE id = ?', [id])
   } catch (err) {
     if (err instanceof SqlError) {
-      throw new DBError(err.message, { cause: err })
+      throw new DBError('ランダム値の設定に失敗しました。', {
+        cause: err,
+      })
     }
     throw err
   } finally {
@@ -89,7 +91,9 @@ export async function setUserSetting(
     ])
   } catch (err) {
     if (err instanceof SqlError) {
-      throw new DBError(err.message, { cause: err })
+      throw new DBError(`${key}の設定に失敗しました。`, {
+        cause: err,
+      })
     }
     throw err
   } finally {

@@ -5,7 +5,7 @@ import { Listener } from '@sapphire/framework'
 export class GuildMemberRemoveListener extends Listener {
   public override run(member: GuildMember | PartialGuildMember) {
     if (workerClientMap.has(member.id)) {
-      guildCtxManager.get(member.guild).resetBots(workerClientMap)
+      guildCtxManager.delete(member.guild)
     }
   }
 }

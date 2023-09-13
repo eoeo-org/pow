@@ -1,5 +1,5 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
-import { guildCtxManager, workerClientMap } from '../index.js'
+import { guildCtxManager } from '../index.js'
 import { PermissionFlagsBits, type InteractionReplyOptions } from 'discord.js'
 import { PowError } from '../errors/index.js'
 
@@ -40,7 +40,7 @@ export class ResetCommand extends Command {
     }
 
     try {
-      guildCtxManager.get(interaction.guild).resetBots(workerClientMap)
+      guildCtxManager.delete(interaction.guild)
       interactionReplyOptions = {
         embeds: [
           {

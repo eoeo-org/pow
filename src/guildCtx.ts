@@ -114,11 +114,10 @@ export class GuildContext {
   async addBot(workerId: string) {
     ;(await this.bots).push(workerId)
   }
-  resetBots(workerClientMap: WorkerClientMap) {
+  leaveAll() {
     for (const voiceChannel of this.connectionManager.channelMap.keys()) {
       this.leave(voiceChannel)
     }
-    this.bots = getBots(this.guild, workerClientMap)
   }
 }
 
@@ -134,5 +133,9 @@ export class GuildCtxManager extends Map<Guild, GuildContext> {
     const guildContext = new GuildContext(guild, workerClientMap)
     this.set(guild, guildContext)
     return guildContext
+  }
+  override delete(guild: Guild) {
+    this.get(guild).leaveAll()
+    return super.delete(guild)
   }
 }

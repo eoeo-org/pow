@@ -9,6 +9,8 @@ export interface UserSetting {
   isDontRead: 0 | 1
 }
 
+const userSettings = new Map<string, UserSetting>()
+
 const pool = createPool({
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT),
@@ -19,6 +21,7 @@ const pool = createPool({
 })
 
 export async function getUserSetting(id: string) {
+  if (userSettings.has(id)) return userSettings.get(id)!
   let conn: PoolConnection | undefined = undefined
   try {
     conn = await pool.getConnection()
@@ -32,6 +35,7 @@ export async function getUserSetting(id: string) {
         await conn.query('SELECT * FROM userSetting WHERE id = ?', [id])
       )[0] as UserSetting
     }
+    userSettings.set(id, rows[0])
     return rows[0]
   } catch (err) {
     if (err instanceof SqlError) {
@@ -44,6 +48,7 @@ export async function getUserSetting(id: string) {
 }
 
 export async function randomizeUserSetting(id: string) {
+  userSettings.delete(id)
   let conn: PoolConnection | undefined = undefined,
     rows: Array<UserSetting> | undefined = undefined
   const voiceList = ['show', 'haruka', 'hikari', 'takeru', 'santa', 'bear']
@@ -82,6 +87,7 @@ export async function setUserSetting(
   key: string,
   value: string | number,
 ) {
+  userSettings.delete(id)
   let conn: PoolConnection | undefined = undefined
   try {
     conn = await pool.getConnection()
@@ -99,4 +105,8 @@ export async function setUserSetting(
   } finally {
     if (conn) conn.release()
   }
+}
+
+export function deleteUserCache(id: string) {
+  userSettings.delete(id)
 }

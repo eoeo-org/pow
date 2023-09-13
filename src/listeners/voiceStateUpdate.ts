@@ -9,6 +9,7 @@ import { guildCtxManager } from '../index.js'
 import debug from 'debug'
 const debug__ErrorHandler = debug('events/voiceStateUpdate.js:ErrorHandler')
 import { Listener } from '@sapphire/framework'
+import { deleteUserCache } from '../db.js'
 
 export class VoiceStateUpdateListener extends Listener {
   public override async run(oldState: VoiceState, newState: VoiceState) {
@@ -87,6 +88,11 @@ export class VoiceStateUpdateListener extends Listener {
             debug__ErrorHandler(e)
           }
         })
+    } else if (
+      oldState.channel !== newState.channel &&
+      guildCtx.connectionManager.channelMap.has(oldState.channel)
+    ) {
+      deleteUserCache(oldState.id)
     }
   }
 }

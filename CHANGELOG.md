@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.5](https://github.com/kazukazu123123/pow/compare/v3.2.4...v3.2.5) (2023-09-13)
+
+
+### Bug Fixes
+
+* **db:** DBエラーのメッセージを修正 ([#781](https://github.com/kazukazu123123/pow/issues/781)) ([04d98f3](https://github.com/kazukazu123123/pow/commit/04d98f31f45efe689692d99ed899fb14d9ebc398))
+
 ## [3.2.4](https://github.com/kazukazu123123/pow/compare/v3.2.3...v3.2.4) (2023-09-09)
 
 

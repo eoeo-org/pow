@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/kazukazu123123/pow/compare/v3.2.5...v3.3.0) (2023-09-13)
+
+
+### Features
+
+* ユーザー設定をキャッシュするようにする ([#783](https://github.com/kazukazu123123/pow/issues/783)) ([22e0636](https://github.com/kazukazu123123/pow/commit/22e0636c1ed8fd418b06ba1aa6b50405afd45f75))
+
 ## [3.2.5](https://github.com/kazukazu123123/pow/compare/v3.2.4...v3.2.5) (2023-09-13)
 
 

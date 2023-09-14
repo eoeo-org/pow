@@ -8,6 +8,7 @@ import {
   PowError,
 } from '../errors/index.js'
 import { checkCanJoin, checkUserAlreadyJoined } from '../components/preCheck.js'
+import { LeaveCause } from '../connectionCtx.js'
 
 export class RejoinCommand extends Command {
   public constructor(
@@ -72,8 +73,12 @@ export class RejoinCommand extends Command {
           existingJoinConfig.guildId,
           existingJoinConfig.channelId ?? '',
         )
-
-      guildCtx.leave(voiceChannel)
+      const cause =
+        interaction.channel ===
+        guildCtx.connectionManager.channelMap.get(voiceChannel)
+          ? undefined
+          : LeaveCause.rejoin
+      guildCtx.leave({ voiceChannel, cause })
 
       const worker = await guildCtx.join(voiceChannel, interaction.channel)
 

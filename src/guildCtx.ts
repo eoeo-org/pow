@@ -7,7 +7,7 @@ import {
 } from 'discord.js'
 import { WorkerClientMap } from './worker.js'
 import { workerClientMap, workerReady } from './index.js'
-import { ConnectionCtxManager } from './connectionCtx.js'
+import { ConnectionCtxManager, LeaveCause } from './connectionCtx.js'
 import {
   AlreadyJoinedError,
   NoWorkerError,
@@ -86,7 +86,7 @@ export class GuildContext {
         if (forOldCtxWorkerId === undefined) {
           throw new NoWorkerError()
         }
-        this.leave(oldVoiceChannel!)
+        this.leave({ voiceChannel: oldVoiceChannel! })
         this.connectionManager.connectionJoin(
           oldVoiceChannel!,
           this.guild.id,
@@ -107,16 +107,25 @@ export class GuildContext {
     )
     return worker
   }
-  leave(voiceChannel: VoiceBasedChannel) {
-    const workerId = this.connectionManager.connectionLeave(voiceChannel)
+  leave({
+    voiceChannel,
+    cause,
+  }: {
+    voiceChannel: VoiceBasedChannel
+    cause?: LeaveCause | undefined
+  }) {
+    const workerId = this.connectionManager.connectionLeave({
+      voiceChannel: voiceChannel,
+      cause,
+    })
     return workerId
   }
   async addBot(workerId: string) {
     ;(await this.bots).push(workerId)
   }
-  leaveAll() {
+  leaveAll({ cause }: { cause: LeaveCause }) {
     for (const voiceChannel of this.connectionManager.channelMap.keys()) {
-      this.leave(voiceChannel)
+      this.leave({ voiceChannel, cause })
     }
   }
 }
@@ -135,7 +144,7 @@ export class GuildCtxManager extends Map<Guild, GuildContext> {
     return guildContext
   }
   override delete(guild: Guild) {
-    this.get(guild).leaveAll()
+    this.get(guild).leaveAll({ cause: LeaveCause.reset })
     return super.delete(guild)
   }
 }

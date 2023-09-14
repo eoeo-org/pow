@@ -29,7 +29,7 @@
     "emoji-regex": "10.2.1",
     "ffmpeg-static": "5.2.0",
     "libsodium-wrappers": "0.7.13",
-    "mariadb": "3.2.0"
+    "mariadb": "3.2.1"
   },
   "devDependencies": {
     "@swc/cli": "0.1.62",

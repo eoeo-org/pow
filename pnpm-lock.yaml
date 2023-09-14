@@ -36,8 +36,8 @@ dependencies:
     specifier: 0.7.13
     version: 0.7.13
   mariadb:
-    specifier: 3.2.0
-    version: 3.2.0
+    specifier: 3.2.1
+    version: 3.2.1
 
 devDependencies:
   '@swc/cli':
@@ -1446,6 +1446,11 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /lru-cache@10.0.1:
+    resolution: {integrity: sha512-IJ4uwUTi2qCccrioU6g9g/5rvvVl13bsdczUUcqbciD9iLr095yj8DQKdObriEvuNSx325N1rV1O0sJFszx75g==}
+    engines: {node: 14 || >=16.14}
+    dev: false
+
   /lru-cache@4.1.5:
     resolution: {integrity: sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==}
     dependencies:
@@ -1460,24 +1465,19 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lru-cache@7.18.3:
-    resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
-    engines: {node: '>=12'}
-    dev: false
-
   /magic-bytes.js@1.0.15:
     resolution: {integrity: sha512-bpRmwbRHqongRhA+mXzbLWjVy7ylqmfMBYaQkSs6pac0z6hBTvsgrH0r4FBYd/UYVJBmS6Rp/O+oCCQVLzKV1g==}
     dev: false
 
-  /mariadb@3.2.0:
-    resolution: {integrity: sha512-IH2nidQat1IBMxP5gjuNxG6dADtz1PESEC6rKrcATen5v3ngFyZITjehyYiwNfz3zUNQupfYmVntz93M+Pz8pQ==}
+  /mariadb@3.2.1:
+    resolution: {integrity: sha512-EWCsvu8IwK5WRYPJ9iRekFiBfHfKB/wBcUwAzbhQKhSc6ivbvLcO/cktkYTCz3HVoGNYVWhBN38485Cq3qMSbQ==}
     engines: {node: '>= 12'}
     dependencies:
       '@types/geojson': 7946.0.10
       '@types/node': 17.0.45
       denque: 2.1.0
       iconv-lite: 0.6.3
-      lru-cache: 7.18.3
+      lru-cache: 10.0.1
     dev: false
 
   /memorystream@0.3.1:

@@ -35,6 +35,16 @@ import {
   HandleInteractionErrorType,
 } from './errors/index.js'
 
+export const LeaveCause = {
+  command: 'leaveコマンドが実行されました。',
+  disconnected: 'BOTがVCから切断されました。',
+  noUser: 'ユーザーがVCから居なくなりました。',
+  rejoin: 'rejoinコマンドが実行されました。',
+  reset: 'resetコマンドが実行されました。',
+} as const
+
+export type LeaveCause = (typeof LeaveCause)[keyof typeof LeaveCause]
+
 class ConnectionContext {
   readChannel: GuildTextBasedChannel
   readQueue: Queue<{ audio: Readable }>
@@ -168,12 +178,40 @@ export class ConnectionCtxManager extends Map<
     })
     this.set(readChannel, new ConnectionContext(readChannel, connection))
   }
-  connectionLeave(voiceChannel: VoiceBasedChannel) {
+  connectionLeave({
+    voiceChannel,
+    cause = undefined,
+  }: {
+    voiceChannel: VoiceBasedChannel
+    cause?: LeaveCause | undefined
+  }) {
     const readChannel = this.channelMap.get(voiceChannel)
     if (readChannel === undefined)
       throw new HandleInteractionError(
         HandleInteractionErrorType.userNotWithBot,
       )
+    if (cause !== undefined) {
+      readChannel
+        .send({
+          embeds: [
+            {
+              color: 0x00ff00,
+              title: 'ボイスチャンネルから退出しました。',
+              description: `${cause}`,
+              footer: { text: 'またのご利用をお待ちしております。' },
+            },
+          ],
+        })
+        .catch((err: DiscordErrorData) => {
+          if (err.code !== 50013) throw err
+          debug__ErrorHandler(
+            `Error code ${err.code}: Missing send messages permission.`,
+          )
+          debug__ErrorHandler(
+            `Guild ID: ${voiceChannel.guild.id} Guild Name: ${voiceChannel.guild.name} Channel ID: ${readChannel.id} Channel Name: ${readChannel.name}`,
+          )
+        })
+    }
     const connection = this.get(this.channelMap.get(voiceChannel))?.connection
     if (connection === undefined) throw Error('connection is null')
     const workerId = connection.joinConfig.group

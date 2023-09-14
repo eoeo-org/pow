@@ -3,6 +3,7 @@ import { guildCtxManager } from '../index.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
 import type { InteractionReplyOptions } from 'discord.js'
 import { PowError } from '../errors/index.js'
+import { LeaveCause } from '../connectionCtx.js'
 
 export class LeaveCommand extends Command {
   public constructor(
@@ -47,7 +48,9 @@ export class LeaveCommand extends Command {
 
       const ctx = guildCtxManager.get(interaction.member.guild)
       const textChannel = ctx.connectionManager.channelMap.get(voiceChannel)
-      const workerId = ctx.leave(voiceChannel)
+      const cause =
+        interaction.channel === textChannel ? undefined : LeaveCause.command
+      const workerId = ctx.leave({ voiceChannel, cause })
 
       interactionReplyOptions = {
         embeds: [

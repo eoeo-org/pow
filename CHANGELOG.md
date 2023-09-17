@@ -1,5 +1,25 @@
 # Changelog
 
+## [3.4.0](https://github.com/kazukazu123123/pow/compare/v3.3.0...v3.4.0) (2023-09-17)
+
+
+### Features
+
+* leave 時に必ず readChannel へメッセージを送信する ([#789](https://github.com/kazukazu123123/pow/issues/789)) ([bb71877](https://github.com/kazukazu123123/pow/commit/bb71877753fea3001c330c3535e2d1d922e6c43a))
+
+
+### Bug Fixes
+
+* **commands:** /reset コマンドで GuildContext をリセットするように修正 ([#786](https://github.com/kazukazu123123/pow/issues/786)) ([888ca79](https://github.com/kazukazu123123/pow/commit/888ca797b1671c39b9eedc7f6e1b61de14c900b1))
+* **db:** return 位置修正 ([#792](https://github.com/kazukazu123123/pow/issues/792)) ([d3e4f87](https://github.com/kazukazu123123/pow/commit/d3e4f8762ca9f80d93a5e884f0259d3c5cab9625))
+* **deps:** update dependency libsodium-wrappers to v0.7.13 ([#788](https://github.com/kazukazu123123/pow/issues/788)) ([e586592](https://github.com/kazukazu123123/pow/commit/e58659222aac3e70ed307fe4212fc82b3e152b5e))
+* **deps:** update dependency mariadb to v3.2.1 ([#790](https://github.com/kazukazu123123/pow/issues/790)) ([b32f48d](https://github.com/kazukazu123123/pow/commit/b32f48dff105f6a4b5d5595a922d1123a9f296cb))
+
+
+### Performance Improvements
+
+* **db:** query 減らす ([#793](https://github.com/kazukazu123123/pow/issues/793)) ([3603a71](https://github.com/kazukazu123123/pow/commit/3603a71397e8711066091272d48a85ec4e187010))
+
 ## [3.3.0](https://github.com/kazukazu123123/pow/compare/v3.2.5...v3.3.0) (2023-09-13)
 
 

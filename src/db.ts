@@ -20,20 +20,17 @@ const pool = createPool({
   compress: true,
 })
 
-export async function getUserSetting(id: string) {
+export async function getUserSetting(id: string): Promise<UserSetting> {
   if (userSettings.has(id)) return userSettings.get(id)!
   let conn: PoolConnection | undefined = undefined
   try {
     conn = await pool.getConnection()
-    const rows: Array<UserSetting | undefined> = await conn.query(
+    const rows: Array<UserSetting> = await conn.query(
       'SELECT * FROM userSetting WHERE id = ?',
       [id],
     )
     if (rows[0] === undefined) {
-      await randomizeUserSetting(id)
-      return (
-        await conn.query('SELECT * FROM userSetting WHERE id = ?', [id])
-      )[0] as UserSetting
+      return await randomizeUserSetting(id)
     }
     userSettings.set(id, rows[0])
     return rows[0]
@@ -47,29 +44,29 @@ export async function getUserSetting(id: string) {
   }
 }
 
-export async function randomizeUserSetting(id: string) {
+export async function randomizeUserSetting(id: string): Promise<UserSetting> {
   userSettings.delete(id)
-  let conn: PoolConnection | undefined = undefined,
-    rows: Array<UserSetting> | undefined = undefined
-  const voiceList = ['show', 'haruka', 'hikari', 'takeru', 'santa', 'bear']
-  const speaker = voiceList[Math.floor(Math.random() * voiceList.length)]
+  let conn: PoolConnection | undefined = undefined
+  const voiceList: UserSetting['speaker'][] = [
+    'show',
+    'haruka',
+    'hikari',
+    'takeru',
+    'santa',
+    'bear',
+  ]
+  const speaker = voiceList[Math.floor(Math.random() * voiceList.length)]!
   const pitch = Math.floor(Math.random() * (200 + 1 - 50)) + 50
   const speed = Math.floor(Math.random() * (400 + 1 - 50)) + 50
+  const isDontRead = 0
   try {
     conn = await pool.getConnection()
-    await conn.query('INSERT IGNORE INTO userSetting VALUES (?, ?, ?, ?, ?)', [
-      id,
-      0,
-      0,
-      0,
-      0,
-    ])
     await conn.query(
-      'UPDATE userSetting SET speaker=?, pitch=?, speed=? WHERE id = ?',
-      [speaker, pitch, speed, id],
+      'INSERT INTO userSetting SET id=?, speaker=?, pitch=?, speed=?, isDontRead=?' +
+        ' ON DUPLICATE KEY UPDATE speaker=VALUE(speaker), pitch=VALUE(pitch), speed=VALUE(speed), isDontRead=VALUE(isDontRead)',
+      [id, speaker, pitch, speed, isDontRead],
     )
-    rows = await conn.query('SELECT * FROM userSetting WHERE id = ?', [id])
-    return rows![0]!
+    return { id: BigInt(id), speaker, pitch, speed, isDontRead }
   } catch (err) {
     if (err instanceof SqlError) {
       throw new DBError('ランダム値の設定に失敗しました。', {

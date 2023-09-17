@@ -69,6 +69,7 @@ export async function randomizeUserSetting(id: string) {
       [speaker, pitch, speed, id],
     )
     rows = await conn.query('SELECT * FROM userSetting WHERE id = ?', [id])
+    return rows![0]!
   } catch (err) {
     if (err instanceof SqlError) {
       throw new DBError('ランダム値の設定に失敗しました。', {
@@ -78,7 +79,6 @@ export async function randomizeUserSetting(id: string) {
     throw err
   } finally {
     if (conn) conn.release()
-    return rows![0]!
   }
 }
 

@@ -83,7 +83,7 @@ export class RejoinCommand extends Command {
       guildCtx.leave({ voiceChannelId, cause })
 
       const worker = await guildCtx.join(
-        voiceChannel,
+        newVoiceBasedChannelId(voiceChannel),
         newGuildTextBasedChannelId(interaction.channel),
       )
 

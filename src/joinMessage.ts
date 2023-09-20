@@ -35,7 +35,7 @@ export const joinMessageRun = async (message: Message) => {
 
   try {
     worker = await guildCtx.join(
-      message.channel,
+      newVoiceBasedChannelId(message.channel),
       newGuildTextBasedChannelId(message.channel),
     )
   } catch (err) {

@@ -9,6 +9,7 @@ import {
 } from '../errors/index.js'
 import { checkCanJoin, checkUserAlreadyJoined } from '../components/preCheck.js'
 import { LeaveCause } from '../connectionCtx.js'
+import { newGuildTextBasedChannelId, newVoiceBasedChannelId } from '../id.js'
 
 export class RejoinCommand extends Command {
   public constructor(
@@ -53,20 +54,21 @@ export class RejoinCommand extends Command {
       checkCanJoin(voiceChannel)
 
       const guildCtx = guildCtxManager.get(interaction.member.guild)
+      const voiceChannelId = newVoiceBasedChannelId(voiceChannel)
 
       if (
-        guildCtx.connectionManager.getWithVoiceChannel(voiceChannel) ===
+        guildCtx.connectionManager.getWithVoiceChannelId(voiceChannelId) ===
         undefined
       )
         throw new HandleInteractionError(
           HandleInteractionErrorType.userNotWithBot,
         )
       const existingJoinConfig = guildCtx.connectionManager.get(
-        interaction.channel,
+        newGuildTextBasedChannelId(interaction.channel),
       )?.connection.joinConfig
       if (
-        guildCtx.connectionManager.channelMap.get(voiceChannel) !==
-          interaction.channel &&
+        guildCtx.connectionManager.channelMap.get(voiceChannelId) !==
+          interaction.channel.id &&
         existingJoinConfig !== undefined
       )
         throw new AlreadyUsedChannelError(
@@ -74,13 +76,16 @@ export class RejoinCommand extends Command {
           existingJoinConfig.channelId ?? '',
         )
       const cause =
-        interaction.channel ===
-        guildCtx.connectionManager.channelMap.get(voiceChannel)
+        interaction.channel.id ===
+        guildCtx.connectionManager.channelMap.get(voiceChannelId)
           ? undefined
           : LeaveCause.rejoin
-      guildCtx.leave({ voiceChannel, cause })
+      guildCtx.leave({ voiceChannelId, cause })
 
-      const worker = await guildCtx.join(voiceChannel, interaction.channel)
+      const worker = await guildCtx.join(
+        voiceChannel,
+        newGuildTextBasedChannelId(interaction.channel),
+      )
 
       interactionReplyOptions = {
         embeds: [

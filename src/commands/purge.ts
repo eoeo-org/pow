@@ -7,6 +7,7 @@ import {
 } from '../errors/index.js'
 import type { InteractionReplyOptions } from 'discord.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
+import { newVoiceBasedChannelId } from '../id.js'
 
 export class PurgeCommand extends Command {
   public constructor(
@@ -51,7 +52,9 @@ export class PurgeCommand extends Command {
 
       const connectionCtx = guildCtxManager
         .get(interaction.member.guild)
-        .connectionManager.getWithVoiceChannel(voiceChannel)
+        .connectionManager.getWithVoiceChannelId(
+          newVoiceBasedChannelId(voiceChannel),
+        )
       if (connectionCtx === undefined)
         throw new HandleInteractionError(
           HandleInteractionErrorType.userNotWithBot,
@@ -68,7 +71,7 @@ export class PurgeCommand extends Command {
             title: '読み上げを中断しました。',
             description: [
               `担当BOT: <@${workerId}>`,
-              `テキストチャンネル: ${connectionCtx.readChannel.toString()}`,
+              `テキストチャンネル: <#${connectionCtx.readChannelId.toString()}>`,
               `ボイスチャンネル: ${voiceChannel}`,
               '読み上げキューを空にして、読み上げを中断しました。',
             ].join('\n'),

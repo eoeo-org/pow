@@ -7,6 +7,7 @@ import {
   PowError,
 } from '../errors/index.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
+import { newUserId, newVoiceBasedChannelId } from '../id.js'
 
 export class TtsmuteCommand extends Command {
   public constructor(
@@ -59,7 +60,9 @@ export class TtsmuteCommand extends Command {
 
       const connectionCtx = guildCtxManager
         .get(interaction.member.guild)
-        .connectionManager.getWithVoiceChannel(voiceChannel)
+        .connectionManager.getWithVoiceChannelId(
+          newVoiceBasedChannelId(voiceChannel),
+        )
       if (connectionCtx === undefined)
         throw new HandleInteractionError(
           HandleInteractionErrorType.userNotWithBot,
@@ -67,7 +70,7 @@ export class TtsmuteCommand extends Command {
 
       const enable =
         interaction.options.getBoolean('enable') ??
-        !connectionCtx.skipUser.has(interaction.user)
+        !connectionCtx.skipUser.has(newUserId(interaction.user))
       connectionCtx.updateSkipUser(interaction.user, enable)
       interactionReplyOptions = {
         embeds: [

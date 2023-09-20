@@ -6,6 +6,7 @@ import {
 } from 'discord.js'
 import { guildCtxManager, workerClientMap } from '../index.js'
 import { Listener } from '@sapphire/framework'
+import { newVoiceBasedChannelId } from '../id.js'
 
 export class ChannelUpdateListener extends Listener {
   public override run(
@@ -26,15 +27,17 @@ export class ChannelUpdateListener extends Listener {
       const connectionManager = guildCtxManager.get(
         newChannel.guild,
       ).connectionManager
-      const readChannel = connectionManager.channelMap.get(newChannel)
+      const readChannelId = connectionManager.channelMap.get(
+        newVoiceBasedChannelId(newChannel),
+      )
 
-      if (readChannel === undefined) return
+      if (readChannelId === undefined) return
       const workerId =
-        connectionManager.get(readChannel)?.connection.joinConfig.group
+        connectionManager.get(readChannelId)?.connection.joinConfig.group
       if (workerId === undefined) return
       workerClientMap
         .get(workerId)
-        ?.guilds.cache.get(readChannel.guildId)
+        ?.guilds.cache.get(newChannel.guildId)
         ?.members.me?.voice.setRequestToSpeak(true)
     }
   }

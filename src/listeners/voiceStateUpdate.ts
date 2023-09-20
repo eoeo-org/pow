@@ -1,15 +1,11 @@
-import {
-  ChannelType,
-  VoiceState,
-  type VoiceBasedChannel,
-  DiscordAPIError,
-} from 'discord.js'
+import { ChannelType, VoiceState, DiscordAPIError } from 'discord.js'
 import { guildCtxManager } from '../index.js'
 import debug from 'debug'
 const debug__ErrorHandler = debug('events/voiceStateUpdate.js:ErrorHandler')
 import { Listener } from '@sapphire/framework'
 import { deleteUserCache } from '../db.js'
 import { LeaveCause } from '../connectionCtx.js'
+import { newVoiceBasedChannelId } from '../id.js'
 
 export class VoiceStateUpdateListener extends Listener {
   public override async run(oldState: VoiceState, newState: VoiceState) {
@@ -46,11 +42,13 @@ export class VoiceStateUpdateListener extends Listener {
       )
     ) {
       guildCtx.leave({
-        voiceChannel: oldState.channel as VoiceBasedChannel,
+        voiceChannelId: newVoiceBasedChannelId(oldState.channel),
         cause: LeaveCause.disconnected,
       })
     } else if (
-      guildCtx.connectionManager.channelMap.has(oldState.channel) &&
+      guildCtx.connectionManager.channelMap.has(
+        newVoiceBasedChannelId(oldState.channel),
+      ) &&
       oldState.channel.members.size === 1 &&
       oldState.channel.members.every((member) =>
         [...guildCtx.connectionManager.values()].find(
@@ -62,12 +60,14 @@ export class VoiceStateUpdateListener extends Listener {
       )
     ) {
       guildCtx.leave({
-        voiceChannel: oldState.channel as VoiceBasedChannel,
+        voiceChannelId: newVoiceBasedChannelId(oldState.channel),
         cause: LeaveCause.noUser,
       })
     } else if (
       oldState.channel !== newState.channel &&
-      guildCtx.connectionManager.channelMap.has(oldState.channel)
+      guildCtx.connectionManager.channelMap.has(
+        newVoiceBasedChannelId(oldState.channel),
+      )
     ) {
       deleteUserCache(oldState.id)
     }

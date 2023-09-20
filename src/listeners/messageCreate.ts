@@ -3,6 +3,7 @@ import { joinMessageRun } from '../joinMessage.js'
 import { guildCtxManager } from '../index.js'
 import { convertContent } from '../contentConverter.js'
 import { Listener } from '@sapphire/framework'
+import { newGuildTextBasedChannelId, newUserId } from '../id.js'
 
 export class MessageCreateListener extends Listener {
   public override run(message: Message) {
@@ -21,11 +22,14 @@ export class MessageCreateListener extends Listener {
     const connectionManager = guildCtxManager.get(
       message.guild,
     ).connectionManager
-    if (!connectionManager.has(message.channel)) return
-    const connectionCtx = connectionManager.get(message.channel)
+    if (!connectionManager.has(newGuildTextBasedChannelId(message.channel)))
+      return
+    const connectionCtx = connectionManager.get(
+      newGuildTextBasedChannelId(message.channel),
+    )
     if (connectionCtx === undefined) return
 
-    if (connectionCtx.skipUser.has(message.author)) return
+    if (connectionCtx.skipUser.has(newUserId(message.author))) return
 
     const convertedMessage = convertContent(
       message.content,

@@ -15,12 +15,11 @@ import {
 
 import {
   Client,
-  type VoiceBasedChannel,
   Message,
   ChatInputCommandInteraction,
   type DiscordErrorData,
-  type GuildTextBasedChannel,
   User,
+  Routes,
 } from 'discord.js'
 import { Queue } from './utils.js'
 import { fetchAudioStream } from './voiceRead.js'
@@ -34,6 +33,12 @@ import {
   HandleInteractionError,
   HandleInteractionErrorType,
 } from './errors/index.js'
+import {
+  newUserId,
+  type GuildTextBasedChannelId,
+  type UserId,
+  type VoiceBasedChannelId,
+} from './id.js'
 
 export const LeaveCause = {
   command: 'leaveコマンドが実行されました。',
@@ -46,16 +51,22 @@ export const LeaveCause = {
 export type LeaveCause = (typeof LeaveCause)[keyof typeof LeaveCause]
 
 class ConnectionContext {
-  readChannel: GuildTextBasedChannel
+  readChannelId: GuildTextBasedChannelId
   readQueue: Queue<{ audio: Readable }>
   player: AudioPlayer | null = null
   connection: VoiceConnection
-  skipUser: Set<User> = new Set()
+  skipUser: Set<UserId> = new Set()
+  readonly client: Client
 
-  constructor(readChannel: GuildTextBasedChannel, connection: VoiceConnection) {
-    this.readChannel = readChannel
+  constructor(
+    readChannelId: GuildTextBasedChannelId,
+    connection: VoiceConnection,
+    client: Client,
+  ) {
+    this.readChannelId = readChannelId
     this.readQueue = new Queue(this.#readMessage.bind(this))
     this.connection = connection
+    this.client = client
   }
 
   async #readMessage({ audio }: { audio: Readable }) {
@@ -126,98 +137,99 @@ class ConnectionContext {
 
   async updateSkipUser(user: User, isSkip: boolean) {
     if (isSkip) {
-      this.skipUser.add(user)
+      this.skipUser.add(newUserId(user))
     } else {
-      this.skipUser.delete(user)
+      this.skipUser.delete(newUserId(user))
     }
   }
 }
 
 export class ConnectionCtxManager extends Map<
-  GuildTextBasedChannel,
+  GuildTextBasedChannelId,
   ConnectionContext
 > {
-  channelMap: Map<VoiceBasedChannel, GuildTextBasedChannel>
+  channelMap: Map<VoiceBasedChannelId, GuildTextBasedChannelId>
   constructor() {
     super()
     this.channelMap = new Map()
   }
-  override get(channel: GuildTextBasedChannel | undefined) {
-    if (channel === undefined) return undefined
-    return super.get(channel)
+  override get(channelId: GuildTextBasedChannelId | undefined) {
+    if (channelId === undefined) return undefined
+    return super.get(channelId)
   }
-  getWithVoiceChannel(voiceChannel: VoiceBasedChannel) {
-    return this.get(this.channelMap.get(voiceChannel))
+  getWithVoiceChannelId(voiceChannelId: VoiceBasedChannelId) {
+    return this.get(this.channelMap.get(voiceChannelId))
   }
 
   connectionJoin(
-    voiceChannel: VoiceBasedChannel,
+    voiceChannelId: VoiceBasedChannelId,
     guildId: string,
-    readChannel: GuildTextBasedChannel,
+    readChannelId: GuildTextBasedChannelId,
     worker: Client,
+    client: Client,
   ) {
-    if (this.channelMap.has(voiceChannel)) throw new AlreadyJoinedError()
-    const existingJoinConfig = this.get(readChannel)?.connection.joinConfig
+    if (this.channelMap.has(voiceChannelId)) throw new AlreadyJoinedError()
+    const existingJoinConfig = this.get(readChannelId)?.connection.joinConfig
     if (existingJoinConfig !== undefined)
       throw new AlreadyUsedChannelError(
         existingJoinConfig.guildId,
         existingJoinConfig.channelId ?? '',
       )
-    this.channelMap.set(voiceChannel, readChannel)
+    this.channelMap.set(voiceChannelId, readChannelId)
     const connection = joinVoiceChannel({
-      channelId: voiceChannel.id,
+      channelId: voiceChannelId,
       guildId: guildId,
       group: worker.user!.id,
       adapterCreator: worker.guilds.cache.get(guildId)!.voiceAdapterCreator,
     })
     connection.once('disconnect', () => {
       debug__ConnectionContext('vc disconnected')
-      this.get(readChannel)!.readQueue.purge()
+      this.get(readChannelId)!.readQueue.purge()
       connection?.destroy()
-      this.delete(readChannel)
+      this.delete(readChannelId)
     })
-    this.set(readChannel, new ConnectionContext(readChannel, connection))
+    this.set(
+      readChannelId,
+      new ConnectionContext(readChannelId, connection, client),
+    )
   }
   connectionLeave({
-    voiceChannel,
+    voiceChannelId,
     cause = undefined,
   }: {
-    voiceChannel: VoiceBasedChannel
+    voiceChannelId: VoiceBasedChannelId
     cause?: LeaveCause | undefined
   }) {
-    const readChannel = this.channelMap.get(voiceChannel)
-    if (readChannel === undefined)
+    const readChannelId = this.channelMap.get(voiceChannelId)
+    if (readChannelId === undefined)
       throw new HandleInteractionError(
         HandleInteractionErrorType.userNotWithBot,
       )
-    if (cause !== undefined) {
-      readChannel
-        .send({
-          embeds: [
-            {
-              color: 0x00ff00,
-              title: 'ボイスチャンネルから退出しました。',
-              description: `${cause}`,
-              footer: { text: 'またのご利用をお待ちしております。' },
-            },
-          ],
-        })
-        .catch((err: DiscordErrorData) => {
-          if (err.code !== 50013) throw err
-          debug__ErrorHandler(
-            `Error code ${err.code}: Missing send messages permission.`,
-          )
-          debug__ErrorHandler(
-            `Guild ID: ${voiceChannel.guild.id} Guild Name: ${voiceChannel.guild.name} Channel ID: ${readChannel.id} Channel Name: ${readChannel.name}`,
-          )
-        })
-    }
-    const connection = this.get(this.channelMap.get(voiceChannel))?.connection
+    const connectionCtx = this.get(this.channelMap.get(voiceChannelId))
+    const connection = connectionCtx?.connection
     if (connection === undefined) throw Error('connection is null')
     const workerId = connection.joinConfig.group
     connection.disconnect()
-    this.channelMap.delete(voiceChannel)
-    this.delete(readChannel)
+    this.channelMap.delete(voiceChannelId)
+    this.delete(readChannelId)
+    if (cause !== undefined) {
+      connectionCtx!.client.rest
+        .post(Routes.channelMessages(readChannelId), {
+          body: {
+            embeds: [
+              {
+                color: 0x00ff00,
+                title: 'ボイスチャンネルから退出しました。',
+                description: `${cause}`,
+                footer: { text: 'またのご利用をお待ちしております。' },
+              },
+            ],
+          },
+        })
+        .catch((err: DiscordErrorData) => {
+          if (err.code !== 50013) throw err
+        })
+    }
     return workerId
   }
 }

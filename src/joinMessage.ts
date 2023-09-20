@@ -1,5 +1,6 @@
 import { ChannelType, Client, Message } from 'discord.js'
 import { guildCtxManager, workerReady } from './index.js'
+import { newGuildTextBasedChannelId, newVoiceBasedChannelId } from './id.js'
 
 export const joinMessageRun = async (message: Message) => {
   if (!message.author.bot) {
@@ -21,15 +22,22 @@ export const joinMessageRun = async (message: Message) => {
     return
   const guildCtx = guildCtxManager.get(message.channel.guild)
   if (
-    guildCtx.connectionManager.channelMap.has(message.channel) ||
-    guildCtx.connectionManager.get(message.channel!) !== undefined
+    guildCtx.connectionManager.channelMap.has(
+      newVoiceBasedChannelId(message.channel),
+    ) ||
+    guildCtx.connectionManager.get(
+      newGuildTextBasedChannelId(message.channel),
+    ) !== undefined
   )
     return
 
   let worker: Client | null = null
 
   try {
-    worker = await guildCtx.join(message.channel, message.channel)
+    worker = await guildCtx.join(
+      message.channel,
+      newGuildTextBasedChannelId(message.channel),
+    )
   } catch (err) {
     if (err instanceof Error && err.message === 'No worker') return
     throw err

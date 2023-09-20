@@ -2,7 +2,6 @@ import {
   Client,
   type Guild,
   type VoiceBasedChannel,
-  type GuildTextBasedChannel,
   ChannelType,
 } from 'discord.js'
 import { WorkerClientMap } from './worker.js'
@@ -13,6 +12,11 @@ import {
   NoWorkerError,
   NotReadyWorkerError,
 } from './errors/index.js'
+import {
+  newVoiceBasedChannelId,
+  type GuildTextBasedChannelId,
+  type VoiceBasedChannelId,
+} from './id.js'
 
 const getBots = async (guild: Guild, worker: WorkerClientMap) => {
   const results = await Promise.allSettled(
@@ -36,9 +40,13 @@ export class GuildContext {
 
   async join(
     voiceChannel: VoiceBasedChannel,
-    readChannel: GuildTextBasedChannel,
+    readChannelId: GuildTextBasedChannelId,
   ) {
-    if (this.connectionManager.channelMap.has(voiceChannel))
+    if (
+      this.connectionManager.channelMap.has(
+        newVoiceBasedChannelId(voiceChannel),
+      )
+    )
       throw new AlreadyJoinedError()
 
     const vcArray = (await voiceChannel.guild.channels.fetch())
@@ -72,11 +80,9 @@ export class GuildContext {
         (v) => v.connection.joinConfig.group === workerId,
       )
       if (oldConnectionCtx !== undefined) {
-        const oldVoiceChannel = await voiceChannel.client.channels
-          .fetch(oldConnectionCtx.connection.joinConfig.channelId!)
-          .then((channels) => {
-            return channels?.type === ChannelType.GuildVoice ? channels : null
-          })
+        const oldVoiceChannel = (await voiceChannel.client.channels.fetch(
+          oldConnectionCtx.connection.joinConfig.channelId!,
+        )) as VoiceBasedChannel
         const forOldCtxWorkerId = (await this.bots).find(
           (botId) =>
             ![...this.connectionManager.values()]
@@ -86,12 +92,13 @@ export class GuildContext {
         if (forOldCtxWorkerId === undefined) {
           throw new NoWorkerError()
         }
-        this.leave({ voiceChannel: oldVoiceChannel! })
+        this.leave({ voiceChannelId: newVoiceBasedChannelId(oldVoiceChannel) })
         this.connectionManager.connectionJoin(
-          oldVoiceChannel!,
+          newVoiceBasedChannelId(oldVoiceChannel!),
           this.guild.id,
-          oldConnectionCtx.readChannel,
+          oldConnectionCtx.readChannelId,
           workerClientMap.get(forOldCtxWorkerId)!,
+          this.guild.client,
         )
       }
     }
@@ -100,22 +107,23 @@ export class GuildContext {
     }
     const worker = workerClientMap.get(workerId)!
     this.connectionManager.connectionJoin(
-      voiceChannel,
+      newVoiceBasedChannelId(voiceChannel),
       this.guild.id,
-      readChannel,
+      readChannelId,
       worker,
+      this.guild.client,
     )
     return worker
   }
   leave({
-    voiceChannel,
+    voiceChannelId,
     cause,
   }: {
-    voiceChannel: VoiceBasedChannel
+    voiceChannelId: VoiceBasedChannelId
     cause?: LeaveCause | undefined
   }) {
     const workerId = this.connectionManager.connectionLeave({
-      voiceChannel: voiceChannel,
+      voiceChannelId: voiceChannelId,
       cause,
     })
     return workerId
@@ -124,8 +132,8 @@ export class GuildContext {
     ;(await this.bots).push(workerId)
   }
   leaveAll({ cause }: { cause: LeaveCause }) {
-    for (const voiceChannel of this.connectionManager.channelMap.keys()) {
-      this.leave({ voiceChannel, cause })
+    for (const voiceChannelId of this.connectionManager.channelMap.keys()) {
+      this.leave({ voiceChannelId, cause })
     }
   }
 }

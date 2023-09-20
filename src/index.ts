@@ -1,9 +1,4 @@
-import {
-  Events,
-  Message,
-  Options,
-  type GuildTextBasedChannel,
-} from 'discord.js'
+import { Events, Options, Routes } from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { GuildCtxManager } from './guildCtx.js'
 import type { SignalConstants } from 'os'
@@ -57,20 +52,24 @@ const destroy = async () => {
   if (!isCalledDestroy) {
     isCalledDestroy = true
 
-    const promises: Promise<Message<true>>[] = []
+    const promises: Promise<unknown>[] = []
 
     guildCtxManager.forEach((guildContext) => {
       guildContext.connectionManager.forEach(async (connectionContext) => {
-        const channel = connectionContext.readChannel as GuildTextBasedChannel
-        const promise = channel.send({
-          embeds: [
-            {
-              color: 0xffff00,
-              title: '再起動を行うためボイスチャンネルから退出します。',
-              description: '起動完了までしばらくお待ちください。',
+        const promise = client.rest.post(
+          Routes.channelMessages(connectionContext.readChannelId),
+          {
+            body: {
+              embeds: [
+                {
+                  color: 0xffff00,
+                  title: '再起動を行うためボイスチャンネルから退出します。',
+                  description: '起動完了までしばらくお待ちください。',
+                },
+              ],
             },
-          ],
-        })
+          },
+        )
         promises.push(promise)
       })
     })

@@ -7,6 +7,7 @@ import {
 } from '../errors/index.js'
 import type { InteractionReplyOptions } from 'discord.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
+import { newVoiceBasedChannelId } from '../id.js'
 
 export class SkipCommand extends Command {
   public constructor(
@@ -51,7 +52,9 @@ export class SkipCommand extends Command {
 
       const connectionCtx = guildCtxManager
         .get(interaction.member.guild)
-        .connectionManager.getWithVoiceChannel(voiceChannel)
+        .connectionManager.getWithVoiceChannelId(
+          newVoiceBasedChannelId(voiceChannel),
+        )
       if (connectionCtx === undefined)
         throw new HandleInteractionError(
           HandleInteractionErrorType.userNotWithBot,
@@ -67,7 +70,7 @@ export class SkipCommand extends Command {
             title: '読み上げをスキップしました。',
             description: [
               `担当BOT: <@${workerId}>`,
-              `テキストチャンネル: ${connectionCtx.readChannel.toString()}`,
+              `テキストチャンネル: <#${connectionCtx.readChannelId.toString()}>`,
               `ボイスチャンネル: ${voiceChannel}`,
             ].join('\n'),
           },

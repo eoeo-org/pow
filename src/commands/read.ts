@@ -13,6 +13,7 @@ import {
   PowError,
 } from '../errors/index.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
+import { newVoiceBasedChannelId } from '../id.js'
 
 export class ReadCommand extends Command {
   public constructor(
@@ -121,7 +122,9 @@ export class ReadCommand extends Command {
 
       const connectionCtx = guildCtxManager
         .get(interaction.member.guild)
-        .connectionManager.getWithVoiceChannel(voiceChannel)
+        .connectionManager.getWithVoiceChannelId(
+          newVoiceBasedChannelId(voiceChannel),
+        )
       if (connectionCtx === undefined)
         throw new HandleInteractionError(
           HandleInteractionErrorType.userNotWithBot,

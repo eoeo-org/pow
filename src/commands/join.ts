@@ -3,6 +3,7 @@ import { guildCtxManager } from '../index.js'
 import { type InteractionReplyOptions } from 'discord.js'
 import { PowError } from '../errors/index.js'
 import { checkCanJoin, checkUserAlreadyJoined } from '../components/preCheck.js'
+import { newGuildTextBasedChannelId } from '../id.js'
 
 export class JoinCommand extends Command {
   public constructor(
@@ -48,7 +49,10 @@ export class JoinCommand extends Command {
 
       const guildCtx = guildCtxManager.get(interaction.member.guild)
 
-      const worker = await guildCtx.join(voiceChannel, interaction.channel)
+      const worker = await guildCtx.join(
+        voiceChannel,
+        newGuildTextBasedChannelId(interaction.channel),
+      )
 
       interactionReplyOptions = {
         embeds: [

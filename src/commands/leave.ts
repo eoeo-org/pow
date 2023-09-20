@@ -4,6 +4,7 @@ import { checkUserAlreadyJoined } from '../components/preCheck.js'
 import type { InteractionReplyOptions } from 'discord.js'
 import { PowError } from '../errors/index.js'
 import { LeaveCause } from '../connectionCtx.js'
+import { newGuildTextBasedChannelId, newVoiceBasedChannelId } from '../id.js'
 
 export class LeaveCommand extends Command {
   public constructor(
@@ -29,7 +30,7 @@ export class LeaveCommand extends Command {
   public override async chatInputRun(
     interaction: ChatInputCommand.Interaction,
   ) {
-    if (!interaction.inCachedGuild()) return
+    if (!interaction.inCachedGuild() || interaction.channel == null) return
     const user = await interaction.member.fetch()
     const voiceChannel = user.voice.channel
 
@@ -47,10 +48,17 @@ export class LeaveCommand extends Command {
       checkUserAlreadyJoined(voiceChannel)
 
       const ctx = guildCtxManager.get(interaction.member.guild)
-      const textChannel = ctx.connectionManager.channelMap.get(voiceChannel)
+      const textChannelId = ctx.connectionManager.channelMap.get(
+        newVoiceBasedChannelId(voiceChannel),
+      )
       const cause =
-        interaction.channel === textChannel ? undefined : LeaveCause.command
-      const workerId = ctx.leave({ voiceChannel, cause })
+        newGuildTextBasedChannelId(interaction.channel) === textChannelId
+          ? undefined
+          : LeaveCause.command
+      const workerId = ctx.leave({
+        voiceChannelId: newVoiceBasedChannelId(voiceChannel),
+        cause,
+      })
 
       interactionReplyOptions = {
         embeds: [
@@ -59,7 +67,7 @@ export class LeaveCommand extends Command {
             title: 'ボイスチャンネルから退出しました。',
             description: [
               `担当BOT: <@${workerId}>`,
-              `テキストチャンネル: ${textChannel}`,
+              `テキストチャンネル: <#${textChannelId}>`,
               `ボイスチャンネル: ${voiceChannel}`,
               'またのご利用をお待ちしております。',
             ].join('\n'),

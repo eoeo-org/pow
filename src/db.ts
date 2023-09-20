@@ -1,5 +1,7 @@
 import { createPool, SqlError, type PoolConnection } from 'mariadb'
 import { DBError } from './errors/index.js'
+import type { VoiceBasedChannel } from 'discord.js'
+import type { ConnectionContext } from './connectionCtx.js'
 
 export interface UserSetting {
   id: bigint
@@ -7,6 +9,24 @@ export interface UserSetting {
   pitch: number
   speed: number
   isDontRead: 0 | 1
+}
+
+export interface ConnectionState {
+  voiceChannel: bigint
+  guild: bigint
+  readChannel: bigint
+  skipUser: string
+}
+
+const toConnectionState = (
+  connectionContext: ConnectionContext,
+): ConnectionState => {
+  return {
+    voiceChannel: BigInt(connectionContext.connection.joinConfig.channelId!),
+    guild: BigInt(connectionContext.connection.joinConfig.guildId),
+    readChannel: BigInt(connectionContext.readChannelId),
+    skipUser: [...connectionContext.skipUser].join(),
+  }
 }
 
 const userSettings = new Map<string, UserSetting>()
@@ -106,4 +126,73 @@ export async function setUserSetting(
 
 export function deleteUserCache(id: string) {
   userSettings.delete(id)
+}
+
+export async function loadStates() {
+  let conn: PoolConnection | undefined = undefined
+  try {
+    conn = await pool.getConnection()
+    await conn.query(
+      'CREATE TABLE IF NOT EXISTS connectionStates (voiceChannel BIGINT UNSIGNED NOT NULL PRIMARY KEY, guild BIGINT UNSIGNED NOT NULL, readChannel BIGINT UNSIGNED NOT NULL, skipUser TEXT)',
+    )
+    const rows: Array<ConnectionState> = await conn.query(
+      'SELECT * FROM connectionStates',
+    )
+    return rows
+  } catch (err) {
+    if (err instanceof SqlError) {
+      throw new DBError(err.message, { cause: err })
+    }
+    throw err
+  } finally {
+    if (conn) conn.release()
+  }
+}
+
+export async function setState(connectionContext: ConnectionContext) {
+  const connectionState = toConnectionState(connectionContext)
+  let conn: PoolConnection | undefined = undefined
+  try {
+    conn = await pool.getConnection()
+    await conn.query(
+      'INSERT IGNORE INTO connectionStates SET voiceChannel=?, guild=?, readChannel=?, skipUser=? ON DUPLICATE KEY UPDATE guild=VALUE(guild), readChannel=VALUE(readChannel), skipUser=VALUE(skipUser)',
+      [
+        connectionState.voiceChannel,
+        connectionState.guild,
+        connectionState.readChannel,
+        connectionState.skipUser,
+        connectionState.voiceChannel,
+      ],
+    )
+  } catch (err) {
+    if (err instanceof SqlError) {
+      throw new DBError(err.message, { cause: err })
+    }
+    throw err
+  } finally {
+    if (conn) conn.release()
+  }
+}
+
+export async function deleteState({
+  voiceChannel,
+  voiceChannelId,
+}: {
+  voiceChannel?: VoiceBasedChannel
+  voiceChannelId?: string
+}) {
+  let conn: PoolConnection | undefined = undefined
+  try {
+    conn = await pool.getConnection()
+    await conn.query('DELETE FROM connectionStates WHERE voiceChannel=?', [
+      voiceChannel?.id ?? voiceChannelId,
+    ])
+  } catch (err) {
+    if (err instanceof SqlError) {
+      throw new DBError(err.message, { cause: err })
+    }
+    throw err
+  } finally {
+    if (conn) conn.release()
+  }
 }

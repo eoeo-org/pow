@@ -7,7 +7,11 @@ import {
   NoWorkerError,
   NotReadyWorkerError,
 } from './errors/index.js'
-import { type GuildTextBasedChannelId, type VoiceBasedChannelId } from './id.js'
+import {
+  type GuildTextBasedChannelId,
+  type VoiceBasedChannelId,
+  type UserId,
+} from './id.js'
 
 const getBots = async (guild: Guild, worker: WorkerClientMap) => {
   const results = await Promise.allSettled(
@@ -29,10 +33,15 @@ export class GuildContext {
     this.connectionManager = new ConnectionCtxManager()
   }
 
-  async join(
-    voiceChannelId: VoiceBasedChannelId,
-    readChannelId: GuildTextBasedChannelId,
-  ) {
+  async join({
+    voiceChannelId,
+    readChannelId,
+    skipUser = new Set(),
+  }: {
+    voiceChannelId: VoiceBasedChannelId
+    readChannelId: GuildTextBasedChannelId
+    skipUser?: Set<UserId>
+  }) {
     if (this.connectionManager.channelMap.has(voiceChannelId))
       throw new AlreadyJoinedError()
 
@@ -82,26 +91,28 @@ export class GuildContext {
           throw new NoWorkerError()
         }
         this.leave({ voiceChannelId: oldVoiceChannelId })
-        this.connectionManager.connectionJoin(
-          oldVoiceChannelId,
-          this.guild.id,
-          oldConnectionCtx.readChannelId,
-          workerClientMap.get(forOldCtxWorkerId)!,
-          this.guild.client,
-        )
+        this.connectionManager.connectionJoin({
+          voiceChannelId: oldVoiceChannelId,
+          guildId: this.guild.id,
+          readChannelId: oldConnectionCtx.readChannelId,
+          worker: workerClientMap.get(forOldCtxWorkerId)!,
+          client: this.guild.client,
+          skipUser,
+        })
       }
     }
     if (workerId === undefined) {
       throw new NoWorkerError()
     }
     const worker = workerClientMap.get(workerId)!
-    this.connectionManager.connectionJoin(
+    this.connectionManager.connectionJoin({
       voiceChannelId,
-      this.guild.id,
+      guildId: this.guild.id,
       readChannelId,
       worker,
-      this.guild.client,
-    )
+      client: this.guild.client,
+      skipUser,
+    })
     return worker
   }
   leave({

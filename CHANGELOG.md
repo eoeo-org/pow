@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.5.0](https://github.com/kazukazu123123/pow/compare/v3.4.0...v3.5.0) (2023-09-20)
+
+
+### Features
+
+* 再起動後に再参加する機能を追加 ([#801](https://github.com/kazukazu123123/pow/issues/801)) ([597d340](https://github.com/kazukazu123123/pow/commit/597d340e1549519073f88b5132027a643655609d))
+
+
+### Performance Improvements
+
+* idベースの管理にする ([#798](https://github.com/kazukazu123123/pow/issues/798)) ([30054cf](https://github.com/kazukazu123123/pow/commit/30054cfd9c62fdacf89bb75c1f1a5851eae29a2a))
+* idベースの管理にする2 ([#800](https://github.com/kazukazu123123/pow/issues/800)) ([9ecc3b5](https://github.com/kazukazu123123/pow/commit/9ecc3b53ec0a17b551d5dabb4cf8defd28c724e2))
+
 ## [3.4.0](https://github.com/kazukazu123123/pow/compare/v3.3.0...v3.4.0) (2023-09-17)
 
 

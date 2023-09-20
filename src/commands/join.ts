@@ -49,10 +49,10 @@ export class JoinCommand extends Command {
 
       const guildCtx = guildCtxManager.get(interaction.member.guild)
 
-      const worker = await guildCtx.join(
-        newVoiceBasedChannelId(voiceChannel),
-        newGuildTextBasedChannelId(interaction.channel),
-      )
+      const worker = await guildCtx.join({
+        voiceChannelId: newVoiceBasedChannelId(voiceChannel),
+        readChannelId: newGuildTextBasedChannelId(interaction.channel),
+      })
 
       interactionReplyOptions = {
         embeds: [

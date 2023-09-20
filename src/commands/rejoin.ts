@@ -82,10 +82,10 @@ export class RejoinCommand extends Command {
           : LeaveCause.rejoin
       guildCtx.leave({ voiceChannelId, cause })
 
-      const worker = await guildCtx.join(
-        newVoiceBasedChannelId(voiceChannel),
-        newGuildTextBasedChannelId(interaction.channel),
-      )
+      const worker = await guildCtx.join({
+        voiceChannelId: newVoiceBasedChannelId(voiceChannel),
+        readChannelId: newGuildTextBasedChannelId(interaction.channel),
+      })
 
       interactionReplyOptions = {
         embeds: [

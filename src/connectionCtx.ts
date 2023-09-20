@@ -23,7 +23,7 @@ import {
 } from 'discord.js'
 import { Queue } from './utils.js'
 import { fetchAudioStream } from './voiceRead.js'
-import { getUserSetting } from './db.js'
+import { deleteState, getUserSetting, setState } from './db.js'
 import { Readable } from 'node:stream'
 import {
   AlreadyJoinedError,
@@ -50,23 +50,32 @@ export const LeaveCause = {
 
 export type LeaveCause = (typeof LeaveCause)[keyof typeof LeaveCause]
 
-class ConnectionContext {
+export class ConnectionContext {
   readChannelId: GuildTextBasedChannelId
   readQueue: Queue<{ audio: Readable }>
   player: AudioPlayer | null = null
   connection: VoiceConnection
-  skipUser: Set<UserId> = new Set()
+  skipUser: Set<UserId>
   readonly client: Client
 
-  constructor(
-    readChannelId: GuildTextBasedChannelId,
-    connection: VoiceConnection,
-    client: Client,
-  ) {
+  constructor({
+    readChannelId,
+    connection,
+    client,
+    skipUser = new Set(),
+  }: {
+    readChannelId: GuildTextBasedChannelId
+    connection: VoiceConnection
+    client: Client
+    skipUser?: Set<UserId>
+  }) {
     this.readChannelId = readChannelId
     this.readQueue = new Queue(this.#readMessage.bind(this))
     this.connection = connection
     this.client = client
+    this.skipUser = skipUser
+
+    setState(this)
   }
 
   async #readMessage({ audio }: { audio: Readable }) {
@@ -141,6 +150,7 @@ class ConnectionContext {
     } else {
       this.skipUser.delete(newUserId(user))
     }
+    await setState(this)
   }
 }
 
@@ -161,13 +171,21 @@ export class ConnectionCtxManager extends Map<
     return this.get(this.channelMap.get(voiceChannelId))
   }
 
-  connectionJoin(
-    voiceChannelId: VoiceBasedChannelId,
-    guildId: string,
-    readChannelId: GuildTextBasedChannelId,
-    worker: Client,
-    client: Client,
-  ) {
+  connectionJoin({
+    voiceChannelId,
+    guildId,
+    readChannelId,
+    worker,
+    client,
+    skipUser = new Set(),
+  }: {
+    voiceChannelId: VoiceBasedChannelId
+    guildId: string
+    readChannelId: GuildTextBasedChannelId
+    worker: Client
+    client: Client
+    skipUser?: Set<UserId>
+  }) {
     if (this.channelMap.has(voiceChannelId)) throw new AlreadyJoinedError()
     const existingJoinConfig = this.get(readChannelId)?.connection.joinConfig
     if (existingJoinConfig !== undefined)
@@ -188,10 +206,14 @@ export class ConnectionCtxManager extends Map<
       connection?.destroy()
       this.delete(readChannelId)
     })
-    this.set(
+    const connectionContext = new ConnectionContext({
       readChannelId,
-      new ConnectionContext(readChannelId, connection, client),
-    )
+      connection,
+      client,
+      skipUser,
+    })
+    this.set(readChannelId, connectionContext)
+    return connectionContext
   }
   connectionLeave({
     voiceChannelId,
@@ -230,6 +252,7 @@ export class ConnectionCtxManager extends Map<
           if (err.code !== 50013) throw err
         })
     }
+    deleteState({ voiceChannelId })
     return workerId
   }
 }

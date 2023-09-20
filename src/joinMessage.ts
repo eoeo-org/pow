@@ -34,10 +34,10 @@ export const joinMessageRun = async (message: Message) => {
   let worker: Client | null = null
 
   try {
-    worker = await guildCtx.join(
-      newVoiceBasedChannelId(message.channel),
-      newGuildTextBasedChannelId(message.channel),
-    )
+    worker = await guildCtx.join({
+      voiceChannelId: newVoiceBasedChannelId(message.channel),
+      readChannelId: newGuildTextBasedChannelId(message.channel),
+    })
   } catch (err) {
     if (err instanceof Error && err.message === 'No worker') return
     throw err

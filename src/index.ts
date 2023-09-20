@@ -6,6 +6,7 @@ import { WorkerClientMap } from './worker.js'
 import { readyEvent } from './events/index.js'
 
 import { createRequire } from 'node:module'
+import { load } from './load.js'
 const packageJson = createRequire(import.meta.url)('../package.json')
 
 let isCalledDestroy = false
@@ -46,6 +47,7 @@ client.on(Events.ClientReady, async (c) => {
     c,
   )
   workerReady = true
+  await load({ client, guildCtxManager })
 })
 
 const destroy = async () => {

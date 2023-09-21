@@ -1,6 +1,7 @@
 import { ChannelType, Client, Message } from 'discord.js'
 import { guildCtxManager, workerReady } from './index.js'
 import { newGuildTextBasedChannelId, newVoiceBasedChannelId } from './id.js'
+import { PowError } from './errors/PowError.js'
 
 export const joinMessageRun = async (message: Message) => {
   if (!message.author.bot) {
@@ -39,7 +40,7 @@ export const joinMessageRun = async (message: Message) => {
       readChannelId: newGuildTextBasedChannelId(message.channel),
     })
   } catch (err) {
-    if (err instanceof Error && err.message === 'No worker') return
+    if (err instanceof PowError) return
     throw err
   }
 

@@ -6,9 +6,9 @@ import { Listener } from '@sapphire/framework'
 import { newGuildTextBasedChannelId, newUserId } from '../id.js'
 
 export class MessageCreateListener extends Listener {
-  public override run(message: Message) {
+  public override async run(message: Message) {
     if (message.content === `${message.client.user} join`) {
-      joinMessageRun(message)
+      await joinMessageRun(message)
     }
 
     if (message.content === '' && message.stickers.size === 0) return

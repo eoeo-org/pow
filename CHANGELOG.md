@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.1](https://github.com/kazukazu123123/pow/compare/v3.5.0...v3.5.1) (2023-09-21)
+
+
+### Bug Fixes
+
+* メッセージによる join に失敗した時に落ちないように修正 ([#802](https://github.com/kazukazu123123/pow/issues/802)) ([42c21b2](https://github.com/kazukazu123123/pow/commit/42c21b23fef419d4567f019901050cf2269484f8))
+
 ## [3.5.0](https://github.com/kazukazu123123/pow/compare/v3.4.0...v3.5.0) (2023-09-20)
 
 

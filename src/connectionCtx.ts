@@ -249,7 +249,7 @@ export class ConnectionCtxManager extends Map<
           },
         })
         .catch((err: DiscordErrorData) => {
-          if (err.code !== 50013) throw err
+          if (![50013, 10003].includes(err.code)) throw err
         })
     }
     deleteState({ voiceChannelId })

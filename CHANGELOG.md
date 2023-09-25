@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.2](https://github.com/kazukazu123123/pow/compare/v3.5.1...v3.5.2) (2023-09-25)
+
+
+### Bug Fixes
+
+* 退出メッセージの送信先チャンネルがない時にエラーをスローしないように修正 ([#808](https://github.com/kazukazu123123/pow/issues/808)) ([9b9bed7](https://github.com/kazukazu123123/pow/commit/9b9bed77157a6aea2865ed5ad46bc63e711ba8a5))
+
 ## [3.5.1](https://github.com/kazukazu123123/pow/compare/v3.5.0...v3.5.1) (2023-09-21)
 
 

@@ -1,9 +1,9 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
 import { type InteractionReplyOptions } from 'discord.js'
-import { PowError } from '../errors/index.js'
 import { checkCanJoin, checkUserAlreadyJoined } from '../components/preCheck.js'
 import { newGuildTextBasedChannelId, newVoiceBasedChannelId } from '../id.js'
+import { getErrorReply } from '../utils.js'
 
 export class JoinCommand extends Command {
   public constructor(
@@ -70,11 +70,8 @@ export class JoinCommand extends Command {
         ],
       }
     } catch (error) {
-      if (error instanceof PowError) {
-        interactionReplyOptions = error.toInteractionReplyOptions
-      } else {
-        throw error
-      }
+      interactionReplyOptions = getErrorReply(error)
+      console.error(error)
     } finally {
       return interaction.reply(interactionReplyOptions)
     }

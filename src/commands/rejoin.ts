@@ -5,11 +5,11 @@ import {
   AlreadyUsedChannelError,
   HandleInteractionError,
   HandleInteractionErrorType,
-  PowError,
 } from '../errors/index.js'
 import { checkCanJoin, checkUserAlreadyJoined } from '../components/preCheck.js'
 import { LeaveCause } from '../connectionCtx.js'
 import { newGuildTextBasedChannelId, newVoiceBasedChannelId } from '../id.js'
+import { getErrorReply } from '../utils.js'
 
 export class RejoinCommand extends Command {
   public constructor(
@@ -101,11 +101,8 @@ export class RejoinCommand extends Command {
         ],
       }
     } catch (error) {
-      if (error instanceof PowError) {
-        interactionReplyOptions = error.toInteractionReplyOptions
-      } else {
-        throw error
-      }
+      interactionReplyOptions = getErrorReply(error)
+      console.error(error)
     } finally {
       return interaction.reply(interactionReplyOptions)
     }

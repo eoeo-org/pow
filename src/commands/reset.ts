@@ -1,7 +1,7 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
 import { PermissionFlagsBits, type InteractionReplyOptions } from 'discord.js'
-import { PowError } from '../errors/index.js'
+import { getErrorReply } from '../utils.js'
 
 export class ResetCommand extends Command {
   public constructor(
@@ -50,11 +50,8 @@ export class ResetCommand extends Command {
         ],
       }
     } catch (error) {
-      if (error instanceof PowError) {
-        interactionReplyOptions = error.toInteractionReplyOptions
-      } else {
-        throw error
-      }
+      interactionReplyOptions = getErrorReply(error)
+      console.error(error)
     } finally {
       return interaction.reply(interactionReplyOptions)
     }

@@ -116,6 +116,7 @@ export class ConnectionContext {
       debug__ConnectionContext('got response, adding to queue')
       this.readQueue.add({ audio })
     } catch (error) {
+      console.error(error)
       const message =
         error instanceof FetchResponseError
           ? { embeds: [FetchResponseError.getEmbed(error)] }

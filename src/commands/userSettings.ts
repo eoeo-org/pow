@@ -1,8 +1,7 @@
 import { Subcommand } from '@sapphire/plugin-subcommands'
-import { objToList, userSettingToDiff } from '../utils.js'
+import { getErrorReply, objToList, userSettingToDiff } from '../utils.js'
 import { getUserSetting, randomizeUserSetting, setUserSetting } from '../db.js'
 import type { InteractionReplyOptions } from 'discord.js'
-import { PowError } from '../errors/index.js'
 
 export class UserSettingsCommand extends Subcommand {
   public constructor(context: Subcommand.Context, options: Subcommand.Options) {
@@ -152,11 +151,8 @@ export class UserSettingsCommand extends Subcommand {
         ephemeral: true,
       }
     } catch (error) {
-      if (error instanceof PowError) {
-        interactionReplyOptions = error.toInteractionReplyOptions
-      } else {
-        throw error
-      }
+      interactionReplyOptions = getErrorReply(error)
+      console.error(error)
     } finally {
       return interaction.reply(interactionReplyOptions)
     }
@@ -274,11 +270,8 @@ export class UserSettingsCommand extends Subcommand {
       }
       return
     } catch (error) {
-      if (error instanceof PowError) {
-        interactionReplyOptions = error.toInteractionReplyOptions
-      } else {
-        throw error
-      }
+      interactionReplyOptions = getErrorReply(error)
+      console.error(error)
     } finally {
       return interaction.reply(interactionReplyOptions)
     }

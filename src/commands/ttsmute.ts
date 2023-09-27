@@ -4,10 +4,10 @@ import type { InteractionReplyOptions } from 'discord.js'
 import {
   HandleInteractionError,
   HandleInteractionErrorType,
-  PowError,
 } from '../errors/index.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
 import { newUserId, newVoiceBasedChannelId } from '../id.js'
+import { getErrorReply } from '../utils.js'
 
 export class TtsmuteCommand extends Command {
   public constructor(
@@ -83,11 +83,8 @@ export class TtsmuteCommand extends Command {
         ],
       }
     } catch (error) {
-      if (error instanceof PowError) {
-        interactionReplyOptions = error.toInteractionReplyOptions
-      } else {
-        throw error
-      }
+      interactionReplyOptions = getErrorReply(error)
+      console.error(error)
     } finally {
       return interaction.reply(interactionReplyOptions)
     }

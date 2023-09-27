@@ -3,11 +3,11 @@ import { guildCtxManager } from '../index.js'
 import {
   HandleInteractionError,
   HandleInteractionErrorType,
-  PowError,
 } from '../errors/index.js'
 import type { InteractionReplyOptions } from 'discord.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
 import { newVoiceBasedChannelId } from '../id.js'
+import { getErrorReply } from '../utils.js'
 
 export class SkipCommand extends Command {
   public constructor(
@@ -77,11 +77,8 @@ export class SkipCommand extends Command {
         ],
       }
     } catch (error) {
-      if (error instanceof PowError) {
-        interactionReplyOptions = error.toInteractionReplyOptions
-      } else {
-        throw error
-      }
+      interactionReplyOptions = getErrorReply(error)
+      console.error(error)
     } finally {
       return interaction.reply(interactionReplyOptions)
     }

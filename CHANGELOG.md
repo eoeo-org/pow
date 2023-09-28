@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/kazukazu123123/pow/compare/v3.5.2...v3.6.0) (2023-09-28)
+
+
+### Features
+
+* エラーを console に書き出すように ([#815](https://github.com/kazukazu123123/pow/issues/815)) ([326759a](https://github.com/kazukazu123123/pow/commit/326759a1c015714110668a6c1f5801007d50073e))
+
 ## [3.5.2](https://github.com/kazukazu123123/pow/compare/v3.5.1...v3.5.2) (2023-09-25)
 
 

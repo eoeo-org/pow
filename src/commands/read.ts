@@ -10,10 +10,10 @@ import {
 import {
   HandleInteractionError,
   HandleInteractionErrorType,
-  PowError,
 } from '../errors/index.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
 import { newVoiceBasedChannelId } from '../id.js'
+import { getErrorReply } from '../utils.js'
 
 export class ReadCommand extends Command {
   public constructor(
@@ -149,11 +149,8 @@ export class ReadCommand extends Command {
         content: 'メッセージを読み上げキューに追加しました。',
       }
     } catch (error) {
-      if (error instanceof PowError) {
-        interactionReplyOptions = error.toInteractionReplyOptions
-      } else {
-        throw error
-      }
+      interactionReplyOptions = getErrorReply(error)
+      console.error(error)
     } finally {
       return interaction.reply(interactionReplyOptions)
     }

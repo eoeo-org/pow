@@ -5,22 +5,22 @@ import type {
 } from 'discord.js'
 
 export class PowError extends Error {
-  static getEmbed(e: PowError): APIEmbed {
+  get embed(): APIEmbed {
     return {
       color: 0xff0000,
-      title: e.name,
-      description: e.message,
+      title: this.name,
+      description: this.message,
     }
   }
-  get toInteractionReplyOptions(): InteractionReplyOptions {
+  toInteractionReplyOptions(): InteractionReplyOptions {
     return {
-      embeds: [PowError.getEmbed(this)],
+      embeds: [this.embed],
       ephemeral: true,
     }
   }
-  get toMessageReplyOptions(): MessageReplyOptions {
+  toMessageReplyOptions(): MessageReplyOptions {
     return {
-      embeds: [PowError.getEmbed(this)],
+      embeds: [this.embed],
     }
   }
 }

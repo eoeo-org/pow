@@ -3,11 +3,11 @@ import { PowError } from './PowError.js'
 
 export class FetchResponseError extends PowError {
   override name = 'APIリクエストエラー'
-  static override getEmbed(e: FetchResponseError): APIEmbed {
+  override get embed(): APIEmbed {
     return {
       color: 0xff0000,
-      title: e.name,
-      description: `${e.response.status}: ${e.response.statusText}`,
+      title: this.name,
+      description: `${this.response.status}: ${this.response.statusText}`,
     }
   }
   constructor(

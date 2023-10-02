@@ -88,7 +88,7 @@ export const userSettingToDiff = (
 
 export const getErrorReply = (error: unknown): InteractionReplyOptions => {
   if (error instanceof PowError) {
-    return error.toInteractionReplyOptions
+    return error.toInteractionReplyOptions()
   } else {
     throw error
   }

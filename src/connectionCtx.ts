@@ -28,10 +28,9 @@ import { Readable } from 'node:stream'
 import {
   AlreadyJoinedError,
   AlreadyUsedChannelError,
-  DBError,
-  FetchResponseError,
   HandleInteractionError,
   HandleInteractionErrorType,
+  PowError,
 } from './errors/index.js'
 import {
   newUserId,
@@ -118,10 +117,8 @@ export class ConnectionContext {
     } catch (error) {
       console.error(error)
       const message =
-        error instanceof FetchResponseError
-          ? { embeds: [FetchResponseError.getEmbed(error)] }
-          : error instanceof DBError
-          ? { embeds: [DBError.getEmbed(error)] }
+        error instanceof PowError
+          ? { embeds: [error.embed] }
           : {
               embeds: [
                 {

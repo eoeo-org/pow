@@ -21,7 +21,7 @@
   "dependencies": {
     "@discordjs/collection": "1.5.3",
     "@discordjs/voice": "0.16.0",
-    "@sapphire/framework": "4.6.0",
+    "@sapphire/framework": "4.6.1",
     "@sapphire/plugin-subcommands": "4.2.1",
     "debug": "4.3.4",
     "discord-emoji": "2.3.0",

@@ -30,7 +30,7 @@ RUN --mount=type=bind,source=src/,target=src/ \
     --mount=type=bind,source=.swcrc,target=.swcrc \
     pnpm build
 
-FROM gcr.io/distroless/cc-debian11:nonroot@sha256:fafc6b2fc16ef26b18b295c6eafc80b0e27ed9c7854b629f845146fd2500833c
+FROM gcr.io/distroless/cc-debian11:nonroot@sha256:fe17f673e8dfdb5dbbb0009a37a260d87eaa63c4f36e1ffad40c982934b68391
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"

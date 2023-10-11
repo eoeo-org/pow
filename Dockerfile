@@ -1,27 +1,30 @@
 # syntax=docker/dockerfile:1
 
-FROM ubuntu:rolling@sha256:f1090cfa89ab321a6d670e79652f61593502591f2fc7452fb0b7c6da575729c4 as depender
+FROM ghcr.io/jqlang/jq:1.7 as jq-base
 
-ARG APT_MIRROR="ftp.jaist.ac.jp/pub/Linux"
-RUN sed -i "s@archive.ubuntu.com@${APT_MIRROR}@g" /etc/apt/sources.list
-RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt update && apt-get -y --no-install-recommends install ca-certificates curl jq
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+FROM quay.io/curl/curl-base:8.4.0 as curl-base
+ENV PATH="/copied/bin:$PATH"
+WORKDIR /dist
+COPY --from=jq-base /jq /copied/bin/jq
+COPY package.json ./
+RUN curl -fsSL --compressed https://get.pnpm.io/install.sh | sed '/setup --force/d' | sed 's|chmod +x "$tmp_dir/pnpm"|install "$tmp_dir/pnpm" pnpm|' | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | grep -oE '[0-9]+\.[0-9]+\.[0-9]+') sh -
+
+FROM ubuntu:rolling@sha256:f1090cfa89ab321a6d670e79652f61593502591f2fc7452fb0b7c6da575729c4 as depender
+ENV SHELL="bash"
 ARG NODE_ENV="production"
 RUN mkdir /pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 WORKDIR /package
+COPY --from=curl-base /dist /copied-bin
 COPY .npmrc package.json ./
-RUN curl -fsSL --compressed https://get.pnpm.io/install.sh | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | grep -oP '\d+\.\d+\.\d+') bash - \
+RUN /copied-bin/pnpm setup --force \
     && pnpm config set store-dir /.pnpm-store
 RUN --mount=type=cache,target=/.pnpm-store \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
     pnpm install --frozen-lockfile
 
 FROM depender as builder
-
 ARG NODE_ENV="development"
 RUN --mount=type=cache,target=/.pnpm-store \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
@@ -30,8 +33,7 @@ RUN --mount=type=bind,source=src/,target=src/ \
     --mount=type=bind,source=.swcrc,target=.swcrc \
     pnpm build
 
-FROM gcr.io/distroless/cc-debian11:nonroot@sha256:fe17f673e8dfdb5dbbb0009a37a260d87eaa63c4f36e1ffad40c982934b68391
-
+FROM gcr.io/distroless/cc-debian12:nonroot
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV="production"

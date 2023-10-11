@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/jqlang/jq:1.7 as jq-base
+FROM ghcr.io/jqlang/jq:1.7@sha256:12f998e5a6f3f6916f744ba6f01549f156f624b42f7564e67ec6dd4733973146 as jq-base
 
-FROM quay.io/curl/curl-base:8.4.0 as curl-base
+FROM quay.io/curl/curl-base:8.4.0@sha256:36f04935213478584f0232e3e6d226a8b803cd98477bd20f89aec913c2450532 as curl-base
 ENV PATH="/copied/bin:$PATH"
 WORKDIR /dist
 COPY --from=jq-base /jq /copied/bin/jq
@@ -33,7 +33,7 @@ RUN --mount=type=bind,source=src/,target=src/ \
     --mount=type=bind,source=.swcrc,target=.swcrc \
     pnpm build
 
-FROM gcr.io/distroless/cc-debian12:nonroot
+FROM gcr.io/distroless/cc-debian12:nonroot@sha256:0a944ba09780b6a4e7a8f30287f88a70d7914ad2ba878233ff8cfffb7479158c
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV="production"

@@ -119,15 +119,9 @@ export class ConnectionContext {
       const message =
         error instanceof PowError
           ? { embeds: [error.embed] }
-          : {
-              embeds: [
-                {
-                  color: 0xff0000,
-                  title: 'リクエストエラー',
-                  description: `${error}`,
-                },
-              ],
-            }
+          : (() => {
+              throw error
+            })()
 
       if (ctx instanceof ChatInputCommandInteraction) {
         return await ctx.followUp(message)

@@ -9,7 +9,7 @@ COPY --from=jq-base /jq /copied/bin/jq
 COPY package.json ./
 RUN curl -fsSL --compressed https://get.pnpm.io/install.sh | sed '/setup --force/d' | sed 's|chmod +x "$tmp_dir/pnpm"|install "$tmp_dir/pnpm" pnpm|' | env PNPM_VERSION=$(cat package.json  | jq -r .packageManager | grep -oE '[0-9]+\.[0-9]+\.[0-9]+') sh -
 
-FROM ubuntu:rolling@sha256:2d6c04e47ab063ed0f2fc78b258b378aa98788e5aa69a0bac1314cd1020d92b4 as depender
+FROM ubuntu:rolling@sha256:064f544c977450f09da254e3512b9d28f0399a11ab6006cffef9d141b87856f6 as depender
 ENV SHELL="bash"
 ARG NODE_ENV="production"
 RUN mkdir /pnpm

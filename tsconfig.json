@@ -1,36 +1,16 @@
 {
   "compileOnSave": true,
   "include": ["src/**/*", "tests/**/*"],
+  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node20/tsconfig"],
   "compilerOptions": {
-    "strict": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
+    "noEmit": true,
+    "composite": true,
+    "outDir": "cli-incremental-info",
+
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true,
 
     "noUnusedParameters": false,
-
-    "module": "NodeNext",
-    "resolveJsonModule": true,
-    "outDir": "dist",
-    "removeComments": true,
-    "sourceMap": true,
-    "allowJs": true,
-    "checkJs": true,
-    "verbatimModuleSyntax": true,
-    "target": "ES2022",
-    "incremental": true,
-    "skipLibCheck": true,
-
-    "noEmit": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-
     "noImplicitAny": false
   }
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.2](https://github.com/kazukazu123123/pow/compare/v3.6.1...v3.6.2) (2023-10-14)
+
+
+### Bug Fixes
+
+* エラーの握りつぶしをやめる ([#833](https://github.com/kazukazu123123/pow/issues/833)) ([03db19a](https://github.com/kazukazu123123/pow/commit/03db19a1c068191feff0982e5ac3291fa5df206a))
+
 ## [3.6.1](https://github.com/kazukazu123123/pow/compare/v3.6.0...v3.6.1) (2023-10-07)
 
 

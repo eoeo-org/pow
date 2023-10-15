@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://github.com/kazukazu123123/pow/compare/v3.6.2...v3.7.0) (2023-10-15)
+
+
+### Features
+
+* 「プレイ中」表記がない presence にする ([#838](https://github.com/kazukazu123123/pow/issues/838)) ([4400f87](https://github.com/kazukazu123123/pow/commit/4400f87bdfb37abda5d2cef7d2a1636de1531425))
+
 ## [3.6.2](https://github.com/kazukazu123123/pow/compare/v3.6.1...v3.6.2) (2023-10-14)
 
 

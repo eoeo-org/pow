@@ -1,11 +1,13 @@
-import type { Client, Guild } from 'discord.js'
+import { ActivityType, type Client, type Guild } from 'discord.js'
 
 export const readyEvent = (client: Client, packageJson) => {
   process.title = `${client.user?.tag} - pow v${packageJson.version}`
   console.log(`Logged in as ${client.user?.tag}!`)
   console.log(`Servers: (${client.guilds.cache.size})`)
   client.user?.setPresence({
-    activities: [{ name: `pow - v${packageJson.version}` }],
+    activities: [
+      { name: `pow - v${packageJson.version}`, type: ActivityType.Custom },
+    ],
   })
   client.guilds.cache.forEach(async (guild: Guild) => {
     console.log(

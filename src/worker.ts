@@ -1,4 +1,4 @@
-import { Client, Events } from 'discord.js'
+import { ActivityType, Client, Events } from 'discord.js'
 
 export class WorkerNullError extends Error {
   code = 'WORKER_USER_IS_NULL' as const
@@ -12,7 +12,12 @@ class WorkerClient<Ready extends boolean = boolean> extends Client<Ready> {
   #onReady(client: Client<true>) {
     console.log(`Ready as ${client.user.tag}`)
     client.user.setPresence({
-      activities: [{ name: `${this.mainClient.user.tag} - worker` }],
+      activities: [
+        {
+          name: `${this.mainClient.user.tag} - worker`,
+          type: ActivityType.Custom,
+        },
+      ],
       status: 'dnd',
     })
   }

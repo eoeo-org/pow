@@ -15,8 +15,8 @@ dependencies:
     specifier: 4.7.1
     version: 4.7.1
   '@sapphire/plugin-subcommands':
-    specifier: 4.2.1
-    version: 4.2.1
+    specifier: 4.2.2
+    version: 4.2.2
   debug:
     specifier: 4.3.4
     version: 4.3.4
@@ -263,9 +263,9 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@sapphire/plugin-subcommands@4.2.1:
-    resolution: {integrity: sha512-biENmpxzW8qVDbSJBq4MOqF5Rl68GZl6Ok90AMCHOaq9LqDw2VcT939/yAajVzvsBjhmP4pSbu4ZcYJY1fMoWg==}
-    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
+  /@sapphire/plugin-subcommands@4.2.2:
+    resolution: {integrity: sha512-+6OwQJBKnWjicgMNT4yAMVMWVb1veNxuz63QdLPPGCUc1TDYO+viKTGm9kYSbXC4tGkpki9aTj+sQEYeJrjo6Q==}
+    engines: {node: '>=v18', npm: '>=7'}
     dependencies:
       '@sapphire/utilities': 3.13.0
       tslib: 2.6.2

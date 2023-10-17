@@ -22,7 +22,7 @@
     "@discordjs/collection": "1.5.3",
     "@discordjs/voice": "0.16.0",
     "@sapphire/framework": "4.7.1",
-    "@sapphire/plugin-subcommands": "4.2.1",
+    "@sapphire/plugin-subcommands": "4.2.2",
     "debug": "4.3.4",
     "discord-emoji": "2.3.0",
     "discord.js": "14.13.0",

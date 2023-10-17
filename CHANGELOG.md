@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.7.2](https://github.com/kazukazu123123/pow/compare/v3.7.1...v3.7.2) (2023-10-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sapphire/framework to v4.7.1 ([#845](https://github.com/kazukazu123123/pow/issues/845)) ([e1f0795](https://github.com/kazukazu123123/pow/commit/e1f0795a2fdcff30c2a7da7af2fd9583d443b990))
+* **deps:** update dependency @sapphire/plugin-subcommands to v4.2.2 ([#846](https://github.com/kazukazu123123/pow/issues/846)) ([e17c8a9](https://github.com/kazukazu123123/pow/commit/e17c8a9855f1d174251ba3a6f079e5c4b91a7624))
+* **deps:** update dependency emoji-regex to v10.3.0 ([#849](https://github.com/kazukazu123123/pow/issues/849)) ([24a1381](https://github.com/kazukazu123123/pow/commit/24a1381332029efee2956a82fb3cab5edb4a7b47))
+* **deps:** update dependency mariadb to v3.2.2 ([#847](https://github.com/kazukazu123123/pow/issues/847)) ([6206cf6](https://github.com/kazukazu123123/pow/commit/6206cf6a61257ed017562bee457b977853b3a007))
+
 ## [3.7.1](https://github.com/kazukazu123123/pow/compare/v3.7.0...v3.7.1) (2023-10-15)
 
 

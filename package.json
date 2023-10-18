@@ -37,7 +37,7 @@
     "@tsconfig/node20": "20.1.2",
     "@tsconfig/strictest": "2.0.2",
     "@types/debug": "4.1.10",
-    "@types/node": "20.8.6",
+    "@types/node": "20.8.7",
     "chokidar": "3.5.3",
     "dotenv": "16.3.1",
     "husky": "8.0.3",

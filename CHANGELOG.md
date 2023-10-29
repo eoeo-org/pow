@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.7.3](https://github.com/kazukazu123123/pow/compare/v3.7.2...v3.7.3) (2023-10-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sapphire/framework to v4.7.2 ([#854](https://github.com/kazukazu123123/pow/issues/854)) ([2bf514a](https://github.com/kazukazu123123/pow/commit/2bf514a2bcb2ccc6e3ad39bcc89a05a5760cbe8a))
+* **deps:** update dependency @sapphire/plugin-subcommands to v4.3.0 ([#855](https://github.com/kazukazu123123/pow/issues/855)) ([91d8018](https://github.com/kazukazu123123/pow/commit/91d8018a63b9e5947c90467d44ca108307581b30))
+* **deps:** update dependency @sapphire/plugin-subcommands to v5 ([#859](https://github.com/kazukazu123123/pow/issues/859)) ([453a8d7](https://github.com/kazukazu123123/pow/commit/453a8d7c02152280b57b212805c0d5b00b0599ab))
+
+
+### Performance Improvements
+
+* **deps:** change to sodium-native ([#868](https://github.com/kazukazu123123/pow/issues/868)) ([d02c3e9](https://github.com/kazukazu123123/pow/commit/d02c3e90e2f983a30a648d2750a1f70e84e62c3d))
+
 ## [3.7.2](https://github.com/kazukazu123123/pow/compare/v3.7.1...v3.7.2) (2023-10-17)
 
 

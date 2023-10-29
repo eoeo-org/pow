@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@discordjs/collection':
-    specifier: 1.5.3
-    version: 1.5.3
   '@discordjs/voice':
     specifier: 0.16.0
     version: 0.16.0(ffmpeg-static@5.2.0)

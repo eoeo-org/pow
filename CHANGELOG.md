@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.7.4](https://github.com/kazukazu123123/pow/compare/v3.7.3...v3.7.4) (2023-11-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @discordjs/voice to v0.16.1 ([#878](https://github.com/kazukazu123123/pow/issues/878)) ([eb0d4f1](https://github.com/kazukazu123123/pow/commit/eb0d4f1671a537d4d63e1671b12d3352a06879b4))
+* **deps:** update dependency discord.js to v14.14.1 ([#879](https://github.com/kazukazu123123/pow/issues/879)) ([4c1ce6f](https://github.com/kazukazu123123/pow/commit/4c1ce6f38a02801b5bce3a820224069a60e2471c))
+
 ## [3.7.3](https://github.com/kazukazu123123/pow/compare/v3.7.2...v3.7.3) (2023-10-29)
 
 

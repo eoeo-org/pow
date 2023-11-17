@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.7.5](https://github.com/kazukazu123123/pow/compare/v3.7.4...v3.7.5) (2023-11-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sapphire/framework to v4.8.2 ([#887](https://github.com/kazukazu123123/pow/issues/887)) ([2091198](https://github.com/kazukazu123123/pow/commit/20911982727a06c4d89c9787e05c8e17136810f5))
+* **deps:** update dependency @sapphire/plugin-subcommands to v5.1.0 ([#888](https://github.com/kazukazu123123/pow/issues/888)) ([f2ee6a8](https://github.com/kazukazu123123/pow/commit/f2ee6a80f75b354d4fbfc3919b78ac2f61489b12))
+
 ## [3.7.4](https://github.com/kazukazu123123/pow/compare/v3.7.3...v3.7.4) (2023-11-15)
 
 

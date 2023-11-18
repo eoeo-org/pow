@@ -12,7 +12,7 @@
     "format": "prettier --write .",
     "lint": "prettier --check .",
     "check:types": "tsc",
-    "prepare": "husky install || [ $? = 127 ]"
+    "prepare": "[ \"$NODE_ENV\" = \"production\" ] || husky install"
   },
   "packageManager": "pnpm@8.10.5",
   "engines": {

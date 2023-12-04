@@ -126,7 +126,7 @@ packages:
       '@sapphire/snowflake': 3.5.1
       '@vladfrangu/async_event_emitter': 2.2.4
       discord-api-types: 0.37.61
-      magic-bytes.js: 1.5.0
+      magic-bytes.js: 1.6.0
       tslib: 2.6.2
       undici: 5.27.2
     dev: false
@@ -1483,8 +1483,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /magic-bytes.js@1.5.0:
-    resolution: {integrity: sha512-wJkXvutRbNWcc37tt5j1HyOK1nosspdh3dj6LUYYAvF6JYNqs53IfRvK9oEpcwiDA1NdoIi64yAMfdivPeVAyw==}
+  /magic-bytes.js@1.6.0:
+    resolution: {integrity: sha512-eOGBE+NSCwU9dKKox93BPHjX4KSxIuiRY1/H1lkfxIagT0Llhs6bkRk8iqoP/0aeDl7FEZPa+ln5lay5mcNY4w==}
     dev: false
 
   /mariadb@3.2.2:

@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@discordjs/voice": "0.16.1",
-    "@sapphire/framework": "4.8.5",
+    "@sapphire/framework": "5.0.2",
     "@sapphire/plugin-subcommands": "5.1.0",
     "debug": "4.3.4",
     "discord-emoji": "2.3.0",

@@ -12,8 +12,8 @@ dependencies:
     specifier: 5.0.2
     version: 5.0.2
   '@sapphire/plugin-subcommands':
-    specifier: 5.1.0
-    version: 5.1.0
+    specifier: 6.0.1
+    version: 6.0.1
   debug:
     specifier: 4.3.4
     version: 4.3.4
@@ -270,11 +270,11 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@sapphire/plugin-subcommands@5.1.0:
-    resolution: {integrity: sha512-VBd6Ayjqa3bPTS4KCPnvFI5h/LCR53O1cJFyW7QN55Tzi/hXpzByo/HtR6IPdY2bQ5LuHVmKhvbAbI5LD0Q8LQ==}
+  /@sapphire/plugin-subcommands@6.0.1:
+    resolution: {integrity: sha512-coV54cq/dqrYBJfjnV5GXq9xp4mPFxJKWDEMWcEbzYVe4/ikQo6ORL2zu1V3bAMHCF3dvHTQGDizOIW2p1ZB6w==}
     engines: {node: '>=v18', npm: '>=7'}
     dependencies:
-      '@sapphire/utilities': 3.13.0
+      '@sapphire/utilities': 3.14.0
       tslib: 2.6.2
     dev: false
 
@@ -306,11 +306,6 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dependencies:
       tslib: 2.6.2
-    dev: false
-
-  /@sapphire/utilities@3.13.0:
-    resolution: {integrity: sha512-BD5ycPjZX5dXxrAb90dJTY8ukpPVBXgU17gA5ghK2memS4hwAzFYpvK+R+6zh4d6HYIKVuqrVhGXjvZenAa/Aw==}
-    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
   /@sapphire/utilities@3.14.0:

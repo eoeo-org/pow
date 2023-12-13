@@ -1,0 +1,2 @@
+# https://github.com/googleapis/repo-automation-bots/tree/7d8c2fea3e2732e9fdd237559a0d84f0b784f602/packages/conventional-commit-lint#configuration
+always_check_pr_title: true

@@ -18,8 +18,8 @@ dependencies:
     specifier: 4.3.4
     version: 4.3.4
   discord-emoji:
-    specifier: 2.3.0
-    version: 2.3.0
+    specifier: 2.4.0
+    version: 2.4.0
   discord.js:
     specifier: 14.14.1
     version: 14.14.1
@@ -834,8 +834,8 @@ packages:
     resolution: {integrity: sha512-3Q+6uBODmVaPAmZZ1jYQiQBbp0hqArgSU9Y6DuYY6KW5Sdij91bwbmFnnVI5XvATRkY+Wk9KMBWFzAEwSDs+1w==}
     dev: false
 
-  /discord-emoji@2.3.0:
-    resolution: {integrity: sha512-OBa4Yn0+esidXTaCKDderhcyq0ylNAqAB9G1DUOl0D/Hn0BQ0jA05+qHIU193VuxvnLwT442i4CWFWy41BNfmQ==}
+  /discord-emoji@2.4.0:
+    resolution: {integrity: sha512-ak5dPZCVT8YG2giMMPXQOgMORlUzMBEeMiHH9v3/yYa+N8/Q+iRaTjtKJRDOutjhCCSGh5aBVjEx+VWRAue+oQ==}
     dev: false
 
   /discord.js@14.14.1:

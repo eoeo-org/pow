@@ -30,8 +30,8 @@ dependencies:
     specifier: 5.2.0
     version: 5.2.0
   mariadb:
-    specifier: 3.2.2
-    version: 3.2.2
+    specifier: 3.2.3
+    version: 3.2.3
   sodium-native:
     specifier: 4.0.4
     version: 4.0.4
@@ -1497,8 +1497,8 @@ packages:
     resolution: {integrity: sha512-YzVU2+/hrjwx8xcgAw+ffNq3jkactpj+f1iSL4LonrFKhvnwDzHSqtFdk/MMRP53y9ScouJ7cKEnqYsJwsHoYA==}
     dev: false
 
-  /mariadb@3.2.2:
-    resolution: {integrity: sha512-9ClJCFsLcK7WnPXVxuKGd7p0CBvNch3i5nwAf1HEqERj7RV60DG/0dJu4DfO33gpYQd9Cr4jq17O76/2VjSbkg==}
+  /mariadb@3.2.3:
+    resolution: {integrity: sha512-Hyc1ehdUJwzvvzcLU2juZS528wJ6oE8pUlpgY0BAOdpKWcdN1motuugi5lC3jkpCkFpyNknHG7Yg66KASl3aPg==}
     engines: {node: '>= 12'}
     dependencies:
       '@types/geojson': 7946.0.13

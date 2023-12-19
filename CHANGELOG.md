@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.7.8](https://github.com/kazukazu123123/pow/compare/v3.7.7...v3.7.8) (2023-12-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency discord-emoji to v2.4.0 ([#931](https://github.com/kazukazu123123/pow/issues/931)) ([21a620c](https://github.com/kazukazu123123/pow/commit/21a620cb272fca72c30e67decc734e93a2651f12))
+* **deps:** update dependency mariadb to v3.2.3 ([#935](https://github.com/kazukazu123123/pow/issues/935)) ([cd74b05](https://github.com/kazukazu123123/pow/commit/cd74b052e4509714c691f46504d4e2e20a618410))
+
 ## [3.7.7](https://github.com/kazukazu123123/pow/compare/v3.7.6...v3.7.7) (2023-12-11)
 
 

@@ -19,13 +19,13 @@ WORKDIR /package
 COPY --link --from=fetch-pnpm /pnpm/ /pnpm/
 RUN pnpm config set store-dir /.pnpm-store
 COPY --link .npmrc ./
-RUN --mount=type=cache,target=/.pnpm-store \
+RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
     pnpm fetch
 COPY --link package.json ./
 
 FROM fetch-deps as dev-deps
-RUN --mount=type=cache,target=/.pnpm-store \
+RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
     pnpm install --frozen-lockfile --offline
 
@@ -43,7 +43,7 @@ RUN --mount=type=bind,from=fetch-deps,source=/pnpm/,target=/pnpm/ \
 
 FROM fetch-deps as prod-deps
 ARG NODE_ENV="production"
-RUN --mount=type=cache,target=/.pnpm-store \
+RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
     pnpm install --frozen-lockfile --offline
 

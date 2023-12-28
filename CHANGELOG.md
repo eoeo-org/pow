@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.9](https://github.com/kazukazu123123/pow/compare/v3.7.8...v3.7.9) (2023-12-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sapphire/framework to v5.0.5 ([#940](https://github.com/kazukazu123123/pow/issues/940)) ([673c914](https://github.com/kazukazu123123/pow/commit/673c91430cda455201a1caacfefb10221480ae35))
+
 ## [3.7.8](https://github.com/kazukazu123123/pow/compare/v3.7.7...v3.7.8) (2023-12-19)
 
 

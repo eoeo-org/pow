@@ -9,8 +9,8 @@ dependencies:
     specifier: 0.16.1
     version: 0.16.1(ffmpeg-static@5.2.0)
   '@sapphire/framework':
-    specifier: 5.0.4
-    version: 5.0.4
+    specifier: 5.0.5
+    version: 5.0.5
   '@sapphire/plugin-subcommands':
     specifier: 6.0.1
     version: 6.0.1
@@ -224,8 +224,8 @@ packages:
       discord-api-types: 0.37.66
     dev: false
 
-  /@sapphire/discord.js-utilities@7.1.4:
-    resolution: {integrity: sha512-rjV6uVP6OOSntPeCOukoH8ldXfXH6pJP8q8lPVlwmwnQiBcezW3rG31ONCGaapEBabLX6o9De7BCYWobYO4bhA==}
+  /@sapphire/discord.js-utilities@7.1.5:
+    resolution: {integrity: sha512-632ka/jaco6+cbTVCyO+gna4g2ExAZ4zpRw9xwwkKrjfvj2g2N8kcrpdLCoLO9AwCg/Ay0yKsgcafESzGdqLqg==}
     engines: {node: '>=16.6.0', npm: '>=7.0.0'}
     dependencies:
       '@sapphire/discord-utilities': 3.2.1
@@ -239,15 +239,15 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
-  /@sapphire/framework@5.0.4:
-    resolution: {integrity: sha512-v6IzCX7jiiVf4RSIjHMt5Hp98nwTU/1lvW/7vM2yyRuZYbBgRty/w77Lcth7jjcKEXMKtKhbGSWRXwVxnSbn3w==}
+  /@sapphire/framework@5.0.5:
+    resolution: {integrity: sha512-+DTrsdgv6UEHjAFvhKl3r2gld+C+1VkU2PbX7dj1p/zIROliFc49/sxWzn3/uCjBvAsbQSBNzLBLcnXGxgMMQA==}
     engines: {node: '>=v18', npm: '>=7'}
     dependencies:
       '@discordjs/builders': 1.7.0
       '@sapphire/discord-utilities': 3.2.1
-      '@sapphire/discord.js-utilities': 7.1.4
+      '@sapphire/discord.js-utilities': 7.1.5
       '@sapphire/lexure': 1.1.6
-      '@sapphire/pieces': 4.1.0
+      '@sapphire/pieces': 4.2.0
       '@sapphire/ratelimits': 2.4.8
       '@sapphire/result': 2.6.5
       '@sapphire/stopwatch': 1.5.1
@@ -261,8 +261,8 @@ packages:
       '@sapphire/result': 2.6.5
     dev: false
 
-  /@sapphire/pieces@4.1.0:
-    resolution: {integrity: sha512-uAdK0oqGCz5wLCexqZR+wvfMCyQFZ/2m8R3kW72X1AGyrUGJ1wuiLx+7QvH42mmfwerViLKywhCBX9R77Qev6Q==}
+  /@sapphire/pieces@4.2.0:
+    resolution: {integrity: sha512-Bh462mJbPv0VbrPhaNpFYD8Bdg9xnKPZEF6h8xA/lMTNnEbhM8e967klBNd8Gw+iDO0Bve60Pg2t4a1xyxdLxA==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dependencies:
       '@discordjs/collection': 1.5.3

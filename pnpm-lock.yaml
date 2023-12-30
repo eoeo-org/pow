@@ -12,8 +12,8 @@ dependencies:
     specifier: 5.0.5
     version: 5.0.5
   '@sapphire/plugin-subcommands':
-    specifier: 6.0.1
-    version: 6.0.1
+    specifier: 6.0.2
+    version: 6.0.2
   debug:
     specifier: 4.3.4
     version: 4.3.4
@@ -270,11 +270,11 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@sapphire/plugin-subcommands@6.0.1:
-    resolution: {integrity: sha512-coV54cq/dqrYBJfjnV5GXq9xp4mPFxJKWDEMWcEbzYVe4/ikQo6ORL2zu1V3bAMHCF3dvHTQGDizOIW2p1ZB6w==}
+  /@sapphire/plugin-subcommands@6.0.2:
+    resolution: {integrity: sha512-AXRIRK2dVxPP3+bsZlvzQjfSrPYAf5C6ueyxzp9gRZE9N5zXKbeAFyL/HeXFB+Hr2zne0zBgqeH25NMeblpm0A==}
     engines: {node: '>=v18', npm: '>=7'}
     dependencies:
-      '@sapphire/utilities': 3.14.0
+      '@sapphire/utilities': 3.15.1
       tslib: 2.6.2
     dev: false
 
@@ -310,6 +310,11 @@ packages:
 
   /@sapphire/utilities@3.14.0:
     resolution: {integrity: sha512-eYlpYlaKLvxTNjD3ymxpsf4MaSHW3x6vf+DMsLdMsV235J7i66VboHb8uxNcogR/lJ7khmMhMTCtabqUhNX4bA==}
+    engines: {node: '>=v14.0.0'}
+    dev: false
+
+  /@sapphire/utilities@3.15.1:
+    resolution: {integrity: sha512-Pce4++kXf+2vgVfO1kEJ2LiZzO8zB2TTyIu6XePHNmNEotcEHkq0RmOSaKw3ElA+5gRvTE269RMwmlAw1twuLg==}
     engines: {node: '>=v14.0.0'}
     dev: false
 

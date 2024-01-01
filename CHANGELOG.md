@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.10](https://github.com/kazukazu123123/pow/compare/v3.7.9...v3.7.10) (2024-01-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sapphire/plugin-subcommands to v6.0.2 ([#942](https://github.com/kazukazu123123/pow/issues/942)) ([13b3f42](https://github.com/kazukazu123123/pow/commit/13b3f428335892a0d642c8c17bc8e9c342ff08d6))
+
 ## [3.7.9](https://github.com/kazukazu123123/pow/compare/v3.7.8...v3.7.9) (2023-12-28)
 
 

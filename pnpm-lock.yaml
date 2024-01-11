@@ -33,8 +33,8 @@ dependencies:
     specifier: 3.2.3
     version: 3.2.3
   sodium-native:
-    specifier: 4.0.4
-    version: 4.0.4
+    specifier: 4.0.5
+    version: 4.0.5
 
 devDependencies:
   '@swc/cli':
@@ -1961,8 +1961,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /sodium-native@4.0.4:
-    resolution: {integrity: sha512-faqOKw4WQKK7r/ybn6Lqo1F9+L5T6NlBJJYvpxbZPetpWylUVqz449mvlwIBKBqxEHbWakWuOlUt8J3Qpc4sWw==}
+  /sodium-native@4.0.5:
+    resolution: {integrity: sha512-YGimGhy7Ho6pTAAvuNdn3Tv9C2MD7HP89X1omReHat0Fd1mMnapGqwzb5YoHTAbIEh8tQmKP6+uLlwYCkf+EOA==}
     requiresBuild: true
     dependencies:
       node-gyp-build: 4.8.0

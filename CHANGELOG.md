@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.7.11](https://github.com/kazukazu123123/pow/compare/v3.7.10...v3.7.11) (2024-01-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sapphire/framework to v5.0.6 ([#953](https://github.com/kazukazu123123/pow/issues/953)) ([40f47d1](https://github.com/kazukazu123123/pow/commit/40f47d116758b6b33774db6897638a14c607dd46))
+* **deps:** update dependency sodium-native to v4.0.5 ([#954](https://github.com/kazukazu123123/pow/issues/954)) ([1982b8a](https://github.com/kazukazu123123/pow/commit/1982b8acc87a569eafec82c1b15be92a788bdf13))
+
 ## [3.7.10](https://github.com/kazukazu123123/pow/compare/v3.7.9...v3.7.10) (2024-01-01)
 
 

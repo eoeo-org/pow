@@ -19,7 +19,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   # tool versions
   # renovate: datasource=github-releases depName=docker/buildx
-  BUILDX_VERSION: v0.12.0
+  BUILDX_VERSION: v0.12.1
 
 jobs:
   build-and-push-image:

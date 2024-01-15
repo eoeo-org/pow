@@ -126,7 +126,7 @@ packages:
       '@sapphire/snowflake': 3.5.1
       '@vladfrangu/async_event_emitter': 2.2.4
       discord-api-types: 0.37.61
-      magic-bytes.js: 1.7.0
+      magic-bytes.js: 1.8.0
       tslib: 2.6.2
       undici: 5.27.2
     dev: false
@@ -247,7 +247,7 @@ packages:
       '@sapphire/discord-utilities': 3.2.1
       '@sapphire/discord.js-utilities': 7.1.5
       '@sapphire/lexure': 1.1.6
-      '@sapphire/pieces': 4.2.0
+      '@sapphire/pieces': 4.2.1
       '@sapphire/ratelimits': 2.4.8
       '@sapphire/result': 2.6.5
       '@sapphire/stopwatch': 1.5.1
@@ -261,8 +261,8 @@ packages:
       '@sapphire/result': 2.6.5
     dev: false
 
-  /@sapphire/pieces@4.2.0:
-    resolution: {integrity: sha512-Bh462mJbPv0VbrPhaNpFYD8Bdg9xnKPZEF6h8xA/lMTNnEbhM8e967klBNd8Gw+iDO0Bve60Pg2t4a1xyxdLxA==}
+  /@sapphire/pieces@4.2.1:
+    resolution: {integrity: sha512-pOVCJ8zgIGfFgmNOKBZJJgHoH/9y278JexDVCmA7RBji1Di5QAECWl8N/22abEU3O1W77Hxj1428fV+DdkZ69g==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dependencies:
       '@discordjs/collection': 1.5.3
@@ -678,7 +678,7 @@ packages:
     dependencies:
       function-bind: 1.1.2
       get-intrinsic: 1.2.2
-      set-function-length: 1.1.1
+      set-function-length: 1.2.0
     dev: true
 
   /caseless@0.12.0:
@@ -920,7 +920,7 @@ packages:
       object.assign: 4.1.5
       regexp.prototype.flags: 1.5.1
       safe-array-concat: 1.0.1
-      safe-regex-test: 1.0.0
+      safe-regex-test: 1.0.2
       string.prototype.trim: 1.2.8
       string.prototype.trimend: 1.0.7
       string.prototype.trimstart: 1.0.7
@@ -1493,8 +1493,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /magic-bytes.js@1.7.0:
-    resolution: {integrity: sha512-YzVU2+/hrjwx8xcgAw+ffNq3jkactpj+f1iSL4LonrFKhvnwDzHSqtFdk/MMRP53y9ScouJ7cKEnqYsJwsHoYA==}
+  /magic-bytes.js@1.8.0:
+    resolution: {integrity: sha512-lyWpfvNGVb5lu8YUAbER0+UMBTdR63w2mcSUlhhBTyVbxJvjgqwyAf3AZD6MprgK0uHuBoWXSDAMWLupX83o3Q==}
     dev: false
 
   /mariadb@3.2.3:
@@ -1860,8 +1860,9 @@ packages:
   /safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
 
-  /safe-regex-test@1.0.0:
-    resolution: {integrity: sha512-JBUUzyOgEwXQY1NuPtvcj/qcBDbDmEvWufhlnXZIm75DEHp+afM1r1ujJpJsV/gSM4t59tpDyPi1sd6ZaPFfsA==}
+  /safe-regex-test@1.0.2:
+    resolution: {integrity: sha512-83S9w6eFq12BBIJYvjMux6/dkirb8+4zJRA9cxNBVb7Wq5fJBW+Xze48WqR8pxua7bDuAaaAxtVVd4Idjp1dBQ==}
+    engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.5
       get-intrinsic: 1.2.2
@@ -1897,11 +1898,12 @@ packages:
       lru-cache: 6.0.0
     dev: true
 
-  /set-function-length@1.1.1:
-    resolution: {integrity: sha512-VoaqjbBJKiWtg4yRcKBQ7g7wnGnLV3M8oLvVWwOk2PdYY6PEFegR1vezXR0tw6fZGF9csVakIRjrJiy2veSBFQ==}
+  /set-function-length@1.2.0:
+    resolution: {integrity: sha512-4DBHDoyHlM1IRPGYcoxexgh67y4ueR53FKV1yyxwFMY7aCqcN/38M1+SwZ/qJQ8iLv7+ck385ot4CcisOAPT9w==}
     engines: {node: '>= 0.4'}
     dependencies:
       define-data-property: 1.1.1
+      function-bind: 1.1.2
       get-intrinsic: 1.2.2
       gopd: 1.0.1
       has-property-descriptors: 1.0.1

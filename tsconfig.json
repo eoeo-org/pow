@@ -11,6 +11,6 @@
     "verbatimModuleSyntax": true,
 
     "noUnusedParameters": false,
-    "noImplicitAny": false
-  }
+    "noImplicitAny": false,
+  },
 }

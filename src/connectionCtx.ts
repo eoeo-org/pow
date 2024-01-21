@@ -127,10 +127,20 @@ export class ConnectionContext {
         return await ctx.followUp(message)
       } else {
         return await ctx.reply(message).catch((err: DiscordErrorData) => {
-          if (err.code !== 50013) throw err
-          debug__ErrorHandler(
-            `Error code ${err.code}: Missing send messages permission.`,
-          )
+          switch (err.code) {
+            case 50013:
+              debug__ErrorHandler(
+                `Error code ${err.code}: Missing send messages permission.`,
+              )
+              break
+            case 50035:
+              debug__ErrorHandler(
+                `Error code ${err.code}: No reply message found, unable to send error.`,
+              )
+              break
+            default:
+              throw err
+          }
         })
       }
     }

@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.8.0](https://github.com/j-eoeo/pow/compare/v3.7.11...v3.8.0) (2024-01-21)
+
+
+### Features
+
+* URL の正規表現を変更してあらゆる URL に対応する ([#972](https://github.com/j-eoeo/pow/issues/972)) ([6ba0c33](https://github.com/j-eoeo/pow/commit/6ba0c333fe91e3bcd502391283121edc0f991aa9))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sapphire/framework to v5.0.7 ([#968](https://github.com/j-eoeo/pow/issues/968)) ([e65c2aa](https://github.com/j-eoeo/pow/commit/e65c2aa5f4ea30c826ff4c92168f4a39cf1f616c))
+* **deps:** update dependency @sapphire/plugin-subcommands to v6.0.3 ([#969](https://github.com/j-eoeo/pow/issues/969)) ([575ae43](https://github.com/j-eoeo/pow/commit/575ae43667434ffe5d184d3567f48e7b87a1912d))
+
 ## [3.7.11](https://github.com/kazukazu123123/pow/compare/v3.7.10...v3.7.11) (2024-01-12)
 
 

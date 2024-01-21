@@ -3,8 +3,6 @@
   "extends": [
     "config:best-practices",
     "config:js-app",
-    ":automergeAll",
-    ":automergePr",
     ":disablePrControls",
     ":labels(dependencies, semver:none)",
     ":maintainLockFilesWeekly",

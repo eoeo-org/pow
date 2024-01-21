@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.1](https://github.com/j-eoeo/pow/compare/v3.8.0...v3.8.1) (2024-01-21)
+
+
+### Bug Fixes
+
+* handle case where no reply message exists ([#975](https://github.com/j-eoeo/pow/issues/975)) ([3d19457](https://github.com/j-eoeo/pow/commit/3d19457ca9607672d46432555cc4b009c41e36b6))
+
 ## [3.8.0](https://github.com/j-eoeo/pow/compare/v3.7.11...v3.8.0) (2024-01-21)
 
 

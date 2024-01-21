@@ -3,24 +3,27 @@ on:
     branches:
       - main
 
-name: release-please
+name: release
 
 jobs:
   release-please:
+    if: github.repository_owner == 'j-eoeo'
     permissions:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
     outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
-      pr: ${{ steps.release.outputs.pr }}
+      release_created: ${{ steps.release-please.outputs.release_created }}
+      tag_name: ${{ steps.release-please.outputs.tag_name }}
     steps:
       - uses: google-github-actions/release-please-action@cc61a07e2da466bebbc19b3a7dd01d6aecb20d1e # v4.0.2
-        id: release
+        id: release-please
         with:
-          release-type: node
-  build:
+          config-file: .github/files/release-please/release-please-config.json
+          manifest-file: .github/files/release-please/.release-please-manifest.json
+          skip-github-pull-request: ${{ startsWith(github.event.head_commit.message, 'release:') && github.event.head_commit.author.name == 'github-actions[bot]' }}
+
+  docker-publish:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
@@ -30,8 +33,49 @@ jobs:
     with:
       tag-name: ${{ needs.release-please.outputs.tag_name }}
 
-  post-release:
-    needs: [build]
+  publish-release:
+    needs: [release-please, docker-publish]
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh release edit ${{ needs.release-please.outputs.tag_name }} --draft=false
+
+  get-pr-number:
+    needs: [release-please]
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions: {}
+    runs-on: ubuntu-latest
+    outputs:
+      pr_number: ${{ steps.pr-number.outputs.pr_number }}
+    steps:
+      - name: Get PR number
+        id: pr-number
+        run: |
+          echo "pr_number=$(printf '${{ github.event.head_commit.message }}' | head -n1 | sed -nE 's/.+\(#([0-9]+)\)$/\1/p')" >> "$GITHUB_OUTPUT"
+
+  add-comment:
+    needs: [release-please, docker-publish, get-pr-number]
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions:
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add comment to PR
+        run: |
+          printf ':robot: Successfully published to ${{ needs.docker-publish.outputs.image_url }} :truck:\n```\n${{ join(needs.docker-publish.outputs.image_tags, '\n') }}\n```' \
+          | gh pr comment ${{ needs.get-pr-number.outputs.pr_number }} --body-file=-
+
+  label-published:
+    needs: [release-please, docker-publish, get-pr-number]
+    if: ${{ needs.release-please.outputs.release_created }}
     permissions:
       pull-requests: write
     env:
@@ -41,17 +85,9 @@ jobs:
     steps:
       - name: Create published label
         run: |
-          gh label create 'autorelease: published' --color=EDEDED || :
-      - name: Get PR number
-        id: pr-number
-        run: |
-          echo "pr_number=$(printf '${{ github.event.head_commit.message }}' | head -n1 | sed -nE 's/.+\(#([0-9]+)\)$/\1/p')" >> "$GITHUB_OUTPUT"
-      - name: Add comment to PR
-        run: |
-          printf ':robot: Successfully published to ${{ needs.build.outputs.image_url }} :truck:\n```\n${{ join(needs.build.outputs.image_tags, '\n') }}\n```' \
-          | gh pr comment ${{ steps.pr-number.outputs.pr_number }} --body-file=-
+          gh label create 'autorelease: published' --color=EDEDED || true
       - name: Change labels on PR
         run: |
-          gh pr edit ${{ steps.pr-number.outputs.pr_number }} \
+          gh pr edit ${{ needs.get-pr-number.outputs.pr_number }} \
           --remove-label='autorelease: tagged' \
           --add-label='autorelease: published'

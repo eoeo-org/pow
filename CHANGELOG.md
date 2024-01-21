@@ -5,8 +5,6 @@
 
 ### Bug Fixes
 
-* Fix CODEOWNERS ([#978](https://github.com/j-eoeo/pow/issues/978)) ([c4417ce](https://github.com/j-eoeo/pow/commit/c4417cedd0067bb633e52a38f9a1ae22d3fd38da))
-* Handle case where no reply message exists ([3d19457](https://github.com/j-eoeo/pow/commit/3d19457ca9607672d46432555cc4b009c41e36b6))
 * handle case where no reply message exists ([#975](https://github.com/j-eoeo/pow/issues/975)) ([3d19457](https://github.com/j-eoeo/pow/commit/3d19457ca9607672d46432555cc4b009c41e36b6))
 
 ## [3.8.0](https://github.com/j-eoeo/pow/compare/v3.7.11...v3.8.0) (2024-01-21)

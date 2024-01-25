@@ -1,0 +1,16 @@
+name: cleanup caches by a branch
+on:
+  pull_request_target:
+    types:
+      - closed
+  delete:
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Cleanup
+        uses: 4m-mazi/souji-action@cdef7f507c4bed326aec95989999988f8a10185b # v1.0.0

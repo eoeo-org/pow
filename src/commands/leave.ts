@@ -47,6 +47,8 @@ export class LeaveCommand extends Command {
     try {
       checkUserAlreadyJoined(voiceChannel)
 
+      await interaction.deferReply()
+
       const ctx = guildCtxManager.get(interaction.member.guild)
       const textChannelId = ctx.connectionManager.channelMap.get(
         newVoiceBasedChannelId(voiceChannel),
@@ -78,7 +80,7 @@ export class LeaveCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return interaction.reply(interactionReplyOptions)
+      return interaction.editReply(interactionReplyOptions)
     }
   }
 }

@@ -26,8 +26,11 @@ export class ResetCommand extends Command {
         .setDMPermission(false),
     )
   }
-  public override chatInputRun(interaction: ChatInputCommand.Interaction) {
+  public override async chatInputRun(
+    interaction: ChatInputCommand.Interaction,
+  ) {
     if (!interaction.inCachedGuild()) return
+    await interaction.deferReply()
 
     let interactionReplyOptions: InteractionReplyOptions = {
       embeds: [
@@ -53,7 +56,7 @@ export class ResetCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return interaction.reply(interactionReplyOptions)
+      return interaction.editReply(interactionReplyOptions)
     }
   }
 }

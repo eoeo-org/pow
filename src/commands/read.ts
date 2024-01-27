@@ -118,6 +118,9 @@ export class ReadCommand extends Command {
 
     try {
       checkUserAlreadyJoined(voiceChannel)
+
+      await interaction.deferReply()
+
       const text = interaction.options.getString('text', true)
 
       const connectionCtx = guildCtxManager
@@ -152,7 +155,7 @@ export class ReadCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return interaction.reply(interactionReplyOptions)
+      return interaction.editReply(interactionReplyOptions)
     }
   }
 }

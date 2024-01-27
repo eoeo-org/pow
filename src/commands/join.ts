@@ -47,6 +47,8 @@ export class JoinCommand extends Command {
       checkUserAlreadyJoined(voiceChannel)
       checkCanJoin(voiceChannel)
 
+      await interaction.deferReply()
+
       const guildCtx = guildCtxManager.get(interaction.member.guild)
 
       const worker = await guildCtx.join({
@@ -73,7 +75,7 @@ export class JoinCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return interaction.reply(interactionReplyOptions)
+      return interaction.editReply(interactionReplyOptions)
     }
   }
 }

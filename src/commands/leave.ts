@@ -4,7 +4,7 @@ import { checkUserAlreadyJoined } from '../components/preCheck.js'
 import type { InteractionReplyOptions } from 'discord.js'
 import { LeaveCause } from '../connectionCtx.js'
 import { newGuildTextBasedChannelId, newVoiceBasedChannelId } from '../id.js'
-import { getErrorReply } from '../utils.js'
+import { deferredReplyOrEdit, getErrorReply } from '../utils.js'
 
 export class LeaveCommand extends Command {
   public constructor(
@@ -80,7 +80,7 @@ export class LeaveCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return interaction.editReply(interactionReplyOptions)
+      return deferredReplyOrEdit(interaction, interactionReplyOptions)
     }
   }
 }

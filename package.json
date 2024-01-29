@@ -1,7 +1,7 @@
 {
   "name": "pow",
   "version": "3.8.1",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "start": "node .",
     "dev": "run-p build:debug:watch dev:run",

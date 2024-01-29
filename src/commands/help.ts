@@ -2,7 +2,7 @@ import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { MessageFlags, type Message } from 'discord.js'
 
 import { createRequire } from 'node:module'
-const packageJson = createRequire(import.meta.url)('../../package.json')
+const packageJson = createRequire(import.meta.url)('../../../package.json')
 
 const helpUrl = `https://gh.kazu123.net/pow/tree/v${packageJson.version}#使い方`
 

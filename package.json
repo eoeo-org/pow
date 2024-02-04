@@ -12,7 +12,7 @@
     "format": "prettier --write .",
     "lint": "prettier --check .",
     "check:types": "tsc",
-    "prepare": "husky install || [ $? = 127 ]"
+    "prepare": "node .husky/install.mjs"
   },
   "packageManager": "pnpm@8.15.1",
   "engines": {

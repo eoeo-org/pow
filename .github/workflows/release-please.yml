@@ -20,8 +20,8 @@ jobs:
         id: generate_token
         uses: actions/create-github-app-token@v1
         with:
-          app-id: ${{ secrets.MAZI_RELEASE_APP_ID }}
-          private-key: ${{ secrets.MAZI_RELEASE_APP_PRIVATE_KEY }}
+          app-id: ${{ secrets.EOEO_RELEASE_APP_ID }}
+          private-key: ${{ secrets.EOEO_RELEASE_PRIVATE_KEY }}
       - uses: google-github-actions/release-please-action@cc61a07e2da466bebbc19b3a7dd01d6aecb20d1e # v4.0.2
         id: release-please
         with:

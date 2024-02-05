@@ -27,6 +27,7 @@ COPY --link package.json ./
 FROM fetch-deps as dev-deps
 RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
+    --mount=type=bind,source=.husky/install.mjs,target=.husky/install.mjs \
     pnpm install --frozen-lockfile --offline
 
 FROM ubuntu:devel@sha256:36fa0c7153804946e17ee951fdeffa6a1c67e5088438e5b90de077de5c600d4c as builder
@@ -45,6 +46,7 @@ FROM fetch-deps as prod-deps
 ARG NODE_ENV="production"
 RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
+    --mount=type=bind,source=.husky/install.mjs,target=.husky/install.mjs \
     pnpm install --frozen-lockfile --offline
 
 FROM gcr.io/distroless/cc-debian12:nonroot@sha256:0b38ddca90c3f62928c320b3921d766baede90ef6de0f03620081c20b6b8b2b6

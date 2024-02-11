@@ -58,7 +58,30 @@ jobs:
         run: |
           echo "pr_number=$(printf '${{ github.event.head_commit.message }}' | head -n1 | sed -nE 's/.+\(#([0-9]+)\)$/\1/p')" >> "$GITHUB_OUTPUT"
 
-  add-comment:
+  update-release-comment:
+    needs: [release-please, publish-release, get-pr-number]
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: peter-evans/find-comment@d5fe37641ad8451bdd80312415672ba26c86575e # v3.0.0
+        id: fc
+        with:
+          issue-number: ${{ needs.get-pr-number.outputs.pr_number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: ':robot: Release is at ${{ github.event.repository.html_url }}/releases/tag/untagged-'
+      - if: steps.fc.conclusion == 'success'
+        uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ needs.get-pr-number.outputs.pr_number }}
+          body: |
+            :robot: Release is at ${{ github.event.repository.html_url }}/releases/tag/${{ needs.release-please.outputs.tag_name }} :sunflower:
+          edit-mode: replace
+
+  add-docker-comment:
     needs: [release-please, docker-publish, get-pr-number]
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
@@ -74,7 +97,7 @@ jobs:
           | gh pr comment ${{ needs.get-pr-number.outputs.pr_number }} --body-file=-
 
   label-published:
-    needs: [release-please, docker-publish, get-pr-number]
+    needs: [release-please, publish-release, get-pr-number]
     if: ${{ needs.release-please.outputs.release_created }}
     permissions:
       pull-requests: write

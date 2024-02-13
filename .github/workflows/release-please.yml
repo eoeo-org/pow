@@ -1,3 +1,6 @@
+env:
+  RELEASE_PLEASE_AUTHOR: j-eoeo-release[bot]
+
 on:
   push:
     branches:
@@ -28,7 +31,7 @@ jobs:
           token: ${{ steps.generate_token.outputs.token }}
           config-file: .github/files/release-please/release-please-config.json
           manifest-file: .github/files/release-please/.release-please-manifest.json
-          skip-github-pull-request: ${{ startsWith(github.event.head_commit.message, 'release:') && github.event.head_commit.author.name == 'j-eoeo-release[bot]' }}
+          skip-github-pull-request: ${{ startsWith(github.event.head_commit.message, 'release:') && github.event.head_commit.author.name == env.RELEASE_PLEASE_AUTHOR }}
 
   docker-publish:
     needs: release-please
@@ -76,7 +79,7 @@ jobs:
         id: fc
         with:
           issue-number: ${{ needs.get-pr-number.outputs.pr_number }}
-          comment-author: 'github-actions[bot]'
+          comment-author: ${{ env.RELEASE_PLEASE_AUTHOR }}
           body-includes: ':robot: Release is at ${{ github.event.repository.html_url }}/releases/tag/untagged-'
       - if: steps.fc.conclusion == 'success'
         uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0

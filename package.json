@@ -38,7 +38,7 @@
     "@types/debug": "4.1.12",
     "@types/node": "20.11.19",
     "chokidar": "3.6.0",
-    "dotenv": "16.4.4",
+    "dotenv": "16.4.5",
     "husky": "9.0.11",
     "npm-run-all2": "6.1.2",
     "prettier": "3.2.5",

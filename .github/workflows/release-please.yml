@@ -65,8 +65,10 @@ jobs:
     steps:
       - name: Get PR number
         id: pr-number
+        env:
+          HEAD_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
-          echo "pr_number=$(printf '${{ github.event.head_commit.message }}' | head -n1 | sed -nE 's/.+\(#([0-9]+)\)$/\1/p')" >> "$GITHUB_OUTPUT"
+          echo "pr_number=$(printf "$HEAD_COMMIT_MESSAGE" | head -n1 | sed -nE 's/.+\(#([0-9]+)\)$/\1/p')" >> "$GITHUB_OUTPUT"
 
   update-release-comment:
     needs: [release-please, publish-release, get-pr-number]

@@ -49,7 +49,7 @@ RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store \
     --mount=type=bind,source=.husky/install.mjs,target=.husky/install.mjs \
     pnpm install --frozen-lockfile --offline
 
-FROM gcr.io/distroless/cc-debian12:nonroot@sha256:944752a974676b26ff92d7f9eeb0974970063d51758651b3e1919227fa3cea91
+FROM gcr.io/distroless/cc-debian12:nonroot@sha256:548d3e91231ffc84c1543da0b63e4063defc1f9620aa969e7f5abfafeb35afbe
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV="production"

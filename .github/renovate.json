@@ -40,6 +40,11 @@
       "matchPackagePrefixes": ["@types/"],
       "automerge": true,
       "automergeType": "branch"
+    },
+    {
+      "matchDatasources": "node-version",
+      "semanticCommitType": "deps",
+      "semanticCommitScope": null
     }
   ],
   "customManagers": [

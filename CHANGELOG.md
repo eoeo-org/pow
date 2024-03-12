@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.8.2](https://github.com/j-eoeo/pow/compare/v3.8.1...v3.8.2) (2024-03-12)
+
+
+### Dependencies
+
+* update dependency node to v21.7.1 ([#1073](https://github.com/j-eoeo/pow/issues/1073)) ([b769dbf](https://github.com/j-eoeo/pow/commit/b769dbfe2ffbd1260a0e03800185e89c2619a175))
+* update dependency sodium-native to v4.0.10 ([#1046](https://github.com/j-eoeo/pow/issues/1046)) ([14de140](https://github.com/j-eoeo/pow/commit/14de140214fcf97cb338f2e8ee5577fb8c03c29f))
+* update dependency sodium-native to v4.0.6 ([#988](https://github.com/j-eoeo/pow/issues/988)) ([0a4ccf6](https://github.com/j-eoeo/pow/commit/0a4ccf6d665a49b22f31fe039f6341bcf4d83a4c))
+* update dependency sodium-native to v4.0.7 ([#1019](https://github.com/j-eoeo/pow/issues/1019)) ([bac6940](https://github.com/j-eoeo/pow/commit/bac69402eae75d1b7bdb1a9d6bfb91e8f04ab003))
+* update dependency sodium-native to v4.0.8 ([#1025](https://github.com/j-eoeo/pow/issues/1025)) ([596ff35](https://github.com/j-eoeo/pow/commit/596ff35595f3fe430d4c1858297933e1d5255167))
+* update dependency sodium-native to v4.0.9 ([#1042](https://github.com/j-eoeo/pow/issues/1042)) ([6294a5a](https://github.com/j-eoeo/pow/commit/6294a5a1e92cf06cca1caefad8c2744d83ade58a))
+
 ## [3.8.1](https://github.com/j-eoeo/pow/compare/v3.8.0...v3.8.1) (2024-01-21)
 
 

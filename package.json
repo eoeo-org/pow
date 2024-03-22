@@ -27,7 +27,7 @@
     "discord.js": "14.14.1",
     "emoji-regex": "10.3.0",
     "ffmpeg-static": "5.2.0",
-    "mariadb": "3.2.3",
+    "mariadb": "3.3.0",
     "sodium-native": "4.1.0"
   },
   "devDependencies": {

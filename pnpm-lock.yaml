@@ -9,8 +9,8 @@ dependencies:
     specifier: 0.16.1
     version: 0.16.1(ffmpeg-static@5.2.0)
   '@sapphire/framework':
-    specifier: 5.0.7
-    version: 5.0.7
+    specifier: 5.0.10
+    version: 5.0.10
   '@sapphire/plugin-subcommands':
     specifier: 6.0.3
     version: 6.0.3
@@ -239,8 +239,8 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
-  /@sapphire/framework@5.0.7:
-    resolution: {integrity: sha512-AfCqoW9F5Xu+oAWINfPU25Gm8WVhaz+ETnRXpUCKbfRDSoYT1C8OImbnZeor2HH25DU6KKkKk3A98AfUxzawDA==}
+  /@sapphire/framework@5.0.10:
+    resolution: {integrity: sha512-F6OCGwTHrNd5fmhQoT9ZLVvZOUj2Pa0YJkw/EAe+KyU/bWguBiejytNP4NSOib5jGIdRNM0Qw0N87oU0wxbR/A==}
     engines: {node: '>=v18', npm: '>=7'}
     dependencies:
       '@discordjs/builders': 1.7.0

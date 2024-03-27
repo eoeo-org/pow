@@ -2,7 +2,7 @@
 
 FROM ghcr.io/jqlang/jq:1.7@sha256:12f998e5a6f3f6916f744ba6f01549f156f624b42f7564e67ec6dd4733973146 as fetch-jq
 
-FROM quay.io/curl/curl-base:8.6.0@sha256:a449217fb65f736674ae7d42d42b8eeb8b744d27b935bbc4b04ea82edb370d4c as fetch-pnpm
+FROM quay.io/curl/curl-base:8.7.1@sha256:325f8ea5de36d06441189ce7b670f452794453561a040b8ae6cebaf19b316747 as fetch-pnpm
 ENV SHELL="sh"
 ENV ENV="/tmp/env"
 ENV PNPM_HOME="/pnpm"

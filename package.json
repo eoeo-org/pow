@@ -34,7 +34,7 @@
     "@swc/cli": "0.3.10",
     "@swc/core": "1.4.11",
     "@tsconfig/node20": "20.1.4",
-    "@tsconfig/strictest": "2.0.4",
+    "@tsconfig/strictest": "2.0.5",
     "@types/debug": "4.1.12",
     "@types/node": "20.11.30",
     "chokidar": "3.6.0",

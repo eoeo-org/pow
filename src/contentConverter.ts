@@ -66,11 +66,16 @@ export const convertContent = (
 
   function resolveURL(...args: unknown[]) {
     const groups = args.at(-1) as Record<string, string | null>
-    if (groups['scheme'] !== 'https') return `${groups['scheme']}へのリンク`
-    return `${
-      embeds.find((data) => data.url === args.shift())?.data.title ??
-      (groups['ipv6address'] ? 'ipv6 アドレス' : groups['host'])
-    }へのリンク`
+    switch (groups['scheme']) {
+      case 'http':
+      case 'https':
+        return `${
+          embeds.find((data) => data.url === args.shift())?.data.title ??
+          (groups['ipv6address'] ? 'ipv6 アドレス' : groups['host'])
+        }へのリンク`
+      default:
+        return `${groups['scheme']}へのリンク`
+    }
   }
 
   const result =

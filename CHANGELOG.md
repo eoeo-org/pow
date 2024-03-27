@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.4](https://github.com/j-eoeo/pow/compare/v3.8.3...v3.8.4) (2024-03-27)
+
+
+### Bug Fixes
+
+* www を読まないようにする ([#1109](https://github.com/j-eoeo/pow/issues/1109)) ([01b42da](https://github.com/j-eoeo/pow/commit/01b42daef027001eeb429ea18b899ac4e09f8f5d))
+
 ## [3.8.3](https://github.com/j-eoeo/pow/compare/v3.8.2...v3.8.3) (2024-03-27)
 
 

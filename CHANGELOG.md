@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.8.3](https://github.com/j-eoeo/pow/compare/v3.8.2...v3.8.3) (2024-03-27)
+
+
+### Bug Fixes
+
+* http でもドメイン名を読み上げるようにする ([#1107](https://github.com/j-eoeo/pow/issues/1107)) ([05d917b](https://github.com/j-eoeo/pow/commit/05d917b93a8211145c7bb0e36da3bd00bac888b8))
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.0.10 ([#1098](https://github.com/j-eoeo/pow/issues/1098)) ([785dceb](https://github.com/j-eoeo/pow/commit/785dceb1c768d018b36f71a993b8fe177c451aeb))
+* update dependency mariadb to v3.3.0 ([#1095](https://github.com/j-eoeo/pow/issues/1095)) ([bf235ee](https://github.com/j-eoeo/pow/commit/bf235ee7abef7085e8c31ab74f024faca0b820a4))
+* update dependency sodium-native to v4.1.0 ([#1096](https://github.com/j-eoeo/pow/issues/1096)) ([87e1d8a](https://github.com/j-eoeo/pow/commit/87e1d8ae5360e3ad7c1b585f7f1af5edd419b784))
+* update dependency sodium-native to v4.1.1 ([#1097](https://github.com/j-eoeo/pow/issues/1097)) ([faaaddb](https://github.com/j-eoeo/pow/commit/faaaddba6939a6ae6a58d8ff9b0530078840db60))
+
 ## [3.8.2](https://github.com/j-eoeo/pow/compare/v3.8.1...v3.8.2) (2024-03-12)
 
 

@@ -71,7 +71,9 @@ export const convertContent = (
       case 'https':
         return `${
           embeds.find((data) => data.url === args.shift())?.data.title ??
-          (groups['ipv6address'] ? 'ipv6 アドレス' : groups['host'])
+          (groups['ipv6address']
+            ? 'ipv6 アドレス'
+            : groups['host']?.replace(/^www\./i, ''))
         }へのリンク`
       default:
         return `${groups['scheme']}へのリンク`

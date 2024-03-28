@@ -38,7 +38,7 @@ RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
 # dev用の依存パッケージをインストールする => /_/node_modules/
 FROM --platform=$BUILDPLATFORM base-build as dev-deps
 WORKDIR /_
-COPY --from=fetch-deps /_/node_modules/ ./node_modules/
+COPY --link --from=fetch-deps /_/node_modules/ ./node_modules/
 RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
     --mount=type=bind,from=fetch-deps,source=/pnpm/,target=/pnpm/ \
     --mount=type=bind,from=change-npmrc,source=/_/.npmrc,target=.npmrc \
@@ -61,7 +61,7 @@ RUN --mount=type=bind,from=fetch-deps,source=/pnpm/,target=/pnpm/ \
 # prod用の依存パッケージをインストールする => /_/node_modules/
 FROM base-build as prod-deps
 WORKDIR /_
-COPY --from=fetch-deps /_/node_modules/ ./node_modules/
+COPY --link --from=fetch-deps /_/node_modules/ ./node_modules/
 ARG NODE_ENV="production"
 RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
     --mount=type=bind,from=fetch-deps,source=/pnpm/,target=/pnpm/ \
@@ -78,7 +78,7 @@ ENV NODE_ENV="production"
 WORKDIR /app
 COPY --link --from=fetch-deps /pnpm/ /pnpm/
 COPY --link --from=build /_/dist/ ./dist/
-COPY --from=prod-deps /_/node_modules/ ./node_modules/
+COPY --link --from=prod-deps /_/node_modules/ ./node_modules/
 COPY --link .npmrc package.json ./
 ENTRYPOINT [ "pnpm", "--shell-emulator" ]
 CMD [ "start" ]

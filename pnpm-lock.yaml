@@ -43,9 +43,9 @@ devDependencies:
   '@swc/core':
     specifier: 1.4.11
     version: 1.4.11
-  '@tsconfig/node20':
-    specifier: 20.1.4
-    version: 20.1.4
+  '@tsconfig/node21':
+    specifier: 21.0.3
+    version: 21.0.3
   '@tsconfig/strictest':
     specifier: 2.0.5
     version: 2.0.5
@@ -478,8 +478,8 @@ packages:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
     dev: true
 
-  /@tsconfig/node20@20.1.4:
-    resolution: {integrity: sha512-sqgsT69YFeLWf5NtJ4Xq/xAF8p4ZQHlmGW74Nu2tD4+g5fAsposc4ZfaaPixVu4y01BEiDCWLRDCvDM5JOsRxg==}
+  /@tsconfig/node21@21.0.3:
+    resolution: {integrity: sha512-qTX4pGNfnRTutaiRPx+c4GFL1DB1u6GHkwfoYSNn/KelE9m86Mkn3RpFBhhxDh6yHeqaVuAx0tz+n7LrjBUEpw==}
     dev: true
 
   /@tsconfig/strictest@2.0.5:

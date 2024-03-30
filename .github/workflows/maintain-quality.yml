@@ -9,8 +9,8 @@ permissions:
   contents: read
 
 jobs:
-  lint:
-    name: Lint
+  ci:
+    name: ci
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -35,6 +35,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
 
+      - name: Check format
+        run: pnpm format:check
       - name: Lint
         run: pnpm lint
       - name: Check types

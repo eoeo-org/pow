@@ -10,7 +10,9 @@
     "build:debug": "swc --source-maps=true src --out-dir=dist",
     "build:debug:watch": "swc --watch --source-maps=true src --out-dir=dist",
     "format": "prettier --write .",
-    "lint": "prettier --check .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "check:types": "tsc",
     "prepare": "node .husky/install.mjs"
   },
@@ -39,10 +41,14 @@
     "@types/node": "20.12.2",
     "chokidar": "3.6.0",
     "dotenv": "16.4.5",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "9.1.0",
+    "globals": "15.0.0",
     "husky": "9.0.11",
     "npm-run-all2": "6.1.2",
     "prettier": "3.2.5",
-    "typescript": "5.4.3"
+    "typescript": "5.4.3",
+    "typescript-eslint": "7.4.0"
   },
   "author": "kazukazu123123",
   "license": "MIT",

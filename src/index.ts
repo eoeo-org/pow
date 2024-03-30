@@ -5,9 +5,7 @@ import type { SignalConstants } from 'os'
 import { WorkerClientMap } from './worker.js'
 import { readyEvent } from './events/index.js'
 
-import { createRequire } from 'node:module'
 import { load } from './load.js'
-const packageJson = createRequire(import.meta.url)('../../package.json')
 
 let isCalledDestroy = false
 
@@ -38,10 +36,10 @@ export const guildCtxManager = new GuildCtxManager(client)
 
 export let workerClientMap: WorkerClientMap
 export let workerReady = false
-console.log(`pow - v${packageJson.version}`)
+console.log(`pow - v${process.env.npm_package_version}`)
 
 client.on(Events.ClientReady, async (c) => {
-  readyEvent(c, packageJson)
+  readyEvent(c)
   workerClientMap = await new WorkerClientMap().init(
     process.env.WORKER_TOKENS,
     c,

@@ -31,7 +31,7 @@ export class Queue<T> extends EventEmitter {
     super()
     ;(async () => {
       debug__Queue('starting event loop')
-      while (true) {
+      for (;;) {
         debug__Queue(`items.length: ${this.items.length}`)
         if (this.items.length === 0) {
           debug__Queue('awaiting new_item')

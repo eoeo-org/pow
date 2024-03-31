@@ -51,7 +51,6 @@ export default tseslint.config(
       '@typescript-eslint/no-unnecessary-type-arguments': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
-      'no-constant-condition': 'off',
       '@typescript-eslint/no-confusing-void-expression': 'off',
       '@typescript-eslint/no-unsafe-member-access': 'off',
     },

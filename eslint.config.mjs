@@ -42,7 +42,6 @@ export default tseslint.config(
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       '@typescript-eslint/no-unsafe-argument': 'off',
-      '@typescript-eslint/array-type': 'off',
       '@typescript-eslint/no-useless-constructor': 'off',
       '@typescript-eslint/no-misused-promises': 'off',
       '@typescript-eslint/require-await': 'off',

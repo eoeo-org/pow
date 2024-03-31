@@ -78,7 +78,7 @@ export class LeaveCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return interaction.reply(interactionReplyOptions)
+      void interaction.reply(interactionReplyOptions)
     }
   }
 }

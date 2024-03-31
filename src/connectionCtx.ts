@@ -244,7 +244,7 @@ export class ConnectionCtxManager extends Map<
               {
                 color: 0x00ff00,
                 title: 'ボイスチャンネルから退出しました。',
-                description: `${cause}`,
+                description: cause,
                 footer: { text: 'またのご利用をお待ちしております。' },
               },
             ],

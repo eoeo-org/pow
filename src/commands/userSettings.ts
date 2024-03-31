@@ -184,7 +184,7 @@ export class UserSettingsCommand extends Subcommand {
     try {
       const oldUserSetting = await getUserSetting(interaction.member.id)
 
-      let errorMsg: string[] = []
+      const errorMsg: string[] = []
 
       const { options } = interaction
       const random = options.getBoolean('random')

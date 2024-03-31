@@ -37,7 +37,6 @@ export default tseslint.config(
       '@typescript-eslint/no-useless-template-literals': 'off',
       '@typescript-eslint/no-unnecessary-condition': 'off',
       '@typescript-eslint/no-floating-promises': 'off',
-      'prefer-const': 'off',
       '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
       '@typescript-eslint/only-throw-error': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',

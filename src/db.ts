@@ -45,7 +45,7 @@ export async function getUserSetting(id: string): Promise<UserSetting> {
   let conn: PoolConnection | undefined = undefined
   try {
     conn = await pool.getConnection()
-    const rows: Array<UserSetting> = await conn.query(
+    const rows: UserSetting[] = await conn.query(
       'SELECT * FROM userSetting WHERE id = ?',
       [id],
     )
@@ -135,7 +135,7 @@ export async function loadStates() {
     await conn.query(
       'CREATE TABLE IF NOT EXISTS connectionStates (voiceChannel BIGINT UNSIGNED NOT NULL PRIMARY KEY, guild BIGINT UNSIGNED NOT NULL, readChannel BIGINT UNSIGNED NOT NULL, skipUser TEXT)',
     )
-    const rows: Array<ConnectionState> = await conn.query(
+    const rows: ConnectionState[] = await conn.query(
       'SELECT * FROM connectionStates',
     )
     return rows

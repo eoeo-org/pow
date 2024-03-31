@@ -154,7 +154,7 @@ export class UserSettingsCommand extends Subcommand {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return interaction.reply(interactionReplyOptions)
+      void interaction.reply(interactionReplyOptions)
     }
   }
 
@@ -273,7 +273,7 @@ export class UserSettingsCommand extends Subcommand {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return interaction.reply(interactionReplyOptions)
+      void interaction.reply(interactionReplyOptions)
     }
   }
 }

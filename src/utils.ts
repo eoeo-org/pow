@@ -73,7 +73,7 @@ export const userSettingToDiff = (
 ) => {
   return `speaker: ${
     oldUserSetting.speaker === newUserSetting.speaker
-      ? `${newUserSetting.speaker}`
+      ? newUserSetting.speaker
       : `\x1B[31m${oldUserSetting.speaker}\x1B[0m -> \x1B[32m${newUserSetting.speaker}\x1B[0m`
   }\npitch: ${
     oldUserSetting.pitch === newUserSetting.pitch

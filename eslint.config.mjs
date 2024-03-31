@@ -34,7 +34,6 @@ export default tseslint.config(
     // TODO
     rules: {
       '@typescript-eslint/restrict-template-expressions': 'off',
-      '@typescript-eslint/no-useless-template-literals': 'off',
       '@typescript-eslint/no-unnecessary-condition': 'off',
       '@typescript-eslint/no-floating-promises': 'off',
       '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',

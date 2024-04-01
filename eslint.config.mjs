@@ -38,7 +38,6 @@ export default tseslint.config(
       '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
       '@typescript-eslint/only-throw-error': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
       '@typescript-eslint/no-unsafe-argument': 'off',
       '@typescript-eslint/no-useless-constructor': 'off',
       '@typescript-eslint/no-misused-promises': 'off',

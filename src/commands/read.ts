@@ -140,7 +140,7 @@ export class ReadCommand extends Command {
         .trim()
         .replace('\n', '')
       if (convertedMessage.length === 0) return
-      connectionCtx.addMessage(convertedMessage, interaction, {
+      await connectionCtx.addMessage(convertedMessage, interaction, {
         speaker: interaction.options.getString('speaker'),
         pitch: interaction.options.getInteger('pitch'),
         speed: interaction.options.getInteger('speed'),

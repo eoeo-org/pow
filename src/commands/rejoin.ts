@@ -80,7 +80,7 @@ export class RejoinCommand extends Command {
         guildCtx.connectionManager.channelMap.get(voiceChannelId)
           ? undefined
           : LeaveCause.rejoin
-      guildCtx.leave({ voiceChannelId, cause })
+      await guildCtx.leave({ voiceChannelId, cause })
 
       const worker = await guildCtx.join({
         voiceChannelId: newVoiceBasedChannelId(voiceChannel),

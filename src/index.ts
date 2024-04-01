@@ -96,4 +96,4 @@ process.on('uncaughtException', async (err) => {
   process.exit(1)
 })
 
-client.login()
+void client.login()

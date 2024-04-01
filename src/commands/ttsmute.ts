@@ -71,7 +71,7 @@ export class TtsmuteCommand extends Command {
       const enable =
         interaction.options.getBoolean('enable') ??
         !connectionCtx.skipUser.has(newUserId(interaction.user))
-      connectionCtx.updateSkipUser(interaction.user, enable)
+      await connectionCtx.updateSkipUser(interaction.user, enable)
       interactionReplyOptions = {
         embeds: [
           {

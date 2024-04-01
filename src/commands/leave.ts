@@ -55,7 +55,7 @@ export class LeaveCommand extends Command {
         newGuildTextBasedChannelId(interaction.channel) === textChannelId
           ? undefined
           : LeaveCause.command
-      const workerId = ctx.leave({
+      const workerId = await ctx.leave({
         voiceChannelId: newVoiceBasedChannelId(voiceChannel),
         cause,
       })

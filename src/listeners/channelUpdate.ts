@@ -35,7 +35,7 @@ export class ChannelUpdateListener extends Listener {
       const workerId =
         connectionManager.get(readChannelId)?.connection.joinConfig.group
       if (workerId === undefined) return
-      workerClientMap
+      void workerClientMap
         .get(workerId)
         ?.guilds.cache.get(newChannel.guildId)
         ?.members.me?.voice.setRequestToSpeak(true)

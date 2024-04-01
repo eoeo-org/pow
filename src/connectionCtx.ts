@@ -74,7 +74,7 @@ export class ConnectionContext {
     this.client = client
     this.skipUser = skipUser
 
-    setState(this)
+    void setState(this)
   }
 
   async #readMessage({ audio }: { audio: Readable }) {
@@ -217,7 +217,7 @@ export class ConnectionCtxManager extends Map<
     this.set(readChannelId, connectionContext)
     return connectionContext
   }
-  connectionLeave({
+  async connectionLeave({
     voiceChannelId,
     cause = undefined,
   }: {
@@ -254,7 +254,7 @@ export class ConnectionCtxManager extends Map<
           if (![50013, 10003].includes(err.code)) throw err
         })
     }
-    deleteState({ voiceChannelId })
+    await deleteState({ voiceChannelId })
     return workerId
   }
 }

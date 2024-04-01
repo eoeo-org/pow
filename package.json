@@ -33,7 +33,7 @@
     "sodium-native": "4.1.1"
   },
   "devDependencies": {
-    "@swc/cli": "0.3.10",
+    "@swc/cli": "0.3.12",
     "@swc/core": "1.4.11",
     "@tsconfig/node21": "21.0.3",
     "@tsconfig/strictest": "2.0.5",

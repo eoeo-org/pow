@@ -90,7 +90,7 @@ export class GuildContext {
         if (forOldCtxWorkerId === undefined) {
           throw new NoWorkerError()
         }
-        this.leave({ voiceChannelId: oldVoiceChannelId })
+        await this.leave({ voiceChannelId: oldVoiceChannelId })
         this.connectionManager.connectionJoin({
           voiceChannelId: oldVoiceChannelId,
           guildId: this.guild.id,
@@ -131,10 +131,13 @@ export class GuildContext {
   async addBot(workerId: string) {
     ;(await this.bots).push(workerId)
   }
-  leaveAll({ cause }: { cause: LeaveCause }) {
-    for (const voiceChannelId of this.connectionManager.channelMap.keys()) {
-      this.leave({ voiceChannelId, cause })
-    }
+  async leaveAll({ cause }: { cause: LeaveCause }) {
+    await Promise.allSettled(
+      Array.from(
+        this.connectionManager.channelMap.keys(),
+        async (voiceChannelId) => await this.leave({ voiceChannelId, cause }),
+      ),
+    )
   }
 }
 
@@ -151,8 +154,8 @@ export class GuildCtxManager extends Map<Guild, GuildContext> {
     this.set(guild, guildContext)
     return guildContext
   }
-  override delete(guild: Guild) {
-    this.get(guild).leaveAll({ cause: LeaveCause.reset })
+  async deleteAsync(guild: Guild) {
+    await this.get(guild).leaveAll({ cause: LeaveCause.reset })
     return super.delete(guild)
   }
 }

@@ -26,7 +26,9 @@ export class ResetCommand extends Command {
         .setDMPermission(false),
     )
   }
-  public override chatInputRun(interaction: ChatInputCommand.Interaction) {
+  public override async chatInputRun(
+    interaction: ChatInputCommand.Interaction,
+  ) {
     if (!interaction.inCachedGuild()) return
 
     let interactionReplyOptions: InteractionReplyOptions = {
@@ -40,7 +42,7 @@ export class ResetCommand extends Command {
     }
 
     try {
-      guildCtxManager.delete(interaction.guild)
+      await guildCtxManager.deleteAsync(interaction.guild)
       interactionReplyOptions = {
         embeds: [
           {

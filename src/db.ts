@@ -60,7 +60,7 @@ export async function getUserSetting(id: string): Promise<UserSetting> {
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }
 
@@ -95,7 +95,7 @@ export async function randomizeUserSetting(id: string): Promise<UserSetting> {
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }
 
@@ -120,7 +120,7 @@ export async function setUserSetting(
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }
 
@@ -145,7 +145,7 @@ export async function loadStates() {
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }
 
@@ -170,7 +170,7 @@ export async function setState(connectionContext: ConnectionContext) {
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }
 
@@ -193,6 +193,6 @@ export async function deleteState({
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }

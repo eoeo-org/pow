@@ -29,7 +29,7 @@ export class Queue<T> extends EventEmitter {
 
   constructor(private consumer: (item: T) => Promise<any>) {
     super()
-    ;(async () => {
+    void (async () => {
       debug__Queue('starting event loop')
       for (;;) {
         debug__Queue(`items.length: ${this.items.length}`)

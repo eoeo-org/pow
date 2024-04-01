@@ -41,7 +41,7 @@ export class VoiceStateUpdateListener extends Listener {
           connectionCtx.connection.joinConfig.group === oldState.id,
       )
     ) {
-      guildCtx.leave({
+      void guildCtx.leave({
         voiceChannelId: newVoiceBasedChannelId(oldState.channel),
         cause: LeaveCause.disconnected,
       })
@@ -59,7 +59,7 @@ export class VoiceStateUpdateListener extends Listener {
         ),
       )
     ) {
-      guildCtx.leave({
+      void guildCtx.leave({
         voiceChannelId: newVoiceBasedChannelId(oldState.channel),
         cause: LeaveCause.noUser,
       })

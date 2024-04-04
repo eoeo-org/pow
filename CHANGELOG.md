@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.5](https://github.com/j-eoeo/pow/compare/v3.8.4...v3.8.5) (2024-04-04)
+
+
+### Dependencies
+
+* update dependency node to v21.7.2 ([#1133](https://github.com/j-eoeo/pow/issues/1133)) ([c683a1d](https://github.com/j-eoeo/pow/commit/c683a1d3ce5904bb82010b37b146f8701f2fe6d8))
+
 ## [3.8.4](https://github.com/j-eoeo/pow/compare/v3.8.3...v3.8.4) (2024-03-27)
 
 

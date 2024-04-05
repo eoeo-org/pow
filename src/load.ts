@@ -48,7 +48,7 @@ export const load = async ({
   guildCtxManager: GuildCtxManager
 }) => {
   const rows = await loadStates()
-  const promises: Promise<void | Client<boolean>>[] = []
+  const promises: Promise<void | Client>[] = []
   rows.forEach((row) => {
     const promise = rejoin({ connectionState: row, client, guildCtxManager })
 

@@ -40,9 +40,9 @@ export class Queue<T> extends EventEmitter {
         }
         debug__Queue('awaiting consumer')
         await Promise.race([
-          awaitEvent(this, 'purge').then(() =>
-            debug__Queue('queue purged, continuing'),
-          ),
+          awaitEvent(this, 'purge').then(() => {
+            debug__Queue('queue purged, continuing')
+          }),
           this.consumer(this.items.shift()!),
         ])
         debug__Queue('consumer resolved')

@@ -13,12 +13,12 @@ export const readyEvent = (client: Client) => {
     ],
   })
   void Promise.all(
-    client.guilds.cache.map(async (guild: Guild) =>
+    client.guilds.cache.map(async (guild: Guild) => {
       console.log(
         `  - ${guild.name} (${guild.memberCount}) Owner: ${await guild
           .fetchOwner()
           .then((owner) => owner.user.tag)}`,
-      ),
-    ),
+      )
+    }),
   )
 }

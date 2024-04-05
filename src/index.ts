@@ -82,18 +82,18 @@ const destroy = async () => {
   }
 }
 
-async function handle(signal: SignalConstants) {
+function handle(signal: SignalConstants) {
   console.log(`Received ${signal}`)
-  await destroy()
-  process.exit()
+  void destroy().then(() => process.exit())
 }
 
 process.on('SIGINT', handle)
 process.on('SIGTERM', handle)
-process.on('uncaughtException', async (err) => {
-  await destroy()
-  console.error('uncaughtException:\n%o', err)
-  process.exit(1)
+process.on('uncaughtException', (err) => {
+  void destroy().then(() => {
+    console.error('uncaughtException:\n%o', err)
+    process.exit(1)
+  })
 })
 
 void client.login()

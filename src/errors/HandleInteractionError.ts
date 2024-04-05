@@ -12,6 +12,7 @@ type ErrorType =
 
 export class HandleInteractionError extends PowError {
   override name = 'コマンド実行エラー'
+  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
   constructor(message: ErrorType) {
     super(message)
   }

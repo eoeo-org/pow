@@ -24,7 +24,7 @@ const rejoin = async ({
     const voiceChannel = (await client.channels.fetch(
       connectionState.voiceChannel.toString(),
     )) as VoiceBasedChannel | null
-    if (voiceChannel === null || voiceChannel.members.size === 0) throw Error
+    if (voiceChannel === null || voiceChannel.members.size === 0) throw Error()
 
     const voiceChannelId =
       connectionState.voiceChannel.toString() as VoiceBasedChannelId

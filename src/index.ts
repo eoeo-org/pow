@@ -55,7 +55,7 @@ const destroy = async () => {
     const promises: Promise<unknown>[] = []
 
     guildCtxManager.forEach((guildContext) => {
-      guildContext.connectionManager.forEach(async (connectionContext) => {
+      guildContext.connectionManager.forEach((connectionContext) => {
         const promise = client.rest.post(
           Routes.channelMessages(connectionContext.readChannelId),
           {

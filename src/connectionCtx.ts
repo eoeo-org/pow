@@ -17,9 +17,9 @@ import {
   Client,
   Message,
   ChatInputCommandInteraction,
-  type DiscordErrorData,
   User,
   Routes,
+  type DiscordAPIError,
 } from 'discord.js'
 import { Queue } from './utils.js'
 import { fetchAudioStream } from './voiceRead.js'
@@ -126,7 +126,7 @@ export class ConnectionContext {
       if (ctx instanceof ChatInputCommandInteraction) {
         return await ctx.followUp(message)
       } else {
-        return await ctx.reply(message).catch((err: DiscordErrorData) => {
+        return await ctx.reply(message).catch((err: DiscordAPIError) => {
           switch (err.code) {
             case 50013:
               debug__ErrorHandler(
@@ -250,8 +250,14 @@ export class ConnectionCtxManager extends Map<
             ],
           },
         })
-        .catch((err: DiscordErrorData) => {
-          if (![50013, 10003].includes(err.code)) throw err
+        .catch((err: DiscordAPIError) => {
+          switch (err.code) {
+            case 50013:
+            case 10003:
+              break
+            default:
+              throw err
+          }
         })
     }
     await deleteState({ voiceChannelId })

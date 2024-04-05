@@ -19,7 +19,7 @@ import {
   ChatInputCommandInteraction,
   User,
   Routes,
-  type DiscordAPIError,
+  DiscordAPIError,
 } from 'discord.js'
 import { Queue } from './utils.js'
 import { fetchAudioStream } from './voiceRead.js'
@@ -126,20 +126,22 @@ export class ConnectionContext {
       if (ctx instanceof ChatInputCommandInteraction) {
         return await ctx.followUp(message)
       } else {
-        return await ctx.reply(message).catch((err: DiscordAPIError) => {
-          switch (err.code) {
-            case 50013:
-              debug__ErrorHandler(
-                `Error code ${err.code}: Missing send messages permission.`,
-              )
-              break
-            case 50035:
-              debug__ErrorHandler(
-                `Error code ${err.code}: No reply message found, unable to send error.`,
-              )
-              break
-            default:
-              throw err
+        return await ctx.reply(message).catch((err: unknown) => {
+          if (err instanceof DiscordAPIError) {
+            switch (err.code) {
+              case 50013:
+                debug__ErrorHandler(
+                  `Error code ${err.code}: Missing send messages permission.`,
+                )
+                break
+              case 50035:
+                debug__ErrorHandler(
+                  `Error code ${err.code}: No reply message found, unable to send error.`,
+                )
+                break
+              default:
+                throw err
+            }
           }
         })
       }
@@ -250,13 +252,15 @@ export class ConnectionCtxManager extends Map<
             ],
           },
         })
-        .catch((err: DiscordAPIError) => {
-          switch (err.code) {
-            case 50013:
-            case 10003:
-              break
-            default:
-              throw err
+        .catch((err: unknown) => {
+          if (err instanceof DiscordAPIError) {
+            switch (err.code) {
+              case 50013:
+              case 10003:
+                break
+              default:
+                throw err
+            }
           }
         })
     }

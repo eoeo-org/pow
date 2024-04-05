@@ -12,6 +12,7 @@ export function getProperty<T, K extends keyof T>(property: K) {
 const awaitEvent = (
   eventEmitter: EventEmitter,
   event: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   validate = (...args: unknown[]) => true,
 ) =>
   new Promise((resolve) => {

@@ -12,10 +12,10 @@ export function getProperty<T, K extends keyof T>(property: K) {
 const awaitEvent = (
   eventEmitter: EventEmitter,
   event: string,
-  validate = (...args: any[]) => true,
+  validate = (...args: unknown[]) => true,
 ) =>
   new Promise((resolve) => {
-    const callback = (...args: any[]) => {
+    const callback = (...args: unknown[]) => {
       if (validate(...args)) {
         eventEmitter.off(event, callback)
         resolve({ event, ...args })
@@ -27,7 +27,7 @@ const awaitEvent = (
 export class Queue<T> extends EventEmitter {
   items: T[] = []
 
-  constructor(private consumer: (item: T) => Promise<any>) {
+  constructor(private consumer: (item: T) => Promise<unknown>) {
     super()
     void (async () => {
       debug__Queue('starting event loop')

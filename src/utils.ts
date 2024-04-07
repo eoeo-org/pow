@@ -62,10 +62,13 @@ export class Queue<T> extends EventEmitter {
   }
 }
 
-export function objToList(obj) {
-  return Object.keys(obj)
-    .map((a) => `${a}: ${obj[a]}`)
-    .join('\n')
+export function userSettingToString(userSetting: UserSetting): string {
+  return [
+    `speaker: ${userSetting.speaker}`,
+    `pitch: ${userSetting.pitch}`,
+    `speed: ${userSetting.speed}`,
+    `isDontRead: ${userSetting.isDontRead}`,
+  ].join('\n')
 }
 
 export const userSettingToDiff = (

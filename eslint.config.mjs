@@ -9,6 +9,7 @@ export default tseslint.config(
   {
     ignores: ['cli-incremental-info', 'coverage', 'dist/*'],
   },
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
@@ -37,7 +38,6 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-argument': 'off',
       '@typescript-eslint/no-base-to-string': 'off',
       '@typescript-eslint/no-invalid-void-type': 'off',
-      '@typescript-eslint/no-unsafe-member-access': 'off',
     },
   },
 )

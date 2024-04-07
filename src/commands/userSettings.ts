@@ -1,5 +1,9 @@
 import { Subcommand } from '@sapphire/plugin-subcommands'
-import { getErrorReply, objToList, userSettingToDiff } from '../utils.js'
+import {
+  getErrorReply,
+  userSettingToString,
+  userSettingToDiff,
+} from '../utils.js'
 import { getUserSetting, randomizeUserSetting, setUserSetting } from '../db.js'
 import type { InteractionReplyOptions } from 'discord.js'
 
@@ -144,7 +148,7 @@ export class UserSettingsCommand extends Subcommand {
             description:
               `**${userNameText}の声の設定**` +
               '```\n' +
-              objToList(userSetting).split('\n').slice(1).join('\n') +
+              userSettingToString(userSetting) +
               '\n```',
           },
         ],

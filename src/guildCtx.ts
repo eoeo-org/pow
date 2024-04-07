@@ -90,12 +90,17 @@ export class GuildContext {
         if (forOldCtxWorkerId === undefined) {
           throw new NoWorkerError()
         }
+        const forOldCtxWorker =
+          workerClientMap.get(forOldCtxWorkerId) ??
+          (() => {
+            throw new NoWorkerError()
+          })()
         await this.leave({ voiceChannelId: oldVoiceChannelId })
         this.connectionManager.connectionJoin({
           voiceChannelId: oldVoiceChannelId,
           guildId: this.guild.id,
           readChannelId: oldConnectionCtx.readChannelId,
-          worker: workerClientMap.get(forOldCtxWorkerId)!,
+          worker: forOldCtxWorker,
           client: this.guild.client,
           skipUser,
         })
@@ -104,7 +109,11 @@ export class GuildContext {
     if (workerId === undefined) {
       throw new NoWorkerError()
     }
-    const worker = workerClientMap.get(workerId)!
+    const worker =
+      workerClientMap.get(workerId) ??
+      (() => {
+        throw new NoWorkerError()
+      })()
     this.connectionManager.connectionJoin({
       voiceChannelId,
       guildId: this.guild.id,
@@ -148,6 +157,7 @@ export class GuildCtxManager extends Map<Guild, GuildContext> {
     this.client = client
   }
   override get(guild: Guild) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     if (this.has(guild)) return super.get(guild)!
     if (!workerReady) throw new NotReadyWorkerError()
     const guildContext = new GuildContext(guild, workerClientMap)

@@ -44,6 +44,7 @@ export class Queue<T> extends EventEmitter {
           awaitEvent(this, 'purge').then(() => {
             debug__Queue('queue purged, continuing')
           }),
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           this.consumer(this.items.shift()!),
         ])
         debug__Queue('consumer resolved')

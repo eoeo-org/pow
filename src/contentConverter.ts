@@ -44,21 +44,22 @@ export const convertContent = (
 ) => {
   if (!guildId) throw new Error('There is no guildId.')
 
-  function parseContent(a, b, c) {
+  function parseContent(a, b: string | undefined, c: string | undefined) {
     const gm = client.guilds.resolve(guildId)!.members
     const gr = client.guilds.resolve(guildId)!.roles
     const gc = client.guilds.resolve(guildId)!.channels
 
     //console.log(a, b, c)
 
+    if (c === undefined) return ''
     switch (b) {
       case '@':
       case '@!':
-        return gm.resolve(c) ? gm.resolve(c).displayName : ''
+        return gm.resolve(c)?.displayName ?? ''
       case '@&':
-        return gr.resolve(c) ? gr.resolve(c).name : ''
+        return gr.resolve(c)?.name ?? ''
       case '#':
-        return gc.resolve(c) ? gc.resolve(c).name : ''
+        return gc?.resolve(c)?.name ?? ''
       default:
         return ''
     }

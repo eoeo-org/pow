@@ -9,10 +9,11 @@ export default tseslint.config(
   {
     ignores: ['cli-incremental-info', 'coverage', 'dist/*'],
   },
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   eslintConfigPrettier,
   {
     languageOptions: {
@@ -35,7 +36,6 @@ export default tseslint.config(
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/no-unnecessary-condition': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-unsafe-argument': 'off',
       '@typescript-eslint/no-base-to-string': 'off',
       '@typescript-eslint/no-invalid-void-type': 'off',
     },

@@ -201,12 +201,13 @@ export class ConnectionCtxManager extends Map<
     const connection = joinVoiceChannel({
       channelId: voiceChannelId,
       guildId: guildId,
-      group: worker.user!.id,
+      group: worker.user?.id ?? '',
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       adapterCreator: worker.guilds.cache.get(guildId)!.voiceAdapterCreator,
     })
     connection.once('disconnect', () => {
       debug__ConnectionContext('vc disconnected')
-      this.get(readChannelId)!.readQueue.purge()
+      this.get(readChannelId)?.readQueue.purge()
       connection?.destroy()
       this.delete(readChannelId)
     })
@@ -239,7 +240,7 @@ export class ConnectionCtxManager extends Map<
     this.channelMap.delete(voiceChannelId)
     this.delete(readChannelId)
     if (cause !== undefined) {
-      connectionCtx!.client.rest
+      connectionCtx?.client.rest
         .post(Routes.channelMessages(readChannelId), {
           body: {
             embeds: [

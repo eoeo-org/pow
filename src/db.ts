@@ -22,6 +22,7 @@ const toConnectionState = (
   connectionContext: ConnectionContext,
 ): ConnectionState => {
   return {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     voiceChannel: BigInt(connectionContext.connection.joinConfig.channelId!),
     guild: BigInt(connectionContext.connection.joinConfig.guildId),
     readChannel: BigInt(connectionContext.readChannelId),
@@ -41,6 +42,7 @@ const pool = createPool({
 })
 
 export async function getUserSetting(id: string): Promise<UserSetting> {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   if (userSettings.has(id)) return userSettings.get(id)!
   let conn: PoolConnection | undefined = undefined
   try {
@@ -75,6 +77,7 @@ export async function randomizeUserSetting(id: string): Promise<UserSetting> {
     'santa',
     'bear',
   ]
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const speaker = voiceList[Math.floor(Math.random() * voiceList.length)]!
   const pitch = Math.floor(Math.random() * (200 + 1 - 50)) + 50
   const speed = Math.floor(Math.random() * (400 + 1 - 50)) + 50

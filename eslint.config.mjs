@@ -35,7 +35,6 @@ export default tseslint.config(
     rules: {
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/no-unnecessary-condition': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-base-to-string': 'off',
       '@typescript-eslint/no-invalid-void-type': 'off',
     },

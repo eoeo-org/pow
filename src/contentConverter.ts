@@ -44,7 +44,11 @@ export const convertContent = (
 ) => {
   if (!guildId) throw new Error('There is no guildId.')
 
-  function parseContent(a, b: string | undefined, c: string | undefined) {
+  function parseContent(
+    a: string,
+    b: string | undefined,
+    c: string | undefined,
+  ) {
     const gm = client.guilds.resolve(guildId)?.members
     const gr = client.guilds.resolve(guildId)?.roles
     const gc = client.guilds.resolve(guildId)?.channels

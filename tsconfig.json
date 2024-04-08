@@ -10,7 +10,6 @@
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
 
-    "noUnusedParameters": false,
-    "noImplicitAny": false
+    "noUnusedParameters": false
   }
 }

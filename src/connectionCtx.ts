@@ -110,7 +110,6 @@ export class ConnectionContext {
         setting.pitch ?? userSetting.pitch,
         setting.speed ?? userSetting.speed,
       )
-      if (audioStream === null) return
       const audio = Readable.fromWeb(audioStream)
       debug__ConnectionContext('got response, adding to queue')
       this.readQueue.add({ audio })
@@ -208,7 +207,7 @@ export class ConnectionCtxManager extends Map<
     connection.once('disconnect', () => {
       debug__ConnectionContext('vc disconnected')
       this.get(readChannelId)?.readQueue.purge()
-      connection?.destroy()
+      connection.destroy()
       this.delete(readChannelId)
     })
     const connectionContext = new ConnectionContext({

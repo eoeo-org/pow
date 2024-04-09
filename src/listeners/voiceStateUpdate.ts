@@ -11,7 +11,7 @@ export class VoiceStateUpdateListener extends Listener {
   public override async run(oldState: VoiceState, newState: VoiceState) {
     if (
       newState.channel?.type === ChannelType.GuildStageVoice &&
-      newState.member?.id === newState.client.user?.id &&
+      newState.member?.id === newState.client.user.id &&
       newState.suppress
     ) {
       try {

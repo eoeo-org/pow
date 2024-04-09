@@ -7,8 +7,8 @@ export const joinMessageRun = async (message: Message) => {
   if (!message.author.bot) {
     return message.reply({
       content: `</join:${(
-        await message.client.application?.commands.fetch()
-      )?.findKey(
+        await message.client.application.commands.fetch()
+      ).findKey(
         (applicationCommand) => applicationCommand.name === 'join',
       )}> をお使いください。（コマンドメンションを押すとチャット欄に自動挿入されます。）`,
     })

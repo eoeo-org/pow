@@ -60,9 +60,9 @@ export class PurgeCommand extends Command {
           HandleInteractionErrorType.userNotWithBot,
         )
 
-      connectionCtx?.readQueue.purge()
-      connectionCtx?.player?.stop()
-      const workerId = connectionCtx?.connection.joinConfig.group
+      connectionCtx.readQueue.purge()
+      connectionCtx.player?.stop()
+      const workerId = connectionCtx.connection.joinConfig.group
 
       interactionReplyOptions = {
         embeds: [

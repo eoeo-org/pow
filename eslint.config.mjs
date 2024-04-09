@@ -34,7 +34,6 @@ export default tseslint.config(
     // TODO
     rules: {
       '@typescript-eslint/restrict-template-expressions': 'off',
-      '@typescript-eslint/no-base-to-string': 'off',
       '@typescript-eslint/no-invalid-void-type': 'off',
     },
   },

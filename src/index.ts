@@ -1,7 +1,6 @@
 import { Events, Options, Routes } from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { GuildCtxManager } from './guildCtx.js'
-import type { SignalConstants } from 'os'
 import { WorkerClientMap } from './worker.js'
 import { readyEvent } from './events/index.js'
 
@@ -82,7 +81,7 @@ const destroy = async () => {
   }
 }
 
-function handle(signal: SignalConstants) {
+function handle(signal: NodeJS.Signals) {
   console.log(`Received ${signal}`)
   void destroy().then(() => process.exit())
 }

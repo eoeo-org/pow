@@ -15,10 +15,11 @@ export function getProperty<T, K extends keyof T>(property: K) {
 const awaitEvent = (
   eventEmitter: EventEmitter,
   event: string,
-  validate = (...args: any[]) => true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  validate = (...args: unknown[]) => true,
 ) =>
   new Promise((resolve) => {
-    const callback = (...args: any[]) => {
+    const callback = (...args: unknown[]) => {
       if (validate(...args)) {
         eventEmitter.off(event, callback)
         resolve({ event, ...args })
@@ -30,11 +31,11 @@ const awaitEvent = (
 export class Queue<T> extends EventEmitter {
   items: T[] = []
 
-  constructor(private consumer: (item: T) => Promise<any>) {
+  constructor(private consumer: (item: T) => Promise<unknown>) {
     super()
-    ;(async () => {
+    void (async () => {
       debug__Queue('starting event loop')
-      while (true) {
+      for (;;) {
         debug__Queue(`items.length: ${this.items.length}`)
         if (this.items.length === 0) {
           debug__Queue('awaiting new_item')
@@ -43,9 +44,10 @@ export class Queue<T> extends EventEmitter {
         }
         debug__Queue('awaiting consumer')
         await Promise.race([
-          awaitEvent(this, 'purge').then(() =>
-            debug__Queue('queue purged, continuing'),
-          ),
+          awaitEvent(this, 'purge').then(() => {
+            debug__Queue('queue purged, continuing')
+          }),
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           this.consumer(this.items.shift()!),
         ])
         debug__Queue('consumer resolved')
@@ -64,10 +66,13 @@ export class Queue<T> extends EventEmitter {
   }
 }
 
-export function objToList(obj) {
-  return Object.keys(obj)
-    .map((a) => `${a}: ${obj[a]}`)
-    .join('\n')
+export function userSettingToString(userSetting: UserSetting): string {
+  return [
+    `speaker: ${userSetting.speaker}`,
+    `pitch: ${userSetting.pitch}`,
+    `speed: ${userSetting.speed}`,
+    `isDontRead: ${userSetting.isDontRead}`,
+  ].join('\n')
 }
 
 export const userSettingToDiff = (
@@ -76,7 +81,7 @@ export const userSettingToDiff = (
 ) => {
   return `speaker: ${
     oldUserSetting.speaker === newUserSetting.speaker
-      ? `${newUserSetting.speaker}`
+      ? newUserSetting.speaker
       : `\x1B[31m${oldUserSetting.speaker}\x1B[0m -> \x1B[32m${newUserSetting.speaker}\x1B[0m`
   }\npitch: ${
     oldUserSetting.pitch === newUserSetting.pitch

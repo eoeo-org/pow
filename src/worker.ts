@@ -7,7 +7,9 @@ export class WorkerNullError extends Error {
 class WorkerClient<Ready extends boolean = boolean> extends Client<Ready> {
   constructor(readonly mainClient: Client<true>) {
     super({ intents: ['Guilds', 'GuildVoiceStates'] })
-    this.on(Events.ClientReady, (client) => this.#onReady(client))
+    this.on(Events.ClientReady, (client) => {
+      this.#onReady(client)
+    })
   }
   #onReady(client: Client<true>) {
     console.log(`Ready as ${client.user.tag}`)

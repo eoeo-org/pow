@@ -22,6 +22,7 @@ const toConnectionState = (
   connectionContext: ConnectionContext,
 ): ConnectionState => {
   return {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     voiceChannel: BigInt(connectionContext.connection.joinConfig.channelId!),
     guild: BigInt(connectionContext.connection.joinConfig.guildId),
     readChannel: BigInt(connectionContext.readChannelId),
@@ -41,11 +42,12 @@ const pool = createPool({
 })
 
 export async function getUserSetting(id: string): Promise<UserSetting> {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   if (userSettings.has(id)) return userSettings.get(id)!
   let conn: PoolConnection | undefined = undefined
   try {
     conn = await pool.getConnection()
-    const rows: Array<UserSetting> = await conn.query(
+    const rows: UserSetting[] = await conn.query(
       'SELECT * FROM userSetting WHERE id = ?',
       [id],
     )
@@ -60,7 +62,7 @@ export async function getUserSetting(id: string): Promise<UserSetting> {
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }
 
@@ -75,6 +77,7 @@ export async function randomizeUserSetting(id: string): Promise<UserSetting> {
     'santa',
     'bear',
   ]
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const speaker = voiceList[Math.floor(Math.random() * voiceList.length)]!
   const pitch = Math.floor(Math.random() * (200 + 1 - 50)) + 50
   const speed = Math.floor(Math.random() * (400 + 1 - 50)) + 50
@@ -95,7 +98,7 @@ export async function randomizeUserSetting(id: string): Promise<UserSetting> {
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }
 
@@ -120,7 +123,7 @@ export async function setUserSetting(
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }
 
@@ -135,7 +138,7 @@ export async function loadStates() {
     await conn.query(
       'CREATE TABLE IF NOT EXISTS connectionStates (voiceChannel BIGINT UNSIGNED NOT NULL PRIMARY KEY, guild BIGINT UNSIGNED NOT NULL, readChannel BIGINT UNSIGNED NOT NULL, skipUser TEXT)',
     )
-    const rows: Array<ConnectionState> = await conn.query(
+    const rows: ConnectionState[] = await conn.query(
       'SELECT * FROM connectionStates',
     )
     return rows
@@ -145,7 +148,7 @@ export async function loadStates() {
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }
 
@@ -170,7 +173,7 @@ export async function setState(connectionContext: ConnectionContext) {
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }
 
@@ -193,6 +196,6 @@ export async function deleteState({
     }
     throw err
   } finally {
-    if (conn) conn.release()
+    if (conn) void conn.release()
   }
 }

@@ -43,7 +43,7 @@ export class ResetCommand extends Command {
     }
 
     try {
-      guildCtxManager.delete(interaction.guild)
+      await guildCtxManager.deleteAsync(interaction.guild)
       interactionReplyOptions = {
         embeds: [
           {
@@ -56,7 +56,7 @@ export class ResetCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return deferredReplyOrEdit(interaction, interactionReplyOptions)
+      void deferredReplyOrEdit(interaction, interactionReplyOptions)
     }
   }
 }

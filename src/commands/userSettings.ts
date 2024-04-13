@@ -2,7 +2,7 @@ import { Subcommand } from '@sapphire/plugin-subcommands'
 import {
   deferredReplyOrEdit,
   getErrorReply,
-  objToList,
+  userSettingToString,
   userSettingToDiff,
 } from '../utils.js'
 import { getUserSetting, randomizeUserSetting, setUserSetting } from '../db.js'
@@ -151,7 +151,7 @@ export class UserSettingsCommand extends Subcommand {
             description:
               `**${userNameText}の声の設定**` +
               '```\n' +
-              objToList(userSetting).split('\n').slice(1).join('\n') +
+              userSettingToString(userSetting) +
               '\n```',
           },
         ],
@@ -161,7 +161,7 @@ export class UserSettingsCommand extends Subcommand {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return deferredReplyOrEdit(interaction, interactionReplyOptions)
+      void deferredReplyOrEdit(interaction, interactionReplyOptions)
     }
   }
 
@@ -193,7 +193,7 @@ export class UserSettingsCommand extends Subcommand {
     try {
       const oldUserSetting = await getUserSetting(interaction.member.id)
 
-      let errorMsg: string[] = []
+      const errorMsg: string[] = []
 
       const { options } = interaction
       const random = options.getBoolean('random')
@@ -282,7 +282,7 @@ export class UserSettingsCommand extends Subcommand {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return deferredReplyOrEdit(interaction, interactionReplyOptions)
+      void deferredReplyOrEdit(interaction, interactionReplyOptions)
     }
   }
 }

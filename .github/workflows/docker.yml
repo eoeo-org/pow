@@ -2,7 +2,8 @@ name: Create and publish a Docker image
 
 on:
   push:
-    branches: ['main']
+    branches: ['**']
+  pull_request:
   workflow_call:
     inputs:
       tag-name:
@@ -19,12 +20,12 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   # tool versions
   # renovate: datasource=github-releases depName=docker/buildx
-  BUILDX_VERSION: v0.12.1
+  BUILDX_VERSION: v0.13.1
 
 jobs:
   build-and-push-image:
     # release-please によるコミットの時は workflow_call でのみ実行する
-    if: ${{ !( github.workflow == 'Create and publish a Docker image' && startsWith(github.event.head_commit.message, 'release:') && github.event.head_commit.author.name == 'github-actions[bot]' ) }}
+    if: ${{ !( github.workflow == 'Create and publish a Docker image' && startsWith(github.event.head_commit.message, 'release:') && github.event.head_commit.author.name == 'j-eoeo-release[bot]' ) }}
     runs-on: ubuntu-22.04
     outputs:
       image_tags: ${{ steps.meta.outputs.tags }}
@@ -38,12 +39,12 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
+        uses: docker/setup-buildx-action@d70bba72b1f3fd22344832f00baa16ece964efeb # v3.3.0
         with:
           version: ${{ env.BUILDX_VERSION }}
 
       - name: Log in to the Container registry
-        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3.1.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -51,7 +52,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@dbef88086f6cef02e264edb7dbf63250c17cef6c # v5.5.0
+        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -62,11 +63,11 @@ jobs:
             type=ref,event=branch
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56 # v5.1.0
+        uses: docker/build-push-action@2cdde995de11925a030ce8070c3d77a52ffcf1c0 # v5.3.0
         with:
           context: .
           platforms: linux/amd64,linux/arm64
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha

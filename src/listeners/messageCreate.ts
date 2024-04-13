@@ -47,6 +47,6 @@ export class MessageCreateListener extends Listener {
         connectionCtx.connection.joinConfig.channelId
     )
       return
-    connectionCtx.addMessage(convertedMessage, message)
+    void connectionCtx.addMessage(convertedMessage, message)
   }
 }

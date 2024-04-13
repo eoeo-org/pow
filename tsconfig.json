@@ -1,7 +1,7 @@
 {
   "compileOnSave": true,
   "include": ["src/**/*", "tests/**/*"],
-  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node20/tsconfig"],
+  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node21/tsconfig"],
   "compilerOptions": {
     "noEmit": true,
     "composite": true,
@@ -10,7 +10,6 @@
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
 
-    "noUnusedParameters": false,
-    "noImplicitAny": false,
-  },
+    "noUnusedParameters": false
+  }
 }

@@ -17,9 +17,9 @@ import {
   Client,
   Message,
   ChatInputCommandInteraction,
-  type DiscordErrorData,
   User,
   Routes,
+  DiscordAPIError,
 } from 'discord.js'
 import { Queue } from './utils.js'
 import { fetchAudioStream } from './voiceRead.js'
@@ -74,7 +74,7 @@ export class ConnectionContext {
     this.client = client
     this.skipUser = skipUser
 
-    setState(this)
+    void setState(this)
   }
 
   async #readMessage({ audio }: { audio: Readable }) {
@@ -110,7 +110,6 @@ export class ConnectionContext {
         setting.pitch ?? userSetting.pitch,
         setting.speed ?? userSetting.speed,
       )
-      if (audioStream === null) return
       const audio = Readable.fromWeb(audioStream)
       debug__ConnectionContext('got response, adding to queue')
       this.readQueue.add({ audio })
@@ -126,20 +125,22 @@ export class ConnectionContext {
       if (ctx instanceof ChatInputCommandInteraction) {
         return await ctx.followUp(message)
       } else {
-        return await ctx.reply(message).catch((err: DiscordErrorData) => {
-          switch (err.code) {
-            case 50013:
-              debug__ErrorHandler(
-                `Error code ${err.code}: Missing send messages permission.`,
-              )
-              break
-            case 50035:
-              debug__ErrorHandler(
-                `Error code ${err.code}: No reply message found, unable to send error.`,
-              )
-              break
-            default:
-              throw err
+        return await ctx.reply(message).catch((err: unknown) => {
+          if (err instanceof DiscordAPIError) {
+            switch (err.code) {
+              case 50013:
+                debug__ErrorHandler(
+                  `Error code ${err.code}: Missing send messages permission.`,
+                )
+                break
+              case 50035:
+                debug__ErrorHandler(
+                  `Error code ${err.code}: No reply message found, unable to send error.`,
+                )
+                break
+              default:
+                throw err
+            }
           }
         })
       }
@@ -199,13 +200,14 @@ export class ConnectionCtxManager extends Map<
     const connection = joinVoiceChannel({
       channelId: voiceChannelId,
       guildId: guildId,
-      group: worker.user!.id,
+      group: worker.user?.id ?? '',
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       adapterCreator: worker.guilds.cache.get(guildId)!.voiceAdapterCreator,
     })
     connection.once('disconnect', () => {
       debug__ConnectionContext('vc disconnected')
-      this.get(readChannelId)!.readQueue.purge()
-      connection?.destroy()
+      this.get(readChannelId)?.readQueue.purge()
+      connection.destroy()
       this.delete(readChannelId)
     })
     const connectionContext = new ConnectionContext({
@@ -217,7 +219,7 @@ export class ConnectionCtxManager extends Map<
     this.set(readChannelId, connectionContext)
     return connectionContext
   }
-  connectionLeave({
+  async connectionLeave({
     voiceChannelId,
     cause = undefined,
   }: {
@@ -237,24 +239,32 @@ export class ConnectionCtxManager extends Map<
     this.channelMap.delete(voiceChannelId)
     this.delete(readChannelId)
     if (cause !== undefined) {
-      connectionCtx!.client.rest
+      connectionCtx?.client.rest
         .post(Routes.channelMessages(readChannelId), {
           body: {
             embeds: [
               {
                 color: 0x00ff00,
                 title: 'ボイスチャンネルから退出しました。',
-                description: `${cause}`,
+                description: cause,
                 footer: { text: 'またのご利用をお待ちしております。' },
               },
             ],
           },
         })
-        .catch((err: DiscordErrorData) => {
-          if (![50013, 10003].includes(err.code)) throw err
+        .catch((err: unknown) => {
+          if (err instanceof DiscordAPIError) {
+            switch (err.code) {
+              case 50013:
+              case 10003:
+                break
+              default:
+                throw err
+            }
+          }
         })
     }
-    deleteState({ voiceChannelId })
+    await deleteState({ voiceChannelId })
     return workerId
   }
 }

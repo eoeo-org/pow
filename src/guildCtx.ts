@@ -90,12 +90,17 @@ export class GuildContext {
         if (forOldCtxWorkerId === undefined) {
           throw new NoWorkerError()
         }
-        this.leave({ voiceChannelId: oldVoiceChannelId })
+        const forOldCtxWorker =
+          workerClientMap.get(forOldCtxWorkerId) ??
+          (() => {
+            throw new NoWorkerError()
+          })()
+        await this.leave({ voiceChannelId: oldVoiceChannelId })
         this.connectionManager.connectionJoin({
           voiceChannelId: oldVoiceChannelId,
           guildId: this.guild.id,
           readChannelId: oldConnectionCtx.readChannelId,
-          worker: workerClientMap.get(forOldCtxWorkerId)!,
+          worker: forOldCtxWorker,
           client: this.guild.client,
           skipUser,
         })
@@ -104,7 +109,11 @@ export class GuildContext {
     if (workerId === undefined) {
       throw new NoWorkerError()
     }
-    const worker = workerClientMap.get(workerId)!
+    const worker =
+      workerClientMap.get(workerId) ??
+      (() => {
+        throw new NoWorkerError()
+      })()
     this.connectionManager.connectionJoin({
       voiceChannelId,
       guildId: this.guild.id,
@@ -131,10 +140,13 @@ export class GuildContext {
   async addBot(workerId: string) {
     ;(await this.bots).push(workerId)
   }
-  leaveAll({ cause }: { cause: LeaveCause }) {
-    for (const voiceChannelId of this.connectionManager.channelMap.keys()) {
-      this.leave({ voiceChannelId, cause })
-    }
+  async leaveAll({ cause }: { cause: LeaveCause }) {
+    await Promise.allSettled(
+      Array.from(
+        this.connectionManager.channelMap.keys(),
+        async (voiceChannelId) => await this.leave({ voiceChannelId, cause }),
+      ),
+    )
   }
 }
 
@@ -145,14 +157,15 @@ export class GuildCtxManager extends Map<Guild, GuildContext> {
     this.client = client
   }
   override get(guild: Guild) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     if (this.has(guild)) return super.get(guild)!
     if (!workerReady) throw new NotReadyWorkerError()
     const guildContext = new GuildContext(guild, workerClientMap)
     this.set(guild, guildContext)
     return guildContext
   }
-  override delete(guild: Guild) {
-    this.get(guild).leaveAll({ cause: LeaveCause.reset })
+  async deleteAsync(guild: Guild) {
+    await this.get(guild).leaveAll({ cause: LeaveCause.reset })
     return super.delete(guild)
   }
 }

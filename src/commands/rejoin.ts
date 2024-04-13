@@ -82,7 +82,7 @@ export class RejoinCommand extends Command {
         guildCtx.connectionManager.channelMap.get(voiceChannelId)
           ? undefined
           : LeaveCause.rejoin
-      guildCtx.leave({ voiceChannelId, cause })
+      await guildCtx.leave({ voiceChannelId, cause })
 
       const worker = await guildCtx.join({
         voiceChannelId: newVoiceBasedChannelId(voiceChannel),
@@ -106,7 +106,7 @@ export class RejoinCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return deferredReplyOrEdit(interaction, interactionReplyOptions)
+      void deferredReplyOrEdit(interaction, interactionReplyOptions)
     }
   }
 }

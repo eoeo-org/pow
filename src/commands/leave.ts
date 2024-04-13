@@ -57,7 +57,7 @@ export class LeaveCommand extends Command {
         newGuildTextBasedChannelId(interaction.channel) === textChannelId
           ? undefined
           : LeaveCause.command
-      const workerId = ctx.leave({
+      const workerId = await ctx.leave({
         voiceChannelId: newVoiceBasedChannelId(voiceChannel),
         cause,
       })
@@ -80,7 +80,7 @@ export class LeaveCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      return deferredReplyOrEdit(interaction, interactionReplyOptions)
+      void deferredReplyOrEdit(interaction, interactionReplyOptions)
     }
   }
 }

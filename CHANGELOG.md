@@ -1,5 +1,54 @@
 # Changelog
 
+## [3.8.6](https://github.com/j-eoeo/pow/compare/v3.8.5...v3.8.6) (2024-04-10)
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.1.0 ([#1148](https://github.com/j-eoeo/pow/issues/1148)) ([4b92d4e](https://github.com/j-eoeo/pow/commit/4b92d4e9f3502c547b7ef1dda93d382530c56e92))
+* update dependency node to v21.7.3 ([#1161](https://github.com/j-eoeo/pow/issues/1161)) ([aabf869](https://github.com/j-eoeo/pow/commit/aabf869ea361b60a97d1784afefcab88fc589380))
+
+## [3.8.5](https://github.com/j-eoeo/pow/compare/v3.8.4...v3.8.5) (2024-04-04)
+
+
+### Dependencies
+
+* update dependency node to v21.7.2 ([#1133](https://github.com/j-eoeo/pow/issues/1133)) ([c683a1d](https://github.com/j-eoeo/pow/commit/c683a1d3ce5904bb82010b37b146f8701f2fe6d8))
+
+## [3.8.4](https://github.com/j-eoeo/pow/compare/v3.8.3...v3.8.4) (2024-03-27)
+
+
+### Bug Fixes
+
+* www を読まないようにする ([#1109](https://github.com/j-eoeo/pow/issues/1109)) ([01b42da](https://github.com/j-eoeo/pow/commit/01b42daef027001eeb429ea18b899ac4e09f8f5d))
+
+## [3.8.3](https://github.com/j-eoeo/pow/compare/v3.8.2...v3.8.3) (2024-03-27)
+
+
+### Bug Fixes
+
+* http でもドメイン名を読み上げるようにする ([#1107](https://github.com/j-eoeo/pow/issues/1107)) ([05d917b](https://github.com/j-eoeo/pow/commit/05d917b93a8211145c7bb0e36da3bd00bac888b8))
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.0.10 ([#1098](https://github.com/j-eoeo/pow/issues/1098)) ([785dceb](https://github.com/j-eoeo/pow/commit/785dceb1c768d018b36f71a993b8fe177c451aeb))
+* update dependency mariadb to v3.3.0 ([#1095](https://github.com/j-eoeo/pow/issues/1095)) ([bf235ee](https://github.com/j-eoeo/pow/commit/bf235ee7abef7085e8c31ab74f024faca0b820a4))
+* update dependency sodium-native to v4.1.0 ([#1096](https://github.com/j-eoeo/pow/issues/1096)) ([87e1d8a](https://github.com/j-eoeo/pow/commit/87e1d8ae5360e3ad7c1b585f7f1af5edd419b784))
+* update dependency sodium-native to v4.1.1 ([#1097](https://github.com/j-eoeo/pow/issues/1097)) ([faaaddb](https://github.com/j-eoeo/pow/commit/faaaddba6939a6ae6a58d8ff9b0530078840db60))
+
+## [3.8.2](https://github.com/j-eoeo/pow/compare/v3.8.1...v3.8.2) (2024-03-12)
+
+
+### Dependencies
+
+* update dependency node to v21.7.1 ([#1073](https://github.com/j-eoeo/pow/issues/1073)) ([b769dbf](https://github.com/j-eoeo/pow/commit/b769dbfe2ffbd1260a0e03800185e89c2619a175))
+* update dependency sodium-native to v4.0.10 ([#1046](https://github.com/j-eoeo/pow/issues/1046)) ([14de140](https://github.com/j-eoeo/pow/commit/14de140214fcf97cb338f2e8ee5577fb8c03c29f))
+* update dependency sodium-native to v4.0.6 ([#988](https://github.com/j-eoeo/pow/issues/988)) ([0a4ccf6](https://github.com/j-eoeo/pow/commit/0a4ccf6d665a49b22f31fe039f6341bcf4d83a4c))
+* update dependency sodium-native to v4.0.7 ([#1019](https://github.com/j-eoeo/pow/issues/1019)) ([bac6940](https://github.com/j-eoeo/pow/commit/bac69402eae75d1b7bdb1a9d6bfb91e8f04ab003))
+* update dependency sodium-native to v4.0.8 ([#1025](https://github.com/j-eoeo/pow/issues/1025)) ([596ff35](https://github.com/j-eoeo/pow/commit/596ff35595f3fe430d4c1858297933e1d5255167))
+* update dependency sodium-native to v4.0.9 ([#1042](https://github.com/j-eoeo/pow/issues/1042)) ([6294a5a](https://github.com/j-eoeo/pow/commit/6294a5a1e92cf06cca1caefad8c2744d83ade58a))
+
 ## [3.8.1](https://github.com/j-eoeo/pow/compare/v3.8.0...v3.8.1) (2024-01-21)
 
 

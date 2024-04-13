@@ -1,13 +1,10 @@
 import { Events, Options, Routes } from 'discord.js'
 import { SapphireClient } from '@sapphire/framework'
 import { GuildCtxManager } from './guildCtx.js'
-import type { SignalConstants } from 'os'
 import { WorkerClientMap } from './worker.js'
 import { readyEvent } from './events/index.js'
 
-import { createRequire } from 'node:module'
 import { load } from './load.js'
-const packageJson = createRequire(import.meta.url)('../package.json')
 
 let isCalledDestroy = false
 
@@ -38,10 +35,10 @@ export const guildCtxManager = new GuildCtxManager(client)
 
 export let workerClientMap: WorkerClientMap
 export let workerReady = false
-console.log(`pow - v${packageJson.version}`)
+console.log(`pow - v${process.env.npm_package_version}`)
 
 client.on(Events.ClientReady, async (c) => {
-  readyEvent(c, packageJson)
+  readyEvent(c)
   workerClientMap = await new WorkerClientMap().init(
     process.env.WORKER_TOKENS,
     c,
@@ -57,7 +54,7 @@ const destroy = async () => {
     const promises: Promise<unknown>[] = []
 
     guildCtxManager.forEach((guildContext) => {
-      guildContext.connectionManager.forEach(async (connectionContext) => {
+      guildContext.connectionManager.forEach((connectionContext) => {
         const promise = client.rest.post(
           Routes.channelMessages(connectionContext.readChannelId),
           {
@@ -84,18 +81,18 @@ const destroy = async () => {
   }
 }
 
-async function handle(signal: SignalConstants) {
+function handle(signal: NodeJS.Signals) {
   console.log(`Received ${signal}`)
-  await destroy()
-  process.exit()
+  void destroy().then(() => process.exit())
 }
 
 process.on('SIGINT', handle)
 process.on('SIGTERM', handle)
-process.on('uncaughtException', async (err) => {
-  await destroy()
-  console.error('uncaughtException:\n%o', err)
-  process.exit(1)
+process.on('uncaughtException', (err) => {
+  void destroy().then(() => {
+    console.error('uncaughtException:\n%o', err)
+    process.exit(1)
+  })
 })
 
-client.login()
+void client.login()

@@ -26,7 +26,7 @@ const dismoji = new Map(
     ...symbols,
     ...travel,
   })
-    .map(([key, value]) => [key, (value as string).replace(/\u{FE0F}$/u, '')])
+    .map(([key, value]) => [key, value.replace(/\u{FE0F}$/u, '')])
     .reverse()
     .map(([key, value]) => [value, key]),
 )
@@ -44,21 +44,26 @@ export const convertContent = (
 ) => {
   if (!guildId) throw new Error('There is no guildId.')
 
-  function parseContent(a, b, c) {
-    const gm = client.guilds.resolve(guildId)!.members
-    const gr = client.guilds.resolve(guildId)!.roles
-    const gc = client.guilds.resolve(guildId)!.channels
+  function parseContent(
+    a: string,
+    b: string | undefined,
+    c: string | undefined,
+  ) {
+    const gm = client.guilds.resolve(guildId)?.members
+    const gr = client.guilds.resolve(guildId)?.roles
+    const gc = client.guilds.resolve(guildId)?.channels
 
     //console.log(a, b, c)
 
+    if (c === undefined) return ''
     switch (b) {
       case '@':
       case '@!':
-        return gm.resolve(c) ? gm.resolve(c).displayName : ''
+        return gm?.resolve(c)?.displayName ?? ''
       case '@&':
-        return gr.resolve(c) ? gr.resolve(c).name : ''
+        return gr?.resolve(c)?.name ?? ''
       case '#':
-        return gc.resolve(c) ? gc.resolve(c).name : ''
+        return gc?.resolve(c)?.name ?? ''
       default:
         return ''
     }
@@ -66,11 +71,18 @@ export const convertContent = (
 
   function resolveURL(...args: unknown[]) {
     const groups = args.at(-1) as Record<string, string | null>
-    if (groups['scheme'] !== 'https') return `${groups['scheme']}へのリンク`
-    return `${
-      embeds.find((data) => data.url === args.shift())?.data.title ??
-      (groups['ipv6address'] ? 'ipv6 アドレス' : groups['host'])
-    }へのリンク`
+    switch (groups['scheme']) {
+      case 'http':
+      case 'https':
+        return `${
+          embeds.find((data) => data.url === args.shift())?.data.title ??
+          (groups['ipv6address']
+            ? 'ipv6 アドレス'
+            : groups['host']?.replace(/^www\./i, ''))
+        }へのリンク`
+      default:
+        return `${groups['scheme']}へのリンク`
+    }
   }
 
   const result =

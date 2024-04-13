@@ -11,7 +11,7 @@ export class VoiceStateUpdateListener extends Listener {
   public override async run(oldState: VoiceState, newState: VoiceState) {
     if (
       newState.channel?.type === ChannelType.GuildStageVoice &&
-      newState.member?.id === newState.client.user?.id &&
+      newState.member?.id === newState.client.user.id &&
       newState.suppress
     ) {
       try {
@@ -41,7 +41,7 @@ export class VoiceStateUpdateListener extends Listener {
           connectionCtx.connection.joinConfig.group === oldState.id,
       )
     ) {
-      guildCtx.leave({
+      void guildCtx.leave({
         voiceChannelId: newVoiceBasedChannelId(oldState.channel),
         cause: LeaveCause.disconnected,
       })
@@ -59,7 +59,7 @@ export class VoiceStateUpdateListener extends Listener {
         ),
       )
     ) {
-      guildCtx.leave({
+      void guildCtx.leave({
         voiceChannelId: newVoiceBasedChannelId(oldState.channel),
         cause: LeaveCause.noUser,
       })

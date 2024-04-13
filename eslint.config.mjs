@@ -9,13 +9,13 @@ export default tseslint.config(
   {
     ignores: ['cli-incremental-info', 'coverage', 'dist/*'],
   },
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  eslintConfigPrettier,
   {
+    // eslint@9 の真似
+    linterOptions: { reportUnusedDisableDirectives: 'warn' },
+
     languageOptions: {
       ecmaVersion: 2023,
       globals: {
@@ -37,4 +37,5 @@ export default tseslint.config(
       '@typescript-eslint/no-invalid-void-type': 'off',
     },
   },
+  eslintConfigPrettier,
 )

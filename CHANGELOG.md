@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.7](https://github.com/j-eoeo/pow/compare/v3.8.6...v3.8.7) (2024-04-21)
+
+
+### Reverts
+
+* "chore(deps): update dependency eslint to v9" ([#1162](https://github.com/j-eoeo/pow/issues/1162)) ([600b332](https://github.com/j-eoeo/pow/commit/600b3323629d75f68b1d7fa2495eecbfc8c02b3e))
+
 ## [3.8.6](https://github.com/j-eoeo/pow/compare/v3.8.5...v3.8.6) (2024-04-10)
 
 

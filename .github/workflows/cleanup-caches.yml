@@ -13,4 +13,4 @@ jobs:
       actions: write
     steps:
       - name: Cleanup
-        uses: 4m-mazi/souji-action@f0193509b3f137a6929092924bbb5dcd52d9ac3a # v1.2.0
+        uses: 4m-mazi/souji-action@7b968d0f5b22b33600ca69829fc08914f8bcccd9 # v1.3.0

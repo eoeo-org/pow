@@ -16,7 +16,7 @@
     "check:types": "tsc",
     "prepare": "node .husky/install.mjs"
   },
-  "packageManager": "pnpm@9.0.5",
+  "packageManager": "pnpm@9.0.6",
   "engines": {
     "npm": "This project is configured to use pnpm"
   },

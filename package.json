@@ -21,7 +21,7 @@
     "npm": "This project is configured to use pnpm"
   },
   "dependencies": {
-    "@discordjs/voice": "0.16.1",
+    "@discordjs/voice": "0.17.0",
     "@sapphire/framework": "5.2.0",
     "@sapphire/plugin-subcommands": "6.0.3",
     "debug": "4.3.4",

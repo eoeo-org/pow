@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.10](https://github.com/j-eoeo/pow/compare/v3.8.9...v3.8.10) (2024-05-05)
+
+
+### Dependencies
+
+* update dependency @discordjs/voice to v0.17.0 ([#1205](https://github.com/j-eoeo/pow/issues/1205)) ([d3cbe27](https://github.com/j-eoeo/pow/commit/d3cbe2765ec030f38ec909cdcf7321d7643673d8))
+
 ## [3.8.9](https://github.com/j-eoeo/pow/compare/v3.8.8...v3.8.9) (2024-05-03)
 
 

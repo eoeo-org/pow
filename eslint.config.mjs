@@ -35,6 +35,12 @@ export default tseslint.config(
     rules: {
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/no-invalid-void-type': 'off',
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        {
+          checksVoidReturn: { arguments: false },
+        },
+      ],
     },
   },
   eslintConfigPrettier,

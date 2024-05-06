@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.11](https://github.com/j-eoeo/pow/compare/v3.8.10...v3.8.11) (2024-05-06)
+
+
+### Dependencies
+
+* update dependency discord.js to v14.15.2 ([#1206](https://github.com/j-eoeo/pow/issues/1206)) ([c466372](https://github.com/j-eoeo/pow/commit/c4663722188bec5a15b30a55d0ae875acbda1a94))
+
 ## [3.8.10](https://github.com/j-eoeo/pow/compare/v3.8.9...v3.8.10) (2024-05-05)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.12](https://github.com/j-eoeo/pow/compare/v3.8.11...v3.8.12) (2024-05-07)
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.2.1 ([#1212](https://github.com/j-eoeo/pow/issues/1212)) ([2902ac1](https://github.com/j-eoeo/pow/commit/2902ac16d82988c4fca07a888f2d3402f470a73d))
+
 ## [3.8.11](https://github.com/j-eoeo/pow/compare/v3.8.10...v3.8.11) (2024-05-06)
 
 

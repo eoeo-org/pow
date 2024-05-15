@@ -11,7 +11,7 @@
     ":prHourlyLimitNone",
     ":rebaseStalePrs",
     ":semanticCommits",
-    "regexManagers:githubActionsVersions"
+    "customManagers:githubActionsVersions"
   ],
   "automergeStrategy": "squash",
   "assignAutomerge": true,

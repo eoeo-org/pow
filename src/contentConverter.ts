@@ -85,6 +85,46 @@ export const convertContent = (
     }
   }
 
+  function parseTimestamp(...args: unknown[]) {
+    const timestamp = args[1] as string
+    const type = args[2] as string | null
+
+    const time = Number(timestamp) * 1000
+    const date = new Date(time)
+
+    const intlConfig: Intl.DateTimeFormatOptions = {}
+
+    switch (type) {
+      case 't':
+        intlConfig.timeStyle = 'short'
+        break
+      case 'T':
+        intlConfig.timeStyle = 'medium'
+        break
+      case 'd':
+        intlConfig.dateStyle = 'short'
+        break
+      case 'D':
+        intlConfig.dateStyle = 'medium'
+        break
+      case 'f':
+        intlConfig.dateStyle = 'short'
+        intlConfig.timeStyle = 'short'
+        break
+      case 'F':
+        intlConfig.dateStyle = 'full'
+        intlConfig.timeStyle = 'short'
+        break
+
+      default:
+        intlConfig.dateStyle = 'short'
+        intlConfig.timeStyle = 'short'
+        break
+    }
+
+    return new Intl.DateTimeFormat('ja-JP', intlConfig).format(date)
+  }
+
   const result =
     text
       .replaceAll(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
@@ -97,6 +137,7 @@ export const convertContent = (
       )
       .replaceAll(/~/g, '')
       .replaceAll(/\*/g, '')
+      .replaceAll(/<t:(-?\d+):?([tTdDfFR])?>/g, parseTimestamp)
       .replaceAll(emojiRegex, getShortcodes) +
     '\n' +
     stickers.map((sticker) => sticker.name).join('\n')

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.9.0](https://github.com/j-eoeo/pow/compare/v3.8.13...v3.9.0) (2024-05-24)
+
+
+### Features
+
+* add parseTimestamp ([#1240](https://github.com/j-eoeo/pow/issues/1240)) ([481f9e8](https://github.com/j-eoeo/pow/commit/481f9e8a5729261fdd803ee775d2f1367b3fdb45)), closes [#985](https://github.com/j-eoeo/pow/issues/985)
+
 ## [3.8.13](https://github.com/j-eoeo/pow/compare/v3.8.12...v3.8.13) (2024-05-15)
 
 

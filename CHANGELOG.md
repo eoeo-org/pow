@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.9.1](https://github.com/j-eoeo/pow/compare/v3.9.0...v3.9.1) (2024-05-25)
+
+
+### Bug Fixes
+
+* update dateStyle to 'long' in contentConverter.ts ([#1244](https://github.com/j-eoeo/pow/issues/1244)) ([77dfd48](https://github.com/j-eoeo/pow/commit/77dfd48a620b62723830ce36ef46e83a24bc670f)), closes [#1242](https://github.com/j-eoeo/pow/issues/1242)
+
 ## [3.9.0](https://github.com/j-eoeo/pow/compare/v3.8.13...v3.9.0) (2024-05-24)
 
 

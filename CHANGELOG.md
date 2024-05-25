@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.0](https://github.com/j-eoeo/pow/compare/v3.9.1...v3.10.0) (2024-05-25)
+
+
+### Features
+
+* Add relativetime for timestamp ([#1247](https://github.com/j-eoeo/pow/issues/1247)) ([ded6c3e](https://github.com/j-eoeo/pow/commit/ded6c3e3d7b6762ea7a3462463ec98c0bc864ef7)), closes [#1246](https://github.com/j-eoeo/pow/issues/1246)
+
 ## [3.9.1](https://github.com/j-eoeo/pow/compare/v3.9.0...v3.9.1) (2024-05-25)
 
 

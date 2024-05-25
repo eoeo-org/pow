@@ -102,13 +102,13 @@ export const convertContent = (
         intlConfig.timeStyle = 'medium'
         break
       case 'd':
-        intlConfig.dateStyle = 'short'
+        intlConfig.dateStyle = 'long'
         break
       case 'D':
-        intlConfig.dateStyle = 'medium'
+        intlConfig.dateStyle = 'long'
         break
       case 'f':
-        intlConfig.dateStyle = 'short'
+        intlConfig.dateStyle = 'long'
         intlConfig.timeStyle = 'short'
         break
       case 'F':
@@ -117,7 +117,7 @@ export const convertContent = (
         break
 
       default:
-        intlConfig.dateStyle = 'short'
+        intlConfig.dateStyle = 'long'
         intlConfig.timeStyle = 'short'
         break
     }

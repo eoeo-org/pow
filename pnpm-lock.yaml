@@ -607,8 +607,8 @@ packages:
   discord-api-types@0.37.83:
     resolution: {integrity: sha512-urGGYeWtWNYMKnYlZnOnDHm8fVRffQs3U0SpE8RHeiuLKb/u92APS8HoQnPTFbnXmY1vVnXjXO4dOxcAn3J+DA==}
 
-  discord-api-types@0.37.85:
-    resolution: {integrity: sha512-T75aB9JEw9X0rlMChEMHbr9JlXMqdmdKiZVjBeKs91cJo28IuAIldj+VZoC+I+Q9gCaRjHlwRkcksy2XZY6c3A==}
+  discord-api-types@0.37.86:
+    resolution: {integrity: sha512-ofpVLHshKdKl+XuZBbwOBSlgQFPJPzMuUiBpala3+ImPHBVo7ojZpzJUu2NJV/f0t1kqncechDugQpO5AjZnxg==}
 
   discord-emoji@2.4.0:
     resolution: {integrity: sha512-ak5dPZCVT8YG2giMMPXQOgMORlUzMBEeMiHH9v3/yYa+N8/Q+iRaTjtKJRDOutjhCCSGh5aBVjEx+VWRAue+oQ==}
@@ -1519,7 +1519,7 @@ snapshots:
 
   '@sapphire/discord-utilities@3.3.0':
     dependencies:
-      discord-api-types: 0.37.85
+      discord-api-types: 0.37.86
 
   '@sapphire/discord.js-utilities@7.2.1':
     dependencies:
@@ -1951,7 +1951,7 @@ snapshots:
 
   discord-api-types@0.37.83: {}
 
-  discord-api-types@0.37.85: {}
+  discord-api-types@0.37.86: {}
 
   discord-emoji@2.4.0: {}
 

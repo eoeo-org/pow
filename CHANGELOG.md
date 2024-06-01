@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.1](https://github.com/j-eoeo/pow/compare/v3.10.0...v3.10.1) (2024-06-01)
+
+
+### Dependencies
+
+* update dependency debug to v4.3.5 ([#1256](https://github.com/j-eoeo/pow/issues/1256)) ([8791b6c](https://github.com/j-eoeo/pow/commit/8791b6cfc95d55c70c027fe9cf9e679387747616))
+
 ## [3.10.0](https://github.com/j-eoeo/pow/compare/v3.9.1...v3.10.0) (2024-05-25)
 
 

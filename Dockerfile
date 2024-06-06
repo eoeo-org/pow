@@ -29,6 +29,7 @@ RUN echo "store-dir=/.pnpm-store" >> .npmrc
 FROM base-build as fetch-deps
 WORKDIR /_
 COPY --link --from=fetch-pnpm /pnpm/ /pnpm/
+ARG TARGETPLATFORM
 RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
     --mount=type=bind,from=change-npmrc,source=/_/.npmrc,target=.npmrc \
     --mount=type=bind,source=package.json,target=package.json \
@@ -39,7 +40,8 @@ RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
 FROM --platform=$BUILDPLATFORM base-build as dev-deps
 WORKDIR /_
 COPY --link --from=fetch-deps /_/node_modules/ ./node_modules/
-RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
+ARG BUILDPLATFORM
+RUN --mount=type=cache,id=pnpm-$BUILDPLATFORM,target=/.pnpm-store/ \
     --mount=type=bind,from=fetch-deps,source=/pnpm/,target=/pnpm/ \
     --mount=type=bind,from=change-npmrc,source=/_/.npmrc,target=.npmrc \
     --mount=type=bind,source=package.json,target=package.json \
@@ -63,6 +65,7 @@ FROM base-build as prod-deps
 WORKDIR /_
 COPY --link --from=fetch-deps /_/node_modules/ ./node_modules/
 ARG NODE_ENV="production"
+ARG TARGETPLATFORM
 RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
     --mount=type=bind,from=fetch-deps,source=/pnpm/,target=/pnpm/ \
     --mount=type=bind,from=change-npmrc,source=/_/.npmrc,target=.npmrc \

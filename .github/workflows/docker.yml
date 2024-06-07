@@ -66,15 +66,26 @@ jobs:
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         id: cache
         with:
-          path: pnpm-store
+          path: |
+            pnpm-store-linux-arm64
+            pnpm-store-linux-amd64
           key: buildkit-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            buildkit-pnpm-
 
       - name: inject cache into docker
         uses: reproducible-containers/buildkit-cache-dance@87e6a3bbd976a1476e29b60fe743ab0977034ff5 # v3.1.1
         with:
           cache-map: |
             {
-              "pnpm-store": "/.pnpm-store/"
+              "pnpm-store-linux-amd64": {
+                "target": "/.pnpm-store/",
+                "id": "pnpm-linux/amd64"
+              },
+              "pnpm-store-linux-arm64": {
+                "target": "/.pnpm-store/",
+                "id": "pnpm-linux/arm64"
+              }
             }
           skip-extraction: ${{ steps.cache.outputs.cache-hit }}
 

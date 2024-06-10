@@ -23,7 +23,7 @@ jobs:
         with:
           app-id: ${{ vars.EOEO_RELEASE_APP_ID }}
           private-key: ${{ secrets.EOEO_RELEASE_PRIVATE_KEY }}
-      - uses: googleapis/release-please-action@f3969c04a4ec81d7a9aa4010d84ae6a7602f86a7 # v4.1.1
+      - uses: googleapis/release-please-action@3f4784dbc19347947972489b7ed79193ff704b10 # v4.1.2
         id: release-please
         with:
           token: ${{ steps.generate_token.outputs.token }}

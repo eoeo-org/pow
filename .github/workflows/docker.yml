@@ -11,7 +11,7 @@ on:
         type: string
     outputs:
       image_tags:
-        value: ${{ jobs.build-and-push-image.outputs.image_tags }}
+        value: ${{ jobs.meta.outputs.tags }}
       image_url:
         value: https://ghcr.io/${{ github.repository }}
 
@@ -22,17 +22,59 @@ env:
   # renovate: datasource=github-releases depName=docker/buildx
   BUILDX_VERSION: v0.14.1
 
+permissions: {}
+
 jobs:
-  build-and-push-image:
+  env:
     # release-please によるコミットの時は workflow_call でのみ実行する
     if: ${{ !( github.workflow == 'Create and publish a Docker image' && startsWith(github.event.head_commit.message, 'release:') && github.event.head_commit.author.name == 'j-eoeo-release[bot]' ) }}
+    runs-on: ubuntu-latest
+    outputs:
+      REGISTRY_IMAGE: ${{ steps.lowercase.outputs.REGISTRY_IMAGE }}
+      PUSH: ${{ github.event_name != 'pull_request' && github.ref_name == github.event.repository.default_branch }}
+    steps:
+      - id: lowercase
+        run: |
+          registory_image='${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}'
+          echo "REGISTRY_IMAGE=${registory_image@L}" >> $GITHUB_OUTPUT
+
+  meta:
+    needs: [env]
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.meta.outputs.version}}
+      tags: ${{ steps.meta.outputs.tags }}
+      labels: ${{ steps.meta.outputs.labels }}
+      json: ${{ steps.meta.outputs.json }}
+    steps:
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
+        with:
+          images: ${{ needs.env.outputs.REGISTRY_IMAGE }}
+          tags: |
+            type=semver,pattern={{version}},value=${{ inputs.tag-name }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag-name }}
+            type=semver,pattern={{major}},value=${{ inputs.tag-name }}
+            type=edge
+            type=ref,event=branch
+
+  build:
+    permissions:
+      packages: write
+      attestations: write
+      id-token: write
+    needs: [env, meta]
     runs-on: ubuntu-22.04
     outputs:
-      image_tags: ${{ steps.meta.outputs.tags }}
+      digest: ${{ steps.build.outputs.digest }}
 
-    permissions:
-      contents: read
-      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - linux/amd64
+          - linux/arm64
 
     steps:
       - name: Set up Docker Buildx
@@ -47,24 +89,67 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=semver,pattern={{version}},value=${{ inputs.tag-name }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag-name }}
-            type=semver,pattern={{major}},value=${{ inputs.tag-name }}
-            type=edge
-            type=ref,event=branch
-
-      - name: Build and push Docker image
+      - name: Build and push by digest
+        id: build
         uses: docker/build-push-action@2cdde995de11925a030ce8070c3d77a52ffcf1c0 # v5.3.0
         with:
-          platforms: linux/amd64,linux/arm64
-          push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          platforms: ${{ matrix.platform }}
+          labels: ${{ needs.meta.outputs.labels }}
+          outputs: type=image,name=${{ needs.env.outputs.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=${{ fromJson(needs.env.outputs.PUSH) }}
+          cache-from: type=gha,scope=buildkit-${{ matrix.platform }}
+          cache-to: type=gha,scope=buildkit-${{ matrix.platform }},mode=max
+
+      - id: export-digest
+        if: ${{ fromJson(needs.env.outputs.PUSH) }}
+        name: Export digest
+        run: |
+          mkdir -p /tmp/digests
+          digest="${{ steps.build.outputs.digest }}"
+          touch "/tmp/digests/${digest#sha256:}"
+      - id: prepare
+        if: ${{ steps.export-digest.conclusion == 'success' }}
+        name: Prepare
+        run: |
+          platform=${{ matrix.platform }}
+          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_OUTPUT
+      - if: ${{ steps.export-digest.conclusion == 'success' }}
+        name: Upload digest
+        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+        with:
+          name: digests-${{ steps.prepare.outputs.PLATFORM_PAIR }}
+          path: /tmp/digests/*
+          if-no-files-found: error
+          retention-days: 1
+
+  merge:
+    permissions:
+      packages: write
+    needs: [env, meta, build]
+    if: ${{ fromJson(needs.env.outputs.PUSH) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download digests
+        uses: actions/download-artifact@65a9edc5881444af0b9093a5e628f2fe47ea3b2e # v4.1.7
+        with:
+          path: /tmp/digests
+          pattern: digests-*
+          merge-multiple: true
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 # v3.2.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create manifest list and push
+        working-directory: /tmp/digests
+        env:
+          DOCKER_METADATA_OUTPUT_JSON: ${{ needs.meta.outputs.json }}
+        run: |
+          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
+          $(printf '${{ needs.env.outputs.REGISTRY_IMAGE }}@sha256:%s ' *)
+
+      - name: Inspect image
+        run: |
+          docker buildx imagetools inspect ${{ needs.env.outputs.REGISTRY_IMAGE }}:${{ needs.meta.outputs.version }}

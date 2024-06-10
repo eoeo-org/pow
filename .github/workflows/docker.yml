@@ -62,8 +62,6 @@ jobs:
   build:
     permissions:
       packages: write
-      attestations: write
-      id-token: write
     needs: [env, meta]
     runs-on: ubuntu-22.04
     outputs:

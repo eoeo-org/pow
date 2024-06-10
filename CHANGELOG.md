@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.3](https://github.com/j-eoeo/pow/compare/v3.10.2...v3.10.3) (2024-06-10)
+
+
+### Dependencies
+
+* update dependency mariadb to v3.3.1 ([#1268](https://github.com/j-eoeo/pow/issues/1268)) ([cc1f3f6](https://github.com/j-eoeo/pow/commit/cc1f3f6d53272258c94e82051144af031da2d1ef))
+
 ## [3.10.2](https://github.com/j-eoeo/pow/compare/v3.10.1...v3.10.2) (2024-06-03)
 
 

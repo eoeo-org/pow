@@ -138,8 +138,8 @@ packages:
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
 
-  '@eslint-community/regexpp@4.10.0':
-    resolution: {integrity: sha512-Cu96Sd2By9mCNTx2iyKOmq10v22jUVQv0lQnlGNy16oE9589yE+QADPbrMGCkA51cKZSg3Pu/aTJVTGfL/qjUA==}
+  '@eslint-community/regexpp@4.10.1':
+    resolution: {integrity: sha512-Zm2NGpWELsQAD1xsJzGQpYfvICSsFkEpU0jxBjfdC6uNEWXcHnfs9hScFWtXVDVl+rBQJGrl4g1vcKIejpH9dA==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
   '@eslint/eslintrc@2.1.4':
@@ -185,8 +185,8 @@ packages:
     resolution: {integrity: sha512-xHAe22GSM4NjhNiyZ/5gwEF+uFDPHSrZABWypPGDUIK+CNDDPyPf56ooUb8cm02dVcU81wzscnRXK2cLY6RPcg==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
-  '@sapphire/discord.js-utilities@7.2.1':
-    resolution: {integrity: sha512-Yq9mml/QhH/1GWylo4XyjrIZRo1KVkX5r4e1Vo14cR6Ce2eI9TJLqyFKl/0ZFQiLPr0YDLxfrqxd2WSXA6uUyw==}
+  '@sapphire/discord.js-utilities@7.3.0':
+    resolution: {integrity: sha512-SOacsoV8eqPz0YqyXwNNZChNhz09QEhTrrGm+rnG+xZbglODtnoYmEgmLIemr2t6eyxPRerwhakacfyNYGapVg==}
     engines: {node: '>=16.6.0', npm: '>=7.0.0'}
 
   '@sapphire/duration@1.1.2':
@@ -607,8 +607,8 @@ packages:
   discord-api-types@0.37.83:
     resolution: {integrity: sha512-urGGYeWtWNYMKnYlZnOnDHm8fVRffQs3U0SpE8RHeiuLKb/u92APS8HoQnPTFbnXmY1vVnXjXO4dOxcAn3J+DA==}
 
-  discord-api-types@0.37.86:
-    resolution: {integrity: sha512-ofpVLHshKdKl+XuZBbwOBSlgQFPJPzMuUiBpala3+ImPHBVo7ojZpzJUu2NJV/f0t1kqncechDugQpO5AjZnxg==}
+  discord-api-types@0.37.87:
+    resolution: {integrity: sha512-9KfluFS1J22RuezzouGs2t5X/Yu3jNpmRJrG+dvu1R9R+wfxlhq1RXr/OjjVL6d4rr7Ez92yNWiImf/qX3GV1g==}
 
   discord-emoji@2.4.0:
     resolution: {integrity: sha512-ak5dPZCVT8YG2giMMPXQOgMORlUzMBEeMiHH9v3/yYa+N8/Q+iRaTjtKJRDOutjhCCSGh5aBVjEx+VWRAue+oQ==}
@@ -1312,6 +1312,9 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
+  tslib@2.6.3:
+    resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
+
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
@@ -1403,7 +1406,7 @@ snapshots:
       discord-api-types: 0.37.83
       fast-deep-equal: 3.1.3
       ts-mixer: 6.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@discordjs/collection@1.5.3': {}
 
@@ -1432,7 +1435,7 @@ snapshots:
       '@types/ws': 8.5.10
       discord-api-types: 0.37.83
       prism-media: 1.3.5(ffmpeg-static@5.2.0)
-      tslib: 2.6.2
+      tslib: 2.6.3
       ws: 8.17.0
     transitivePeerDependencies:
       - '@discordjs/opus'
@@ -1462,7 +1465,7 @@ snapshots:
       eslint: 8.57.0
       eslint-visitor-keys: 3.4.3
 
-  '@eslint-community/regexpp@4.10.0': {}
+  '@eslint-community/regexpp@4.10.1': {}
 
   '@eslint/eslintrc@2.1.4':
     dependencies:
@@ -1519,14 +1522,14 @@ snapshots:
 
   '@sapphire/discord-utilities@3.3.0':
     dependencies:
-      discord-api-types: 0.37.86
+      discord-api-types: 0.37.87
 
-  '@sapphire/discord.js-utilities@7.2.1':
+  '@sapphire/discord.js-utilities@7.3.0':
     dependencies:
       '@sapphire/discord-utilities': 3.3.0
       '@sapphire/duration': 1.1.2
       '@sapphire/utilities': 3.16.2
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@sapphire/duration@1.1.2': {}
 
@@ -1534,7 +1537,7 @@ snapshots:
     dependencies:
       '@discordjs/builders': 1.8.2
       '@sapphire/discord-utilities': 3.3.0
-      '@sapphire/discord.js-utilities': 7.2.1
+      '@sapphire/discord.js-utilities': 7.3.0
       '@sapphire/lexure': 1.1.7
       '@sapphire/pieces': 4.2.2
       '@sapphire/ratelimits': 2.4.9
@@ -1550,12 +1553,12 @@ snapshots:
     dependencies:
       '@discordjs/collection': 1.5.3
       '@sapphire/utilities': 3.16.2
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@sapphire/plugin-subcommands@6.0.3':
     dependencies:
       '@sapphire/utilities': 3.16.2
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@sapphire/ratelimits@2.4.9': {}
 
@@ -1570,7 +1573,7 @@ snapshots:
 
   '@sapphire/stopwatch@1.5.2':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@sapphire/utilities@3.16.2': {}
 
@@ -1705,7 +1708,7 @@ snapshots:
 
   '@typescript-eslint/eslint-plugin@7.12.0(@typescript-eslint/parser@7.12.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)':
     dependencies:
-      '@eslint-community/regexpp': 4.10.0
+      '@eslint-community/regexpp': 4.10.1
       '@typescript-eslint/parser': 7.12.0(eslint@8.57.0)(typescript@5.4.5)
       '@typescript-eslint/scope-manager': 7.12.0
       '@typescript-eslint/type-utils': 7.12.0(eslint@8.57.0)(typescript@5.4.5)
@@ -1951,7 +1954,7 @@ snapshots:
 
   discord-api-types@0.37.83: {}
 
-  discord-api-types@0.37.86: {}
+  discord-api-types@0.37.87: {}
 
   discord-emoji@2.4.0: {}
 
@@ -2005,7 +2008,7 @@ snapshots:
   eslint@8.57.0:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
-      '@eslint-community/regexpp': 4.10.0
+      '@eslint-community/regexpp': 4.10.1
       '@eslint/eslintrc': 2.1.4
       '@eslint/js': 8.57.0
       '@humanwhocodes/config-array': 0.11.14
@@ -2621,6 +2624,8 @@ snapshots:
   ts-mixer@6.0.4: {}
 
   tslib@2.6.2: {}
+
+  tslib@2.6.3: {}
 
   type-check@0.4.0:
     dependencies:

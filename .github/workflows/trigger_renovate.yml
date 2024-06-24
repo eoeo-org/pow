@@ -1,0 +1,46 @@
+name: Trigger Renovate
+on:
+  issues:
+    # Dependency Dashboard
+    types: [edited]
+  pull_request_target:
+    types:
+      # rebaseLabel
+      - labeled
+      # stopUpdatingLabel
+      - unlabeled
+      # PrControls
+      - edited
+      # ignore update
+      - closed
+      # Edited/Blocked
+      - synchronize
+    branches: ['main']
+  push:
+    branches:
+      - 'main'
+      # https://docs.renovatebot.com/config-validation/#validation-of-renovate-config-change-prs
+      - 'renovate/reconfigure'
+  # This lets you dispatch a renovate job with different cache options if you want to reset or disable the cache manually.
+  workflow_dispatch:
+    inputs:
+      repoCache:
+        description: 'Reset or disable the cache?'
+        type: choice
+        default: enabled
+        options:
+          - enabled
+          - disabled
+          - reset
+
+permissions: {}
+
+jobs:
+  renovate:
+    uses: j-eoeo/renovate-workflow/.github/workflows/_renovate.yml@main
+    with:
+      renovate_actor: 'j-eoeo-renovate[bot]'
+      repoCache: ${{ inputs.repoCache }}
+    secrets:
+      app-id: ${{ vars.EOEO_TRIGGER_APP_ID }}
+      private-key: ${{ secrets.EOEO_TRIGGER_PRIVATE_KEY }}

@@ -35,9 +35,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
 
-      - name: Check format
-        run: pnpm format:check
-      - name: Lint
-        run: pnpm lint
-      - name: Check types
-        run: pnpm check:types
+      - name: Check all
+        run: pnpm run --aggregate-output "/^(format:check|lint|check:types)$/"
+        env:
+          FORCE_COLOR: 3

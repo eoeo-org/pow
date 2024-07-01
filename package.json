@@ -50,7 +50,7 @@
     "npm-run-all2": "6.2.0",
     "prettier": "3.3.2",
     "typescript": "5.4.5",
-    "typescript-eslint": "7.14.1"
+    "typescript-eslint": "7.15.0"
   },
   "author": "kazukazu123123",
   "license": "MIT",

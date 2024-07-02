@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.8.1@sha256:e87caa74dcb7d46cd820352bfea12591f3dba3ddc4285e19c7dcd13359f7cefd
 
 # ビルド時にベースとするイメージを定義
-FROM ubuntu:devel@sha256:1cb75bbc36738eec8f60ae12d71cd3a191bf4e6256f2fd5706bd8480257d0cee as base-build
+FROM ubuntu:devel@sha256:b7c7d0b22ba1052e2cce660c2f559bb9ea42ad1220c9cc467bc9fb49eca5b202 as base-build
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 

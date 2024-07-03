@@ -37,9 +37,8 @@ permissions: {}
 
 jobs:
   renovate:
-    uses: j-eoeo/renovate-workflow/.github/workflows/_renovate.yml@main
+    uses: eoeo-org/renovate-workflow/.github/workflows/_renovate.yml@main
     with:
-      renovate_actor: 'j-eoeo-renovate[bot]'
       repoCache: ${{ inputs.repoCache }}
     secrets:
       app-id: ${{ vars.EOEO_TRIGGER_APP_ID }}

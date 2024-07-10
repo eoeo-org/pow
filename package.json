@@ -17,9 +17,6 @@
     "prepare": "node .husky/install.mjs"
   },
   "packageManager": "pnpm@9.4.0",
-  "engines": {
-    "npm": "This project is configured to use pnpm"
-  },
   "dependencies": {
     "@discordjs/voice": "0.17.0",
     "@sapphire/framework": "5.2.1",

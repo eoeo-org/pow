@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.6](https://github.com/eoeo-org/pow/compare/v3.10.5...v3.10.6) (2024-07-10)
+
+
+### Dependencies
+
+* update dependency node to v22.4.1 ([#1345](https://github.com/eoeo-org/pow/issues/1345)) ([f939171](https://github.com/eoeo-org/pow/commit/f939171cbd99cab6a39fa332d9d01e6acf8e5517))
+
 ## [3.10.5](https://github.com/j-eoeo/pow/compare/v3.10.4...v3.10.5) (2024-07-02)
 
 

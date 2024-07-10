@@ -7,7 +7,7 @@ name: release
 
 jobs:
   release-please:
-    if: github.repository_owner == 'j-eoeo'
+    if: github.repository_owner == 'eoeo-org'
     permissions:
       contents: write
       pull-requests: write

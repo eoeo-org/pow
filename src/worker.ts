@@ -31,13 +31,15 @@ class WorkerClient<Ready extends boolean = boolean> extends Client<Ready> {
 
 export class WorkerClientMap extends Map<string, Client> {
   public async init(tokens: string, mainClient: Client<true>) {
-    await Promise.all(
-      tokens.split(',').map(async (token) => {
-        const workerClient = await new WorkerClient(mainClient).start(token)
-        if (workerClient.user === null) throw new WorkerNullError()
-        this.set(workerClient.user.id, workerClient)
-      }),
-    )
+    if (tokens) {
+      await Promise.all(
+        tokens.split(',').map(async (token) => {
+          const workerClient = await new WorkerClient(mainClient).start(token)
+          if (workerClient.user === null) throw new WorkerNullError()
+          this.set(workerClient.user.id, workerClient)
+        }),
+      )
+    }
     this.set(mainClient.user.id, mainClient)
     return this
   }

@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.10.8](https://github.com/eoeo-org/pow/compare/v3.10.7...v3.10.8) (2024-07-20)
+
+
+### Bug Fixes
+
+* runs even if WORKER_TOKENS is empty ([#1363](https://github.com/eoeo-org/pow/issues/1363)) ([bdbfeaf](https://github.com/eoeo-org/pow/commit/bdbfeaf96546ef81152fb393b37fb140a8a41a70))
+
+
+### Dependencies
+
+* update dependency node to v22.5.1 ([#1361](https://github.com/eoeo-org/pow/issues/1361)) ([655ed82](https://github.com/eoeo-org/pow/commit/655ed8249ce53b481744302ea777d693df40fd59))
+
 ## [3.10.7](https://github.com/eoeo-org/pow/compare/v3.10.6...v3.10.7) (2024-07-18)
 
 

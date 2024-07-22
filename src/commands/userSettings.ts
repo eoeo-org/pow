@@ -188,9 +188,6 @@ export class UserSettingsCommand extends Subcommand {
     }
 
     try {
-      const oldUserSetting = await getUserSetting(interaction.member.id)
-      let newUserSetting = { ...oldUserSetting }
-
       const errorMsg: string[] = []
 
       const { options } = interaction
@@ -199,9 +196,10 @@ export class UserSettingsCommand extends Subcommand {
       const pitch = options.getInteger('pitch')
       const speed = options.getInteger('speed')
 
-      if (random) {
-        newUserSetting = randomUserSetting(oldUserSetting.id)
-      }
+      const oldUserSetting = await getUserSetting(interaction.member.id)
+      const newUserSetting = random
+        ? randomUserSetting(oldUserSetting.id)
+        : { ...oldUserSetting }
 
       if (speaker !== null) {
         if (allowedVoiceList.includes(speaker)) {

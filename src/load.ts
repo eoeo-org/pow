@@ -1,5 +1,6 @@
 import type { SapphireClient } from '@sapphire/framework'
-import { loadStates, type ConnectionState, deleteState } from './db.js'
+import { loadStates, deleteState } from './db.js'
+import { type connectionStates } from '@prisma/client'
 import type { GuildCtxManager } from './guildCtx.js'
 import type { Client, VoiceBasedChannel } from 'discord.js'
 import type {
@@ -13,7 +14,7 @@ const rejoin = async ({
   client,
   guildCtxManager,
 }: {
-  connectionState: ConnectionState
+  connectionState: connectionStates
   client: SapphireClient
   guildCtxManager: GuildCtxManager
 }) => {
@@ -35,7 +36,7 @@ const rejoin = async ({
     return guildCtx.join({ voiceChannelId, readChannelId, skipUser })
   } catch {
     return deleteState({
-      voiceChannelId: connectionState.voiceChannel.toString(),
+      voiceChannelId: connectionState.voiceChannel,
     })
   }
 }

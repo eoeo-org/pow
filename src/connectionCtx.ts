@@ -264,7 +264,7 @@ export class ConnectionCtxManager extends Map<
           }
         })
     }
-    await deleteState({ voiceChannelId })
+    await deleteState({ voiceChannelId: BigInt(voiceChannelId) })
     return workerId
   }
 }

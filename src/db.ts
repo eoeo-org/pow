@@ -1,12 +1,12 @@
 import {
   Prisma,
   PrismaClient,
-  SpeakerList,
   type userSetting,
   type connectionStates,
 } from '@prisma/client'
 import { DBError } from './errors/index.js'
 import type { ConnectionContext } from './connectionCtx.js'
+import { randomUserSetting } from './utils.js'
 
 const toConnectionState = (
   connectionContext: ConnectionContext,
@@ -20,13 +20,13 @@ const toConnectionState = (
   }
 }
 
-const userSettings = new Map<string, userSetting>()
+const cachedUserSettings = new Map<string, userSetting>()
 
 const prisma: PrismaClient = new PrismaClient()
 
 export async function getUserSetting(id: string): Promise<userSetting> {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  if (userSettings.has(id)) return userSettings.get(id)!
+  if (cachedUserSettings.has(id)) return cachedUserSettings.get(id)!
   try {
     const userSetting = await prisma.userSetting.findUnique({
       where: {
@@ -35,7 +35,7 @@ export async function getUserSetting(id: string): Promise<userSetting> {
     })
 
     if (userSetting === null) {
-      return await randomizeUserSetting(id)
+      return await setUserSetting(randomUserSetting(BigInt(id)))
     }
     return userSetting
   } catch (err) {
@@ -49,44 +49,15 @@ export async function getUserSetting(id: string): Promise<userSetting> {
   }
 }
 
-export async function randomizeUserSetting(id: string): Promise<userSetting> {
-  userSettings.delete(id)
-  const speakerListValues = Object.values(SpeakerList)
-
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const speaker = speakerListValues[
-    Math.floor(Math.random() * speakerListValues.length)
-  ]! as SpeakerList
-
-  const pitch = Math.floor(Math.random() * (200 + 1 - 50)) + 50
-  const speed = Math.floor(Math.random() * (400 + 1 - 50)) + 50
-
+export async function setUserSetting(
+  setting: userSetting,
+): Promise<userSetting> {
+  cachedUserSettings.delete(String(setting.id))
   try {
     const userSetting = await prisma.userSetting.upsert({
-      where: { id: BigInt(id) },
-      create: { id: BigInt(id), speaker, pitch, speed },
-      update: { speaker, pitch, speed },
-    })
-
-    return userSetting
-  } catch (err) {
-    if (
-      err instanceof Prisma.PrismaClientKnownRequestError ||
-      err instanceof Prisma.PrismaClientUnknownRequestError
-    ) {
-      throw new DBError('ランダム値の設定に失敗しました。', { cause: err })
-    }
-    throw err
-  }
-}
-
-export async function setUserSetting(id: string, setting: userSetting) {
-  userSettings.delete(id)
-  try {
-    await prisma.userSetting.upsert({
-      where: { id: BigInt(id) },
+      where: { id: BigInt(setting.id) },
       create: {
-        id: BigInt(id),
+        id: BigInt(setting.id),
         speaker: setting.speaker,
         pitch: setting.pitch,
         speed: setting.speed,
@@ -97,6 +68,8 @@ export async function setUserSetting(id: string, setting: userSetting) {
         speed: setting.speed,
       },
     })
+
+    return userSetting
   } catch (err) {
     if (
       err instanceof Prisma.PrismaClientKnownRequestError ||
@@ -111,7 +84,7 @@ export async function setUserSetting(id: string, setting: userSetting) {
 }
 
 export function deleteUserCache(id: string) {
-  userSettings.delete(id)
+  cachedUserSettings.delete(id)
 }
 
 export async function loadStates() {

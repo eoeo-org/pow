@@ -1,7 +1,7 @@
 import debug from 'debug'
 const debug__Queue = debug('utils.js:Queue')
 import { EventEmitter } from 'events'
-import type { UserSetting } from './db.js'
+import { SpeakerList, type userSetting } from '@prisma/client'
 import type { InteractionReplyOptions } from 'discord.js'
 import { PowError } from './errors/PowError.js'
 
@@ -63,7 +63,27 @@ export class Queue<T> extends EventEmitter {
   }
 }
 
-export function userSettingToString(userSetting: UserSetting): string {
+export function randomUserSetting(id: bigint): userSetting {
+  const speakerListValues = Object.values(SpeakerList)
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const speaker = speakerListValues[
+    Math.floor(Math.random() * speakerListValues.length)
+  ]! as SpeakerList
+
+  const pitch = Math.floor(Math.random() * (200 + 1 - 50)) + 50
+  const speed = Math.floor(Math.random() * (400 + 1 - 50)) + 50
+
+  return {
+    id,
+    speaker,
+    pitch,
+    speed,
+    isDontRead: false,
+  }
+}
+
+export function userSettingToString(userSetting: userSetting): string {
   return [
     `speaker: ${userSetting.speaker}`,
     `pitch: ${userSetting.pitch}`,
@@ -73,8 +93,8 @@ export function userSettingToString(userSetting: UserSetting): string {
 }
 
 export const userSettingToDiff = (
-  oldUserSetting: UserSetting,
-  newUserSetting: UserSetting,
+  oldUserSetting: userSetting,
+  newUserSetting: userSetting,
 ) => {
   return `speaker: ${
     oldUserSetting.speaker === newUserSetting.speaker

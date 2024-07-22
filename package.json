@@ -5,6 +5,10 @@
   "scripts": {
     "start": "node .",
     "dev": "run-p build:debug:watch dev:run",
+    "db:generate": "prisma generate",
+    "db:dev": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:push": "prisma db push",
     "dev:run": "node --watch -r dotenv/config . dotenv_config_override=true",
     "build": "swc src --out-dir dist",
     "build:debug": "swc --source-maps=true src --out-dir=dist",
@@ -27,6 +31,8 @@
     "emoji-regex": "10.3.0",
     "ffmpeg-static": "5.2.0",
     "mariadb": "3.3.1",
+    "prisma": "5.17.0",
+    "@prisma/client": "5.17.0",
     "sodium-native": "4.1.1"
   },
   "devDependencies": {

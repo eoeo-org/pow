@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@swc/cli": "0.4.0",
-    "@swc/core": "1.7.0",
+    "@swc/core": "1.7.1",
     "@tsconfig/node21": "21.0.3",
     "@tsconfig/strictest": "2.0.5",
     "@types/debug": "4.1.12",

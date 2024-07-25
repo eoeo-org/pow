@@ -37,9 +37,9 @@
       "automergeType": "branch"
     },
     {
-      "matchPackagePrefixes": ["@types/"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "branch",
+      "matchPackageNames": ["@types/**"]
     },
     {
       "matchDatasources": "node-version",

@@ -34,7 +34,7 @@ RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
     --mount=type=bind,from=change-npmrc,source=/_/.npmrc,target=.npmrc \
     --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
-    pnpm fetch
+    PRISMA_SKIP_POSTINSTALL_GENERATE=true pnpm fetch
 
 # dev用の依存パッケージをインストールする => /_/node_modules/
 FROM --platform=$BUILDPLATFORM base-build AS dev-deps
@@ -49,16 +49,17 @@ RUN --mount=type=cache,id=pnpm-$BUILDPLATFORM,target=/.pnpm-store/ \
     --mount=type=bind,source=.husky/install.mjs,target=.husky/install.mjs \
     pnpm install --frozen-lockfile --offline
 
-# ビルドする => /_/dist/
+# ビルドする => /_/node_modules/.prisma/client/,/_/dist/
 FROM --platform=$BUILDPLATFORM base-build AS build
 WORKDIR /_
+COPY --link --from=dev-deps /_/node_modules/ ./node_modules/
 RUN --mount=type=bind,from=fetch-deps,source=/pnpm/,target=/pnpm/ \
-    --mount=type=bind,from=dev-deps,source=/_/node_modules/,target=node_modules/ \
     --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,from=change-npmrc,source=/_/.npmrc,target=.npmrc \
     --mount=type=bind,source=src/,target=src/ \
     --mount=type=bind,source=.swcrc,target=.swcrc \
-    pnpm build
+    --mount=type=bind,source=prisma/schema.prisma,target=prisma/schema.prisma \
+    pnpm db:generate && pnpm build
 
 # prod用の依存パッケージをインストールする => /_/node_modules/
 FROM base-build AS prod-deps
@@ -80,6 +81,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV="production"
 WORKDIR /app
 COPY --link --from=fetch-deps /pnpm/ /pnpm/
+COPY --link --from=build /_/node_modules/.prisma/client/ ./node_modules/.prisma/client/
 COPY --link --from=build /_/dist/ ./dist/
 COPY --link --from=prod-deps /_/node_modules/ ./node_modules/
 COPY --link .npmrc package.json ./

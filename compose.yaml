@@ -7,3 +7,11 @@ services:
     environment:
       - DEBUG=voiceRead.js:*,utils.js:*
     restart: always
+  migrate:
+    image: discordbot-pow-migrate
+    build:
+      context: .
+      dockerfile: migrate.Dockerfile
+    pull_policy: build
+    env_file: .env
+    restart: no

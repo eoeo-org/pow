@@ -11,7 +11,7 @@
     ":prHourlyLimitNone",
     ":rebaseStalePrs",
     ":semanticCommits",
-    "regexManagers:githubActionsVersions"
+    "customManagers:githubActionsVersions"
   ],
   "automergeStrategy": "squash",
   "assignAutomerge": true,
@@ -37,9 +37,9 @@
       "automergeType": "branch"
     },
     {
-      "matchPackagePrefixes": ["@types/"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "branch",
+      "matchPackageNames": ["@types/**"]
     },
     {
       "matchDatasources": "node-version",

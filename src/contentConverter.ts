@@ -85,6 +85,76 @@ export const convertContent = (
     }
   }
 
+  function relativeTime(time: number): string {
+    const now = Date.now()
+    const diff = now - time
+    const absDiff = Math.abs(diff)
+    const direction = diff < 0 ? '後' : '前'
+
+    if (absDiff < 1000) return '今'
+
+    const seconds = absDiff / 1000
+    if (seconds < 60) return `${Math.round(seconds)}秒${direction}`
+
+    const minutes = seconds / 60
+    if (minutes < 60) return `${Math.round(minutes)}分${direction}`
+
+    const hours = minutes / 60
+    if (hours < 24) return `${Math.round(hours)}時間${direction}`
+
+    const days = hours / 24
+    if (days < 30) return `${Math.round(days)}日${direction}`
+
+    const months = days / 30
+    if (months < 12) return `${Math.round(months)}ヶ月${direction}`
+
+    const years = days / 365
+    return `${Math.round(years)}年${direction}`
+  }
+
+  function parseTimestamp(...args: unknown[]) {
+    const timestamp = args[1] as string
+    const type = args[2] as string | null
+
+    const time = Number(timestamp) * 1000
+    const date = new Date(time)
+
+    const intlConfig: Intl.DateTimeFormatOptions = {}
+
+    switch (type) {
+      case 't':
+        intlConfig.timeStyle = 'short'
+        break
+      case 'T':
+        intlConfig.timeStyle = 'medium'
+        break
+      case 'd':
+        intlConfig.dateStyle = 'long'
+        break
+      case 'D':
+        intlConfig.dateStyle = 'long'
+        break
+      case 'f':
+        intlConfig.dateStyle = 'long'
+        intlConfig.timeStyle = 'short'
+        break
+      case 'F':
+        intlConfig.dateStyle = 'full'
+        intlConfig.timeStyle = 'short'
+        break
+
+      case 'R':
+        return relativeTime(time)
+
+      default:
+        intlConfig.dateStyle = 'long'
+        intlConfig.timeStyle = 'short'
+        break
+    }
+
+    return new Intl.DateTimeFormat('ja-JP', intlConfig).format(date)
+  }
+
   const result =
     text
       .replaceAll(/<(@[!&]?|#)!?([\d]+)>/g, parseContent)
@@ -97,6 +167,7 @@ export const convertContent = (
       )
       .replaceAll(/~/g, '')
       .replaceAll(/\*/g, '')
+      .replaceAll(/<t:(-?\d+):?([tTdDfFR])?>/g, parseTimestamp)
       .replaceAll(emojiRegex, getShortcodes) +
     '\n' +
     stickers.map((sticker) => sticker.name).join('\n')

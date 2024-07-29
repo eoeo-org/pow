@@ -4,9 +4,11 @@ import {
   getErrorReply,
   userSettingToString,
   userSettingToDiff,
+  randomUserSetting,
 } from '../utils.js'
-import { getUserSetting, randomizeUserSetting, setUserSetting } from '../db.js'
+import { getUserSetting, setUserSetting } from '../db.js'
 import type { InteractionReplyOptions } from 'discord.js'
+import { SpeakerList } from '@prisma/client'
 
 export class UserSettingsCommand extends Subcommand {
   public constructor(context: Subcommand.Context, options: Subcommand.Options) {
@@ -191,23 +193,22 @@ export class UserSettingsCommand extends Subcommand {
     }
 
     try {
-      const oldUserSetting = await getUserSetting(interaction.member.id)
-
       const errorMsg: string[] = []
 
       const { options } = interaction
       const random = options.getBoolean('random')
-      const speaker = options.getString('speaker')
+      const speaker = options.getString('speaker') as SpeakerList | null
       const pitch = options.getInteger('pitch')
       const speed = options.getInteger('speed')
 
-      if (random) {
-        await randomizeUserSetting(interaction.member.id)
-      }
+      const oldUserSetting = await getUserSetting(interaction.member.id)
+      const newUserSetting = random
+        ? randomUserSetting(oldUserSetting.id)
+        : { ...oldUserSetting }
 
       if (speaker !== null) {
         if (allowedVoiceList.includes(speaker)) {
-          await setUserSetting(interaction.member.id, 'speaker', speaker)
+          newUserSetting.speaker = speaker
         } else {
           errorMsg.push(
             [
@@ -220,7 +221,7 @@ export class UserSettingsCommand extends Subcommand {
 
       if (pitch !== null) {
         if (pitch > 49 && pitch < 201) {
-          await setUserSetting(interaction.member.id, 'pitch', pitch)
+          newUserSetting.pitch = pitch
         } else {
           errorMsg.push(
             `その声の高さ(${pitch}%)は指定できません。指定できる声の高さは、50%~200%です。`,
@@ -230,13 +231,15 @@ export class UserSettingsCommand extends Subcommand {
 
       if (speed !== null) {
         if (speed > 49 && speed < 401) {
-          await setUserSetting(interaction.member.id, 'speed', speed)
+          newUserSetting.speed = speed
         } else {
           errorMsg.push(
             `その速度(${speed}%)は指定できません。指定できる声の速度は、50%~400%です。`,
           )
         }
       }
+
+      await setUserSetting(newUserSetting)
       const userSetting = await getUserSetting(interaction.member.id)
 
       if (errorMsg.length === 0) {

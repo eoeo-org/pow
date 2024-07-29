@@ -5,6 +5,11 @@ on:
       - closed
   delete:
   workflow_dispatch:
+    inputs:
+      branchNames:
+        description: '削除対象とするキャッシュのあるbranch(ref)のリスト'
+        required: false
+        type: string
 
 jobs:
   cleanup:
@@ -13,4 +18,6 @@ jobs:
       actions: write
     steps:
       - name: Cleanup
-        uses: 4m-mazi/souji-action@ec8a8f52c8a4fbc71e8c1e7074484c7c12177fa4 # v1.1.0
+        uses: 4m-mazi/souji-action@20f71e75c2af757e9c7c61391a51b88d593d17b8 # v1.4.0
+        with:
+          branch-names: ${{ inputs.branchNames }}

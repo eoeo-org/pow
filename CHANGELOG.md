@@ -1,5 +1,150 @@
 # Changelog
 
+## [3.11.0](https://github.com/eoeo-org/pow/compare/v3.10.8...v3.11.0) (2024-07-29)
+
+
+### Features
+
+* **db:** move to prisma ([#1367](https://github.com/eoeo-org/pow/issues/1367)) ([46da125](https://github.com/eoeo-org/pow/commit/46da1250c3ea8d4e4336f8d85f282181debd5ad8))
+
+
+### Dependencies
+
+* change prisma to devDependencies ([#1385](https://github.com/eoeo-org/pow/issues/1385)) ([f180dff](https://github.com/eoeo-org/pow/commit/f180dff240d79c1936ac81fc734c0b28b3411273))
+* update dependency debug to v4.3.6 ([#1383](https://github.com/eoeo-org/pow/issues/1383)) ([12b3635](https://github.com/eoeo-org/pow/commit/12b3635cbd4fb204087a3800dd58272a0059b42c))
+
+## [3.10.8](https://github.com/eoeo-org/pow/compare/v3.10.7...v3.10.8) (2024-07-20)
+
+
+### Bug Fixes
+
+* runs even if WORKER_TOKENS is empty ([#1363](https://github.com/eoeo-org/pow/issues/1363)) ([bdbfeaf](https://github.com/eoeo-org/pow/commit/bdbfeaf96546ef81152fb393b37fb140a8a41a70))
+
+
+### Dependencies
+
+* update dependency node to v22.5.1 ([#1361](https://github.com/eoeo-org/pow/issues/1361)) ([655ed82](https://github.com/eoeo-org/pow/commit/655ed8249ce53b481744302ea777d693df40fd59))
+
+## [3.10.7](https://github.com/eoeo-org/pow/compare/v3.10.6...v3.10.7) (2024-07-18)
+
+
+### Dependencies
+
+* update dependency node to v22.5.0 ([#1354](https://github.com/eoeo-org/pow/issues/1354)) ([3593415](https://github.com/eoeo-org/pow/commit/3593415f196b46b411e10c16a8daf905c3f5d7c9))
+
+## [3.10.6](https://github.com/eoeo-org/pow/compare/v3.10.5...v3.10.6) (2024-07-10)
+
+
+### Dependencies
+
+* update dependency node to v22.4.1 ([#1345](https://github.com/eoeo-org/pow/issues/1345)) ([f939171](https://github.com/eoeo-org/pow/commit/f939171cbd99cab6a39fa332d9d01e6acf8e5517))
+
+## [3.10.5](https://github.com/j-eoeo/pow/compare/v3.10.4...v3.10.5) (2024-07-02)
+
+
+### Dependencies
+
+* update dependency node to v22.4.0 ([#1327](https://github.com/j-eoeo/pow/issues/1327)) ([1c0672f](https://github.com/j-eoeo/pow/commit/1c0672f4aaf12aa3a32f35ffd4e04a3886fe5d37))
+
+## [3.10.4](https://github.com/j-eoeo/pow/compare/v3.10.3...v3.10.4) (2024-06-11)
+
+
+### Dependencies
+
+* update dependency node to v22.3.0 ([#1288](https://github.com/j-eoeo/pow/issues/1288)) ([a2c19c1](https://github.com/j-eoeo/pow/commit/a2c19c1b16679936be6e15469951e9fa179edab0))
+
+## [3.10.3](https://github.com/j-eoeo/pow/compare/v3.10.2...v3.10.3) (2024-06-10)
+
+
+### Dependencies
+
+* update dependency mariadb to v3.3.1 ([#1268](https://github.com/j-eoeo/pow/issues/1268)) ([cc1f3f6](https://github.com/j-eoeo/pow/commit/cc1f3f6d53272258c94e82051144af031da2d1ef))
+
+## [3.10.2](https://github.com/j-eoeo/pow/compare/v3.10.1...v3.10.2) (2024-06-03)
+
+
+### Dependencies
+
+* update dependency discord.js to v14.15.3 ([#1259](https://github.com/j-eoeo/pow/issues/1259)) ([91b1f13](https://github.com/j-eoeo/pow/commit/91b1f13919260c786138ee7da334854d1b82f963))
+
+## [3.10.1](https://github.com/j-eoeo/pow/compare/v3.10.0...v3.10.1) (2024-06-01)
+
+
+### Dependencies
+
+* update dependency debug to v4.3.5 ([#1256](https://github.com/j-eoeo/pow/issues/1256)) ([8791b6c](https://github.com/j-eoeo/pow/commit/8791b6cfc95d55c70c027fe9cf9e679387747616))
+
+## [3.10.0](https://github.com/j-eoeo/pow/compare/v3.9.1...v3.10.0) (2024-05-25)
+
+
+### Features
+
+* Add relativetime for timestamp ([#1247](https://github.com/j-eoeo/pow/issues/1247)) ([ded6c3e](https://github.com/j-eoeo/pow/commit/ded6c3e3d7b6762ea7a3462463ec98c0bc864ef7)), closes [#1246](https://github.com/j-eoeo/pow/issues/1246)
+
+## [3.9.1](https://github.com/j-eoeo/pow/compare/v3.9.0...v3.9.1) (2024-05-25)
+
+
+### Bug Fixes
+
+* update dateStyle to 'long' in contentConverter.ts ([#1244](https://github.com/j-eoeo/pow/issues/1244)) ([77dfd48](https://github.com/j-eoeo/pow/commit/77dfd48a620b62723830ce36ef46e83a24bc670f)), closes [#1242](https://github.com/j-eoeo/pow/issues/1242)
+
+## [3.9.0](https://github.com/j-eoeo/pow/compare/v3.8.13...v3.9.0) (2024-05-24)
+
+
+### Features
+
+* add parseTimestamp ([#1240](https://github.com/j-eoeo/pow/issues/1240)) ([481f9e8](https://github.com/j-eoeo/pow/commit/481f9e8a5729261fdd803ee775d2f1367b3fdb45)), closes [#985](https://github.com/j-eoeo/pow/issues/985)
+
+## [3.8.13](https://github.com/j-eoeo/pow/compare/v3.8.12...v3.8.13) (2024-05-15)
+
+
+### Dependencies
+
+* update dependency node to v22.2.0 ([#1229](https://github.com/j-eoeo/pow/issues/1229)) ([94e77f7](https://github.com/j-eoeo/pow/commit/94e77f71d2b3b6ff0c8c5a3f9f7565eb365c0a37))
+
+## [3.8.12](https://github.com/j-eoeo/pow/compare/v3.8.11...v3.8.12) (2024-05-07)
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.2.1 ([#1212](https://github.com/j-eoeo/pow/issues/1212)) ([2902ac1](https://github.com/j-eoeo/pow/commit/2902ac16d82988c4fca07a888f2d3402f470a73d))
+
+## [3.8.11](https://github.com/j-eoeo/pow/compare/v3.8.10...v3.8.11) (2024-05-06)
+
+
+### Dependencies
+
+* update dependency discord.js to v14.15.2 ([#1206](https://github.com/j-eoeo/pow/issues/1206)) ([c466372](https://github.com/j-eoeo/pow/commit/c4663722188bec5a15b30a55d0ae875acbda1a94))
+
+## [3.8.10](https://github.com/j-eoeo/pow/compare/v3.8.9...v3.8.10) (2024-05-05)
+
+
+### Dependencies
+
+* update dependency @discordjs/voice to v0.17.0 ([#1205](https://github.com/j-eoeo/pow/issues/1205)) ([d3cbe27](https://github.com/j-eoeo/pow/commit/d3cbe2765ec030f38ec909cdcf7321d7643673d8))
+
+## [3.8.9](https://github.com/j-eoeo/pow/compare/v3.8.8...v3.8.9) (2024-05-03)
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.2.0 ([#1203](https://github.com/j-eoeo/pow/issues/1203)) ([eb8d18d](https://github.com/j-eoeo/pow/commit/eb8d18df799e8db1fcd0c9c4b4cf1e71b9b6bd2d))
+* update dependency node to v22.1.0 ([#1202](https://github.com/j-eoeo/pow/issues/1202)) ([4ffa662](https://github.com/j-eoeo/pow/commit/4ffa66287f93a75b08d6cec6c5f5209de0b864f0))
+
+## [3.8.8](https://github.com/j-eoeo/pow/compare/v3.8.7...v3.8.8) (2024-04-27)
+
+
+### Dependencies
+
+* update dependency node to v22.0.0 ([#1195](https://github.com/j-eoeo/pow/issues/1195)) ([cee965b](https://github.com/j-eoeo/pow/commit/cee965bd4e219397e7ad6358ddce9147cb87b656))
+
+## [3.8.7](https://github.com/j-eoeo/pow/compare/v3.8.6...v3.8.7) (2024-04-21)
+
+
+### Reverts
+
+* "chore(deps): update dependency eslint to v9" ([#1162](https://github.com/j-eoeo/pow/issues/1162)) ([600b332](https://github.com/j-eoeo/pow/commit/600b3323629d75f68b1d7fa2495eecbfc8c02b3e))
+
 ## [3.8.6](https://github.com/j-eoeo/pow/compare/v3.8.5...v3.8.6) (2024-04-10)
 
 

@@ -13,18 +13,18 @@ https://user-images.githubusercontent.com/34514603/184809823-c66e5f0c-7a7c-476a-
 
 | ボット名       | サーバーに追加URL                                                                                      |
 |:-------------|:----------------------------------------------------------------------------------------------------|
-|pow.js#1687    |https://discord.com/api/oauth2/authorize?client_id=939494577574924339&permissions=3164160&scope=applications.commands%20bot|
-|pow.js(02)#6569|https://discord.com/api/oauth2/authorize?client_id=1092794194667520070&permissions=3145728&scope=bot|
-|pow.js(03)#6971|https://discord.com/api/oauth2/authorize?client_id=1096472754187948073&permissions=3145728&scope=bot|
-|pow.js(04)#1884|https://discord.com/api/oauth2/authorize?client_id=1099605468722249728&permissions=3145728&scope=bot|
-|pow.js(05)#1501|https://discord.com/api/oauth2/authorize?client_id=1099605507792195604&permissions=3145728&scope=bot|
-|pow.js(06)#2465|https://discord.com/api/oauth2/authorize?client_id=1101127292287201332&permissions=3145728&scope=bot|
-|pow.js(07)#8155|https://discord.com/api/oauth2/authorize?client_id=1101127376332664933&permissions=3145728&scope=bot|
-|pow.js(08)#5359|https://discord.com/api/oauth2/authorize?client_id=1101127454841643078&permissions=3145728&scope=bot|
-|pow.js(09)#7365|https://discord.com/api/oauth2/authorize?client_id=1101127534415974463&permissions=3145728&scope=bot|
-|pow.js(10)#5506|https://discord.com/api/oauth2/authorize?client_id=1101127722505359411&permissions=3145728&scope=bot|
-|pow.js(11)#1725|https://discord.com/api/oauth2/authorize?client_id=1109944502061371483&permissions=3145728&scope=bot|
-|pow.js(12)#7321|https://discord.com/api/oauth2/authorize?client_id=1109944571560996946&permissions=3145728&scope=bot|
+|pow.js#1687    |<https://discord.com/oauth2/authorize?client_id=939494577574924339>|
+|pow.js(02)#6569|<https://discord.com/oauth2/authorize?client_id=1092794194667520070>|
+|pow.js(03)#6971|<https://discord.com/oauth2/authorize?client_id=1096472754187948073>|
+|pow.js(04)#1884|<https://discord.com/oauth2/authorize?client_id=1099605468722249728>|
+|pow.js(05)#1501|<https://discord.com/oauth2/authorize?client_id=1099605507792195604>|
+|pow.js(06)#2465|<https://discord.com/oauth2/authorize?client_id=1101127292287201332>|
+|pow.js(07)#8155|<https://discord.com/oauth2/authorize?client_id=1101127376332664933>|
+|pow.js(08)#5359|<https://discord.com/oauth2/authorize?client_id=1101127454841643078>|
+|pow.js(09)#7365|<https://discord.com/oauth2/authorize?client_id=1101127534415974463>|
+|pow.js(10)#5506|<https://discord.com/oauth2/authorize?client_id=1101127722505359411>|
+|pow.js(11)#1725|<https://discord.com/oauth2/authorize?client_id=1109944502061371483>|
+|pow.js(12)#7321|<https://discord.com/oauth2/authorize?client_id=1109944571560996946>|
 
 ## 使い方
 

@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.11.0](https://github.com/eoeo-org/pow/compare/v3.10.8...v3.11.0) (2024-07-29)
+
+
+### Features
+
+* **db:** move to prisma ([#1367](https://github.com/eoeo-org/pow/issues/1367)) ([46da125](https://github.com/eoeo-org/pow/commit/46da1250c3ea8d4e4336f8d85f282181debd5ad8))
+
+
+### Dependencies
+
+* change prisma to devDependencies ([#1385](https://github.com/eoeo-org/pow/issues/1385)) ([f180dff](https://github.com/eoeo-org/pow/commit/f180dff240d79c1936ac81fc734c0b28b3411273))
+* update dependency debug to v4.3.6 ([#1383](https://github.com/eoeo-org/pow/issues/1383)) ([12b3635](https://github.com/eoeo-org/pow/commit/12b3635cbd4fb204087a3800dd58272a0059b42c))
+
 ## [3.10.8](https://github.com/eoeo-org/pow/compare/v3.10.7...v3.10.8) (2024-07-20)
 
 

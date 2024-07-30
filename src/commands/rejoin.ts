@@ -53,8 +53,6 @@ export class RejoinCommand extends Command {
       checkUserAlreadyJoined(voiceChannel)
       checkCanJoin(voiceChannel)
 
-      await interaction.deferReply()
-
       const guildCtx = guildCtxManager.get(interaction.member.guild)
       const voiceChannelId = newVoiceBasedChannelId(voiceChannel)
 
@@ -77,6 +75,9 @@ export class RejoinCommand extends Command {
           existingJoinConfig.guildId,
           existingJoinConfig.channelId ?? '',
         )
+
+      await interaction.deferReply()
+
       const cause =
         interaction.channel.id ===
         guildCtx.connectionManager.channelMap.get(voiceChannelId)

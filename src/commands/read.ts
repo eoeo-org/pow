@@ -119,8 +119,6 @@ export class ReadCommand extends Command {
     try {
       checkUserAlreadyJoined(voiceChannel)
 
-      await interaction.deferReply()
-
       const text = interaction.options.getString('text', true)
 
       const connectionCtx = guildCtxManager
@@ -132,6 +130,8 @@ export class ReadCommand extends Command {
         throw new HandleInteractionError(
           HandleInteractionErrorType.userNotWithBot,
         )
+
+      await interaction.deferReply()
 
       const convertedMessage = convertContent(
         text,

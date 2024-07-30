@@ -47,13 +47,18 @@ export class JoinCommand extends Command {
       checkUserAlreadyJoined(voiceChannel)
       checkCanJoin(voiceChannel)
 
+      const guildCtx = guildCtxManager.get(interaction.member.guild)
+      const readChannelId = newGuildTextBasedChannelId(interaction.channel)
+      const voiceChannelId = newVoiceBasedChannelId(voiceChannel)
+
+      guildCtx.checkAlreadyJoined(voiceChannelId)
+      guildCtx.connectionManager.checkAlreadyUsedChannel(readChannelId)
+
       await interaction.deferReply()
 
-      const guildCtx = guildCtxManager.get(interaction.member.guild)
-
       const worker = await guildCtx.join({
-        voiceChannelId: newVoiceBasedChannelId(voiceChannel),
-        readChannelId: newGuildTextBasedChannelId(interaction.channel),
+        voiceChannelId,
+        readChannelId,
       })
 
       interactionReplyOptions = {

@@ -5,6 +5,10 @@ import type { InteractionReplyOptions } from 'discord.js'
 import { LeaveCause } from '../connectionCtx.js'
 import { newGuildTextBasedChannelId, newVoiceBasedChannelId } from '../id.js'
 import { deferredReplyOrEdit, getErrorReply } from '../utils.js'
+import {
+  HandleInteractionError,
+  HandleInteractionErrorType,
+} from '../errors/index.js'
 
 export class LeaveCommand extends Command {
   public constructor(
@@ -47,14 +51,19 @@ export class LeaveCommand extends Command {
     try {
       checkUserAlreadyJoined(voiceChannel)
 
-      await interaction.deferReply()
-
       const ctx = guildCtxManager.get(interaction.member.guild)
-      const textChannelId = ctx.connectionManager.channelMap.get(
+      const readChannelId = ctx.connectionManager.channelMap.get(
         newVoiceBasedChannelId(voiceChannel),
       )
+      if (readChannelId === undefined)
+        throw new HandleInteractionError(
+          HandleInteractionErrorType.userNotWithBot,
+        )
+
+      await interaction.deferReply()
+
       const cause =
-        newGuildTextBasedChannelId(interaction.channel) === textChannelId
+        newGuildTextBasedChannelId(interaction.channel) === readChannelId
           ? undefined
           : LeaveCause.command
       const workerId = await ctx.leave({
@@ -69,7 +78,7 @@ export class LeaveCommand extends Command {
             title: 'ボイスチャンネルから退出しました。',
             description: [
               `担当BOT: <@${workerId}>`,
-              `テキストチャンネル: <#${textChannelId}>`,
+              `テキストチャンネル: <#${readChannelId}>`,
               `ボイスチャンネル: ${voiceChannel}`,
               'またのご利用をお待ちしております。',
             ].join('\n'),

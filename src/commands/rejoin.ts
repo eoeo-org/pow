@@ -9,7 +9,7 @@ import {
 import { checkCanJoin, checkUserAlreadyJoined } from '../components/preCheck.js'
 import { LeaveCause } from '../connectionCtx.js'
 import { newGuildTextBasedChannelId, newVoiceBasedChannelId } from '../id.js'
-import { getErrorReply } from '../utils.js'
+import { deferredReplyOrEdit, getErrorReply } from '../utils.js'
 
 export class RejoinCommand extends Command {
   public constructor(
@@ -75,6 +75,9 @@ export class RejoinCommand extends Command {
           existingJoinConfig.guildId,
           existingJoinConfig.channelId ?? '',
         )
+
+      await interaction.deferReply()
+
       const cause =
         interaction.channel.id ===
         guildCtx.connectionManager.channelMap.get(voiceChannelId)
@@ -104,7 +107,7 @@ export class RejoinCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      void interaction.reply(interactionReplyOptions)
+      void deferredReplyOrEdit(interaction, interactionReplyOptions)
     }
   }
 }

@@ -174,6 +174,15 @@ export class ConnectionCtxManager extends Map<
     return this.get(this.channelMap.get(voiceChannelId))
   }
 
+  checkAlreadyUsedChannel(readChannelId: GuildTextBasedChannelId) {
+    const existingJoinConfig = this.get(readChannelId)?.connection.joinConfig
+    if (existingJoinConfig !== undefined)
+      throw new AlreadyUsedChannelError(
+        existingJoinConfig.guildId,
+        existingJoinConfig.channelId ?? '',
+      )
+  }
+
   connectionJoin({
     voiceChannelId,
     guildId,
@@ -190,12 +199,7 @@ export class ConnectionCtxManager extends Map<
     skipUser?: Set<UserId>
   }) {
     if (this.channelMap.has(voiceChannelId)) throw new AlreadyJoinedError()
-    const existingJoinConfig = this.get(readChannelId)?.connection.joinConfig
-    if (existingJoinConfig !== undefined)
-      throw new AlreadyUsedChannelError(
-        existingJoinConfig.guildId,
-        existingJoinConfig.channelId ?? '',
-      )
+    this.checkAlreadyUsedChannel(readChannelId)
     this.channelMap.set(voiceChannelId, readChannelId)
     const connection = joinVoiceChannel({
       channelId: voiceChannelId,
@@ -219,6 +223,7 @@ export class ConnectionCtxManager extends Map<
     this.set(readChannelId, connectionContext)
     return connectionContext
   }
+
   async connectionLeave({
     voiceChannelId,
     cause = undefined,

@@ -13,7 +13,7 @@ import {
 } from '../errors/index.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
 import { newVoiceBasedChannelId } from '../id.js'
-import { getErrorReply } from '../utils.js'
+import { deferredReplyOrEdit, getErrorReply } from '../utils.js'
 
 export class ReadCommand extends Command {
   public constructor(
@@ -118,6 +118,7 @@ export class ReadCommand extends Command {
 
     try {
       checkUserAlreadyJoined(voiceChannel)
+
       const text = interaction.options.getString('text', true)
 
       const connectionCtx = guildCtxManager
@@ -129,6 +130,8 @@ export class ReadCommand extends Command {
         throw new HandleInteractionError(
           HandleInteractionErrorType.userNotWithBot,
         )
+
+      await interaction.deferReply()
 
       const convertedMessage = convertContent(
         text,
@@ -152,7 +155,7 @@ export class ReadCommand extends Command {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      void interaction.reply(interactionReplyOptions)
+      void deferredReplyOrEdit(interaction, interactionReplyOptions)
     }
   }
 }

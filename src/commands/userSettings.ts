@@ -1,5 +1,6 @@
 import { Subcommand } from '@sapphire/plugin-subcommands'
 import {
+  deferredReplyOrEdit,
   getErrorReply,
   userSettingToString,
   userSettingToDiff,
@@ -124,6 +125,8 @@ export class UserSettingsCommand extends Subcommand {
     interaction: Subcommand.ChatInputCommandInteraction,
   ) {
     if (!interaction.inCachedGuild()) return
+    await interaction.deferReply({ ephemeral: true })
+
     const user = interaction.options.getUser('user')
 
     let interactionReplyOptions: InteractionReplyOptions = {
@@ -160,7 +163,7 @@ export class UserSettingsCommand extends Subcommand {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      void interaction.reply(interactionReplyOptions)
+      void deferredReplyOrEdit(interaction, interactionReplyOptions)
     }
   }
 
@@ -168,6 +171,8 @@ export class UserSettingsCommand extends Subcommand {
     interaction: Subcommand.ChatInputCommandInteraction,
   ) {
     if (!interaction.inCachedGuild()) return
+    await interaction.deferReply({ ephemeral: true })
+
     const allowedVoiceList = [
       'show',
       'haruka',
@@ -280,7 +285,7 @@ export class UserSettingsCommand extends Subcommand {
       interactionReplyOptions = getErrorReply(error)
       console.error(error)
     } finally {
-      void interaction.reply(interactionReplyOptions)
+      void deferredReplyOrEdit(interaction, interactionReplyOptions)
     }
   }
 }

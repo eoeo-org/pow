@@ -33,6 +33,11 @@ export class GuildContext {
     this.connectionManager = new ConnectionCtxManager()
   }
 
+  checkAlreadyJoined(voiceChannelId: VoiceBasedChannelId) {
+    if (this.connectionManager.channelMap.has(voiceChannelId))
+      throw new AlreadyJoinedError()
+  }
+
   async join({
     voiceChannelId,
     readChannelId,
@@ -42,8 +47,7 @@ export class GuildContext {
     readChannelId: GuildTextBasedChannelId
     skipUser?: Set<UserId>
   }) {
-    if (this.connectionManager.channelMap.has(voiceChannelId))
-      throw new AlreadyJoinedError()
+    this.checkAlreadyJoined(voiceChannelId)
 
     const vcArray = (await this.guild.channels.fetch())
       .map((v) => {

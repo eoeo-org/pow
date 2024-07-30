@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.0](https://github.com/eoeo-org/pow/compare/v3.11.0...v3.12.0) (2024-07-30)
+
+
+### Features
+
+* prevent timeout in command response ([#984](https://github.com/eoeo-org/pow/issues/984)) ([bf28075](https://github.com/eoeo-org/pow/commit/bf280752cfdcf59ad172db24ea14b5254ead86ff))
+
 ## [3.11.0](https://github.com/eoeo-org/pow/compare/v3.10.8...v3.11.0) (2024-07-29)
 
 

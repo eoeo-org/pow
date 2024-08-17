@@ -15,3 +15,5 @@ services:
     pull_policy: build
     env_file: .env
     restart: no
+    profiles:
+      - tools

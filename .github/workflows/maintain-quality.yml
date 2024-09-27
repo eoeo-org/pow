@@ -39,6 +39,7 @@ jobs:
         run: pnpm run db:generate
 
       - name: Check all
+        shell: bash
         run: pnpm run --aggregate-output "/^(format:check|lint|check:types)$/"
         env:
           FORCE_COLOR: 3

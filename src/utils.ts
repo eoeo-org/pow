@@ -1,7 +1,7 @@
 import debug from 'debug'
 const debug__Queue = debug('utils.js:Queue')
 import { EventEmitter } from 'events'
-import { SpeakerList, type userSetting } from '@prisma/client'
+import { SpeakerList, type userSetting } from '.prisma/client'
 import type {
   ChatInputCommandInteraction,
   InteractionReplyOptions,

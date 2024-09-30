@@ -26,7 +26,7 @@
     "@prisma/client": "5.20.0",
     "@sapphire/framework": "5.2.1",
     "@sapphire/plugin-subcommands": "6.0.3",
-    "debug": "4.3.6",
+    "debug": "4.3.7",
     "discord-emoji": "2.4.0",
     "discord.js": "14.15.3",
     "emoji-regex": "10.3.0",

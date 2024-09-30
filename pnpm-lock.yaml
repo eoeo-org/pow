@@ -18,8 +18,8 @@ importers:
         specifier: 5.2.1
         version: 5.2.1
       '@sapphire/plugin-subcommands':
-        specifier: 6.0.3
-        version: 6.0.3
+        specifier: 7.0.0
+        version: 7.0.0
       debug:
         specifier: 4.3.7
         version: 4.3.7
@@ -237,8 +237,8 @@ packages:
     resolution: {integrity: sha512-t42o6i8gPQ3QISIsMl463hj057yfyHsaSrs4FssdiGLmnvL9cuLGLTsjGEPn904wHUhPzS8W5aAPr788RK2/jQ==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
-  '@sapphire/plugin-subcommands@6.0.3':
-    resolution: {integrity: sha512-SLDlTjMrMpb3s89ZjrBvVbMWsXfNNciO6SnNQdKLKTUQwktaYxIdj+k3MmEWpN19i8W9ogRvIrLl0Hw20pPUng==}
+  '@sapphire/plugin-subcommands@7.0.0':
+    resolution: {integrity: sha512-oBJ5o99hjq1sdBGcL4ksChyg73pZ1zhGVNBLnRHP4K5iegCA60GE4WRZqskrA94owy0hHNeCjj0etUpOCaihbQ==}
     engines: {node: '>=v18', npm: '>=7'}
 
   '@sapphire/ratelimits@2.4.9':
@@ -1619,10 +1619,9 @@ snapshots:
       '@sapphire/utilities': 3.17.0
       tslib: 2.6.3
 
-  '@sapphire/plugin-subcommands@6.0.3':
+  '@sapphire/plugin-subcommands@7.0.0':
     dependencies:
       '@sapphire/utilities': 3.17.0
-      tslib: 2.6.3
 
   '@sapphire/ratelimits@2.4.9': {}
 

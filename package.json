@@ -25,7 +25,7 @@
     "@discordjs/voice": "0.17.0",
     "@prisma/client": "5.20.0",
     "@sapphire/framework": "5.2.1",
-    "@sapphire/plugin-subcommands": "6.0.3",
+    "@sapphire/plugin-subcommands": "7.0.0",
     "debug": "4.3.7",
     "discord-emoji": "2.5.1",
     "discord.js": "14.15.3",

@@ -1,5 +1,31 @@
 # Changelog
 
+## [3.12.1](https://github.com/eoeo-org/pow/compare/v3.12.0...v3.12.1) (2024-10-04)
+
+
+### Bug Fixes
+
+* import from .prisma/client ([#1405](https://github.com/eoeo-org/pow/issues/1405)) ([a9f5c05](https://github.com/eoeo-org/pow/commit/a9f5c056fe31623688bfba880df31411d8ec0872))
+
+
+### Dependencies
+
+* update dependency @sapphire/plugin-subcommands to v7 ([#1429](https://github.com/eoeo-org/pow/issues/1429)) ([61a5301](https://github.com/eoeo-org/pow/commit/61a53018c4f11a3dcc6350dfac6a41fb6af9949b))
+* update dependency debug to v4.3.7 ([#1417](https://github.com/eoeo-org/pow/issues/1417)) ([f00de1d](https://github.com/eoeo-org/pow/commit/f00de1d3ecc6564c0ece1953b8e52c2ad4bc9b53))
+* update dependency discord-emoji to v2.5.1 ([#1424](https://github.com/eoeo-org/pow/issues/1424)) ([75780c8](https://github.com/eoeo-org/pow/commit/75780c81414d0cd2126d1efbf148e602e2509e2d))
+* update dependency discord.js to v14.16.3 ([#1425](https://github.com/eoeo-org/pow/issues/1425)) ([10cfa59](https://github.com/eoeo-org/pow/commit/10cfa5954f353f85cb5d815b175289878efec3c5))
+* update dependency emoji-regex to v10.4.0 ([#1426](https://github.com/eoeo-org/pow/issues/1426)) ([d3763ab](https://github.com/eoeo-org/pow/commit/d3763abc505b278a21e79d8f2cc07b350ae27a06))
+* update dependency mariadb to v3.3.2 ([#1418](https://github.com/eoeo-org/pow/issues/1418)) ([f8d5ec8](https://github.com/eoeo-org/pow/commit/f8d5ec88de714a82169cf563a1fc87f6df5a154d))
+* update dependency node to v22.9.0 ([#1416](https://github.com/eoeo-org/pow/issues/1416)) ([a5f1816](https://github.com/eoeo-org/pow/commit/a5f18168ac65277ee1d7a4ce29870502055c4ee3))
+* update dependency sodium-native to v4.2.0 ([#1427](https://github.com/eoeo-org/pow/issues/1427)) ([ccc0800](https://github.com/eoeo-org/pow/commit/ccc08005d6921cf0ef1ea811a4938093b0479cce))
+* update dependency sodium-native to v4.2.1 ([#1440](https://github.com/eoeo-org/pow/issues/1440)) ([64ebee5](https://github.com/eoeo-org/pow/commit/64ebee52a226c3d3b2dbce7ded59a3c27b0f6301))
+* update prisma monorepo to v5.20.0 ([#1402](https://github.com/eoeo-org/pow/issues/1402)) ([4d1b1bd](https://github.com/eoeo-org/pow/commit/4d1b1bd64ac3582eda1cb7e409464e7c63161626))
+
+
+### Reverts
+
+* "fix: import from .prisma/client" ([#1441](https://github.com/eoeo-org/pow/issues/1441)) ([27ce17b](https://github.com/eoeo-org/pow/commit/27ce17b6907f267bb1e9ef2b7e4c437103369f6d))
+
 ## [3.12.0](https://github.com/eoeo-org/pow/compare/v3.11.0...v3.12.0) (2024-07-30)
 
 

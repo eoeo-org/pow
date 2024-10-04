@@ -5,7 +5,7 @@ import { deferredReplyOrEdit, getErrorReply } from '../utils.js'
 
 export class ResetCommand extends Command {
   public constructor(
-    context: ChatInputCommand.Context,
+    context: ChatInputCommand.LoaderContext,
     options: ChatInputCommand.Options,
   ) {
     super(context, {

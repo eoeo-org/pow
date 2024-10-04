@@ -4,7 +4,7 @@ import { MessageFlags, type Message } from 'discord.js'
 const helpUrl = `https://gh.kazu123.net/pow/tree/v${process.env.npm_package_version}#使い方`
 
 export class HelpCommand extends Command {
-  public constructor(context: Command.Context, options: Command.Options) {
+  public constructor(context: Command.LoaderContext, options: Command.Options) {
     super(context, {
       ...options,
       name: 'help',

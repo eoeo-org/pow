@@ -11,7 +11,10 @@ import type { InteractionReplyOptions } from 'discord.js'
 import { SpeakerList } from '.prisma/client'
 
 export class UserSettingsCommand extends Subcommand {
-  public constructor(context: Subcommand.Context, options: Subcommand.Options) {
+  public constructor(
+    context: Subcommand.LoaderContext,
+    options: Subcommand.Options,
+  ) {
     super(context, {
       ...options,
       name: 'user-settings',

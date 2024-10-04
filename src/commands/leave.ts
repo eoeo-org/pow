@@ -12,7 +12,7 @@ import {
 
 export class LeaveCommand extends Command {
   public constructor(
-    context: ChatInputCommand.Context,
+    context: ChatInputCommand.LoaderContext,
     options: ChatInputCommand.Options,
   ) {
     super(context, {

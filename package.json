@@ -28,7 +28,7 @@
     "@sapphire/plugin-subcommands": "7.0.0",
     "debug": "4.3.7",
     "discord-emoji": "2.5.1",
-    "discord.js": "14.15.3",
+    "discord.js": "14.16.3",
     "emoji-regex": "10.4.0",
     "ffmpeg-static": "5.2.0",
     "mariadb": "3.3.2",

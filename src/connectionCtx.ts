@@ -11,6 +11,7 @@ import {
   AudioPlayerStatus,
   AudioPlayer,
   VoiceConnection,
+  type DiscordGatewayAdapterCreator,
 } from '@discordjs/voice'
 
 import {
@@ -205,8 +206,10 @@ export class ConnectionCtxManager extends Map<
       channelId: voiceChannelId,
       guildId: guildId,
       group: worker.user?.id ?? '',
+      // HACK: InternalDiscordGatewayAdapterCreator as DiscordGatewayAdapterCreator
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      adapterCreator: worker.guilds.cache.get(guildId)!.voiceAdapterCreator,
+      adapterCreator: worker.guilds.cache.get(guildId)!
+        .voiceAdapterCreator as DiscordGatewayAdapterCreator,
     })
     connection.once('disconnect', () => {
       debug__ConnectionContext('vc disconnected')

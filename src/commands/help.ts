@@ -16,7 +16,11 @@ export class HelpCommand extends Command {
   public override async messageRun(message: Message) {
     await message.reply({
       content: [
-        `</help:${this.applicationCommandRegistry.globalCommandId}> をお使いください。（コマンドメンションを押すとチャット欄に自動挿入されます。）`,
+        `</help:${
+          this.applicationCommandRegistry.globalChatInputCommandIds
+            .values()
+            .next().value
+        }> をお使いください。（コマンドメンションを押すとチャット欄に自動挿入されます。）`,
         '- コマンドが使えない場合、サーバーの設定により使用が制限されているかもしれません。',
       ].join('\n'),
       flags: MessageFlags.SuppressEmbeds,

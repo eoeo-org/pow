@@ -11,7 +11,7 @@ import { getErrorReply } from '../utils.js'
 
 export class SkipCommand extends Command {
   public constructor(
-    context: ChatInputCommand.Context,
+    context: ChatInputCommand.LoaderContext,
     options: ChatInputCommand.Options,
   ) {
     super(context, {

@@ -18,6 +18,6 @@ jobs:
       actions: write
     steps:
       - name: Cleanup
-        uses: 4m-mazi/souji-action@9e9f29801a9414a40e8895579ce72050393df639 # v1.4.6
+        uses: 4m-mazi/souji-action@f15e44572bec5a33cdab58541084c2c9fdd7e993 # v1.4.7
         with:
           branch-names: ${{ inputs.branchNames }}

@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.13.0](https://github.com/eoeo-org/pow/compare/v3.12.1...v3.13.0) (2024-10-12)
+
+
+### Features
+
+* allow fallback to user name if guild member not found ([#1457](https://github.com/eoeo-org/pow/issues/1457)) ([3db3ea1](https://github.com/eoeo-org/pow/commit/3db3ea12023f46649bafa29bd3600181cacf8e99))
+
+
+### Bug Fixes
+
+* add await ([#1455](https://github.com/eoeo-org/pow/issues/1455)) ([6d3848e](https://github.com/eoeo-org/pow/commit/6d3848e8de02793e257f5037d99bea2f370ab884))
+
 ## [3.12.1](https://github.com/eoeo-org/pow/compare/v3.12.0...v3.12.1) (2024-10-04)
 
 

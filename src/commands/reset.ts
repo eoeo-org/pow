@@ -1,6 +1,10 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
-import { PermissionFlagsBits, type InteractionReplyOptions } from 'discord.js'
+import {
+  InteractionContextType,
+  PermissionFlagsBits,
+  type InteractionReplyOptions,
+} from 'discord.js'
 import { deferredReplyOrEdit, getErrorReply } from '../utils.js'
 
 export class ResetCommand extends Command {
@@ -23,7 +27,7 @@ export class ResetCommand extends Command {
         .setName(this.name)
         .setDescription(this.description)
         .setDefaultMemberPermissions(PermissionFlagsBits.MoveMembers)
-        .setDMPermission(false),
+        .setContexts([InteractionContextType.Guild]),
     )
   }
   public override async chatInputRun(

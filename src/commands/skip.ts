@@ -4,7 +4,10 @@ import {
   HandleInteractionError,
   HandleInteractionErrorType,
 } from '../errors/index.js'
-import type { InteractionReplyOptions } from 'discord.js'
+import {
+  InteractionContextType,
+  type InteractionReplyOptions,
+} from 'discord.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
 import { newVoiceBasedChannelId } from '../id.js'
 import { getErrorReply } from '../utils.js'
@@ -27,7 +30,7 @@ export class SkipCommand extends Command {
       builder
         .setName(this.name)
         .setDescription(this.description)
-        .setDMPermission(false),
+        .setContexts([InteractionContextType.Guild]),
     )
   }
   public override async chatInputRun(

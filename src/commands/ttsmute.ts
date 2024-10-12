@@ -1,6 +1,9 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
-import type { InteractionReplyOptions } from 'discord.js'
+import {
+  InteractionContextType,
+  type InteractionReplyOptions,
+} from 'discord.js'
 import {
   HandleInteractionError,
   HandleInteractionErrorType,
@@ -27,7 +30,7 @@ export class TtsmuteCommand extends Command {
       builder
         .setName(this.name)
         .setDescription(this.description)
-        .setDMPermission(false)
+        .setContexts([InteractionContextType.Guild])
         .addBooleanOption((option) =>
           option
             .setName('enable')

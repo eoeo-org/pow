@@ -1,7 +1,10 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
 import { checkUserAlreadyJoined } from '../components/preCheck.js'
-import type { InteractionReplyOptions } from 'discord.js'
+import {
+  InteractionContextType,
+  type InteractionReplyOptions,
+} from 'discord.js'
 import { LeaveCause } from '../connectionCtx.js'
 import { newGuildTextBasedChannelId, newVoiceBasedChannelId } from '../id.js'
 import { deferredReplyOrEdit, getErrorReply } from '../utils.js'
@@ -28,7 +31,7 @@ export class LeaveCommand extends Command {
       builder
         .setName(this.name)
         .setDescription(this.description)
-        .setDMPermission(false),
+        .setContexts([InteractionContextType.Guild]),
     )
   }
   public override async chatInputRun(

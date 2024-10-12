@@ -33,11 +33,12 @@ const rejoin = async ({
       connectionState.readChannel.toString() as GuildTextBasedChannelId
     const skipUser = new Set(connectionState.skipUser.split(',') as UserId[])
 
-    return guildCtx.join({ voiceChannelId, readChannelId, skipUser })
+    return await guildCtx.join({ voiceChannelId, readChannelId, skipUser })
   } catch {
-    return deleteState({
+    await deleteState({
       voiceChannelId: connectionState.voiceChannel,
     })
+    return
   }
 }
 

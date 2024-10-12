@@ -1,6 +1,9 @@
 import { Command, type ChatInputCommand } from '@sapphire/framework'
 import { guildCtxManager } from '../index.js'
-import type { InteractionReplyOptions } from 'discord.js'
+import {
+  InteractionContextType,
+  type InteractionReplyOptions,
+} from 'discord.js'
 import {
   AlreadyUsedChannelError,
   HandleInteractionError,
@@ -29,7 +32,7 @@ export class RejoinCommand extends Command {
       builder
         .setName(this.name)
         .setDescription(this.description)
-        .setDMPermission(false),
+        .setContexts([InteractionContextType.Guild]),
     )
   }
   public override async chatInputRun(

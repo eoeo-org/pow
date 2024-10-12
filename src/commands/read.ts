@@ -4,6 +4,7 @@ import { convertContent } from '../contentConverter.js'
 import {
   AutocompleteInteraction,
   Collection,
+  InteractionContextType,
   type InteractionReplyOptions,
   type Sticker,
 } from 'discord.js'
@@ -33,7 +34,7 @@ export class ReadCommand extends Command {
       builder
         .setName(this.name)
         .setDescription(this.description)
-        .setDMPermission(false)
+        .setContexts([InteractionContextType.Guild])
         .addStringOption((option) =>
           option
             .setName('text')

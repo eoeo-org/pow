@@ -52,6 +52,7 @@ export const convertContent = (
     const gm = client.guilds.resolve(guildId)?.members
     const gr = client.guilds.resolve(guildId)?.roles
     const gc = client.guilds.resolve(guildId)?.channels
+    const cu = client.users
 
     //console.log(a, b, c)
 
@@ -59,7 +60,7 @@ export const convertContent = (
     switch (b) {
       case '@':
       case '@!':
-        return gm?.resolve(c)?.displayName ?? ''
+        return gm?.resolve(c)?.displayName ?? cu.resolve(c)?.displayName ?? ''
       case '@&':
         return gr?.resolve(c)?.name ?? ''
       case '#':

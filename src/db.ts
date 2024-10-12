@@ -89,7 +89,7 @@ export function deleteUserCache(id: string) {
 
 export async function loadStates() {
   try {
-    const connectionStates = prisma.connectionStates.findMany()
+    const connectionStates = await prisma.connectionStates.findMany()
     return connectionStates
   } catch (err) {
     if (

@@ -59,11 +59,11 @@ export const convertContent = (
     switch (b) {
       case '@':
       case '@!':
-        return gm?.resolve(c)?.displayName ?? ''
+        return gm?.resolve(c)?.displayName ?? '不明なユーザー'
       case '@&':
-        return gr?.resolve(c)?.name ?? ''
+        return gr?.resolve(c)?.name ?? 'unknown-role'
       case '#':
-        return gc?.resolve(c)?.name ?? ''
+        return gc?.resolve(c)?.name ?? '不明なチャンネル'
       default:
         return ''
     }

@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.14.0](https://github.com/eoeo-org/pow/compare/v3.13.0...v3.14.0) (2024-10-13)
+
+
+### Features
+
+* provide default values for unknown users, roles, and channels ([#1461](https://github.com/eoeo-org/pow/issues/1461)) ([f5c8b75](https://github.com/eoeo-org/pow/commit/f5c8b75245ae4a5bedd53bb5271f40fe11097c57))
+
+
+### Reverts
+
+* "feat: allow fallback to user name if guild member not found" ([#1459](https://github.com/eoeo-org/pow/issues/1459)) ([1442a4d](https://github.com/eoeo-org/pow/commit/1442a4d0d16626db6e262cee74852feff9ef2ede))
+
 ## [3.13.0](https://github.com/eoeo-org/pow/compare/v3.12.1...v3.13.0) (2024-10-12)
 
 

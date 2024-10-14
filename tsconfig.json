@@ -1,15 +1,9 @@
 {
-  "compileOnSave": true,
-  "include": ["src/**/*", "tests/**/*"],
-  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node22/tsconfig"],
   "compilerOptions": {
+    "types": ["@types/node"],
     "noEmit": true,
-    "composite": true,
-    "outDir": "cli-incremental-info",
-
-    "resolveJsonModule": true,
-    "verbatimModuleSyntax": true,
-
-    "noUnusedParameters": false
-  }
+    "allowJs": true
+  },
+  "extends": "./tsconfig.build.json",
+  "include": ["src/**/*", "tests/**/*", "**/*.mjs"]
 }

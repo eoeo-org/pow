@@ -31,7 +31,7 @@ export default tseslint.config(
         cacheLifetime: {
           glob: 'Infinity',
         },
-        project: ['tsconfig.json', 'tsconfig.*.json'],
+        projectService: true,
       },
     },
   },

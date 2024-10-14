@@ -1,0 +1,15 @@
+{
+  "compileOnSave": true,
+  "include": ["src/**/*", "tests/**/*"],
+  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node22/tsconfig"],
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": true,
+    "outDir": "cli-incremental-info",
+
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true,
+
+    "noUnusedParameters": false
+  }
+}

@@ -7,7 +7,12 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
-    ignores: ['cli-incremental-info', 'coverage', 'dist/*'],
+    ignores: [
+      '.husky/install.mjs',
+      'cli-incremental-info',
+      'coverage',
+      'dist/*',
+    ],
   },
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,

@@ -5,6 +5,6 @@
     "allowJs": true,
     "checkJs": true
   },
-  "extends": "./tsconfig.build.json",
+  "extends": "./tsconfig-build.json",
   "include": ["src/**/*", "tests/**/*", "**/*.mjs"]
 }

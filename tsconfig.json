@@ -2,7 +2,8 @@
   "compilerOptions": {
     "types": ["@types/node"],
     "noEmit": true,
-    "allowJs": true
+    "allowJs": true,
+    "checkJs": true
   },
   "extends": "./tsconfig.build.json",
   "include": ["src/**/*", "tests/**/*", "**/*.mjs"]

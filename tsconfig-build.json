@@ -1,14 +1,7 @@
 {
+  "extends": "./tsconfig-base",
   "compileOnSave": true,
-  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node22/tsconfig"],
   "compilerOptions": {
-    "noEmit": true,
-    "composite": true,
-    "outDir": "cli-incremental-info",
-
-    "resolveJsonModule": true,
-    "verbatimModuleSyntax": true,
-
     "noUnusedParameters": false
   },
   "include": ["src/**/*", "tests/**/*"]

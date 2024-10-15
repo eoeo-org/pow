@@ -1,6 +1,5 @@
 {
   "compileOnSave": true,
-  "include": ["src/**/*", "tests/**/*"],
   "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node22/tsconfig"],
   "compilerOptions": {
     "noEmit": true,
@@ -11,5 +10,6 @@
     "verbatimModuleSyntax": true,
 
     "noUnusedParameters": false
-  }
+  },
+  "include": ["src/**/*", "tests/**/*"]
 }

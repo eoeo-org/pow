@@ -4,5 +4,6 @@
   "compilerOptions": {
     "noUnusedParameters": false
   },
-  "include": ["src/**/*", "tests/**/*"]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["src/generated/client/"]
 }

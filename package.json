@@ -10,7 +10,7 @@
     "db:deploy": "prisma migrate deploy",
     "db:push": "prisma db push",
     "dev:run": "node --watch -r dotenv/config . dotenv_config_override=true",
-    "build": "swc src --out-dir dist",
+    "build": "swc src --copy-files --out-dir dist",
     "build:debug": "swc --source-maps=true src --out-dir=dist",
     "build:debug:watch": "swc --watch --source-maps=true src --out-dir=dist",
     "format": "prettier --write .",

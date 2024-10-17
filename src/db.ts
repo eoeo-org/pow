@@ -3,7 +3,7 @@ import {
   PrismaClient,
   type userSetting,
   type connectionStates,
-} from '@prisma/client'
+} from './generated/client/index.js'
 import { DBError } from './errors/index.js'
 import type { ConnectionContext } from './connectionCtx.js'
 import { randomUserSetting } from './utils.js'

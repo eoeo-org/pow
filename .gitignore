@@ -2,5 +2,6 @@ node_modules
 .env*
 !.env-example
 
+src/generated/client
 dist
 cli-incremental-info

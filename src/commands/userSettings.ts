@@ -8,7 +8,7 @@ import {
 } from '../utils.js'
 import { getUserSetting, setUserSetting } from '../db.js'
 import type { InteractionReplyOptions } from 'discord.js'
-import { SpeakerList } from '@prisma/client'
+import { SpeakerList } from '../generated/client/index.js'
 
 export class UserSettingsCommand extends Subcommand {
   public constructor(

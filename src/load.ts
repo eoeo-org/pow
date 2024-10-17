@@ -1,6 +1,6 @@
 import type { SapphireClient } from '@sapphire/framework'
 import { loadStates, deleteState } from './db.js'
-import { type connectionStates } from '@prisma/client'
+import { type connectionStates } from './generated/client/index.js'
 import type { GuildCtxManager } from './guildCtx.js'
 import type { Client, VoiceBasedChannel } from 'discord.js'
 import type {

@@ -6,5 +6,6 @@
     "allowJs": true,
     "checkJs": true
   },
-  "include": ["**/*.mjs"]
+  "include": ["**/*.mjs"],
+  "exclude": ["src/generated/client/"]
 }

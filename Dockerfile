@@ -55,7 +55,7 @@ COPY --link --from=dev-deps /_/node_modules/ ./node_modules/
 RUN --mount=type=bind,from=fetch-deps,source=/pnpm/,target=/pnpm/ \
     --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,from=change-npmrc,source=/_/.npmrc,target=.npmrc \
-    --mount=type=bind,source=src/,target=src/ \
+    --mount=type=bind,source=src/,target=src/,readwrite \
     --mount=type=bind,source=.swcrc,target=.swcrc \
     --mount=type=bind,source=prisma/schema.prisma,target=prisma/schema.prisma \
     pnpm db:generate && pnpm build
@@ -80,7 +80,6 @@ ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_ENV="production"
 WORKDIR /app
 COPY --link --from=fetch-deps /pnpm/ /pnpm/
-COPY --link --from=build /_/node_modules/.prisma/client/ ./node_modules/.prisma/client/
 COPY --link --from=build /_/dist/ ./dist/
 COPY --link --from=prod-deps /_/node_modules/ ./node_modules/
 COPY --link .npmrc package.json ./

@@ -10,6 +10,7 @@ export default tseslint.config(
       'cli-incremental-info',
       'coverage',
       'dist/*',
+      'src/generated/client',
     ],
   },
   eslint.configs.recommended,

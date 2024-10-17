@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.14.1](https://github.com/eoeo-org/pow/compare/v3.14.0...v3.14.1) (2024-10-17)
+
+
+### Dependencies
+
+* update dependency node to v22.10.0 ([#1476](https://github.com/eoeo-org/pow/issues/1476)) ([500a765](https://github.com/eoeo-org/pow/commit/500a76548bcb9b2d17a5eaf5c27fc4c94393e4d5))
+* update prisma monorepo to v5.21.0 ([#1470](https://github.com/eoeo-org/pow/issues/1470)) ([ce4e1d6](https://github.com/eoeo-org/pow/commit/ce4e1d672de510d057c823b6c7affdbc319f06a8))
+
 ## [3.14.0](https://github.com/eoeo-org/pow/compare/v3.13.0...v3.14.0) (2024-10-13)
 
 

@@ -64,8 +64,8 @@ importers:
         specifier: 8.42.3
         version: 8.42.3
       '@types/node':
-        specifier: 22.7.6
-        version: 22.7.6
+        specifier: 22.7.7
+        version: 22.7.7
       chokidar:
         specifier: 3.6.0
         version: 3.6.0
@@ -523,8 +523,8 @@ packages:
   '@types/node@10.17.60':
     resolution: {integrity: sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==}
 
-  '@types/node@22.7.6':
-    resolution: {integrity: sha512-/d7Rnj0/ExXDMcioS78/kf1lMzYk4BZV8MZGTBKzTGZ6/406ukkbYlIsZmMPhcR5KlkunDHQLrtAVmSq7r+mSw==}
+  '@types/node@22.7.7':
+    resolution: {integrity: sha512-SRxCrrg9CL/y54aiMCG3edPKdprgMVGDXjA3gB8UmmBW5TcXzRUYAh8EWzTnSJFAd1rgImPELza+A3bJ+qxz8Q==}
 
   '@types/responselike@1.0.3':
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
@@ -1871,7 +1871,7 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 22.7.6
+      '@types/node': 22.7.7
       '@types/responselike': 1.0.3
 
   '@types/debug@4.1.12':
@@ -1899,23 +1899,23 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 22.7.6
+      '@types/node': 22.7.7
 
   '@types/ms@0.7.34': {}
 
   '@types/node@10.17.60': {}
 
-  '@types/node@22.7.6':
+  '@types/node@22.7.7':
     dependencies:
       undici-types: 6.19.8
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 22.7.6
+      '@types/node': 22.7.7
 
   '@types/ws@8.5.12':
     dependencies:
-      '@types/node': 22.7.6
+      '@types/node': 22.7.7
 
   '@typescript-eslint/eslint-plugin@8.10.0(@typescript-eslint/parser@8.10.0(eslint@9.13.0)(typescript@5.6.3))(eslint@9.13.0)(typescript@5.6.3)':
     dependencies:
@@ -2511,7 +2511,7 @@ snapshots:
   mariadb@3.3.2:
     dependencies:
       '@types/geojson': 7946.0.14
-      '@types/node': 22.7.6
+      '@types/node': 22.7.7
       denque: 2.1.0
       iconv-lite: 0.6.3
       lru-cache: 10.4.3

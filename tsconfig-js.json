@@ -7,5 +7,5 @@
     "checkJs": true
   },
   "include": ["**/*.mjs"],
-  "exclude": ["src/generated/client/"]
+  "exclude": ["node_modules", "src/generated/client/"]
 }

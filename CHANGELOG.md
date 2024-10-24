@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.3](https://github.com/eoeo-org/pow/compare/v3.14.2...v3.14.3) (2024-10-24)
+
+
+### Dependencies
+
+* update dependency sodium-native to v4.2.2 ([#1489](https://github.com/eoeo-org/pow/issues/1489)) ([a5503b5](https://github.com/eoeo-org/pow/commit/a5503b5dbf11b5ac0710667748f638d5fb460421))
+
 ## [3.14.2](https://github.com/eoeo-org/pow/compare/v3.14.1...v3.14.2) (2024-10-18)
 
 

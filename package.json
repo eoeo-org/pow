@@ -32,7 +32,7 @@
     "emoji-regex": "10.4.0",
     "ffmpeg-static": "5.2.0",
     "mariadb": "3.3.2",
-    "sodium-native": "4.2.1"
+    "sodium-native": "4.2.2"
   },
   "devDependencies": {
     "@swc/cli": "0.4.0",

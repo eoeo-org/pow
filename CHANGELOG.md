@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.14.3](https://github.com/eoeo-org/pow/compare/v3.14.2...v3.14.3) (2024-10-27)
+
+
+### Dependencies
+
+* update dependency mariadb to v3.4.0 ([#1493](https://github.com/eoeo-org/pow/issues/1493)) ([0439636](https://github.com/eoeo-org/pow/commit/04396369f4fa217933bec05f230b9fc9d7065c8c))
+* update dependency node to v23.1.0 ([#1494](https://github.com/eoeo-org/pow/issues/1494)) ([c585c29](https://github.com/eoeo-org/pow/commit/c585c2994d767d7d01d715b05deca3cfdf095568))
+* update dependency sodium-native to v4.2.2 ([#1489](https://github.com/eoeo-org/pow/issues/1489)) ([a5503b5](https://github.com/eoeo-org/pow/commit/a5503b5dbf11b5ac0710667748f638d5fb460421))
+
 ## [3.14.2](https://github.com/eoeo-org/pow/compare/v3.14.1...v3.14.2) (2024-10-18)
 
 

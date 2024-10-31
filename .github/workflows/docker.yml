@@ -22,7 +22,7 @@ env:
   # renovate: datasource=github-releases depName=docker/buildx
   BUILDX_VERSION: v0.17.1
   # renovate: datasource=github-releases depName=moby/buildkit
-  BUILDKIT_VERSION: v0.16.0
+  BUILDKIT_VERSION: v0.17.0
 
 permissions: {}
 

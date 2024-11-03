@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.14.4](https://github.com/eoeo-org/pow/compare/v3.14.3...v3.14.4) (2024-11-03)
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.3.0 ([#1507](https://github.com/eoeo-org/pow/issues/1507)) ([36f9d90](https://github.com/eoeo-org/pow/commit/36f9d900d5200ab0167165f4df5db036e492d8e8))
+* update dependency @sapphire/plugin-subcommands to v7.0.1 ([#1508](https://github.com/eoeo-org/pow/issues/1508)) ([4da8349](https://github.com/eoeo-org/pow/commit/4da83492dad7679372dc56c28a4733deccec750e))
+
+
+### Reverts
+
+* "chore(deps): update dependency @swc/core to v1.7.42" ([#1504](https://github.com/eoeo-org/pow/issues/1504)) ([88db05c](https://github.com/eoeo-org/pow/commit/88db05c5ac5b4396e11aa18eb03fe42219638e41))
+
 ## [3.14.3](https://github.com/eoeo-org/pow/compare/v3.14.2...v3.14.3) (2024-10-27)
 
 

@@ -6,7 +6,7 @@ services:
     env_file: .env
     environment:
       - DEBUG=voiceRead.js:*,utils.js:*
-    restart: always
+    restart: no
   migrate:
     image: discordbot-pow-migrate
     build:

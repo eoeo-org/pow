@@ -15,8 +15,8 @@ importers:
         specifier: 5.21.1
         version: 5.21.1(prisma@5.21.1)
       '@sapphire/framework':
-        specifier: 5.3.0
-        version: 5.3.0
+        specifier: 5.3.1
+        version: 5.3.1
       '@sapphire/plugin-subcommands':
         specifier: 7.0.1
         version: 7.0.1
@@ -348,8 +348,8 @@ packages:
     resolution: {integrity: sha512-7GZ34rAR8mDO075tD47LY2S28N3EdyWf5D0jywNnRVSNOX2375mGVAt6MSddelEa2jjU8FfSGMP19jeswtFioQ==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
-  '@sapphire/framework@5.3.0':
-    resolution: {integrity: sha512-Jm1Wszgqzbq8A9NrURkBOtZod/uzubbGZb2XbgfYfld4AapSb0tR4yeJMb8HKtcRAAXM2vk5rFYvR774Wyv4rg==}
+  '@sapphire/framework@5.3.1':
+    resolution: {integrity: sha512-WWPgWVeJX6Pt/vuH0PYTzgNmRgP5VVdbbZdFDXMEaloI6C7GyOGmelGvR3pvtRiMM+qfyPVHxsDpaQr+Po9juw==}
     engines: {node: '>=v18', npm: '>=7'}
 
   '@sapphire/lexure@1.1.9':
@@ -1752,7 +1752,7 @@ snapshots:
 
   '@sapphire/duration@1.1.3': {}
 
-  '@sapphire/framework@5.3.0':
+  '@sapphire/framework@5.3.1':
     dependencies:
       '@discordjs/builders': 1.9.0
       '@sapphire/discord-utilities': 3.4.2

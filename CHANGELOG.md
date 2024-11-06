@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.14.5](https://github.com/eoeo-org/pow/compare/v3.14.4...v3.14.5) (2024-11-06)
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.3.1 ([#1515](https://github.com/eoeo-org/pow/issues/1515)) ([15fdde2](https://github.com/eoeo-org/pow/commit/15fdde2662c730b12ac815557b06f9b5af50e30e))
+* update prisma monorepo to v5.22.0 ([#1518](https://github.com/eoeo-org/pow/issues/1518)) ([f30ce00](https://github.com/eoeo-org/pow/commit/f30ce00b42b4871a5440bfe90e40482d7970130e))
+
 ## [3.14.4](https://github.com/eoeo-org/pow/compare/v3.14.3...v3.14.4) (2024-11-03)
 
 

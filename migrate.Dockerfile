@@ -9,7 +9,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 FROM ghcr.io/jqlang/jq:1.7@sha256:12f998e5a6f3f6916f744ba6f01549f156f624b42f7564e67ec6dd4733973146 AS fetch-jq
 
 # pnpmを取得する => /pnpm/
-FROM quay.io/curl/curl-base:8.10.1@sha256:9a916e798d58aa99e66e29373005644a69730e641520a9733ca758df13d2835b AS fetch-pnpm
+FROM quay.io/curl/curl-base:8.11.0@sha256:7442b6cd429bbd7d579e75892b8a34f965d90031ce63b34da144101b7ed43ef5 AS fetch-pnpm
 ENV SHELL="sh"
 ENV ENV="/tmp/env"
 ENV PNPM_HOME="/pnpm"

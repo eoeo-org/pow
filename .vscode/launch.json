@@ -1,19 +1,17 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Program",
-      "preLaunchTask": "pnpm: build with source-maps",
-      "skipFiles": ["<node_internals>/**"],
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["start"],
-      "envFile": "${workspaceFolder}/.env",
-      "killBehavior": "polite"
-    }
-  ]
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "Cargo launch",
+			"cargo": {
+				"args": ["build", "--lib"]
+			},
+			"args": []
+		}
+	]
 }

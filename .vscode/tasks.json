@@ -1,13 +1,5 @@
 {
   "version": "2.0.0",
   "tasks": [
-    {
-      "type": "npm",
-      "script": "build:debug",
-      "group": "build",
-      "problemMatcher": [],
-      "label": "pnpm: build with source-maps",
-      "detail": "swc --source-maps=true src --out-dir=dist"
-    }
   ]
 }

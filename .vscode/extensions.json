@@ -1,8 +1,9 @@
 {
-  "recommendations": [
-    "esbenp.prettier-vscode",
-    "EditorConfig.EditorConfig",
-    "dbaeumer.vscode-eslint",
-    "Prisma.prisma"
-  ]
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"EditorConfig.EditorConfig",
+		"vadimcn.vscode-lldb",
+		"rust-lang.rust-analyzer",
+		"tamasfe.even-better-toml"
+	]
 }

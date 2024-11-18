@@ -38,9 +38,6 @@ importers:
       mariadb:
         specifier: 3.4.0
         version: 3.4.0
-      sodium-native:
-        specifier: 4.3.1
-        version: 4.3.1
     devDependencies:
       '@swc/cli':
         specifier: 0.5.0
@@ -1129,10 +1126,6 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  node-gyp-build@4.8.3:
-    resolution: {integrity: sha512-EMS95CMJzdoSKoIiXo8pxKoL8DYxwIZXYlLmgPb8KUv794abpnLK6ynsCAWNliOjREKruYKdzbh76HHYUHX7nw==}
-    hasBin: true
-
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
@@ -1357,9 +1350,6 @@ packages:
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
-
-  sodium-native@4.3.1:
-    resolution: {integrity: sha512-YdP64gAdpIKHfL4ttuX4aIfjeunh9f+hNeQJpE9C8UMndB3zkgZ7YmmGT4J2+v6Ibyp6Wem8D1TcSrtdW0bqtg==}
 
   sort-keys-length@1.0.1:
     resolution: {integrity: sha512-GRbEOUqCxemTAk/b32F2xa8wDTs+Z1QHOkbhJDQTvv/6G3ZkbJ+frYWsTcc7cBB3Fu4wy4XlLCuNtJuMn7Gsvw==}
@@ -2559,8 +2549,6 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  node-gyp-build@4.8.3: {}
-
   normalize-path@3.0.0: {}
 
   normalize-url@6.1.0: {}
@@ -2734,10 +2722,6 @@ snapshots:
   signal-exit@3.0.7: {}
 
   slash@3.0.0: {}
-
-  sodium-native@4.3.1:
-    dependencies:
-      node-gyp-build: 4.8.3
 
   sort-keys-length@1.0.1:
     dependencies:

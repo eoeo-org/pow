@@ -31,8 +31,7 @@
     "discord.js": "14.16.3",
     "emoji-regex": "10.4.0",
     "ffmpeg-static": "5.2.0",
-    "mariadb": "3.4.0",
-    "sodium-native": "4.3.1"
+    "mariadb": "3.4.0"
   },
   "devDependencies": {
     "@swc/cli": "0.5.0",

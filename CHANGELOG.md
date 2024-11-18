@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.14.9](https://github.com/eoeo-org/pow/compare/v3.14.8...v3.14.9) (2024-11-18)
+
+
+### Dependencies
+
+* remove sodium-native ([#1538](https://github.com/eoeo-org/pow/issues/1538)) ([656589e](https://github.com/eoeo-org/pow/commit/656589e90f5fc5ae02ca11b4889463e41d46bdd4))
+* update dependency @discordjs/voice to v0.18.0 ([#1536](https://github.com/eoeo-org/pow/issues/1536)) ([95c4204](https://github.com/eoeo-org/pow/commit/95c4204116623f167a15db9628e103858460bb22))
+
 ## [3.14.8](https://github.com/eoeo-org/pow/compare/v3.14.7...v3.14.8) (2024-11-16)
 
 

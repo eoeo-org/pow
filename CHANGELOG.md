@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.14.11](https://github.com/eoeo-org/pow/compare/v3.14.10...v3.14.11) (2024-11-23)
+
+
+### Dependencies
+
+* add bufferutil ([#1548](https://github.com/eoeo-org/pow/issues/1548)) ([58c9df5](https://github.com/eoeo-org/pow/commit/58c9df5b411503aea5ba5068a1c65a21818f789f))
+* add zlib-sync ([#1547](https://github.com/eoeo-org/pow/issues/1547)) ([6ae6d16](https://github.com/eoeo-org/pow/commit/6ae6d166bd27f87641b5078e3f3587af8d4a6f3f))
+
 ## [3.14.10](https://github.com/eoeo-org/pow/compare/v3.14.9...v3.14.10) (2024-11-21)
 
 

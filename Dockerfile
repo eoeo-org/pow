@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.11.1@sha256:10c699f1b6c8bdc8f6b4ce8974855dd8542f1768c26eb240237b8f1c9c6c9976
 
 # ビルド時にベースとするイメージを定義
-FROM ubuntu:devel@sha256:76d816faff9ffc55af334ac9a26808b021607fffc1a7c4e6fcb3d488d410fdb6 AS base-build
+FROM buildpack-deps:bookworm@sha256:c15cf15316aab40fffa9fb71bd6b1c2d576bc41d1a49a7c24eefbb6f75503096 AS base-build
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
@@ -30,6 +30,9 @@ FROM base-build AS fetch-deps
 WORKDIR /_
 COPY --link --from=fetch-pnpm /pnpm/ /pnpm/
 ARG TARGETPLATFORM
+RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
+    --mount=type=bind,from=change-npmrc,source=/_/.npmrc,target=.npmrc \
+    pnpm install -g node-gyp
 RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
     --mount=type=bind,from=change-npmrc,source=/_/.npmrc,target=.npmrc \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \

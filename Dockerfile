@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.11.1@sha256:10c699f1b6c8bdc8f6b4ce8974855dd8542f1768c26eb240237b8f1c9c6c9976
+# syntax=docker/dockerfile:1.12.0@sha256:db1ff77fb637a5955317c7a3a62540196396d565f3dd5742e76dddbb6d75c4c5
 
 # ビルド時にベースとするイメージを定義
 FROM buildpack-deps:bookworm@sha256:c15cf15316aab40fffa9fb71bd6b1c2d576bc41d1a49a7c24eefbb6f75503096 AS base-build

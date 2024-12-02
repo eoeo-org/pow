@@ -46,7 +46,7 @@ jobs:
     outputs:
       version: ${{ steps.meta.outputs.version}}
       tags: ${{ steps.meta.outputs.tags }}
-      labels: ${{ steps.meta.outputs.labels }}
+      labels: ${{ steps.labels.outputs.labels }}
       json: ${{ steps.meta.outputs.json }}
     steps:
       - name: Extract metadata (tags, labels) for Docker
@@ -60,6 +60,15 @@ jobs:
             type=semver,pattern={{major}},value=${{ inputs.tag-name }}
             type=edge
             type=ref,event=branch
+
+      - name: Delete org.opencontainers.image.licenses label
+        id: labels
+        run: |
+          cat << EOS >> "$GITHUB_OUTPUT"
+          labels<<EOF
+          $(echo '${{ steps.meta.outputs.labels }}' | sed '/^org.opencontainers.image.licenses=/d')
+          EOF
+          EOS
 
   build:
     permissions:

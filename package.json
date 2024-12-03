@@ -45,7 +45,7 @@
     "@types/eslint__js": "8.42.3",
     "@types/node": "22.10.1",
     "chokidar": "3.6.0",
-    "dotenv": "16.4.5",
+    "dotenv": "16.4.6",
     "eslint": "9.16.0",
     "eslint-config-prettier": "9.1.0",
     "globals": "15.13.0",

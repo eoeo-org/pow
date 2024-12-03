@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.14.13](https://github.com/eoeo-org/pow/compare/v3.14.12...v3.14.13) (2024-12-03)
+
+
+### Dependencies
+
+* remove ffmpeg-static ([#1568](https://github.com/eoeo-org/pow/issues/1568)) ([7070204](https://github.com/eoeo-org/pow/commit/70702048a7c6dc9124b3504abe647829cd34a405))
+* update prisma monorepo to v6.0.1 ([#1573](https://github.com/eoeo-org/pow/issues/1573)) ([ab8046c](https://github.com/eoeo-org/pow/commit/ab8046c9a607dfb7e0ce3b87e616bbebf610db42))
+
+
+### Reverts
+
+* "deps: remove ffmpeg-static" ([#1572](https://github.com/eoeo-org/pow/issues/1572)) ([6779a09](https://github.com/eoeo-org/pow/commit/6779a0918c7099313df807bda4cbb1872104c79e))
+
 ## [3.14.12](https://github.com/eoeo-org/pow/compare/v3.14.11...v3.14.12) (2024-11-29)
 
 

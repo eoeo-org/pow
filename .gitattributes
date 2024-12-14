@@ -1,4 +1,4 @@
 * text=auto eol=lf
 
-.huskey/** linguist-vendored
+.husky/** linguist-vendored
 *.config.mjs -linguist-detectable

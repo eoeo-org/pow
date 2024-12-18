@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.16](https://github.com/eoeo-org/pow/compare/v3.14.15...v3.14.16) (2024-12-18)
+
+
+### Reverts
+
+* "chore: exclude the husky directory from language statistics" ([#1594](https://github.com/eoeo-org/pow/issues/1594)) ([0b696e3](https://github.com/eoeo-org/pow/commit/0b696e35f3b77666ee6266a9e32cb13d90822254))
+
 ## [3.14.15](https://github.com/eoeo-org/pow/compare/v3.14.14...v3.14.15) (2024-12-12)
 
 

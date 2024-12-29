@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.17](https://github.com/eoeo-org/pow/compare/v3.14.16...v3.14.17) (2024-12-29)
+
+
+### Dependencies
+
+* update dependency bufferutil to v4.0.9 ([#1616](https://github.com/eoeo-org/pow/issues/1616)) ([81c3df7](https://github.com/eoeo-org/pow/commit/81c3df77497f54a92a429410c91a07fee71b52c2))
+
 ## [3.14.16](https://github.com/eoeo-org/pow/compare/v3.14.15...v3.14.16) (2024-12-20)
 
 

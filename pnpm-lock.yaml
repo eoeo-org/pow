@@ -30,8 +30,8 @@ importers:
         specifier: 2.5.1
         version: 2.5.1
       discord.js:
-        specifier: 14.17.1
-        version: 14.17.1(bufferutil@4.0.9)
+        specifier: 14.17.2
+        version: 14.17.2(bufferutil@4.0.9)
       emoji-regex:
         specifier: 10.4.0
         version: 10.4.0
@@ -803,8 +803,8 @@ packages:
   discord-emoji@2.5.1:
     resolution: {integrity: sha512-XlITfJF+lN+K2oc3nK2pMP8Mj8NSOfQ9ScuDbrriCmO29CilWKSZwa0CjRGnbZXJD3oprf9vbu61juwu3Ls7iQ==}
 
-  discord.js@14.17.1:
-    resolution: {integrity: sha512-aSkUs/vu1II+AyRVGHXjAoLo/YLrPajM2vVs3CgBdK68Es3vKfc1hy2xWb2JxTDZsPEGScvV3HyIXWhACVX5vQ==}
+  discord.js@14.17.2:
+    resolution: {integrity: sha512-mrH6ziLVtNtId4bV4bsaUt5jE6NUaiHMPqO5VsSw1VVhFnjFi9duD8ctlo90/6cUH+8uyKBkoq9mSJ35SuuZ7Q==}
     engines: {node: '>=18'}
 
   dotenv@16.4.7:
@@ -2251,7 +2251,7 @@ snapshots:
 
   discord-emoji@2.5.1: {}
 
-  discord.js@14.17.1(bufferutil@4.0.9):
+  discord.js@14.17.2(bufferutil@4.0.9):
     dependencies:
       '@discordjs/builders': 1.10.0
       '@discordjs/collection': 1.5.3

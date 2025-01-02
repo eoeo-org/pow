@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.19](https://github.com/eoeo-org/pow/compare/v3.14.18...v3.14.19) (2025-01-02)
+
+
+### Dependencies
+
+* update dependency discord.js to v14.17.2 ([#1625](https://github.com/eoeo-org/pow/issues/1625)) ([7ed7687](https://github.com/eoeo-org/pow/commit/7ed768720b229cc543faf43ca6ec532a391a9438))
+
 ## [3.14.18](https://github.com/eoeo-org/pow/compare/v3.14.17...v3.14.18) (2025-01-02)
 
 

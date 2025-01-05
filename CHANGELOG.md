@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.20](https://github.com/eoeo-org/pow/compare/v3.14.19...v3.14.20) (2025-01-05)
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.3.2 ([#1627](https://github.com/eoeo-org/pow/issues/1627)) ([3c864cd](https://github.com/eoeo-org/pow/commit/3c864cd9a476eb9133094b3f0c68866dd8e0f07a))
+
 ## [3.14.19](https://github.com/eoeo-org/pow/compare/v3.14.18...v3.14.19) (2025-01-02)
 
 

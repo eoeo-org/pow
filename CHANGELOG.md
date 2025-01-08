@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.21](https://github.com/eoeo-org/pow/compare/v3.14.20...v3.14.21) (2025-01-08)
+
+
+### Dependencies
+
+* update node.js to v23.6.0 ([#1633](https://github.com/eoeo-org/pow/issues/1633)) ([5e46310](https://github.com/eoeo-org/pow/commit/5e4631017ada69707e71a3d847e8a0e51a3d955c))
+
 ## [3.14.20](https://github.com/eoeo-org/pow/compare/v3.14.19...v3.14.20) (2025-01-05)
 
 

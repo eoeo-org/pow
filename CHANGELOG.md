@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.14.22](https://github.com/eoeo-org/pow/compare/v3.14.21...v3.14.22) (2025-01-09)
+
+
+### Dependencies
+
+* update dependency discord.js to v14.17.3 ([#1635](https://github.com/eoeo-org/pow/issues/1635)) ([6d80638](https://github.com/eoeo-org/pow/commit/6d806387a7317ed5b078a92027df5a1634d3066c))
+* update prisma monorepo to v6.2.1 ([#1637](https://github.com/eoeo-org/pow/issues/1637)) ([074ca36](https://github.com/eoeo-org/pow/commit/074ca360d0b947cd63150b13b15465a45796d1a8))
+
 ## [3.14.21](https://github.com/eoeo-org/pow/compare/v3.14.20...v3.14.21) (2025-01-08)
 
 

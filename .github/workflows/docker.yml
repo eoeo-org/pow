@@ -74,16 +74,19 @@ jobs:
     permissions:
       packages: write
     needs: [env, meta]
-    runs-on: ubuntu-24.04
     outputs:
       digest: ${{ steps.build.outputs.digest }}
 
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
+        include:
+          - platform: linux/amd64
+            on: ubuntu-24.04
+          - platform: linux/arm64
+            on: ubuntu-24.04-arm
+
+    runs-on: ${{ matrix.on }}
 
     steps:
       - name: Set up Docker Buildx

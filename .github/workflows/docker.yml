@@ -157,6 +157,7 @@ jobs:
 
       - name: Create manifest list and push
         working-directory: /tmp/digests
+        shell: bash -xe {0}
         env:
           DOCKER_METADATA_OUTPUT_JSON: ${{ needs.meta.outputs.json }}
         run: |

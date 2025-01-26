@@ -161,7 +161,7 @@ jobs:
         env:
           DOCKER_METADATA_OUTPUT_JSON: ${{ needs.meta.outputs.json }}
         run: |
-          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
+          docker buildx imagetools create $(jq -cr '.tags | map("--tag=" + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
           $(printf '${{ needs.env.outputs.REGISTRY_IMAGE }}@sha256:%s ' *)
 
       - name: Inspect image

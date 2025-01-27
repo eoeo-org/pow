@@ -46,7 +46,7 @@
     "@types/node": "22.10.10",
     "chokidar": "3.6.0",
     "dotenv": "16.4.7",
-    "eslint": "9.18.0",
+    "eslint": "9.19.0",
     "eslint-config-prettier": "10.0.1",
     "globals": "15.14.0",
     "husky": "9.1.7",

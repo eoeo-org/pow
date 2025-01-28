@@ -147,7 +147,7 @@ export class UserSettingsCommand extends Subcommand {
         user ? user.id : interaction.member.id,
       )
 
-      const userNameText = user ? user : '現在'
+      const userNameText = user ?? '現在'
 
       interactionReplyOptions = {
         embeds: [

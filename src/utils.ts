@@ -22,6 +22,7 @@ const awaitEvent = (
     const callback = (...args: unknown[]) => {
       if (validate(...args)) {
         eventEmitter.off(event, callback)
+        // eslint-disable-next-line @typescript-eslint/no-misused-spread
         resolve({ event, ...args })
       }
     }

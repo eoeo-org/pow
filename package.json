@@ -36,15 +36,15 @@
     "zlib-sync": "0.1.9"
   },
   "devDependencies": {
-    "@swc/cli": "0.5.2",
-    "@swc/core": "1.10.6",
+    "@swc/cli": "0.6.0",
+    "@swc/core": "1.10.11",
     "@tsconfig/node22": "22.0.0",
     "@tsconfig/strictest": "2.0.5",
     "@types/debug": "4.1.12",
     "@types/eslint-config-prettier": "6.11.3",
     "@types/eslint__js": "8.42.3",
     "@types/node": "22.12.0",
-    "chokidar": "3.6.0",
+    "chokidar": "4.0.3",
     "dotenv": "16.4.7",
     "eslint": "9.19.0",
     "eslint-config-prettier": "10.0.1",

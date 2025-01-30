@@ -23,7 +23,7 @@
   "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
   "dependencies": {
     "@discordjs/voice": "0.18.0",
-    "@prisma/client": "6.2.1",
+    "@prisma/client": "6.3.0",
     "@sapphire/framework": "5.3.2",
     "@sapphire/plugin-subcommands": "7.0.1",
     "bufferutil": "4.0.9",
@@ -52,7 +52,7 @@
     "husky": "9.1.7",
     "npm-run-all2": "7.0.2",
     "prettier": "3.4.2",
-    "prisma": "6.2.1",
+    "prisma": "6.3.0",
     "typescript": "5.7.3",
     "typescript-eslint": "8.22.0"
   },

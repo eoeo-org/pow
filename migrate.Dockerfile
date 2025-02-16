@@ -49,13 +49,11 @@ RUN --mount=type=cache,id=pnpm-$BUILDPLATFORM,target=/.pnpm-store/ \
     pnpm install --frozen-lockfile --offline --dev
 
 FROM base AS runner
-USER ubuntu
 WORKDIR /app
-# HACK(?): ここではUIDを指定する必要があります。usernameにしているとビルドできません。
-# `Error: buildx failed with: ERROR: failed to solve: invalid user index: -1`
-COPY --chown=1000 --link prisma/ prisma/
-COPY --chown=1000 --link --from=fetch-deps /pnpm/ /pnpm/
-COPY --chown=1000 --link --from=dev-deps /_/node_modules/ ./node_modules/
-COPY --chown=1000 --link .npmrc package.json ./
+COPY --chown=ubuntu --link prisma/ prisma/
+COPY --chown=ubuntu --link --from=fetch-deps /pnpm/ /pnpm/
+COPY --chown=ubuntu --link --from=dev-deps /_/node_modules/ ./node_modules/
+COPY --chown=ubuntu --link .npmrc package.json ./
+USER ubuntu
 ENTRYPOINT [ "pnpm", "--shell-emulator" ]
 CMD [ "db:deploy" ]

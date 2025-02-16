@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.27](https://github.com/eoeo-org/pow/compare/v3.14.26...v3.14.27) (2025-02-16)
+
+
+### Build System
+
+* use ubuntu user instead of root for container execution ([#1693](https://github.com/eoeo-org/pow/issues/1693)) ([22aee99](https://github.com/eoeo-org/pow/commit/22aee9985ddede107d113d432826d0305523cf5b))
+
 ## [3.14.26](https://github.com/eoeo-org/pow/compare/v3.14.25...v3.14.26) (2025-02-15)
 
 

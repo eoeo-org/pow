@@ -49,10 +49,11 @@ RUN --mount=type=cache,id=pnpm-$BUILDPLATFORM,target=/.pnpm-store/ \
     pnpm install --frozen-lockfile --offline --dev
 
 FROM base AS runner
+USER ubuntu
 WORKDIR /app
-COPY --link prisma/ prisma/
-COPY --link --from=fetch-deps /pnpm/ /pnpm/
-COPY --link --from=dev-deps /_/node_modules/ ./node_modules/
-COPY --link .npmrc package.json ./
+COPY --chown=ubuntu --link prisma/ prisma/
+COPY --chown=ubuntu --link --from=fetch-deps /pnpm/ /pnpm/
+COPY --chown=ubuntu --link --from=dev-deps /_/node_modules/ ./node_modules/
+COPY --chown=ubuntu --link .npmrc package.json ./
 ENTRYPOINT [ "pnpm", "--shell-emulator" ]
 CMD [ "db:deploy" ]

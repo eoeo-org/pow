@@ -51,9 +51,9 @@ RUN --mount=type=cache,id=pnpm-$BUILDPLATFORM,target=/.pnpm-store/ \
 FROM base AS runner
 USER ubuntu
 WORKDIR /app
-COPY --chown=ubuntu --link prisma/ prisma/
-COPY --chown=ubuntu --link --from=fetch-deps /pnpm/ /pnpm/
-COPY --chown=ubuntu --link --from=dev-deps /_/node_modules/ ./node_modules/
-COPY --chown=ubuntu --link .npmrc package.json ./
+COPY --chown=ubuntu:ubuntu --link prisma/ prisma/
+COPY --chown=ubuntu:ubuntu --link --from=fetch-deps /pnpm/ /pnpm/
+COPY --chown=ubuntu:ubuntu --link --from=dev-deps /_/node_modules/ ./node_modules/
+COPY --chown=ubuntu:ubuntu --link .npmrc package.json ./
 ENTRYPOINT [ "pnpm", "--shell-emulator" ]
 CMD [ "db:deploy" ]

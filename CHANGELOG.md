@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.28](https://github.com/eoeo-org/pow/compare/v3.14.27...v3.14.28) (2025-02-18)
+
+
+### Dependencies
+
+* downgrade pnpm version ([#1698](https://github.com/eoeo-org/pow/issues/1698)) ([f475107](https://github.com/eoeo-org/pow/commit/f475107c51e6fbb293f3483012c69a1e4c62702e))
+
 ## [3.14.27](https://github.com/eoeo-org/pow/compare/v3.14.26...v3.14.27) (2025-02-16)
 
 

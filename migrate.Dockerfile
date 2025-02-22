@@ -32,6 +32,7 @@ COPY --link --from=fetch-pnpm /pnpm/ /pnpm/
 ARG TARGETPLATFORM
 RUN --mount=type=cache,id=pnpm-$TARGETPLATFORM,target=/.pnpm-store/ \
     --mount=type=bind,from=change-npmrc,source=/_/.npmrc,target=.npmrc \
+    --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
     pnpm fetch --dev
 

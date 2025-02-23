@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.14.29](https://github.com/eoeo-org/pow/compare/v3.14.28...v3.14.29) (2025-02-23)
+
+
+### Build System
+
+* copy package.json before pnpm fetch as required by pnpm@10 ([#1708](https://github.com/eoeo-org/pow/issues/1708)) ([6000d24](https://github.com/eoeo-org/pow/commit/6000d243afc6c7f09ff4758f25aa013c180468ae))
+* **deps:** update docker/dockerfile docker tag to v1.14.0 ([#1712](https://github.com/eoeo-org/pow/issues/1712)) ([2dc5252](https://github.com/eoeo-org/pow/commit/2dc52529c67c07922ce48389840a8db7e0ee4f1a))
+
 ## [3.14.28](https://github.com/eoeo-org/pow/compare/v3.14.27...v3.14.28) (2025-02-18)
 
 

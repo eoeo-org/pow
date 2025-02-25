@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.14.30](https://github.com/eoeo-org/pow/compare/v3.14.29...v3.14.30) (2025-02-25)
+
+
+### Dependencies
+
+* lock file maintenance ([#1715](https://github.com/eoeo-org/pow/issues/1715)) ([b60b0b3](https://github.com/eoeo-org/pow/commit/b60b0b393befaf64c9e707a5fc4d3a4edc133888))
+
+
+### Build System
+
+* **deps:** update buildpack-deps:bookworm docker digest to a74a7e5 ([#1717](https://github.com/eoeo-org/pow/issues/1717)) ([0ba01e9](https://github.com/eoeo-org/pow/commit/0ba01e9d3dfe039a7e0d5fcf80e16f0964bb310d))
+
 ## [3.14.29](https://github.com/eoeo-org/pow/compare/v3.14.28...v3.14.29) (2025-02-23)
 
 

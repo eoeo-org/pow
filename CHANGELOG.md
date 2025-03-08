@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.14.35](https://github.com/eoeo-org/pow/compare/v3.14.34...v3.14.35) (2025-03-08)
+
+
+### Dependencies
+
+* lock file maintenance ([#1739](https://github.com/eoeo-org/pow/issues/1739)) ([087a4b8](https://github.com/eoeo-org/pow/commit/087a4b82b84f7591f1e43f62f83ee687ffdf2f3d))
+* update dependency discord-emoji to v2.5.3 ([#1743](https://github.com/eoeo-org/pow/issues/1743)) ([e6270e0](https://github.com/eoeo-org/pow/commit/e6270e0b21d66fade496e10ca74491dc1d645339))
+* update pnpm to v10.6.0 ([#1748](https://github.com/eoeo-org/pow/issues/1748)) ([8c12741](https://github.com/eoeo-org/pow/commit/8c127413cc5db96242aeb665e2735ed0cb14e725))
+* update pnpm to v10.6.1 ([#1749](https://github.com/eoeo-org/pow/issues/1749)) ([ba65ee8](https://github.com/eoeo-org/pow/commit/ba65ee8190a44de74c0eca4f940da63599d4d186))
+
+
+### Build System
+
+* **deps:** update docker/dockerfile:1.14.0 docker digest to 4c68376 ([#1747](https://github.com/eoeo-org/pow/issues/1747)) ([f691e1c](https://github.com/eoeo-org/pow/commit/f691e1cd6bbc5900d9f5ff3218f3b1d599874fe5))
+
 ## [3.14.34](https://github.com/eoeo-org/pow/compare/v3.14.33...v3.14.34) (2025-02-28)
 
 

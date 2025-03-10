@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.36](https://github.com/eoeo-org/pow/compare/v3.14.35...v3.14.36) (2025-03-10)
+
+
+### Dependencies
+
+* update pnpm to v10.6.2 ([#1754](https://github.com/eoeo-org/pow/issues/1754)) ([8196a5d](https://github.com/eoeo-org/pow/commit/8196a5d0b97f8b088d8c3313a6108f2d68741da5))
+
 ## [3.14.35](https://github.com/eoeo-org/pow/compare/v3.14.34...v3.14.35) (2025-03-08)
 
 

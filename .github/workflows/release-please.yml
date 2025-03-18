@@ -5,6 +5,9 @@ on:
 
 name: release
 
+permissions:
+  contents: read
+
 jobs:
   release-please:
     if: github.repository_owner == 'eoeo-org'
@@ -17,6 +20,11 @@ jobs:
       release_created: ${{ steps.release-please.outputs.release_created }}
       tag_name: ${{ steps.release-please.outputs.tag_name }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
       - name: Generate a token
         id: generate_token
         uses: actions/create-github-app-token@21cfef2b496dd8ef5b904c159339626a10ad380e # v1.11.6
@@ -51,6 +59,11 @@ jobs:
       GH_REPO: ${{ github.repository }}
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
       - run: gh release edit ${{ needs.release-please.outputs.tag_name }} --draft=false
 
   get-pr-number:
@@ -61,6 +74,11 @@ jobs:
     outputs:
       pr_number: ${{ steps.pr-number.outputs.pr_number }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
       - name: Get PR number
         id: pr-number
         env:
@@ -75,6 +93,11 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
       - uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e # v3.1.0
         id: fc
         with:
@@ -101,6 +124,11 @@ jobs:
       GH_REPO: ${{ github.repository }}
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
       - name: Add comment to PR
         run: |
           printf ':robot: Successfully published to ${{ needs.docker-publish.outputs.image_url }} :truck:\n```\n${{ join(needs.docker-publish.outputs.image_tags, '\n') }}\n```' \
@@ -116,6 +144,11 @@ jobs:
       GH_REPO: ${{ github.repository }}
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
       - name: Create published label
         run: |
           gh label create 'autorelease: published' --color=EDEDED || true

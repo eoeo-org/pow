@@ -11,12 +11,20 @@ on:
         required: false
         type: string
 
+permissions:
+  contents: read
+
 jobs:
   cleanup:
     runs-on: ubuntu-latest
     permissions:
       actions: write
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Cleanup
         uses: 4m-mazi/souji-action@df02f74003831b23deb60cacf168747b0b9ab6f0 # v1.4.11
         with:

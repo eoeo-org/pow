@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.14.0@sha256:4c68376a702446fc3c79af22de146a148bc3367e73c25a5803d453b6b3f722fb
 
 # ビルド時にベースとするイメージを定義
-FROM buildpack-deps:bookworm@sha256:9aae1be1de042206698b15dc5d17f809317192a91a85c40bbf8e57770d042ee8 AS base-build
+FROM buildpack-deps:bookworm@sha256:7c97d3d3a45acfdb15cc330a07f4a28ff745a3f78e83e51dec9922a7c4ca2bd9 AS base-build
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 

@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.14.38](https://github.com/eoeo-org/pow/compare/v3.14.37...v3.14.38) (2025-03-19)
+
+
+### Dependencies
+
+* update pnpm to v10.6.4 ([#1765](https://github.com/eoeo-org/pow/issues/1765)) ([47a889a](https://github.com/eoeo-org/pow/commit/47a889afd92fd5226f2742281d70072ca8a91363))
+
+
+### Build System
+
+* **deps:** update buildpack-deps:bookworm docker digest to 7c97d3d ([#1769](https://github.com/eoeo-org/pow/issues/1769)) ([bb6180a](https://github.com/eoeo-org/pow/commit/bb6180a5aa8c9d70c7d7c34b57eaba183c1a6466))
+* **deps:** update gcr.io/distroless/cc-debian12:nonroot docker digest to db46784 ([#1770](https://github.com/eoeo-org/pow/issues/1770)) ([2d8cdc7](https://github.com/eoeo-org/pow/commit/2d8cdc740c0a9677f67407453c2a35062400064e))
+
 ## [3.14.37](https://github.com/eoeo-org/pow/compare/v3.14.36...v3.14.37) (2025-03-14)
 
 

@@ -7,18 +7,22 @@ on:
       - synchronize
       - reopened
 
-permissions:
-  pull-requests: write
+permissions: {}
 
 jobs:
   label-check:
     name: 'SemVer label'
+    permissions:
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
         with:
-          egress-policy: audit
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: |
+            api.github.com:443
 
       - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

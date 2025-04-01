@@ -64,8 +64,8 @@ importers:
         specifier: 4.1.12
         version: 4.1.12
       '@types/node':
-        specifier: 22.13.16
-        version: 22.13.16
+        specifier: 22.13.17
+        version: 22.13.17
       chokidar:
         specifier: 4.0.3
         version: 4.0.3
@@ -671,8 +671,8 @@ packages:
   '@types/node@10.17.60':
     resolution: {integrity: sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==}
 
-  '@types/node@22.13.16':
-    resolution: {integrity: sha512-15tM+qA4Ypml/N7kyRdvfRjBQT2RL461uF1Bldn06K0Nzn1lY3nAPgHlsVrJxdZ9WhZiW0Fmc1lOYMtDsAuB3w==}
+  '@types/node@22.13.17':
+    resolution: {integrity: sha512-nAJuQXoyPj04uLgu+obZcSmsfOenUg6DxPKogeUy6yNCFwWaj5sBF8/G/pNo8EtBJjAfSVgfIlugR/BCOleO+g==}
 
   '@types/ws@8.18.1':
     resolution: {integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==}
@@ -2119,13 +2119,13 @@ snapshots:
 
   '@types/node@10.17.60': {}
 
-  '@types/node@22.13.16':
+  '@types/node@22.13.17':
     dependencies:
       undici-types: 6.20.0
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 22.13.16
+      '@types/node': 22.13.17
 
   '@typescript-eslint/eslint-plugin@8.29.0(@typescript-eslint/parser@8.29.0(eslint@9.23.0)(typescript@5.8.2))(eslint@9.23.0)(typescript@5.8.2)':
     dependencies:
@@ -2793,7 +2793,7 @@ snapshots:
   mariadb@3.4.0:
     dependencies:
       '@types/geojson': 7946.0.16
-      '@types/node': 22.13.16
+      '@types/node': 22.13.17
       denque: 2.1.0
       iconv-lite: 0.6.3
       lru-cache: 10.4.3

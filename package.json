@@ -32,7 +32,7 @@
     "discord.js": "14.18.0",
     "emoji-regex": "10.4.0",
     "ffmpeg-static": "5.2.0",
-    "mariadb": "3.4.0",
+    "mariadb": "3.4.1",
     "zlib-sync": "0.1.9"
   },
   "devDependencies": {

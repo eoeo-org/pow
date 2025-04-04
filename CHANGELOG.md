@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.14.41](https://github.com/eoeo-org/pow/compare/v3.14.40...v3.14.41) (2025-04-04)
+
+
+### Dependencies
+
+* update dependency mariadb to v3.4.1 ([#1806](https://github.com/eoeo-org/pow/issues/1806)) ([7364c8b](https://github.com/eoeo-org/pow/commit/7364c8bbdf4db600f6f4bd5e93418f68b93f3bee))
+* update node.js to v23.11.0 ([#1802](https://github.com/eoeo-org/pow/issues/1802)) ([8abd4e4](https://github.com/eoeo-org/pow/commit/8abd4e441bf1894183fc3462195efc736558e722))
+
+
+### Build System
+
+* **deps:** update gcr.io/distroless/cc-debian12:nonroot docker digest to 3c62069 ([#1794](https://github.com/eoeo-org/pow/issues/1794)) ([12a151c](https://github.com/eoeo-org/pow/commit/12a151cd7402cf811dc07c253aa817a06fd5fa10))
+
 ## [3.14.40](https://github.com/eoeo-org/pow/compare/v3.14.39...v3.14.40) (2025-03-26)
 
 

@@ -15,8 +15,8 @@ importers:
         specifier: 6.5.0
         version: 6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3)
       '@sapphire/framework':
-        specifier: 5.3.2
-        version: 5.3.2
+        specifier: 5.3.3
+        version: 5.3.3
       '@sapphire/plugin-subcommands':
         specifier: 7.0.1
         version: 7.0.1
@@ -504,16 +504,16 @@ packages:
     resolution: {integrity: sha512-LxjOAFXz81WmrI8XX9YaVcAZDjQj/1p78lZCvkAWZB1nphOwz/D0dU3CBejmhOWx5dO5CszTkLJMNR0xuCK+Zg==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
-  '@sapphire/framework@5.3.2':
-    resolution: {integrity: sha512-1DU8Lm57mnbcRgchd9ucbpWA5Yfy7TFOaA+m7zdlKlKUa2NzDUJW1XiTnChfcZUI1SDA0uaikh6u7gaN0zRX5Q==}
+  '@sapphire/framework@5.3.3':
+    resolution: {integrity: sha512-22DjLLtzkyRv8f0hnWbrZs1mbrwlpuD5+b2XoZAkw7OMklunwFUN9xCVlqAgJiSLo+/jAnyPaFHCNLJ7jGNTfw==}
     engines: {node: '>=v18', npm: '>=7'}
 
   '@sapphire/lexure@1.1.10':
     resolution: {integrity: sha512-odE4FD0SkCxkwEOhzAOqEnCJ/oJlPUuyFEw2KJacIuGiwY86WRTPIHLg1rt6XmfSYLxGXiqRf74req43+wRV9g==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
-  '@sapphire/pieces@4.3.1':
-    resolution: {integrity: sha512-t42o6i8gPQ3QISIsMl463hj057yfyHsaSrs4FssdiGLmnvL9cuLGLTsjGEPn904wHUhPzS8W5aAPr788RK2/jQ==}
+  '@sapphire/pieces@4.3.2':
+    resolution: {integrity: sha512-0GuLwBoiyINHRDYEcd+RR/enYUQCiGkbCYOVi9Zwa1G4c2S6lc2MqdUd5ies7LkY5HgqDg/3ST7W4FSzxnvbHA==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
 
   '@sapphire/plugin-subcommands@7.0.1':
@@ -1979,13 +1979,13 @@ snapshots:
 
   '@sapphire/duration@1.2.0': {}
 
-  '@sapphire/framework@5.3.2':
+  '@sapphire/framework@5.3.3':
     dependencies:
       '@discordjs/builders': 1.10.1
       '@sapphire/discord-utilities': 3.4.4
       '@sapphire/discord.js-utilities': 7.3.2
       '@sapphire/lexure': 1.1.10
-      '@sapphire/pieces': 4.3.1
+      '@sapphire/pieces': 4.3.2
       '@sapphire/ratelimits': 2.4.11
       '@sapphire/result': 2.7.2
       '@sapphire/stopwatch': 1.5.4
@@ -1995,7 +1995,7 @@ snapshots:
     dependencies:
       '@sapphire/result': 2.7.2
 
-  '@sapphire/pieces@4.3.1':
+  '@sapphire/pieces@4.3.2':
     dependencies:
       '@discordjs/collection': 1.5.3
       '@sapphire/utilities': 3.18.2

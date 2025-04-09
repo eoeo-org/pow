@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.14.41](https://github.com/eoeo-org/pow/compare/v3.14.40...v3.14.41) (2025-04-09)
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.3.3 ([#1810](https://github.com/eoeo-org/pow/issues/1810)) ([538b9c8](https://github.com/eoeo-org/pow/commit/538b9c80c5992f96ef69a6e5d51adf7da80b8d47))
+* update dependency mariadb to v3.4.1 ([#1806](https://github.com/eoeo-org/pow/issues/1806)) ([7364c8b](https://github.com/eoeo-org/pow/commit/7364c8bbdf4db600f6f4bd5e93418f68b93f3bee))
+* update node.js to v23.11.0 ([#1802](https://github.com/eoeo-org/pow/issues/1802)) ([8abd4e4](https://github.com/eoeo-org/pow/commit/8abd4e441bf1894183fc3462195efc736558e722))
+
+
+### Build System
+
+* **deps:** update buildpack-deps:bookworm docker digest to a003a1b ([#1819](https://github.com/eoeo-org/pow/issues/1819)) ([8e54c11](https://github.com/eoeo-org/pow/commit/8e54c11bec3e59f9ba265d83bc6beb17d2226a6b))
+* **deps:** update buildpack-deps:bookworm docker digest to f63adcb ([#1816](https://github.com/eoeo-org/pow/issues/1816)) ([1c4e402](https://github.com/eoeo-org/pow/commit/1c4e402e6be680d04abaafb3724541d9863c6286))
+* **deps:** update gcr.io/distroless/cc-debian12:nonroot docker digest to 3c62069 ([#1794](https://github.com/eoeo-org/pow/issues/1794)) ([12a151c](https://github.com/eoeo-org/pow/commit/12a151cd7402cf811dc07c253aa817a06fd5fa10))
+* **deps:** update quay.io/curl/curl-base docker tag to v8.13.0 ([#1809](https://github.com/eoeo-org/pow/issues/1809)) ([f67f9a6](https://github.com/eoeo-org/pow/commit/f67f9a63a640ac29d0fb82365471a76db8040bef))
+
 ## [3.14.40](https://github.com/eoeo-org/pow/compare/v3.14.39...v3.14.40) (2025-03-26)
 
 

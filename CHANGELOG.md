@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.14.43](https://github.com/eoeo-org/pow/compare/v3.14.42...v3.14.43) (2025-04-26)
+
+
+### Dependencies
+
+* update dependency @sapphire/framework to v5.3.4 ([#1831](https://github.com/eoeo-org/pow/issues/1831)) ([09e1702](https://github.com/eoeo-org/pow/commit/09e1702598da6d329a2df2d29f8e7ff62de8a3b7))
+* update dependency discord.js to v14.19.1 ([#1842](https://github.com/eoeo-org/pow/issues/1842)) ([76f6a47](https://github.com/eoeo-org/pow/commit/76f6a47bebaf0b8116793dd649a008122b6c7e9b))
+* update dependency mariadb to v3.4.2 ([#1841](https://github.com/eoeo-org/pow/issues/1841)) ([ccc3045](https://github.com/eoeo-org/pow/commit/ccc3045a092e14b1cea31ef7223cc8063fd48d44))
+
 ## [3.14.42](https://github.com/eoeo-org/pow/compare/v3.14.41...v3.14.42) (2025-04-20)
 
 

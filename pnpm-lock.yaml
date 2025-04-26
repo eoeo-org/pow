@@ -39,8 +39,8 @@ importers:
         specifier: 5.2.0
         version: 5.2.0
       mariadb:
-        specifier: 3.4.1
-        version: 3.4.1
+        specifier: 3.4.2
+        version: 3.4.2
       zlib-sync:
         specifier: 0.1.9
         version: 0.1.9
@@ -1299,8 +1299,8 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
 
-  mariadb@3.4.1:
-    resolution: {integrity: sha512-h2q6JREwHrzPx7bVVdHCkMGCbCXZmUk6WhDPcNrmhgGoYe15Cbs24Giq/m43oXFO/6Gqz4MTaRrnipWCgtgetQ==}
+  mariadb@3.4.2:
+    resolution: {integrity: sha512-B17vhYRHDMQ1XXvhSWsvKJbpw3Q8B6py93ThBEXZXSgxIbqnKqoHK1RzoPLbIxoEzWN3jA86ZaMMc3IG6L5wsw==}
     engines: {node: '>= 14'}
 
   memorystream@0.3.1:
@@ -2923,7 +2923,7 @@ snapshots:
     dependencies:
       semver: 7.7.1
 
-  mariadb@3.4.1:
+  mariadb@3.4.2:
     dependencies:
       '@types/geojson': 7946.0.16
       '@types/node': 22.15.2

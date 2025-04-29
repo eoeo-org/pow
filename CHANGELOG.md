@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.14.44](https://github.com/eoeo-org/pow/compare/v3.14.43...v3.14.44) (2025-04-29)
+
+
+### Dependencies
+
+* lock file maintenance ([#1845](https://github.com/eoeo-org/pow/issues/1845)) ([fe42a76](https://github.com/eoeo-org/pow/commit/fe42a76892d56d6c944e340b96ce6a85c2476082))
+* update dependency discord.js to v14.19.2 ([#1846](https://github.com/eoeo-org/pow/issues/1846)) ([ee236a7](https://github.com/eoeo-org/pow/commit/ee236a7401eb5936f14f39e3ca5d0ec1b5857688))
+* update pnpm to v10.10.0 ([#1843](https://github.com/eoeo-org/pow/issues/1843)) ([826c32d](https://github.com/eoeo-org/pow/commit/826c32d50d061b7ffe4eb1fa1c9ebb0866cbe2b6))
+
+
+### Build System
+
+* **deps:** update buildpack-deps:bookworm docker digest to 5328645 ([#1847](https://github.com/eoeo-org/pow/issues/1847)) ([97117cc](https://github.com/eoeo-org/pow/commit/97117ccdd3005df2a9531a94e9494f26ae27f072))
+
 ## [3.14.43](https://github.com/eoeo-org/pow/compare/v3.14.42...v3.14.43) (2025-04-26)
 
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.14.45](https://github.com/eoeo-org/pow/compare/v3.14.44...v3.14.45) (2025-04-30)
+
+
+### Dependencies
+
+* update prisma monorepo to v6.7.0 ([#1849](https://github.com/eoeo-org/pow/issues/1849)) ([05e7c3f](https://github.com/eoeo-org/pow/commit/05e7c3fc2208ba5e3837bf1000ffea52cc8f63f3))
+
+
+### Build System
+
+* **deps:** update buildpack-deps:bookworm docker digest to 57d1e5d ([#1848](https://github.com/eoeo-org/pow/issues/1848)) ([aff3f32](https://github.com/eoeo-org/pow/commit/aff3f32306e67997d879c9f194d1f6108e9da667))
+* **deps:** update buildpack-deps:bookworm docker digest to 8c30a94 ([#1853](https://github.com/eoeo-org/pow/issues/1853)) ([151d958](https://github.com/eoeo-org/pow/commit/151d958a6c80199893872be3939e4178be3a7aa6))
+* **deps:** update buildpack-deps:bookworm docker digest to e83a35b ([#1852](https://github.com/eoeo-org/pow/issues/1852)) ([d10d126](https://github.com/eoeo-org/pow/commit/d10d12667271b3bd267c6d7b554bb1c8d8eaf75d))
+
 ## [3.14.44](https://github.com/eoeo-org/pow/compare/v3.14.43...v3.14.44) (2025-04-29)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.46](https://github.com/eoeo-org/pow/compare/v3.14.45...v3.14.46) (2025-05-01)
+
+
+### Build System
+
+* **deps:** update docker/dockerfile docker tag to v1.15.1 ([#1855](https://github.com/eoeo-org/pow/issues/1855)) ([9c67d30](https://github.com/eoeo-org/pow/commit/9c67d30d82b2642bdb63aab987b35f2767fe86f9))
+
 ## [3.14.45](https://github.com/eoeo-org/pow/compare/v3.14.44...v3.14.45) (2025-04-30)
 
 

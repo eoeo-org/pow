@@ -42,8 +42,8 @@ importers:
         specifier: 3.4.2
         version: 3.4.2
       zlib-sync:
-        specifier: 0.1.9
-        version: 0.1.9
+        specifier: 0.1.10
+        version: 0.1.10
     devDependencies:
       '@eslint/js':
         specifier: 9.25.1
@@ -1648,8 +1648,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zlib-sync@0.1.9:
-    resolution: {integrity: sha512-DinB43xCjVwIBDpaIvQqHbmDsnYnSt6HJ/yiB2MZQGTqgPcwBSZqLkimXwK8BvdjQ/MaZysb5uEenImncqvCqQ==}
+  zlib-sync@0.1.10:
+    resolution: {integrity: sha512-t7/pYg5tLBznL1RuhmbAt8rNp5tbhr+TSrJFnMkRtrGIaPJZ6Dc0uR4u3OoQI2d6cGlVI62E3Gy6gwkxyIqr/w==}
 
 snapshots:
 
@@ -3108,6 +3108,6 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zlib-sync@0.1.9:
+  zlib-sync@0.1.10:
     dependencies:
       nan: 2.22.2

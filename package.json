@@ -33,7 +33,7 @@
     "emoji-regex": "10.4.0",
     "ffmpeg-static": "5.2.0",
     "mariadb": "3.4.2",
-    "zlib-sync": "0.1.9"
+    "zlib-sync": "0.1.10"
   },
   "devDependencies": {
     "@eslint/js": "9.25.1",

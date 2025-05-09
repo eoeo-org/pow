@@ -50,7 +50,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["(^|/)\\.npmrc$"],
+      "managerFilePatterns": ["/(^|/)\\.npmrc$/"],
       "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version"

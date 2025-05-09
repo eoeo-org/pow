@@ -49,8 +49,8 @@ importers:
         specifier: 9.26.0
         version: 9.26.0
       '@swc/cli':
-        specifier: 0.7.3
-        version: 0.7.3(@swc/core@1.11.24)(chokidar@4.0.3)
+        specifier: 0.7.5
+        version: 0.7.5(@swc/core@1.11.24)(chokidar@4.0.3)
       '@swc/core':
         specifier: 1.11.24
         version: 1.11.24
@@ -565,8 +565,8 @@ packages:
     resolution: {integrity: sha512-TV7t8GKYaJWsn00tFDqBw8+Uqmr8A0fRU1tvTQhyZzGv0sJCGRQL3JGMI3ucuKo3XIZdUP+Lx7/gh2t3lewy7g==}
     engines: {node: '>=14.16'}
 
-  '@swc/cli@0.7.3':
-    resolution: {integrity: sha512-rnVXNnlURjdOuPaBIwZ3TmBA44BF/eP0j154LanlgPEYfau74ige7cpKlKkZr1IBqMOG99lAnYNxQipDWA3hdg==}
+  '@swc/cli@0.7.5':
+    resolution: {integrity: sha512-RlUYAxOhsecBB7qFVdDXhXXW3GDVxXpJx90q8Tlj+KuJVUPXViI7tNAvu54u3hbIZAL3LtrQKZHBWF6O5cXxZQ==}
     engines: {node: '>= 16.14.0'}
     hasBin: true
     peerDependencies:
@@ -2336,7 +2336,7 @@ snapshots:
 
   '@sindresorhus/is@5.6.0': {}
 
-  '@swc/cli@0.7.3(@swc/core@1.11.24)(chokidar@4.0.3)':
+  '@swc/cli@0.7.5(@swc/core@1.11.24)(chokidar@4.0.3)':
     dependencies:
       '@swc/core': 1.11.24
       '@swc/counter': 0.1.3

@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.14.47](https://github.com/eoeo-org/pow/compare/v3.14.46...v3.14.47) (2025-05-10)
+
+
+### Dependencies
+
+* lock file maintenance ([#1864](https://github.com/eoeo-org/pow/issues/1864)) ([56d90e6](https://github.com/eoeo-org/pow/commit/56d90e67ffa5c8b8b33fbaf270bca5ec803d8728))
+* update dependency discord.js to v14.19.3 ([#1863](https://github.com/eoeo-org/pow/issues/1863)) ([1392d44](https://github.com/eoeo-org/pow/commit/1392d443b9468a9736751e02646f71e359633c55))
+* update dependency zlib-sync to v0.1.10 ([#1858](https://github.com/eoeo-org/pow/issues/1858)) ([285fdd5](https://github.com/eoeo-org/pow/commit/285fdd515c8571dadd6828504eff0d4e0227f26e))
+
 ## [3.14.46](https://github.com/eoeo-org/pow/compare/v3.14.45...v3.14.46) (2025-05-01)
 
 

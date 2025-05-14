@@ -27,7 +27,7 @@
     "@sapphire/framework": "5.3.5",
     "@sapphire/plugin-subcommands": "7.0.1",
     "bufferutil": "4.0.9",
-    "debug": "4.4.0",
+    "debug": "4.4.1",
     "discord-emoji": "2.5.3",
     "discord.js": "14.19.3",
     "emoji-regex": "10.4.0",

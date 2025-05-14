@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.49](https://github.com/eoeo-org/pow/compare/v3.14.48...v3.14.49) (2025-05-14)
+
+
+### Dependencies
+
+* update dependency debug to v4.4.1 ([#1875](https://github.com/eoeo-org/pow/issues/1875)) ([41347e4](https://github.com/eoeo-org/pow/commit/41347e425fa0c8963cf7d18599bcc6dfe680a21c))
+
 ## [3.14.48](https://github.com/eoeo-org/pow/compare/v3.14.47...v3.14.48) (2025-05-12)
 
 

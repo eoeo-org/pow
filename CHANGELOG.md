@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.14.52](https://github.com/eoeo-org/pow/compare/v3.14.51...v3.14.52) (2025-05-21)
+
+
+### Dependencies
+
+* lock file maintenance ([#1888](https://github.com/eoeo-org/pow/issues/1888)) ([0c4539d](https://github.com/eoeo-org/pow/commit/0c4539d80af64ad437289cbebe297b126f63b6d5))
+
+
+### Build System
+
+* **deps:** update gcr.io/distroless/cc-debian12:nonroot docker digest to 20111f0 ([#1887](https://github.com/eoeo-org/pow/issues/1887)) ([f955518](https://github.com/eoeo-org/pow/commit/f95551895f04679282376a0a6be1883724ae104a))
+
 ## [3.14.51](https://github.com/eoeo-org/pow/compare/v3.14.50...v3.14.51) (2025-05-17)
 
 

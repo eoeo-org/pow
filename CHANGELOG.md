@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.14.53](https://github.com/eoeo-org/pow/compare/v3.14.52...v3.14.53) (2025-05-23)
+
+
+### Build System
+
+* **deps:** update buildpack-deps:bookworm docker digest to 2205c87 ([#1897](https://github.com/eoeo-org/pow/issues/1897)) ([41ba370](https://github.com/eoeo-org/pow/commit/41ba3706d9ee99902b76cd981c8da86a226d82c2))
+* **deps:** update buildpack-deps:bookworm docker digest to 320572f ([#1899](https://github.com/eoeo-org/pow/issues/1899)) ([27cc983](https://github.com/eoeo-org/pow/commit/27cc983332a0de1eafcae226676f771c7bce9492))
+* **deps:** update buildpack-deps:bookworm docker digest to aa85cf4 ([#1898](https://github.com/eoeo-org/pow/issues/1898)) ([596f819](https://github.com/eoeo-org/pow/commit/596f819a4fc08cc8db70db123de4be51cfa8f60f))
+* **deps:** update buildpack-deps:bookworm docker digest to d51dfc8 ([#1900](https://github.com/eoeo-org/pow/issues/1900)) ([5c75682](https://github.com/eoeo-org/pow/commit/5c75682dacd0fd484c397ead8666d9f85a11d907))
+* **deps:** update docker/dockerfile docker tag to v1.16.0 ([#1892](https://github.com/eoeo-org/pow/issues/1892)) ([5c42911](https://github.com/eoeo-org/pow/commit/5c42911fbf68fc677407ae1d9e4d9f9118f3455a))
+
 ## [3.14.52](https://github.com/eoeo-org/pow/compare/v3.14.51...v3.14.52) (2025-05-21)
 
 

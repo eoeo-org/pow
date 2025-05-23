@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.54](https://github.com/eoeo-org/pow/compare/v3.14.53...v3.14.54) (2025-05-23)
+
+
+### Build System
+
+* **deps:** update buildpack-deps:bookworm docker digest to 9c25b19 ([#1901](https://github.com/eoeo-org/pow/issues/1901)) ([098fff0](https://github.com/eoeo-org/pow/commit/098fff07bc6dba8d658ad52d98ea61c850950ad0))
+
 ## [3.14.53](https://github.com/eoeo-org/pow/compare/v3.14.52...v3.14.53) (2025-05-23)
 
 

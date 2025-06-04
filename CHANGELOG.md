@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.55](https://github.com/eoeo-org/pow/compare/v3.14.54...v3.14.55) (2025-06-04)
+
+
+### Dependencies
+
+* update prisma monorepo to v6.9.0 ([#1914](https://github.com/eoeo-org/pow/issues/1914)) ([d823b73](https://github.com/eoeo-org/pow/commit/d823b739edd1e707d8babeb17f76e378c7e4d974))
+
 ## [3.14.54](https://github.com/eoeo-org/pow/compare/v3.14.53...v3.14.54) (2025-05-23)
 
 

@@ -38,7 +38,7 @@
   "devDependencies": {
     "@eslint/js": "9.28.0",
     "@swc/cli": "0.7.7",
-    "@swc/core": "1.11.29",
+    "@swc/core": "1.11.31",
     "@tsconfig/node22": "22.0.2",
     "@tsconfig/strictest": "2.0.5",
     "@types/debug": "4.1.12",

@@ -56,5 +56,8 @@
       "datasourceTemplate": "node-version"
     }
   ],
-  "ignorePrAuthor": true
+  "ignorePrAuthor": true,
+  "gitIgnoredAuthors": [
+    "eoeo-renovate[bot] <173731483+eoeo-renovate[bot]@users.noreply.github.com>"
+  ]
 }

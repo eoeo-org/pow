@@ -57,7 +57,5 @@
     }
   ],
   "ignorePrAuthor": true,
-  "gitIgnoredAuthors": [
-    "eoeo-renovate[bot] <173731483+eoeo-renovate[bot]@users.noreply.github.com>"
-  ]
+  "gitIgnoredAuthors": ["173731483+eoeo-renovate[bot]@users.noreply.github.com"]
 }

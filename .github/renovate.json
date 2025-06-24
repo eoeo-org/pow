@@ -16,7 +16,7 @@
   "automergeStrategy": "squash",
   "assignAutomerge": true,
   "assigneesFromCodeOwners": true,
-  "dependencyDashboardAutoclose": true,
+  "dependencyDashboardAutoclose": false,
   "prConcurrentLimit": 3,
   "reviewersFromCodeOwners": true,
   "packageRules": [
@@ -55,5 +55,6 @@
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version"
     }
-  ]
+  ],
+  "ignorePrAuthor": true
 }

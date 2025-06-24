@@ -9,7 +9,7 @@ permissions: {}
 
 jobs:
   release-please:
-    if: github.repository_owner == 'eoeo-org'
+    if: github.repository_owner == 'kazukazu123123'
     permissions:
       contents: write
       pull-requests: write

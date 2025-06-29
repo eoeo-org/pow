@@ -70,8 +70,8 @@ importers:
         specifier: 4.0.3
         version: 4.0.3
       dotenv:
-        specifier: 16.6.1
-        version: 16.6.1
+        specifier: 17.0.0
+        version: 17.0.0
       eslint:
         specifier: 9.30.0
         version: 9.30.0(jiti@2.4.2)
@@ -798,8 +798,8 @@ packages:
     resolution: {integrity: sha512-lncTRk0k+8Q5D3nThnODBR8fR8x2fM798o8Vsr40Krx0DjPwpZCuxxTcFMrXMQVOqM1QB9wqWgaXPg3TbmlHqA==}
     engines: {node: '>=18'}
 
-  dotenv@16.6.1:
-    resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
+  dotenv@17.0.0:
+    resolution: {integrity: sha512-A0BJ5lrpJVSfnMMXjmeO0xUnoxqsBHWCoqqTnGwGYVdnctqXXUEhJOO7LxmgxJon9tEZFGpe0xPRX0h2v3AANQ==}
     engines: {node: '>=12'}
 
   emoji-regex@10.4.0:
@@ -2243,7 +2243,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  dotenv@16.6.1: {}
+  dotenv@17.0.0: {}
 
   emoji-regex@10.4.0: {}
 

@@ -55,6 +55,5 @@
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version"
     }
-  ],
-  "ignorePrAuthor": false
+  ]
 }

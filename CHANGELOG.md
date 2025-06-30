@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.58](https://github.com/kazukazu123123/pow/compare/v3.14.57...v3.14.58) (2025-06-30)
+
+
+### Dependencies
+
+* update dependency discord.js to v14.21.0 ([#1947](https://github.com/kazukazu123123/pow/issues/1947)) ([7755060](https://github.com/kazukazu123123/pow/commit/775506097052cd536676285ab4cf7db605cf0e43))
+
 ## [3.14.57](https://github.com/kazukazu123123/pow/compare/v3.14.56...v3.14.57) (2025-06-24)
 
 

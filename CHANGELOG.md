@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.14.59](https://github.com/kazukazu123123/pow/compare/v3.14.58...v3.14.59) (2025-07-02)
+
+
+### Dependencies
+
+* update prisma monorepo to v6.11.0 ([#1953](https://github.com/kazukazu123123/pow/issues/1953)) ([2220357](https://github.com/kazukazu123123/pow/commit/22203579e75cebec3c9bda5eff65cd1e7e347129))
+
+
+### Build System
+
+* **deps:** update buildpack-deps:bookworm docker digest to 8d9c076 ([#1951](https://github.com/kazukazu123123/pow/issues/1951)) ([3bdc526](https://github.com/kazukazu123123/pow/commit/3bdc5264974a98dd5cbb4b6de0fa220adc0d1017))
+* **deps:** update buildpack-deps:bookworm docker digest to afc155d ([#1958](https://github.com/kazukazu123123/pow/issues/1958)) ([03d46a6](https://github.com/kazukazu123123/pow/commit/03d46a621845d573d2c4404bf2843199cc257e28))
+* **deps:** update buildpack-deps:bookworm docker digest to fc363b5 ([#1955](https://github.com/kazukazu123123/pow/issues/1955)) ([342d591](https://github.com/kazukazu123123/pow/commit/342d591505c7db78d219bb624b8b08dfe796fb3c))
+
 ## [3.14.58](https://github.com/kazukazu123123/pow/compare/v3.14.57...v3.14.58) (2025-06-30)
 
 

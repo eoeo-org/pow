@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.14.60](https://github.com/kazukazu123123/pow/compare/v3.14.59...v3.14.60) (2025-07-03)
+
+
+### Dependencies
+
+* update dependency mariadb to v3.4.3 ([#1961](https://github.com/kazukazu123123/pow/issues/1961)) ([d665545](https://github.com/kazukazu123123/pow/commit/d665545bd9479d12a3929db156c4fb02e4320d52))
+* update dependency mariadb to v3.4.4 ([#1963](https://github.com/kazukazu123123/pow/issues/1963)) ([d191dd8](https://github.com/kazukazu123123/pow/commit/d191dd895062841e6afa4097167c31da6dc7d6fb))
+
 ## [3.14.59](https://github.com/kazukazu123123/pow/compare/v3.14.58...v3.14.59) (2025-07-02)
 
 

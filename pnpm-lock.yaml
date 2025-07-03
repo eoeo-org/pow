@@ -39,8 +39,8 @@ importers:
         specifier: 5.2.0
         version: 5.2.0
       mariadb:
-        specifier: 3.4.3
-        version: 3.4.3
+        specifier: 3.4.4
+        version: 3.4.4
       zlib-sync:
         specifier: 0.1.10
         version: 0.1.10
@@ -1116,8 +1116,8 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
 
-  mariadb@3.4.3:
-    resolution: {integrity: sha512-T1z4XHB4DsU/AKhAqlsK3Jewo4deXRMrosWkc99FlmqSANj/GVdOdkcyBUH7TfZvEs7p6DRy21nMJLrBfIr1fg==}
+  mariadb@3.4.4:
+    resolution: {integrity: sha512-feIbZJM8q1ddPAcG9UXcY9/afrpQMxIN3pWQTYBnwCTzQcFkZ6RJHFWB46mDHoLFdQh02lZgyg3uq6Y/74E5bA==}
     engines: {node: '>= 14'}
 
   memorystream@0.3.1:
@@ -2563,7 +2563,7 @@ snapshots:
     dependencies:
       semver: 7.7.2
 
-  mariadb@3.4.3:
+  mariadb@3.4.4:
     dependencies:
       denque: 2.1.0
       iconv-lite: 0.6.3

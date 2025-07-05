@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.14.61](https://github.com/kazukazu123123/pow/compare/v3.14.60...v3.14.61) (2025-07-05)
+
+
+### Dependencies
+
+* update prisma monorepo to v6.11.1 ([#1964](https://github.com/kazukazu123123/pow/issues/1964)) ([227fbe7](https://github.com/kazukazu123123/pow/commit/227fbe7ac6e8e002bce403c86ab0d7586bafa332))
+
 ## [3.14.60](https://github.com/kazukazu123123/pow/compare/v3.14.59...v3.14.60) (2025-07-03)
 
 
